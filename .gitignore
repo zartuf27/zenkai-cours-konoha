@@ -1,0 +1,10 @@
+# Images lourdes (captures Discord, screenshots)
+théorique/histoire du village/*.png
+théorique/regle d or/*.png
+Hishiba/*.png
+Hishiba/*.webp
+
+# Fichiers système
+.DS_Store
+Thumbs.db
+desktop.ini

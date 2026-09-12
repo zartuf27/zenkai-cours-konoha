@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Une porte que je ne savais pas avoir — Carnet d'Eraku Morikawa</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@400;500;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,500;1,400&family=Zen+Kaku+Gothic+New:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --nuit: #0e1116;
+    --nuit-2: #141922;
+    --encre: #e8e1cf;
+    --encre-faible: #a89f8a;
+    --lune: #c9a56033;
+    --or: #c9a560;
+    --rouge-sceau: #9a3b32;
+    --trait: #2a3040;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--nuit);
+    color: var(--encre);
+    font-family: 'Crimson Pro', serif;
+    font-size: 1.16rem;
+    font-weight: 300;
+    line-height: 1.85;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ------- texture nuit : très léger grain ------- */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    background-image: radial-gradient(#ffffff08 1px, transparent 1px);
+    background-size: 3px 3px;
+    opacity: .35;
+    z-index: 0;
+  }
+
+  .page {
+    position: relative;
+    z-index: 1;
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 4.5rem 1.5rem 6rem;
+  }
+
+  /* ================= EN-TÊTE ================= */
+  header { text-align: center; margin-bottom: 4.5rem; }
+
+  .tampon {
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    font-weight: 300;
+    font-size: .72rem;
+    letter-spacing: .38em;
+    text-transform: uppercase;
+    color: var(--encre-faible);
+  }
+
+  h1 {
+    font-family: 'Shippori Mincho', serif;
+    font-weight: 500;
+    font-size: clamp(1.9rem, 5.5vw, 2.9rem);
+    line-height: 1.35;
+    margin: 1.4rem 0 1.2rem;
+    letter-spacing: .015em;
+  }
+
+  .date-ligne {
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    font-size: .78rem;
+    letter-spacing: .22em;
+    color: var(--encre-faible);
+  }
+  .date-ligne .heure { color: var(--or); }
+
+  .sous-titre {
+    margin-top: 1.6rem;
+    font-style: italic;
+    color: var(--encre-faible);
+    font-size: 1rem;
+  }
+
+  /* ============ SIGNATURE : onde de berceuse ============ */
+  .onde {
+    display: block;
+    width: min(340px, 70%);
+    margin: 3.2rem auto;
+    overflow: visible;
+  }
+  .onde path {
+    fill: none;
+    stroke: var(--or);
+    stroke-width: 1.1;
+    opacity: .75;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .onde path {
+      stroke-dasharray: 460;
+      stroke-dashoffset: 460;
+      animation: chanter 7s ease-in-out infinite;
+    }
+    @keyframes chanter {
+      0%   { stroke-dashoffset: 460; opacity: 0; }
+      18%  { opacity: .75; }
+      55%  { stroke-dashoffset: 0; opacity: .75; }
+      85%  { opacity: .2; }
+      100% { stroke-dashoffset: 0; opacity: 0; }
+    }
+  }
+
+  /* ================= MOUVEMENTS ================= */
+  .mouvement { margin-bottom: 4rem; }
+
+  .mouvement-titre {
+    font-family: 'Shippori Mincho', serif;
+    font-weight: 500;
+    font-size: 1.1rem;
+    letter-spacing: .12em;
+    color: var(--or);
+    margin-bottom: 1.6rem;
+    display: flex;
+    align-items: baseline;
+    gap: .9rem;
+  }
+  .mouvement-titre::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, var(--trait), transparent);
+    transform: translateY(-4px);
+  }
+
+  p { margin-bottom: 1.35rem; }
+  p:last-child { margin-bottom: 0; }
+
+  em { color: var(--encre); }
+
+  /* passage marquant */
+  .hanté {
+    margin: 2.4rem 0;
+    padding: 1.6rem 1.8rem;
+    border-left: 2px solid var(--rouge-sceau);
+    background: var(--nuit-2);
+    font-family: 'Shippori Mincho', serif;
+    font-weight: 400;
+    font-size: 1.12rem;
+    line-height: 1.9;
+  }
+
+  /* note en marge (nom de l'apprentie) */
+  .nom {
+    font-family: 'Shippori Mincho', serif;
+    font-weight: 500;
+    color: var(--or);
+    letter-spacing: .02em;
+  }
+
+  /* ================= NOTE FINALE ================= */
+  .silence {
+    border-top: 1px solid var(--trait);
+    margin-top: 1rem;
+    padding-top: 3rem;
+  }
+  .silence .mouvement-titre { color: var(--encre-faible); }
+
+  footer {
+    margin-top: 4.5rem;
+    text-align: center;
+  }
+  .sceau {
+    display: inline-block;
+    font-family: 'Shippori Mincho', serif;
+    font-size: .95rem;
+    letter-spacing: .3em;
+    color: var(--rouge-sceau);
+    border: 1px solid var(--rouge-sceau);
+    padding: .55rem 1.1rem .55rem 1.4rem;
+    transform: rotate(-2deg);
+  }
+  footer .tampon { margin-top: 1.4rem; }
+
+  /* ================= BOUTON BERCEUSE ================= */
+  .berceuse-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: .7rem;
+    margin-top: .2rem;
+    padding: .6rem 1.4rem;
+    background: transparent;
+    border: 1px solid var(--trait);
+    color: var(--encre-faible);
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    font-size: .74rem;
+    letter-spacing: .28em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: border-color .4s ease, color .4s ease;
+  }
+  .berceuse-btn:hover,
+  .berceuse-btn:focus-visible {
+    border-color: var(--or);
+    color: var(--or);
+  }
+  .berceuse-btn:focus-visible { outline: 2px solid var(--or); outline-offset: 3px; }
+  .berceuse-btn .icone { font-size: .9rem; transform: translateY(-1px); }
+  .berceuse-btn.joue {
+    border-color: var(--or);
+    color: var(--or);
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .berceuse-btn.joue .icone { animation: pulser 3.6s ease-in-out infinite; }
+    @keyframes pulser {
+      0%, 100% { opacity: .5; }
+      50% { opacity: 1; }
+    }
+  }
+
+  ::selection { background: var(--lune); }
+
+  @media (max-width: 480px) {
+    body { font-size: 1.06rem; }
+    .hanté { padding: 1.2rem 1.2rem; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <div class="tampon">Carnet personnel · Eraku Morikawa</div>
+    <h1>Une porte que je ne savais pas avoir</h1>
+    <div class="date-ligne">Jeudi 4 juin&nbsp;&nbsp;·&nbsp;&nbsp;<span class="heure">02:59</span>&nbsp;&nbsp;·&nbsp;&nbsp;Konoha</div>
+    <p class="sous-titre">Journée d'assistance à l'académie, comme apprenti sensei.</p>
+
+    <svg class="onde" viewBox="0 0 340 60" aria-hidden="true">
+      <path d="M0,30 C15,30 20,22 30,22 S45,38 55,38 S70,12 82,12 S98,48 110,48 S126,18 138,18 S152,40 164,40 S178,25 190,25 S204,34 216,34 S230,20 244,20 S258,36 272,36 S286,27 300,27 S320,30 340,30"/>
+    </svg>
+
+    <button class="berceuse-btn" id="berceuseBtn" aria-pressed="false">
+      <span class="icone" aria-hidden="true">♪</span>
+      <span class="libelle">Écouter la berceuse</span>
+    </button>
+  </header>
+
+  <section class="mouvement">
+    <div class="mouvement-titre">Le cours, puis la berceuse</div>
+    <p>J'étais venu pour deux cours. Le premier sur les mudras, en début de soirée. Le second sur le saut de chakra, tard. Je n'attendais rien d'autre qu'une longue veille, deux séances d'attention, quelques apprentis à corriger sans dureté. C'est ce que j'avais préparé.</p>
+    <p>Le cours sur les mudras. Une heure de pratique au sol, des mains qui se trompent, des appuis qu'on rectifie avec un mot. J'ai accompagné le travail individuel, corrigé les postures, veillé à la précision. Les apprentis recevaient les remarques sans résistance. C'était un bon groupe.</p>
+    <p>À la fin de la séance, une apprentie est restée un instant en arrière. Elle s'appelle <span class="nom">Kotsubabaa Otsuyo</span>. Elle a annoncé qu'elle allait chanter une berceuse. Je n'ai pas eu le temps de me demander pourquoi.</p>
+    <p>Le chant a commencé. Quelques notes, basses, posées sans effort. Et tout de suite, quelque chose s'est mis à descendre en moi. Pas une émotion. Quelque chose de plus mécanique, de plus physique. Mes paupières se sont chargées. J'ai commencé à bâiller, et le bâillement est revenu, et il est revenu encore, et il n'a plus voulu s'arrêter. Mes bras sont devenus lourds, mes jambes ont cessé de répondre, j'avais l'impression que mon corps oubliait lentement comment être debout.</p>
+  </section>
+
+  <section class="mouvement">
+    <div class="mouvement-titre">L'hôpital</div>
+    <p>Je suis sorti de l'académie aussi vite que ma motricité me l'a permis, et je suis allé droit à l'hôpital. On m'a allongé. Une transfusion de chakra a suffi à stabiliser ce qui se déréglait. En quelques minutes le bâillement s'est apaisé, le corps est revenu.</p>
+    <p>On m'a expliqué que la transfusion n'avait pas réparé, elle avait simplement remis assez de chakra dans le système pour compenser ce qu'il était en train de perdre. La cause précise du déséquilibre n'a pas été identifiée.</p>
+    <div class="hanté">
+      <p>Ce qui me reste de cet épisode n'est pas la frayeur. Ça, c'est déjà passé. C'est l'idée qu'une voix d'enfant ait pu, sans intention de nuire, déranger un chakra d'adulte au point de demander un traitement médical. Et c'est ça qui me hante depuis&nbsp;: si elle avait voulu nuire, qu'est-ce qu'elle aurait fait&nbsp;?</p>
+    </div>
+    <p>Cette jeune ira loin. Je le dis sans flatterie et sans crainte. Je le dis parce que je l'ai senti dans le corps avant de pouvoir le penser. Elle n'a pas appris cela à l'académie. Elle l'a en elle, ce don de toucher le chakra par le son, et le chemin qu'elle ouvrira sera fait d'instruments dont on n'a pas encore le nom.</p>
+  </section>
+
+  <section class="mouvement silence">
+    <div class="mouvement-titre">Plus tard, dans le silence</div>
+    <p>Ce que j'écris maintenant, ce n'est pas pour Otsuyo. C'est pour moi.</p>
+    <p>Depuis cette berceuse, quelque chose en moi répond à la musique d'une manière qu'il ne le faisait pas avant. Ce n'est pas un goût artistique nouveau. Je ne me suis pas découvert le besoin d'entendre des mélodies pour le plaisir. C'est plus profond, et c'est plus discret. C'est comme une porte qui s'est ouverte sans bruit, et qui ne se referme pas.</p>
+    <p>Quand un son vient, et que ce son est porté par une intention — peu importe l'intention, douce ou tendue — quelque chose en moi le reçoit autrement. Je le perçois dans la peau avant de l'entendre dans l'oreille.</p>
+    <p>C'est la deuxième fois cette année que je remarque chez moi cette sorte d'ouverture. La première, c'était avec le reishi, et j'avais noté que je préférais relire mes lignes plus tard plutôt que de trancher trop vite. Je dis la même chose ici. Je n'affirme pas. Je note.</p>
+    <p>Je note que ce qui m'avait paru singulier avec le champignon devient, depuis la berceuse, un thème. Et qu'un thème, ce n'est plus une coïncidence.</p>
+  </section>
+
+  <footer>
+    <span class="sceau">森川 依樂</span>
+    <div class="tampon">Eraku Morikawa · apprenti sensei</div>
+  </footer>
+
+</div>
+
+<script>
+(() => {
+  // ---- Berceuse d'Otsuyo : synthèse Web Audio, gamme hirajoshi ----
+  // Ré hirajoshi : D, Eb, G, A, Bb — douce, un peu troublante.
+  const btn = document.getElementById('berceuseBtn');
+  const libelle = btn.querySelector('.libelle');
+
+  let ctx = null, master = null, delay = null;
+  let joue = false, timer = null, noteIndex = 0;
+
+  const D3 = 146.83;
+  const ratios = { D: 1, Eb: 16/15, G: 4/3, A: 3/2, Bb: 8/5 };
+  const f = (n, oct = 0) => D3 * ratios[n] * Math.pow(2, oct);
+
+  // Mélodie lente en deux phrases : la voix se pose, redescend, s'endort.
+  // [fréquence, durée en temps, vélocité]
+  const melodie = [
+    [f('A'),      2,   .50], [f('G'),      2,   .42], [f('Bb'),    2,   .46],
+    [f('A'),      3,   .40], [f('G'),      2,   .38], [f('Eb'),    2,   .40],
+    [f('D'),      4,   .44], [0,           2,   0  ],
+    [f('G'),      2,   .44], [f('A'),      2,   .48], [f('Bb'),    2,   .42],
+    [f('A'),      2,   .38], [f('G'),      3,   .36], [f('Eb'),    2,   .38],
+    [f('D'),      5,   .42], [0,           3,   0  ],
+    [f('A', 1),   2,   .30], [f('G', 1),   2,   .26], [f('Eb', 1), 3,   .24],
+    [f('D', 1),   5,   .28], [0,           4,   0  ],
+  ];
+  const TEMPO = 1.05; // secondes par temps — très lent, comme une veille
+
+  function initAudio() {
+    ctx = new (window.AudioContext || window.webkitAudioContext)();
+
+    master = ctx.createGain();
+    master.gain.value = 0;
+    master.connect(ctx.destination);
+
+    // Écho discret pour donner de l'air (la salle vide de l'académie)
+    delay = ctx.createDelay(2);
+    delay.delayTime.value = 0.62;
+    const retour = ctx.createGain();
+    retour.gain.value = 0.32;
+    const filtreEcho = ctx.createBiquadFilter();
+    filtreEcho.type = 'lowpass';
+    filtreEcho.frequency.value = 900;
+    delay.connect(filtreEcho).connect(retour).connect(delay);
+    delay.connect(master);
+
+    // Bourdon grave : le chakra qui descend
+    const drone = ctx.createOscillator();
+    drone.type = 'sine';
+    drone.frequency.value = D3 / 2; // D2
+    const droneGain = ctx.createGain();
+    droneGain.gain.value = 0.055;
+    const lfo = ctx.createOscillator();
+    lfo.frequency.value = 0.09;
+    const lfoGain = ctx.createGain();
+    lfoGain.gain.value = 0.02;
+    lfo.connect(lfoGain).connect(droneGain.gain);
+    drone.connect(droneGain).connect(master);
+    drone.start(); lfo.start();
+  }
+
+  function jouerNote(freq, duree, velocite, quand) {
+    if (!freq) return;
+    const osc = ctx.createOscillator();
+    osc.type = 'sine';
+    osc.frequency.setValueAtTime(freq, quand);
+    // Léger vibrato humain, en retard sur l'attaque
+    const vib = ctx.createOscillator();
+    vib.frequency.value = 4.6;
+    const vibGain = ctx.createGain();
+    vibGain.gain.setValueAtTime(0, quand);
+    vibGain.gain.linearRampToValueAtTime(freq * 0.006, quand + duree * 0.5);
+    vib.connect(vibGain).connect(osc.frequency);
+
+    // Deuxième partiel très doux pour un timbre de voix
+    const osc2 = ctx.createOscillator();
+    osc2.type = 'sine';
+    osc2.frequency.setValueAtTime(freq * 2, quand);
+    const g2 = ctx.createGain();
+    g2.gain.value = 0.12;
+
+    const env = ctx.createGain();
+    env.gain.setValueAtTime(0, quand);
+    env.gain.linearRampToValueAtTime(velocite * 0.22, quand + 0.35);
+    env.gain.exponentialRampToValueAtTime(0.001, quand + duree + 1.2);
+
+    osc.connect(env);
+    osc2.connect(g2).connect(env);
+    env.connect(master);
+    env.connect(delay);
+
+    osc.start(quand); osc2.start(quand); vib.start(quand);
+    const fin = quand + duree + 1.5;
+    osc.stop(fin); osc2.stop(fin); vib.stop(fin);
+  }
+
+  // Planificateur simple : programme la note suivante un peu en avance
+  let prochainTemps = 0;
+  function boucle() {
+    while (prochainTemps < ctx.currentTime + 0.6) {
+      const [freq, duree, vel] = melodie[noteIndex];
+      jouerNote(freq, duree * TEMPO, vel, prochainTemps);
+      prochainTemps += duree * TEMPO;
+      noteIndex = (noteIndex + 1) % melodie.length;
+    }
+    timer = setTimeout(boucle, 250);
+  }
+
+  btn.addEventListener('click', () => {
+    if (!ctx) initAudio();
+    if (ctx.state === 'suspended') ctx.resume();
+
+    joue = !joue;
+    btn.classList.toggle('joue', joue);
+    btn.setAttribute('aria-pressed', String(joue));
+    const t = ctx.currentTime;
+    master.gain.cancelScheduledValues(t);
+    master.gain.setValueAtTime(master.gain.value, t);
+
+    if (joue) {
+      libelle.textContent = 'Laisser le silence revenir';
+      master.gain.linearRampToValueAtTime(0.9, t + 2.5); // le chant s'installe
+      noteIndex = 0;
+      prochainTemps = t + 0.8;
+      boucle();
+    } else {
+      libelle.textContent = 'Écouter la berceuse';
+      master.gain.linearRampToValueAtTime(0, t + 2); // il s'éteint sans rupture
+      clearTimeout(timer);
+    }
+  });
+})();
+</script>
+</body>
+</html>

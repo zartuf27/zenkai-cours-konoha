@@ -1,0 +1,1144 @@
+{
+  "meta": {
+    "titre": "Cours RP Zenkai - Konoha",
+    "version": "1.0",
+    "derniere_maj": "2026-06-25"
+  },
+  "rangs": [
+    "Apprenti Genin",
+    "Genin",
+    "Genin Confirmé",
+    "Chūnin",
+    "Konin",
+    "Tokubetsu Jōnin",
+    "Jōnin",
+    "Commandant Jōnin",
+    "Sanin",
+    "Hokage"
+  ],
+  "mudras": [
+    { "id": "rat", "nom": "Rat", "fonction": "Initie la mise en mouvement du chakra" },
+    { "id": "boeuf", "nom": "Bœuf", "fonction": "Structure le chakra, empêche la dispersion" },
+    { "id": "tigre", "nom": "Tigre", "fonction": "Amplifie et intensifie le flux" },
+    { "id": "lievre", "nom": "Lièvre", "fonction": "Fluidifie le flux de chakra" },
+    { "id": "dragon", "nom": "Dragon", "fonction": "Concentre le chakra sous une forme dense" },
+    { "id": "serpent", "nom": "Serpent", "fonction": "Apporte la précision au modelage" },
+    { "id": "cheval", "nom": "Cheval", "fonction": "Intensifie et accélère le flux" },
+    { "id": "belier", "nom": "Bélier", "fonction": "Équilibre et harmonise le chakra" },
+    { "id": "singe", "nom": "Singe", "fonction": "Coordonne les enchaînements complexes" },
+    { "id": "coq", "nom": "Coq", "fonction": "Projette et dirige le chakra" },
+    { "id": "chien", "nom": "Chien", "fonction": "Protège et structure en défense" },
+    { "id": "sanglier", "nom": "Sanglier", "fonction": "Libération brutale du chakra" }
+  ],
+  "natures": [
+    { "id": "katon", "nom": "Katon", "element": "Feu", "force": "Inflige des brûlures", "superieur_a": "futon", "inferieur_a": "suiton" },
+    { "id": "futon", "nom": "Futon", "element": "Vent", "force": "Accélère la vitesse", "superieur_a": "raiton", "inferieur_a": "katon" },
+    { "id": "raiton", "nom": "Raiton", "element": "Foudre", "force": "Étourdit la cible", "superieur_a": "doton", "inferieur_a": "futon" },
+    { "id": "doton", "nom": "Doton", "element": "Terre", "force": "Renforce la robustesse", "superieur_a": "suiton", "inferieur_a": "raiton" },
+    { "id": "suiton", "nom": "Suiton", "element": "Eau", "force": "Absorbe le chakra", "superieur_a": "katon", "inferieur_a": "doton" }
+  ],
+  "kekkei_genkai": [
+    { "id": "bakuton", "nom": "Bakuton", "elements": ["doton","raiton"], "art": "Explosions" },
+    { "id": "deiton", "nom": "Deiton", "elements": ["doton","suiton"], "art": "Boue" },
+    { "id": "futton", "nom": "Futton", "elements": ["suiton","katon"], "art": "Vapeur" },
+    { "id": "hyoton", "nom": "Hyoton", "elements": ["suiton","futon"], "art": "Glace" },
+    { "id": "jiton", "nom": "Jiton", "elements": ["doton","futon"], "art": "Magnétisme" },
+    { "id": "mokuton", "nom": "Mokuton", "elements": ["doton","suiton"], "art": "Bois" },
+    { "id": "shakuton", "nom": "Shakuton", "elements": ["katon","futon"], "art": "Chaleur" },
+    { "id": "yoton", "nom": "Yoton", "elements": ["doton","katon"], "art": "Lave" },
+    { "id": "ranton", "nom": "Ranton", "elements": ["suiton","raiton"], "art": "Orage" },
+    { "id": "jinton", "nom": "Jinton", "elements": ["katon","futon","doton"], "art": "Particules (Kekkei Tōta)" }
+  ],
+  "armes": [
+    { "id": "katana", "nom": "Katana", "taille": "60-80 cm de lame (~1m total)", "description": "Sabre traditionnel à lame courbée. Combat rapproché, frappes rapides et précises. Peut être amélioré en y insufflant du chakra." },
+    { "id": "makibishi", "nom": "Makibishi", "taille": "2-5 cm", "description": "Petites pointes métalliques dispersées au sol pour ralentir ou blesser les ennemis." },
+    { "id": "clochettes", "nom": "Clochettes", "taille": "Quelques cm", "description": "Dispositifs sonores pour détecter ou piéger un ennemi. Combinables avec un Kunai pour décentraliser l'attention." },
+    { "id": "bombe_fumigene", "nom": "Bombe fumigène", "taille": "5-10 cm", "description": "Capsule libérant un nuage de fumée pour masquer les mouvements, fuir ou surprendre. Effet non permanent." },
+    { "id": "parchemin_explosif", "nom": "Parchemin explosif", "taille": "10-20 cm", "description": "Feuille avec sceau de Fuinjutsu déclenchant une explosion. Utilisable comme piège ou arme à distance." },
+    { "id": "senbon", "nom": "Senbon", "taille": "15-25 cm", "description": "Aiguilles fines et légères. Permettent de toucher des points vitaux ou neutraliser discrètement." },
+    { "id": "kunai", "nom": "Kunai", "taille": "20-30 cm", "description": "Poignard robuste avec anneau. Sert à attaquer, lancer, grimper ou creuser. L'arme la plus polyvalente." },
+    { "id": "shuriken", "nom": "Shuriken", "taille": "5-10 cm", "description": "Étoile métallique à plusieurs pointes. Distance ou corps à corps. Matériel indispensable du Shinobi." }
+  ],
+  "cours": [
+    {
+      "id": "regles_or",
+      "titre": "Les Règles d'Or du Ninja",
+      "categorie": "theorique",
+      "module": "Fondamentaux Philosophiques",
+      "rang_requis": "Apprenti Genin",
+      "public_cible": "Tous",
+      "auteur": null,
+      "prerequis": [],
+      "description": "Les 8 règles fondamentales qui régissent la vie de tout ninja de Konoha : loyauté, hiérarchie, mission, protection, secret, respect, maîtrise de soi, honneur.",
+      "techniques": [
+        {
+          "id": "regle_loyaute",
+          "nom": "1. Loyauté envers le village",
+          "description": "Un ninja doit agir en toutes circonstances dans l'intérêt du village et sous l'autorité du Hokage.",
+          "type": "connaissance",
+          "etapes": ["Comprendre le principe de loyauté", "Savoir l'appliquer en situation"],
+          "mudras": [],
+          "rang": "Apprenti Genin",
+          "prerequis": []
+        },
+        {
+          "id": "regle_hierarchie",
+          "nom": "2. Respect de la hiérarchie",
+          "description": "Les ordres des supérieurs doivent être respectés et exécutés avec discipline.",
+          "type": "connaissance",
+          "etapes": ["Connaître la chaîne de commandement", "Appliquer les ordres avec discipline"],
+          "mudras": [],
+          "rang": "Apprenti Genin",
+          "prerequis": []
+        },
+        {
+          "id": "regle_mission",
+          "nom": "3. Priorité à la mission",
+          "description": "La mission confiée par le village doit être accomplie avec sérieux et détermination.",
+          "type": "connaissance",
+          "etapes": ["Comprendre la priorité de la mission", "Savoir gérer les dilemmes mission vs personnel"],
+          "mudras": [],
+          "rang": "Apprenti Genin",
+          "prerequis": []
+        },
+        {
+          "id": "regle_protection",
+          "nom": "4. Protection des habitants",
+          "description": "Un shinobi est avant tout un protecteur du village et de ses civils.",
+          "type": "connaissance",
+          "etapes": ["Intégrer le rôle de protecteur", "Identifier les civils à protéger en situation"],
+          "mudras": [],
+          "rang": "Apprenti Genin",
+          "prerequis": []
+        },
+        {
+          "id": "regle_secret",
+          "nom": "5. Secret et discrétion",
+          "description": "Les informations relatives aux missions, techniques et stratégies du village doivent rester confidentielles.",
+          "type": "connaissance",
+          "etapes": ["Comprendre le secret ninja", "Savoir ce qui est confidentiel"],
+          "mudras": [],
+          "rang": "Apprenti Genin",
+          "prerequis": []
+        },
+        {
+          "id": "regle_respect",
+          "nom": "6. Respect entre shinobi",
+          "description": "Les ninjas doivent faire preuve de respect envers leurs camarades et préserver l'unité du village.",
+          "type": "connaissance",
+          "etapes": ["Pratiquer le respect mutuel", "Préserver la cohésion d'équipe"],
+          "mudras": [],
+          "rang": "Apprenti Genin",
+          "prerequis": []
+        },
+        {
+          "id": "regle_maitrise",
+          "nom": "7. Maîtrise de soi",
+          "description": "Un ninja doit contrôler ses émotions et éviter toute violence inutile.",
+          "type": "connaissance",
+          "etapes": ["Apprendre le contrôle émotionnel", "Éviter la violence inutile"],
+          "mudras": [],
+          "rang": "Apprenti Genin",
+          "prerequis": []
+        },
+        {
+          "id": "regle_honneur",
+          "nom": "8. Honneur et responsabilité",
+          "description": "Chaque shinobi est responsable de ses actes et représente le village.",
+          "type": "connaissance",
+          "etapes": ["Comprendre la responsabilité individuelle", "Agir en représentant du village"],
+          "mudras": [],
+          "rang": "Apprenti Genin",
+          "prerequis": []
+        }
+      ]
+    },
+    {
+      "id": "nindo",
+      "titre": "Le Nindo",
+      "categorie": "theorique",
+      "module": "Fondamentaux Philosophiques",
+      "rang_requis": "Apprenti Genin",
+      "public_cible": "Tous",
+      "auteur": null,
+      "prerequis": ["regles_or"],
+      "description": "Le Nindo (chemin du ninja) est la philosophie de vie personnelle de chaque shinobi. Il se forge dans l'adversité et guide les choix les plus difficiles.",
+      "techniques": [
+        {
+          "id": "nindo_comprendre",
+          "nom": "Comprendre le concept de Nindo",
+          "description": "Le Nindo est un code personnel, pas un objectif. Il doit être court, direct, refléter vos valeurs et votre souhait pour le monde ninja.",
+          "type": "connaissance",
+          "etapes": ["Distinguer Nindo et objectif", "Comprendre que le Nindo est personnel et unique", "Identifier ses propres valeurs"],
+          "mudras": [],
+          "rang": "Apprenti Genin",
+          "prerequis": []
+        },
+        {
+          "id": "nindo_forger",
+          "nom": "Forger son propre Nindo",
+          "description": "Construire progressivement son code personnel à travers les épreuves et l'introspection.",
+          "type": "connaissance",
+          "etapes": ["Réfléchir à ses expériences formatrices", "Formuler un Nindo court et direct", "Le tester face aux dilemmes"],
+          "mudras": [],
+          "rang": "Genin",
+          "prerequis": ["nindo_comprendre"]
+        }
+      ]
+    },
+    {
+      "id": "volonte_feu",
+      "titre": "La Volonté du Feu",
+      "categorie": "theorique",
+      "module": "Fondamentaux Philosophiques",
+      "rang_requis": "Apprenti Genin",
+      "public_cible": "Tous",
+      "auteur": null,
+      "prerequis": ["nindo"],
+      "description": "La doctrine fondatrice de Konoha : la protection du village passe avant tout, et les rêves se transmettent de génération en génération.",
+      "techniques": [
+        {
+          "id": "volonte_doctrine1",
+          "nom": "Doctrine 1 : Protéger Konoha",
+          "description": "Le village passe avant tout. Tous les sacrifices sont nécessaires pour protéger Konoha. Chaque habitant est un membre de la famille de Konoha.",
+          "type": "connaissance",
+          "etapes": ["Comprendre le sacrifice pour le village", "Intégrer le concept de famille de Konoha", "Appliquer la doctrine en situation de crise"],
+          "mudras": [],
+          "rang": "Apprenti Genin",
+          "prerequis": []
+        },
+        {
+          "id": "volonte_doctrine2",
+          "nom": "Doctrine 2 : La transmission des rêves",
+          "description": "Les rêves non accomplis se transmettent aux descendants ou disciples. L'héritage d'Hashirama perdure à travers les générations.",
+          "type": "connaissance",
+          "etapes": ["Comprendre la transmission intergénérationnelle", "Connaître l'histoire d'Hashirama", "Identifier les rêves hérités"],
+          "mudras": [],
+          "rang": "Apprenti Genin",
+          "prerequis": []
+        }
+      ]
+    },
+    {
+      "id": "histoire",
+      "titre": "Histoire du Village de Konoha",
+      "categorie": "theorique",
+      "module": "Fondamentaux Philosophiques",
+      "rang_requis": "Apprenti Genin",
+      "public_cible": "Tous",
+      "auteur": null,
+      "prerequis": ["volonte_feu"],
+      "description": "L'histoire complète de Konoha : des clans en guerre à la fondation par Hashirama et Madara, le rôle des grands clans, et l'institutionnalisation par Tobirama.",
+      "techniques": [
+        {
+          "id": "histoire_avant_konoha",
+          "nom": "I. Avant Konoha : le Pays du Feu en guerre",
+          "description": "Le Pays du Feu avant les villages cachés : territoire fracturé, clans dominants (Senju, Uchiha, Hyūga, Nara, Akimichi).",
+          "type": "connaissance",
+          "etapes": ["Connaître le contexte pré-Konoha", "Identifier les 5 grands clans fondateurs"],
+          "mudras": [],
+          "rang": "Apprenti Genin",
+          "prerequis": []
+        },
+        {
+          "id": "histoire_fondation",
+          "nom": "II. Hashirama, Madara et la fondation",
+          "description": "L'alliance Senju-Uchiha, la création de Konohagakure, Hashirama Premier Hokage et la Volonté du Feu.",
+          "type": "connaissance",
+          "etapes": ["Comprendre l'alliance Senju-Uchiha", "Connaître le rôle d'Hashirama et Madara", "Lier la fondation à la Volonté du Feu"],
+          "mudras": [],
+          "rang": "Apprenti Genin",
+          "prerequis": ["histoire_avant_konoha"]
+        },
+        {
+          "id": "histoire_clans",
+          "nom": "III. Rôle des grands clans",
+          "description": "Senju (architectes), Uchiha (pilier militaire), Hyūga (sentinelles), Nara (cerveaux/archives), Akimichi (logistique/cohésion).",
+          "type": "connaissance",
+          "etapes": ["Connaître le rôle du clan Senju", "Connaître le rôle du clan Uchiha", "Connaître le rôle du clan Hyūga", "Connaître le rôle du clan Nara", "Connaître le rôle du clan Akimichi"],
+          "mudras": [],
+          "rang": "Apprenti Genin",
+          "prerequis": ["histoire_fondation"]
+        },
+        {
+          "id": "histoire_tobirama",
+          "nom": "IV. Tobirama et l'institutionnalisation",
+          "description": "Tobirama crée l'Académie, les ANBU, le système de missions. Crise politique après sa mort.",
+          "type": "connaissance",
+          "etapes": ["Comprendre les institutions créées par Tobirama", "Connaître la crise de succession"],
+          "mudras": [],
+          "rang": "Apprenti Genin",
+          "prerequis": ["histoire_clans"]
+        }
+      ]
+    },
+    {
+      "id": "decomposition_chakra",
+      "titre": "Décomposition du Chakra",
+      "categorie": "theorique",
+      "module": "Bases du Chakra",
+      "rang_requis": "Apprenti Genin",
+      "public_cible": "Tous",
+      "auteur": null,
+      "prerequis": [],
+      "description": "De quoi le chakra est-il fait : énergies, réseau, Tenketsu et Compensation.",
+      "techniques": [
+        {
+          "id": "dc_composantes",
+          "nom": "Les deux composantes",
+          "description": "Le chakra naît de la fusion de l'énergie physique (Yang, Yôton) et de l'énergie spirituelle (Yin, Inton).",
+          "type": "connaissance",
+          "etapes": [
+            "Comprendre la décomposition du chakra en deux énergies",
+            "Connaître l'énergie physique (Yang, Yôton) : corps, cellules, force vitale",
+            "Connaître l'énergie spirituelle (Yin, Inton) : esprit, expérience, volonté",
+            "Comprendre que le déséquilibre épuise le chakra"
+          ],
+          "mudras": [],
+          "rang": "Apprenti Genin",
+          "prerequis": []
+        },
+        {
+          "id": "dc_reseau",
+          "nom": "Réseau et noyau",
+          "description": "Le chakra circule dans un réseau propre, depuis un noyau situé dans l'abdomen.",
+          "type": "connaissance",
+          "etapes": [
+            "Connaître le noyau du chakra (abdomen)",
+            "Comprendre la circulation dans le réseau",
+            "Comprendre la séparation en flux (pieds, mains, technique)"
+          ],
+          "mudras": [],
+          "rang": "Apprenti Genin",
+          "prerequis": ["dc_composantes"]
+        },
+        {
+          "id": "dc_tenketsu",
+          "nom": "Les Tenketsu",
+          "description": "361 points de chakra dont 64 importants. Carrefours du réseau.",
+          "type": "connaissance",
+          "etapes": [
+            "Savoir ce qu'est un Tenketsu",
+            "Retenir : 361 au total, 64 importants",
+            "Comprendre le blocage d'un Tenketsu chez l'adversaire"
+          ],
+          "mudras": [],
+          "rang": "Apprenti Genin",
+          "prerequis": ["dc_reseau"]
+        },
+        {
+          "id": "dc_compensation",
+          "nom": "La Compensation (Sosaï)",
+          "description": "Deux jutsus de même niveau et de même nature s'annulent mutuellement.",
+          "type": "connaissance",
+          "etapes": [
+            "Comprendre le principe de Sosaï",
+            "Retenir les deux conditions : même niveau + même nature",
+            "Distinguer Compensation, supériorité de niveau et cycle des natures"
+          ],
+          "mudras": [],
+          "rang": "Apprenti Genin",
+          "prerequis": ["dc_tenketsu"]
+        }
+      ]
+    },
+    {
+      "id": "mudras_cours",
+      "titre": "Les Mudras",
+      "categorie": "theorique",
+      "module": "Bases du Chakra",
+      "rang_requis": "Apprenti Genin",
+      "public_cible": "Tous",
+      "auteur": null,
+      "prerequis": [],
+      "description": "Comprendre le rôle des mudras et apprendre à les exécuter correctement. Avant même de lancer un jutsu, vous devez parler le langage du chakra. Sans mudras, le chakra est instable, ce qui amène à des jutsu ratés.",
+      "techniques": [
+        {
+          "id": "mudras_theorie",
+          "nom": "Théorie des Mudras",
+          "description": "Comprendre ce que sont les mudras (12 gestes qui permettent de modeler le chakra), pourquoi ils sont essentiels : canaliser, transformer et stabiliser le chakra. L'exécution doit être précise, rapide et fluide. L'ordre des mudras est crucial.",
+          "type": "connaissance",
+          "etapes": ["Savoir ce qu'est un mudra et combien il en existe (12)", "Connaître les 3 fonctions (canaliser, transformer, stabiliser)", "Comprendre l'importance de l'ordre", "Être précis, rapide et fluide", "Les mudras doivent devenir instinctifs"],
+          "mudras": [],
+          "rang": "Apprenti Genin",
+          "prerequis": []
+        },
+        {
+          "id": "mudras_maitrise",
+          "nom": "Maîtrise des 12 Mudras",
+          "description": "Exécuter chaque mudra avec précision, rapidité et fluidité. Chaque mudra doit devenir un réflexe instinctif. Si vous réfléchissez pendant vos mudras, vous êtes déjà en retard.",
+          "type": "mudras",
+          "etapes": [],
+          "mudras": ["rat","boeuf","tigre","lievre","dragon","serpent","cheval","belier","singe","coq","chien","sanglier"],
+          "rang": "Apprenti Genin",
+          "prerequis": ["mudras_theorie"]
+        }
+      ]
+    },
+    {
+      "id": "nature_theorie",
+      "titre": "Nature de Chakra (Théorie)",
+      "categorie": "theorique",
+      "module": "Bases du Chakra",
+      "rang_requis": "Apprenti Genin",
+      "public_cible": "Tous",
+      "auteur": null,
+      "prerequis": ["mudras_cours"],
+      "description": "La hiérarchie des 5 natures élémentaires (Katon > Futon > Raiton > Doton > Suiton > Katon), le test de la feuille, les forces de chaque nature, et les Kekkei Genkai.",
+      "techniques": [
+        {
+          "id": "nature_hierarchie",
+          "nom": "Hiérarchie des 5 Natures",
+          "description": "Comprendre le cycle des supériorités : Katon bat Futon, Futon bat Raiton, Raiton bat Doton, Doton bat Suiton, Suiton bat Katon.",
+          "type": "connaissance",
+          "etapes": ["Mémoriser le cycle des 5 natures", "Comprendre les forces de chaque nature", "Identifier sa propre nature via le test de la feuille"],
+          "mudras": [],
+          "rang": "Apprenti Genin",
+          "prerequis": []
+        },
+        {
+          "id": "nature_test_feuille",
+          "nom": "Le Test de la Feuille",
+          "description": "Méthode pour déterminer sa nature de chakra : Katon (brûle), Suiton (humidifie), Doton (s'effrite), Raiton (se plie), Futon (se coupe).",
+          "type": "connaissance",
+          "etapes": ["Connaître les 5 réactions de la feuille", "Savoir interpréter le résultat"],
+          "mudras": [],
+          "rang": "Apprenti Genin",
+          "prerequis": ["nature_hierarchie"]
+        },
+        {
+          "id": "nature_kekkei",
+          "nom": "Les Kekkei Genkai",
+          "description": "Combinaisons avancées de natures de chakra : Mokuton (Doton+Suiton), Hyoton (Suiton+Futon), Yoton (Doton+Katon), etc.",
+          "type": "connaissance",
+          "etapes": ["Connaître les principales combinaisons", "Comprendre le Kekkei Tōta (Jinton = 3 natures)", "Identifier les Kekkei Genkai spéciaux (Shoton, Inkuton, Kami, Meiton)"],
+          "mudras": [],
+          "rang": "Genin",
+          "prerequis": ["nature_hierarchie"]
+        }
+      ]
+    },
+    {
+      "id": "taijutsu_theorie",
+      "titre": "Théorie du Taijutsu",
+      "categorie": "theorique",
+      "module": "Bases du Combat",
+      "rang_requis": "Apprenti Genin",
+      "public_cible": "Tous",
+      "auteur": null,
+      "prerequis": [],
+      "description": "Le Taijutsu est l'une des 3 branches du combat ninja. Combat à mains nues et maniement d'armes, basé sur la force physique et mentale. Ne requiert généralement pas de chakra ni de mudras.",
+      "techniques": [
+        {
+          "id": "taijutsu_fondamentaux",
+          "nom": "Fondamentaux du Taijutsu",
+          "description": "Comprendre la place du Taijutsu parmi les 3 branches (Ninjutsu, Genjutsu, Taijutsu). L'aptitude au taijutsu est un savoir-faire, pas de la force brute.",
+          "type": "connaissance",
+          "etapes": ["Distinguer les 3 branches du combat ninja", "Comprendre que le Taijutsu = savoir-faire + vitesse + force", "Intégrer l'avantage de rapidité d'exécution (pas de mudras)"],
+          "mudras": [],
+          "rang": "Apprenti Genin",
+          "prerequis": []
+        }
+      ]
+    },
+    {
+      "id": "armes_cours",
+      "titre": "Les Armes Ninja",
+      "categorie": "theorique",
+      "module": "Bases du Combat",
+      "rang_requis": "Apprenti Genin",
+      "public_cible": "Tous",
+      "auteur": null,
+      "prerequis": [],
+      "description": "Catalogue complet des armes ninja : caractéristiques, tailles et utilisations tactiques de chaque arme.",
+      "techniques": [
+        {
+          "id": "armes_lancer",
+          "nom": "Armes de lancer",
+          "description": "Maîtrise du Kunai (polyvalent), du Shuriken (étoile de jet) et du Senbon (aiguille de précision).",
+          "type": "connaissance",
+          "etapes": ["Connaître le Kunai et ses utilisations", "Connaître le Shuriken et ses utilisations", "Connaître le Senbon et ses utilisations"],
+          "mudras": [],
+          "rang": "Apprenti Genin",
+          "prerequis": []
+        },
+        {
+          "id": "armes_melee",
+          "nom": "Armes de mêlée",
+          "description": "Le Katana : sabre traditionnel pouvant être amélioré au chakra.",
+          "type": "connaissance",
+          "etapes": ["Connaître le Katana et ses propriétés", "Comprendre l'infusion de chakra dans une arme"],
+          "mudras": [],
+          "rang": "Apprenti Genin",
+          "prerequis": []
+        },
+        {
+          "id": "armes_tactiques",
+          "nom": "Équipement tactique",
+          "description": "Makibishi (pièges au sol), Clochettes (détection), Bombe fumigène (couverture), Parchemin explosif (piège/distance).",
+          "type": "connaissance",
+          "etapes": ["Connaître les Makibishi", "Connaître les Clochettes et leur combinaison avec le Kunai", "Connaître la Bombe fumigène", "Connaître le Parchemin explosif et le Fuinjutsu"],
+          "mudras": [],
+          "rang": "Apprenti Genin",
+          "prerequis": []
+        }
+      ]
+    },
+    {
+      "id": "infiltration",
+      "titre": "Infiltration (Théorie)",
+      "categorie": "theorique",
+      "module": "Spécialisation",
+      "rang_requis": "Apprenti Genin",
+      "public_cible": "Apprentis Genin et Genin",
+      "auteur": "Akio Fukurō",
+      "prerequis": ["regles_or"],
+      "description": "Cours théorique sur les bases de l'infiltration : discrétion, changement de tenue, d'attitude, d'apparence, et mensonge convaincant.",
+      "techniques": [
+        {
+          "id": "infiltration_tenue",
+          "nom": "Changement de tenue",
+          "description": "Adapter sa tenue à l'environnement et au type de mission. Tenue sobre de marchand/paysan pour un hameau, tenue adaptée au village ennemi pour une infiltration militaire.",
+          "type": "connaissance",
+          "etapes": ["Savoir adapter sa tenue à l'environnement", "Préparer une couverture vestimentaire crédible"],
+          "mudras": [],
+          "rang": "Apprenti Genin",
+          "prerequis": []
+        },
+        {
+          "id": "infiltration_attitude",
+          "nom": "Changement d'attitude",
+          "description": "S'identifier à quelqu'un d'autre pour ne pas dévoiler ses traits de caractère. Ne pas être trop suspicieux ni trop impatient.",
+          "type": "connaissance",
+          "etapes": ["Apprendre à jouer un rôle", "Contrôler ses réactions naturelles"],
+          "mudras": [],
+          "rang": "Apprenti Genin",
+          "prerequis": []
+        },
+        {
+          "id": "infiltration_apparence",
+          "nom": "Changement d'apparence",
+          "description": "Modifier son apparence physique (cheveux, etc.). Se préparer psychologiquement à un changement d'identité prolongé.",
+          "type": "connaissance",
+          "etapes": ["Maîtriser les modifications d'apparence", "Se préparer psychologiquement"],
+          "mudras": [],
+          "rang": "Genin",
+          "prerequis": ["infiltration_tenue"]
+        },
+        {
+          "id": "infiltration_mensonge",
+          "nom": "Mensonge convaincant",
+          "description": "Trouver un rôle pertinent et crédible. Un paysan ou marchand dans un hameau vaut mieux qu'un prince perdu. Rester convaincant et ouvert à l'imprévu.",
+          "type": "connaissance",
+          "etapes": ["Choisir un rôle crédible et adapté", "Maintenir sa couverture sous pression", "S'adapter aux imprévus"],
+          "mudras": [],
+          "rang": "Genin",
+          "prerequis": ["infiltration_attitude"]
+        }
+      ]
+    },
+    {
+      "id": "bourrasque",
+      "titre": "La Bourrasque de Konoha",
+      "categorie": "pratique",
+      "module": "Techniques Taijutsu",
+      "rang_requis": "Genin",
+      "public_cible": "Genin et plus",
+      "auteur": null,
+      "prerequis": ["taijutsu_theorie"],
+      "description": "Technique de coup de pied rotatif 360°. Requiert souplesse des hanches, la jambe doit agir comme un fouet. Entraînement avec low kicks puis rotation complète.",
+      "techniques": [
+        {
+          "id": "bourrasque_low_kick",
+          "nom": "Série de Low Kicks",
+          "description": "Travail des coups de pied bas en duo sur Pao (cible rembourrée), montée progressive en intensité, puis sur surface rigide (arbre/poteau).",
+          "type": "taijutsu",
+          "etapes": ["Low kick en duo sur Pao (série de 10)", "Monter progressivement l'intensité", "Low kick rotatif sur surface rigide (série de 10, roll possible)"],
+          "mudras": [],
+          "rang": "Genin",
+          "prerequis": []
+        },
+        {
+          "id": "bourrasque_rotation",
+          "nom": "La Bourrasque (rotation 360°)",
+          "description": "Saut avec rotation 360° et retombée sur pieds, puis extension de la jambe pendant la rotation, enfin exécution au sol avec vitesse.",
+          "type": "taijutsu",
+          "etapes": ["Saut + rotation 360° et retombée (×5)", "Extension de la jambe non-appui pendant la rotation", "Exécution au sol : vitesse de rotation, engagement épaules/hanches, jambe tendue"],
+          "mudras": [],
+          "rang": "Genin",
+          "prerequis": ["bourrasque_low_kick"]
+        }
+      ]
+    },
+    {
+      "id": "pied_aube",
+      "titre": "Le Pied de l'Aube",
+      "categorie": "pratique",
+      "module": "Techniques Taijutsu",
+      "rang_requis": "Genin",
+      "public_cible": "Genin et plus",
+      "auteur": null,
+      "prerequis": ["taijutsu_theorie"],
+      "description": "Technique de saut offensif. Travail des muscles fessiers (base de la puissance de saut), squats en binôme, puis démonstration de la technique.",
+      "techniques": [
+        {
+          "id": "pied_aube_fessiers",
+          "nom": "Travail des fessiers et élasticité",
+          "description": "Tour de terrain avec alternance de positions : accroupi/canard, saut groupé, saut de grenouille, sprint. Les fessiers sont la base de la puissance de saut.",
+          "type": "taijutsu",
+          "etapes": ["Position accroupie / en canard", "Saut groupé vertical (genoux au torse)", "Saut de grenouille", "Sprint"],
+          "mudras": [],
+          "rang": "Genin",
+          "prerequis": []
+        },
+        {
+          "id": "pied_aube_squats",
+          "nom": "Squats en binôme",
+          "description": "Séries de squats face à face. Au signal, l'un saute sur les épaules de l'autre. Chanter 'L'Aube est l'espoir de Konoha' pendant l'exercice.",
+          "type": "taijutsu",
+          "etapes": ["Squats en binôme face à face", "Saut sur les épaules du partenaire au signal", "Alternance au second signal"],
+          "mudras": [],
+          "rang": "Genin",
+          "prerequis": ["pied_aube_fessiers"]
+        },
+        {
+          "id": "pied_aube_technique",
+          "nom": "Technique du Pied de l'Aube",
+          "description": "Technique facilement parable si vue, mais permet de combler l'espace. Sert aux offensives surprise et ouvertures d'enchaînement.",
+          "type": "taijutsu",
+          "etapes": ["Démonstration par un HG", "Exécution de la technique", "Application en offensive surprise"],
+          "mudras": [],
+          "rang": "Genin",
+          "prerequis": ["pied_aube_squats"]
+        }
+      ]
+    },
+    {
+      "id": "saut_chakra",
+      "titre": "Saut de Chakra",
+      "categorie": "pratique",
+      "module": "Techniques de Chakra",
+      "rang_requis": "Genin",
+      "public_cible": "Genin et plus",
+      "auteur": null,
+      "prerequis": ["mudras_cours", "nature_theorie"],
+      "description": "Apprendre à concentrer le chakra dans les pieds pour améliorer la détente. Le saut de chakra est une question de précision, pas de force brute.",
+      "techniques": [
+        {
+          "id": "saut_chakra_theorie",
+          "nom": "Principes du Saut de Chakra",
+          "description": "Comprendre que le chakra se concentre dans la plante des pieds. Trop = perte de contrôle, pas assez = pas de décollage. Adapter les angles selon la situation.",
+          "type": "connaissance",
+          "etapes": ["Comprendre le principe de concentration du chakra", "Connaître les risques (trop/pas assez)", "Comprendre les angles (haut, avant, côté, arrière)"],
+          "mudras": [],
+          "rang": "Genin",
+          "prerequis": []
+        },
+        {
+          "id": "saut_chakra_pratique",
+          "nom": "Exécution du Saut de Chakra",
+          "description": "Échauffement sans chakra, puis malaxage et concentration sur la plante des pieds (roll 50+), enfin propulsion vers un toit.",
+          "type": "chakra",
+          "etapes": ["Échauffement : sauts sans chakra", "Malaxer le chakra et concentrer sur la plante des pieds (roll 50+)", "Libérer le chakra pour propulsion", "Rejoindre le professeur sur le toit de l'Académie"],
+          "mudras": ["rat", "belier", "tigre"],
+          "rang": "Genin",
+          "prerequis": ["saut_chakra_theorie"]
+        }
+      ]
+    },
+    {
+      "id": "nature_combat",
+      "titre": "Natures de Chakra - Analyse et Combat",
+      "categorie": "pratique",
+      "module": "Techniques de Chakra",
+      "rang_requis": "Genin Confirmé",
+      "public_cible": "Genins confirmés / Genins",
+      "auteur": "Jihon Ichirin",
+      "prerequis": ["nature_theorie"],
+      "description": "Exercice d'analyse de combat en fonction des natures de chakra. Apprendre à lire un combat, adapter ses techniques, éviter l'effet tunnel.",
+      "techniques": [
+        {
+          "id": "analyse_forces_faiblesses",
+          "nom": "Analyse des forces et faiblesses",
+          "description": "En groupe mixte par nature, discuter des forces et faiblesses de chaque nature de chakra.",
+          "type": "connaissance",
+          "etapes": ["Former des groupes mixtes par nature", "Discuter forces et faiblesses (10 min)", "Exposer les conclusions au groupe"],
+          "mudras": [],
+          "rang": "Genin Confirmé",
+          "prerequis": []
+        },
+        {
+          "id": "combat_analyse",
+          "nom": "Combat avec analyse tactique",
+          "description": "Combats en équipe avec obligation d'analyser, construire des actions et collaborer. Débriefing : 2 points positifs et 2 à améliorer.",
+          "type": "taijutsu",
+          "etapes": ["Effectuer un combat construit en équipe", "Analyser les actions pendant le combat", "Débriefing : 2 positifs + 2 à améliorer", "Le groupe vainqueur affronte les Chūnins"],
+          "mudras": [],
+          "rang": "Genin Confirmé",
+          "prerequis": ["analyse_forces_faiblesses"]
+        }
+      ]
+    },
+    {
+      "id": "jeu_roi",
+      "titre": "Le Jeu du Roi",
+      "categorie": "pratique",
+      "module": "Exercices Tactiques",
+      "rang_requis": "Genin",
+      "public_cible": "Genin et plus",
+      "auteur": "Yumi Amano",
+      "prerequis": ["taijutsu_theorie", "regles_or"],
+      "description": "Exercice de protection de cible prioritaire. Deux groupes (attaque/défense), le Roi est un professeur. Combat, diplomatie et négociation autorisés. Si le Roi est blessé, tout le monde échoue.",
+      "techniques": [
+        {
+          "id": "jeu_roi_defense",
+          "nom": "Protection de cible prioritaire",
+          "description": "Apprendre à protéger une cible tout en gérant la menace. Arbitrage attaque/défense, responsabilisation collective.",
+          "type": "tactique",
+          "etapes": ["Organiser la défense autour du Roi", "Gérer les menaces multiples", "Maintenir la protection sans blesser le Roi"],
+          "mudras": [],
+          "rang": "Genin",
+          "prerequis": []
+        },
+        {
+          "id": "jeu_roi_attaque",
+          "nom": "Capture stratégique",
+          "description": "Capturer le Roi sans le blesser. Utiliser combat, diplomatie et négociation.",
+          "type": "tactique",
+          "etapes": ["Élaborer une stratégie de capture", "Coordonner l'approche en équipe", "Capturer sans blesser la cible"],
+          "mudras": [],
+          "rang": "Genin",
+          "prerequis": []
+        }
+      ]
+    },
+    {
+      "id": "capture_drapeau",
+      "titre": "Simulation - Capture de Drapeau",
+      "categorie": "pratique",
+      "module": "Exercices Tactiques",
+      "rang_requis": "Genin",
+      "public_cible": "Genin et plus",
+      "auteur": null,
+      "prerequis": ["taijutsu_theorie", "regles_or"],
+      "description": "Simulation tactique en 1-3 manches. Phase diplomatie (7 min) puis phase combat (5 min). Retour entre chaque manche pour adaptation.",
+      "techniques": [
+        {
+          "id": "capture_diplomatie",
+          "nom": "Phase de Diplomatie",
+          "description": "7 minutes de négociation avant chaque phase de combat. Que la négociation aboutisse ou non, le combat suit.",
+          "type": "tactique",
+          "etapes": ["Préparer une stratégie diplomatique", "Négocier pendant 7 minutes", "Adapter la stratégie selon le résultat"],
+          "mudras": [],
+          "rang": "Genin",
+          "prerequis": []
+        },
+        {
+          "id": "capture_combat",
+          "nom": "Phase de Combat et Coordination",
+          "description": "5 minutes de combat pour capturer ou défendre le drapeau. Coordination offensive et défense de position.",
+          "type": "tactique",
+          "etapes": ["Organiser la défense de position", "Coordonner l'offensive", "Gérer les priorités en temps réel", "Débriefing et adaptation entre les manches"],
+          "mudras": [],
+          "rang": "Genin",
+          "prerequis": ["capture_diplomatie"]
+        }
+      ]
+    },
+    {
+      "id": "raiton_cours",
+      "titre": "Techniques Raiton",
+      "categorie": "pratique",
+      "module": "Techniques Ninjutsu",
+      "rang_requis": "Genin",
+      "public_cible": "Genin et plus",
+      "auteur": null,
+      "prerequis": ["mudras_cours", "nature_theorie"],
+      "description": "Techniques de la foudre : 4 jutsus Raiton offensifs/défensifs et 2 techniques de Taijutsu.",
+      "techniques": [
+        {
+          "id": "rai_rayon",
+          "nom": "Rayon Instantané",
+          "description": "Rayon d'éclair canalisé depuis la paume.",
+          "type": "ninjutsu",
+          "etapes": ["Composer les mudras", "Concentrer le chakra dans la paume droite", "Canaliser et viser", "Maintenir le rayon"],
+          "mudras": ["serpent", "lievre"],
+          "rang": "Genin",
+          "prerequis": []
+        },
+        {
+          "id": "rai_boule",
+          "nom": "Boule Fulgurante",
+          "description": "Boule de foudre projetée en ligne droite.",
+          "type": "ninjutsu",
+          "etapes": ["Composer les mudras", "Concentrer le chakra dans les deux paumes", "Diriger les paumes vers la cible", "Projeter la boule de foudre"],
+          "mudras": ["dragon", "serpent"],
+          "rang": "Genin",
+          "prerequis": []
+        },
+        {
+          "id": "rai_ruee",
+          "nom": "Ruée Foudroyante",
+          "description": "Ruée de foudre au sol, contrôle de zone.",
+          "type": "ninjutsu",
+          "etapes": ["Composer les mudras", "Libérer le chakra au sol", "Diriger la ruée vers la cible", "La ligne persiste et inflige des dégâts"],
+          "mudras": ["singe", "cheval", "serpent"],
+          "rang": "Genin Confirmé",
+          "prerequis": []
+        },
+        {
+          "id": "rai_zone",
+          "nom": "Zone Fulgurante",
+          "description": "Zone électrique circulaire autour du lanceur.",
+          "type": "ninjutsu",
+          "etapes": ["Composer les mudras", "Concentrer le chakra dans les paumes", "Libérer au sol", "La zone électrique se forme autour"],
+          "mudras": ["serpent", "rat", "chien"],
+          "rang": "Genin Confirmé",
+          "prerequis": []
+        },
+        {
+          "id": "rai_bourrasque",
+          "nom": "Bourrasque Ardente",
+          "description": "Technique de taijutsu au corps à corps.",
+          "type": "taijutsu",
+          "etapes": ["Exécuter la technique au corps à corps"],
+          "mudras": [],
+          "rang": "Genin",
+          "prerequis": []
+        },
+        {
+          "id": "rai_pied_aube",
+          "nom": "Pied de l'Aube",
+          "description": "Technique de taijutsu au corps à corps.",
+          "type": "taijutsu",
+          "etapes": ["Exécuter la technique au corps à corps"],
+          "mudras": [],
+          "rang": "Genin Confirmé",
+          "prerequis": []
+        }
+      ]
+    },
+    {
+      "id": "permutation",
+      "titre": "Permutation",
+      "categorie": "pratique",
+      "module": "Techniques Ninjutsu",
+      "rang_requis": "Genin Confirmé",
+      "public_cible": "Genin Confirmé et plus",
+      "auteur": null,
+      "prerequis": ["mudras_cours"],
+      "description": "Technique de substitution : remplacer son corps par un objet pour esquiver une attaque.",
+      "techniques": [
+        {
+          "id": "perm_principe",
+          "nom": "Principe de la Permutation",
+          "description": "Comprendre le mécanisme de substitution.",
+          "type": "connaissance",
+          "etapes": ["Comprendre le principe de substitution", "Identifier les objets utilisables", "Choisir le bon timing"],
+          "mudras": [],
+          "rang": "Genin Confirmé",
+          "prerequis": []
+        },
+        {
+          "id": "perm_exec",
+          "nom": "Exécution de la Permutation",
+          "description": "Réaliser la substitution au bon moment.",
+          "type": "ninjutsu",
+          "etapes": ["Anticiper l'attaque adverse", "Exécuter la substitution", "Se repositionner après la permutation"],
+          "mudras": [],
+          "rang": "Genin Confirmé",
+          "prerequis": ["perm_principe"]
+        }
+      ]
+    },
+    {
+      "id": "infiltration_pratique",
+      "titre": "Infiltration — Exercice pratique",
+      "categorie": "pratique",
+      "module": "Spécialisation",
+      "rang_requis": "Apprenti Genin",
+      "public_cible": "Apprentis Genin / Genins / Genins Confirmés",
+      "auteur": "Akio Fukurō",
+      "prerequis": ["infiltration"],
+      "description": "Exercice de terrain au Hameau des rizières. Infiltration parmi des senseis jouant des bandits, récolte d'informations sans se faire identifier.",
+      "techniques": [
+        {
+          "id": "infil_pratique_infiltration",
+          "nom": "S'infiltrer sans être repéré",
+          "description": "Se déguiser, adopter un rôle civil et entrer dans le village sans être identifié comme ninja.",
+          "type": "tactique",
+          "etapes": ["Se déguiser en civil crédible", "Entrer dans le village sans attirer l'attention", "Éviter les comportements suspects"],
+          "mudras": [],
+          "rang": "Apprenti Genin",
+          "prerequis": []
+        },
+        {
+          "id": "infil_pratique_recolte",
+          "nom": "Récolter l'information",
+          "description": "Exploiter les faiblesses des PNJ (gourmandise, cupidité, stupidité) pour obtenir l'information secrète.",
+          "type": "tactique",
+          "etapes": ["Identifier le défaut du PNJ", "Adapter son approche pour le faire parler", "Transmettre l'info à l'équipe via radio"],
+          "mudras": [],
+          "rang": "Apprenti Genin",
+          "prerequis": ["infil_pratique_infiltration"]
+        }
+      ]
+    },
+    {
+      "id": "traque",
+      "titre": "La Traque",
+      "categorie": "pratique",
+      "module": "Spécialisation",
+      "rang_requis": "Genin",
+      "public_cible": "Genin et plus",
+      "auteur": "Inoshi Baikutai & Gaoh Uragiri",
+      "prerequis": ["regles_or"],
+      "description": "Exercice d'investigation : localiser et interpeller une personne recherchée parmi des leurres.",
+      "techniques": [
+        {
+          "id": "traque_recherche",
+          "nom": "Recherche et identification",
+          "description": "Exploiter les indices (nom, détail physique, tenue) pour localiser la bonne cible.",
+          "type": "tactique",
+          "etapes": ["Analyser les indices fournis", "Quadriller la zone de recherche", "Distinguer la cible des leurres"],
+          "mudras": [],
+          "rang": "Genin",
+          "prerequis": []
+        },
+        {
+          "id": "traque_interpellation",
+          "nom": "Interpellation",
+          "description": "Procéder à l'interpellation ou faire remonter la localisation.",
+          "type": "tactique",
+          "etapes": ["Confirmer l'identité de la cible", "Procéder à l'interpellation", "Débriefing collectif sur les méthodes"],
+          "mudras": [],
+          "rang": "Genin",
+          "prerequis": ["traque_recherche"]
+        }
+      ]
+    },
+    {
+      "id": "enquete",
+      "titre": "L'Enquête",
+      "categorie": "pratique",
+      "module": "Spécialisation",
+      "rang_requis": "Genin",
+      "public_cible": "Genin et plus",
+      "auteur": "Inoshi Baikutai",
+      "prerequis": ["regles_or"],
+      "description": "Scénario d'enquête : un ninja a été attaqué en traître. Interroger les témoins, recueillir les indices, fournir un rapport.",
+      "techniques": [
+        {
+          "id": "enquete_interrogatoire",
+          "nom": "Interrogatoire et recueil d'info",
+          "description": "Mener des interrogatoires structurés pour recueillir des témoignages.",
+          "type": "tactique",
+          "etapes": ["Identifier les témoins à interroger", "Poser les bonnes questions", "Recouper les témoignages"],
+          "mudras": [],
+          "rang": "Genin",
+          "prerequis": []
+        },
+        {
+          "id": "enquete_rapport",
+          "nom": "Analyse et rapport",
+          "description": "Assembler les informations et fournir une conclusion argumentée.",
+          "type": "tactique",
+          "etapes": ["Organiser les indices", "Formuler une hypothèse", "Rendre un rapport fiable"],
+          "mudras": [],
+          "rang": "Genin",
+          "prerequis": ["enquete_interrogatoire"]
+        }
+      ]
+    },
+    {
+      "id": "orientation_terrain",
+      "titre": "Course d'orientation et analyse du terrain",
+      "categorie": "pratique",
+      "module": "Terrain",
+      "rang_requis": "Apprenti Genin",
+      "public_cible": "Apprentis Genin / Genin",
+      "auteur": "Akio Fukurō",
+      "prerequis": [],
+      "description": "Course d'orientation par énigmes à travers le Pays du Feu. 4 lieux à trouver en décryptant les indices.",
+      "techniques": [
+        {
+          "id": "orient_enigme",
+          "nom": "Décrypter les indices",
+          "description": "Résoudre les énigmes pour identifier le lieu à atteindre.",
+          "type": "connaissance",
+          "etapes": ["Lire et analyser l'indice", "Identifier le lieu correspondant", "S'orienter vers la destination"],
+          "mudras": [],
+          "rang": "Apprenti Genin",
+          "prerequis": []
+        },
+        {
+          "id": "orient_terrain",
+          "nom": "Analyse du terrain",
+          "description": "Observer et analyser l'environnement sur place pour trouver l'élément demandé.",
+          "type": "connaissance",
+          "etapes": ["Observer l'environnement du lieu", "Identifier l'élément demandé", "Transmettre la réponse par radio"],
+          "mudras": [],
+          "rang": "Apprenti Genin",
+          "prerequis": ["orient_enigme"]
+        }
+      ]
+    },
+    {
+      "id": "pays_feu_visite",
+      "titre": "Pays du Feu — Orientation et visite",
+      "categorie": "pratique",
+      "module": "Terrain",
+      "rang_requis": "Apprenti Genin",
+      "public_cible": "Tous",
+      "auteur": "Jihon Ichirin",
+      "prerequis": [],
+      "description": "Visite guidée du Pays du Feu : géographie, zones dangereuses, frontières et lieux stratégiques.",
+      "techniques": [
+        {
+          "id": "pf_geographie",
+          "nom": "Géographie du Pays du Feu",
+          "description": "Connaître les lieux clés : Konoha, Tanzaku, Vallée de la fin, Temple du Feu, Hameau des rizières.",
+          "type": "connaissance",
+          "etapes": ["Identifier les lieux principaux", "Connaître les itinéraires", "Distinguer zones sûres et dangereuses"],
+          "mudras": [],
+          "rang": "Apprenti Genin",
+          "prerequis": []
+        },
+        {
+          "id": "pf_frontieres",
+          "nom": "Frontières et zones interdites",
+          "description": "Identifier les frontières sensibles et les zones interdites d'accès.",
+          "type": "connaissance",
+          "etapes": ["Connaître les pays frontaliers", "Identifier les zones interdites (Marais, Ame)", "Comprendre les enjeux diplomatiques des frontières"],
+          "mudras": [],
+          "rang": "Apprenti Genin",
+          "prerequis": ["pf_geographie"]
+        }
+      ]
+    },
+    {
+      "id": "simulation_mission",
+      "titre": "Simulation de Mission — Dilemmes moraux",
+      "categorie": "pratique",
+      "module": "Exercices Tactiques",
+      "rang_requis": "Genin",
+      "public_cible": "Genin et plus",
+      "auteur": "Gromlof",
+      "prerequis": ["regles_or", "volonte_feu"],
+      "description": "Mission simulée avec dilemmes moraux : obéir à un ordre qui nuit au village, ou protéger un citoyen au risque de rater la mission.",
+      "techniques": [
+        {
+          "id": "sim_mission_dilemme1",
+          "nom": "Dilemme 1 — Mission vs Village",
+          "description": "Transmettre une info sensible à un contact qui s'avère être un espion ennemi.",
+          "type": "tactique",
+          "etapes": ["Recevoir et analyser la mission", "Identifier la menace (espion Amegakure)", "Décider : accomplir la mission ou protéger le village"],
+          "mudras": [],
+          "rang": "Genin",
+          "prerequis": []
+        },
+        {
+          "id": "sim_mission_dilemme2",
+          "nom": "Dilemme 2 — Mission vs Protection",
+          "description": "Un marchand de Konoha est attaqué par des bandits pendant la mission.",
+          "type": "tactique",
+          "etapes": ["Évaluer la situation du marchand", "Décider : poursuivre la mission ou intervenir", "Assumer les conséquences de son choix"],
+          "mudras": [],
+          "rang": "Genin",
+          "prerequis": []
+        }
+      ]
+    },
+    {
+      "id": "simulation_escorte",
+      "titre": "Simulation d'Escorte",
+      "categorie": "pratique",
+      "module": "Exercices Tactiques",
+      "rang_requis": "Genin",
+      "public_cible": "Genin et plus",
+      "auteur": "Yumi Amano",
+      "prerequis": ["regles_or", "taijutsu_theorie"],
+      "description": "Mission d'escorte simulée : protéger une personne ou livraison sur un trajet réel avec imprévus.",
+      "techniques": [
+        {
+          "id": "escorte_placement",
+          "nom": "Placement défensif",
+          "description": "Organiser la protection autour de la cible pendant le déplacement.",
+          "type": "tactique",
+          "etapes": ["Répartir les rôles (éclaireur, flancs, arrière-garde)", "Maintenir la formation en mouvement", "Adapter le placement selon le terrain"],
+          "mudras": [],
+          "rang": "Genin",
+          "prerequis": []
+        },
+        {
+          "id": "escorte_imprevu",
+          "nom": "Réaction à l'imprévu",
+          "description": "Gérer les situations imprévues en terrain ouvert.",
+          "type": "tactique",
+          "etapes": ["Détecter la menace", "Protéger la cible en priorité", "Communiquer et s'adapter en temps réel"],
+          "mudras": [],
+          "rang": "Genin",
+          "prerequis": ["escorte_placement"]
+        }
+      ]
+    },
+    {
+      "id": "hishiba_zakuto",
+      "titre": "Hishiba Zakuto — Mémoire d'un Shinobi",
+      "categorie": "theorique",
+      "module": "Fondamentaux",
+      "rang_requis": "Apprenti Genin",
+      "public_cible": "Tous",
+      "auteur": "Eraku Morikawa",
+      "prerequis": ["volonte_feu"],
+      "description": "Hommage à Hishiba Zakuto, ninja de la Reconnaissance et ami le plus proche d'Eraku. Sa vie, ses actes, et ce que sa mémoire enseigne à ceux qui restent.",
+      "techniques": [
+        {
+          "id": "hishiba_parcours",
+          "nom": "Qui était Hishiba Zakuto",
+          "description": "Ninja de la Reconnaissance, combattant aérien redoutable, surnommé le Tigre de Jade. Son parcours, ses missions, ce qui faisait de lui un shinobi d'exception.",
+          "type": "connaissance",
+          "etapes": [
+            "Connaître son rôle au sein de la Reconnaissance",
+            "Comprendre son profil de combat : taijutsu aérien, puissance explosive",
+            "Retenir ses faits d'armes : l'affaire Ori Souta, la Section Hana Do",
+            "Comprendre ce qui le distinguait : la loyauté sans condition"
+          ],
+          "mudras": [],
+          "rang": "Apprenti Genin",
+          "prerequis": []
+        },
+        {
+          "id": "hishiba_liens",
+          "nom": "Les liens qui forgent un shinobi",
+          "description": "L'amitié entre ninjas dépasse le simple lien de mission. Hishiba n'était pas un frère d'armes — il était un ami. La différence compte.",
+          "type": "connaissance",
+          "etapes": [
+            "Distinguer camarade de mission et ami véritable",
+            "Comprendre que la confiance se construit hors du champ de bataille",
+            "Savoir que ces liens sont une force, pas une faiblesse",
+            "Accepter que perdre quelqu'un de proche change un shinobi à jamais"
+          ],
+          "mudras": [],
+          "rang": "Apprenti Genin",
+          "prerequis": []
+        },
+        {
+          "id": "hishiba_flamme",
+          "nom": "Porter la flamme des absents",
+          "description": "Un ninja tombé ne disparaît pas s'il reste dans la mémoire de ceux qui avancent. Lien direct avec la Volonté du Feu : les rêves se transmettent.",
+          "type": "connaissance",
+          "etapes": [
+            "Comprendre que le deuil n'est pas une faiblesse",
+            "Transformer le souvenir en force, pas en chaîne",
+            "Continuer d'avancer — c'est la dernière volonté de ceux qui partent",
+            "Transmettre l'histoire des tombés aux générations futures"
+          ],
+          "mudras": [],
+          "rang": "Apprenti Genin",
+          "prerequis": []
+        }
+      ]
+    }
+  ]
+}
