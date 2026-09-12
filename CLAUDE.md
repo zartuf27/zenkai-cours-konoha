@@ -94,6 +94,12 @@ Sage 🍃, Implacable 🗡️, Guerrier 🔥, Bienveillant 🌸, Énigmatique �
 
 Chaque type : 1 citation par cours (16 × 24 = 384) + greeting dashboard + animation avatar spécifique.
 
+Certains types modifient les **labels de la sidebar** (`SIDEBAR_LABELS`) :
+- Ombre : Annonces→"Transmission", Bilan→"Rapport opérationnel", Historique→"Logs"
+- Rebelle : Bilan→"Ce que j'ai foutu ce mois", Admin→"Les règles"
+- Chasseur : Annonces→"Appel de la meute", Bilan→"Tableau de chasse"
+- etc.
+
 ### Skins par nature de chakra
 
 | Nature | Couleurs | Particules | Animation |
@@ -128,10 +134,25 @@ Sur chaque page de cours détaillé :
 - **−1** — corrige un miss-clic (retire la dernière entrée)
 - Historique : `S.n.cours_history` = JSON array `[{id, titre, date, heure, ts, noEleve?}]`
 
-### Page Fin de mois (📊)
+### Onboarding (tuto première visite)
 
-- Sélecteur de jour IRL (= mois IG)
-- Message Discord prêt à copier :
+Flow en 2 phases :
+1. **Pop-up d'accueil** → redirige vers la page Sensei pour configurer le profil
+2. **Guide des onglets** — lancé via le bouton "✅ Profil configuré — Découvrir l'app"
+   - 5 étapes (Dashboard, Cours, Annonces, Bilan, Historique)
+   - Descriptions **personnalisées par type** (`TOUR_TIPS_TYPED`) : 8 types ont des textes uniques
+   - Mot de fin personnalisé par type + nature + prénom (`ONBOARD_FINAL`)
+   - Sons : tick au clic (`playClick`), accord Do-Mi-Sol en fin (`playSuccess`)
+   - Animations : slide, pulse, fade
+
+Le flag `zenkai_onboarded` dans localStorage empêche de relancer le tuto. Bouton "🎓 Relancer" dans la page Sensei.
+
+### Page Fin de mois (📊) — Rapport pour le Parchemin
+
+Le **Parchemin** = le canal Discord de l'Académie où les senseis postent leur rapport.
+
+- Sélecteur de jour IRL (= mois IG) avec boutons cliquables
+- Message pré-formaté prêt à copier-coller sur le Parchemin :
   ```
   **- Prénom Nom :** Eraku Morikawa
   **- Rôle :** Jōnin
@@ -141,6 +162,7 @@ Sur chaque page de cours détaillé :
   • Les Règles d'Or — 16:00 (proposé, 0 élève présent)
   ```
 - Bouton 🗑️ Remettre à zéro
+- Lien vers la page Historique
 
 ### Page Historique (📜)
 
@@ -169,6 +191,10 @@ Overlay plein écran déclenché depuis la page détail d'un cours. Affiche le c
 | `const NATURE_CLOSING` | Phrases clôture par nature × module (5 × 8) |
 | `const COURS_NATURE` | Mapping cours → nature pour filtrage |
 | `const NATURE_PARTICLES` | Emojis par nature pour particules |
+| `const ONBOARD_FINAL` | Mots de fin du tuto par type (16 entrées) |
+| `const TOUR_TIPS_TYPED` | Descriptions d'onglets par type (8 types × 4 onglets) |
+| `const SIDEBAR_TIPS` | Descriptions d'onglets génériques (11 vues) |
+| `const SIDEBAR_LABELS` | Labels sidebar personnalisés par type (9 types) |
 
 ### Persistence (localStorage clé `zenkai_v2`)
 
@@ -192,6 +218,9 @@ Overlay plein écran déclenché depuis la page détail d'un cours. Affiche le c
 | Copie | `clipCopy()`, `copyNotes()`, `copyAndOpen()`, `copyModuleAnnonces()` |
 | Présentation | `openPresentation()` |
 | Persistence | `load()`, `save()`, `chk()`, `tog()`, `getNote()`, `setNote()` |
+| Onboarding | `showOnboarding()`, `startTourGuide()`, `finishOnboarding()`, `isFirstVisit()` |
+| Sons | `playClick()`, `playSuccess()` |
+| Sidebar | `getSidebarLabel()`, `getTourTip()` |
 | Export | `doExport()`, `doImport()`, `doReset()`, `resetBilan()` |
 
 ### Procédure pour ajouter un cours
