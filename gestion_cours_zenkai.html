@@ -285,6 +285,61 @@
 [data-theme="dark"] .sidebar { background:var(--bg-surface); border-right-color:var(--border); }
 [data-theme="dark"] .mobile-nav { background:var(--bg-surface); border-bottom-color:var(--border); }
 
+/* ====== STYLE PARCHEMIN (historique) ====== */
+.scroll-card {
+  background:var(--bg-parchment); border:1px solid var(--border-warm);
+  border-radius:var(--radius-lg); padding:24px;
+  margin-bottom:16px; position:relative; overflow:hidden;
+  box-shadow:inset 0 0 30px rgba(0,0,0,0.03);
+}
+.scroll-card::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:3px;
+  background:var(--skin-gradient); opacity:0.7;
+}
+.scroll-card::after {
+  content:''; position:absolute; bottom:0; left:0; right:0; height:3px;
+  background:var(--skin-gradient); opacity:0.3;
+}
+.scroll-title {
+  font-family:'Cinzel',serif; font-size:1rem; color:var(--skin-primary);
+  margin-bottom:16px; padding-bottom:10px;
+  border-bottom:1px dashed var(--border-warm);
+  display:flex; align-items:center; gap:8px;
+  letter-spacing:0.5px;
+}
+.scroll-title .scroll-brush {
+  font-size:1.2rem;
+}
+.scroll-subtitle {
+  font-size:0.7rem; color:var(--text-muted); font-style:italic;
+  font-family:'Noto Sans JP',sans-serif; letter-spacing:0;
+}
+.scroll-stamp {
+  position:absolute; top:14px; right:16px;
+  width:48px; height:48px; border-radius:50%;
+  border:2px solid var(--skin-primary); opacity:0.12;
+  display:flex; align-items:center; justify-content:center;
+  font-size:1.6rem; transform:rotate(-15deg);
+}
+.scroll-seal {
+  display:inline-flex; align-items:center; gap:6px;
+  padding:4px 12px; border:1px dashed var(--skin-primary);
+  border-radius:4px; font-size:0.72rem; color:var(--skin-primary);
+  font-style:italic; margin-top:8px;
+}
+[data-theme="dark"] .scroll-card {
+  background:var(--bg-card); border-color:var(--border);
+  box-shadow:inset 0 0 30px rgba(0,0,0,0.1);
+}
+/* Sauvegarde */
+.save-code {
+  font-family:monospace; font-size:0.7rem; word-break:break-all;
+  background:var(--bg-input); border:1px solid var(--border);
+  border-radius:var(--radius); padding:12px;
+  color:var(--text); max-height:120px; overflow-y:auto;
+  user-select:all; line-height:1.4;
+}
+
 /* ====== ONBOARDING ====== */
 .onboard-overlay {
   position:fixed; inset:0; z-index:950;
@@ -3756,8 +3811,9 @@ function renderDash(){
     tacticien:'Toutes les pièces sont en place. À vous de jouer.'
   };
   const _greeting=_greetings[_s.type]||_greetings.sage;
+  const _avatar=getNote('sensei_avatar');
   h+=`<div class="sensei-card" data-type="${_s.type}" onclick="nav('sensei')" style="cursor:pointer">
-    <div class="sensei-card-avatar">${_nat?_nat.icon:_type.icon}</div>
+    <div class="sensei-card-avatar">${_avatar?`<img src="${_avatar}" style="width:100%;height:100%;object-fit:cover;border-radius:50%">`:(_nat?_nat.icon:_type.icon)}</div>
     <div class="sensei-card-info">
       <div class="sensei-card-name">${esc(senseiFullName())}</div>
       <div class="sensei-card-meta">${_s.rang?_s.rang+' · ':''}${_type.icon} ${_type.nom}${_s.signe?' · '+esc(_s.signe):''}</div>
@@ -4877,8 +4933,9 @@ function renderHistorique(){
   h+=`</div></div>`;
 
   // ====== CARTE SENSEI ======
+  const _hAvatar=getNote('sensei_avatar');
   h+=`<div class="sensei-card" data-type="${s.type}" style="margin-bottom:24px">
-    <div class="sensei-card-avatar">${nat?nat.icon:typeInfo.icon}</div>
+    <div class="sensei-card-avatar">${_hAvatar?`<img src="${_hAvatar}" style="width:100%;height:100%;object-fit:cover;border-radius:50%">`:nat?nat.icon:typeInfo.icon}</div>
     <div class="sensei-card-info">
       <div class="sensei-card-name">${esc(senseiFullName())}</div>
       <div class="sensei-card-meta">${s.rang?s.rang+' · ':''}${typeInfo.icon} ${typeInfo.nom}</div>
@@ -4903,8 +4960,9 @@ function renderHistorique(){
   h+=`<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;margin-bottom:20px">`;
 
   // Camembert Théo/Prat
-  h+=`<div class="card" style="padding:20px;text-align:center">
-    <div style="font-family:'Cinzel',serif;font-size:0.85rem;color:var(--accent-gold);margin-bottom:12px">📖 Théorique vs Pratique</div>
+  h+=`<div class="scroll-card" style="text-align:center">
+    <div class="scroll-stamp">${nat?nat.icon:'📜'}</div>
+    <div class="scroll-title" style="justify-content:center"><span class="scroll-brush">📖</span> Théorique vs Pratique</div>
     <div style="display:flex;justify-content:center;margin-bottom:12px">${svgPie([{val:nbTheo,color:'var(--skin-primary)'},{val:nbPrat,color:'var(--skin-secondary)'}],130)}</div>
     <div style="display:flex;justify-content:center;gap:16px;font-size:0.75rem">
       <span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--skin-primary);margin-right:4px"></span>Théo ${nbTheo}</span>
@@ -4913,8 +4971,9 @@ function renderHistorique(){
   </div>`;
 
   // Camembert Donnés/Proposés
-  h+=`<div class="card" style="padding:20px;text-align:center">
-    <div style="font-family:'Cinzel',serif;font-size:0.85rem;color:var(--accent-gold);margin-bottom:12px">✅ Donnés vs Proposés</div>
+  h+=`<div class="scroll-card" style="text-align:center">
+    <div class="scroll-stamp">${typeInfo.icon}</div>
+    <div class="scroll-title" style="justify-content:center"><span class="scroll-brush">✅</span> Donnés vs Proposés</div>
     <div style="display:flex;justify-content:center;margin-bottom:12px">${svgPie([{val:totalDonnes,color:'var(--accent-leaf)'},{val:totalProposes,color:'var(--accent-orange)'}],130)}</div>
     <div style="display:flex;justify-content:center;gap:16px;font-size:0.75rem">
       <span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--accent-leaf);margin-right:4px"></span>Donnés ${totalDonnes}</span>
@@ -4924,8 +4983,8 @@ function renderHistorique(){
 
   // Camembert par module
   if(modEntries.length>1){
-    h+=`<div class="card" style="padding:20px;text-align:center">
-      <div style="font-family:'Cinzel',serif;font-size:0.85rem;color:var(--accent-gold);margin-bottom:12px">🏯 Par module</div>
+    h+=`<div class="scroll-card" style="text-align:center">
+      <div class="scroll-title" style="justify-content:center"><span class="scroll-brush">🏯</span> Par module</div>
       <div style="display:flex;justify-content:center;margin-bottom:12px">${svgPie(modEntries.map(([m,c],i)=>({val:c,color:getPC(i)})),130)}</div>
       <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:8px;font-size:0.68rem">
         ${modEntries.map(([m,c],i)=>`<span><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${getPC(i)};margin-right:3px"></span>${modIcons[m]||''} ${c}</span>`).join('')}
@@ -4936,10 +4995,9 @@ function renderHistorique(){
 
   // ====== GRAPHE ACTIVITÉ (barres) — uniquement en mode global ======
   if(isGlobal&&jourKeys2.length>1){
-    h+=`<div class="card" style="padding:20px;margin-bottom:16px">
-      <div style="font-family:'Cinzel',serif;font-size:0.95rem;color:var(--accent-gold);margin-bottom:16px;display:flex;align-items:center;gap:8px">
-        📅 Activité par jour <span style="font-size:0.7rem;color:var(--text-muted);font-family:'Noto Sans JP',sans-serif">(1 jour IRL = 1 mois IG)</span>
-      </div>`;
+    h+=`<div class="scroll-card">
+      <div class="scroll-stamp">📅</div>
+      <div class="scroll-title"><span class="scroll-brush">📅</span> Activité par jour <span class="scroll-subtitle">(1 jour IRL = 1 mois IG)</span></div>`;
     const joursSorted=jourKeys2.sort((a,b)=>{const pa=a.split('/'),pb=b.split('/');return new Date(pa[2],pa[1]-1,pa[0])-new Date(pb[2],pb[1]-1,pb[0])});
     const maxJour=Math.max(...joursSorted.map(d=>parJour[d].length));
     joursSorted.forEach(d=>{
@@ -4959,8 +5017,9 @@ function renderHistorique(){
   }
 
   // ====== RÉPARTITION PAR MODULE (barres) ======
-  h+=`<div class="card" style="padding:20px;margin-bottom:16px">
-    <div style="font-family:'Cinzel',serif;font-size:0.95rem;color:var(--accent-gold);margin-bottom:16px">🏯 Répartition par module</div>`;
+  h+=`<div class="scroll-card">
+    <div class="scroll-stamp">🏯</div>
+    <div class="scroll-title"><span class="scroll-brush">🏯</span> Répartition par module</div>`;
   modEntries.forEach(([mod,count])=>{
     const pct=maxMod?Math.round(count/maxMod*100):0;
     const icon=modIcons[mod]||'📚';
@@ -4975,8 +5034,9 @@ function renderHistorique(){
   h+=`</div>`;
 
   // ====== HEURES (colonnes) ======
-  h+=`<div class="card" style="padding:20px;margin-bottom:16px">
-    <div style="font-family:'Cinzel',serif;font-size:0.95rem;color:var(--accent-gold);margin-bottom:16px">⏰ Heures d'enseignement</div>
+  h+=`<div class="scroll-card">
+    <div class="scroll-stamp">⏰</div>
+    <div class="scroll-title"><span class="scroll-brush">⏰</span> Heures d'enseignement</div>
     <div style="display:flex;align-items:flex-end;gap:3px;height:120px;padding:0 4px">`;
   for(let hr=7;hr<=23;hr++){
     const k=String(hr).padStart(2,'0');
@@ -4991,8 +5051,9 @@ function renderHistorique(){
   h+=`</div></div>`;
 
   // ====== CLASSEMENT ======
-  h+=`<div class="card" style="padding:20px;margin-bottom:16px">
-    <div style="font-family:'Cinzel',serif;font-size:0.95rem;color:var(--accent-gold);margin-bottom:16px">🏆 Classement des cours</div>`;
+  h+=`<div class="scroll-card">
+    <div class="scroll-stamp">🏆</div>
+    <div class="scroll-title"><span class="scroll-brush">🏆</span> Classement des cours</div>`;
   coursEntries.forEach(([id,data],i)=>{
     const c=cours(id);
     const pct=maxCours?Math.round(data.count/maxCours*100):0;
@@ -5012,8 +5073,9 @@ function renderHistorique(){
   h+=`</div>`;
 
   // ====== JOURNAL ======
-  h+=`<div class="card" style="padding:20px">
-    <div style="font-family:'Cinzel',serif;font-size:0.95rem;color:var(--accent-gold);margin-bottom:16px">📋 Journal${isGlobal?' complet':' — '+histoFilter}</div>
+  h+=`<div class="scroll-card">
+    <div class="scroll-stamp">📋</div>
+    <div class="scroll-title"><span class="scroll-brush">📋</span> Journal${isGlobal?' complet':' — '+histoFilter}</div>
     <table style="width:100%;border-collapse:collapse;font-size:0.78rem">
       <tr style="border-bottom:2px solid var(--border);color:var(--text-muted);font-size:0.65rem;text-transform:uppercase;letter-spacing:1px">
         ${isGlobal?'<td style="padding:8px 6px">Date</td>':''}<td style="padding:8px 6px">Heure</td><td style="padding:8px 6px">Cours</td><td style="padding:8px 6px">Module</td><td style="padding:8px 6px;text-align:center">Statut</td></tr>`;
@@ -5205,6 +5267,39 @@ function renderSensei(){
     </div>`;
   }
 
+  // Avatar / screenshot
+  const avatarData=getNote('sensei_avatar');
+  h+=`<div class="sensei-field">
+    <label>Avatar / Screenshot</label>
+    <div style="display:flex;align-items:center;gap:16px;margin-top:4px">
+      <div style="width:80px;height:80px;border-radius:50%;border:2px solid var(--skin-primary);overflow:hidden;display:flex;align-items:center;justify-content:center;background:var(--bg-input);flex-shrink:0">
+        ${avatarData?`<img src="${avatarData}" style="width:100%;height:100%;object-fit:cover">`:`<span style="font-size:2rem;color:var(--text-muted)">👤</span>`}
+      </div>
+      <div>
+        <input type="file" id="avatarInput" accept="image/*" style="display:none" onchange="loadAvatar(this)">
+        <button class="btn btn-sm" onclick="document.getElementById('avatarInput').click()" style="font-size:0.8rem">📷 Choisir une image</button>
+        ${avatarData?`<button class="btn btn-sm" onclick="setNote('sensei_avatar','');render()" style="font-size:0.75rem;margin-left:4px">✕</button>`:''}
+        <div style="font-size:0.72rem;color:var(--text-muted);margin-top:4px">Affiché sur votre carte sensei (stocké dans votre navigateur)</div>
+      </div>
+    </div>
+  </div>`;
+
+  // Parchemin de transfert
+  h+=`<div class="sensei-field">
+    <label>📜 Parchemin de Transfert</label>
+    <div style="font-size:0.78rem;color:var(--text-dim);margin-bottom:8px">Sauvegardez votre profil + progression. Copiez ce code et gardez-le (Discord, notes, fichier). Collez-le sur un autre appareil pour tout retrouver.</div>
+    <div style="display:flex;gap:8px;margin-bottom:8px">
+      <button class="btn btn-sm btn-primary" onclick="document.getElementById('saveCodeOut').textContent=generateSaveCode();toast('Code généré')" style="font-size:0.8rem">📜 Générer mon parchemin</button>
+      <button class="btn btn-sm" onclick="clipCopy(document.getElementById('saveCodeOut').textContent,'Parchemin')" style="font-size:0.8rem">📋 Copier</button>
+    </div>
+    <div id="saveCodeOut" class="save-code" style="min-height:40px"></div>
+    <div style="margin-top:12px;font-size:0.78rem;color:var(--text-dim)">Restaurer un parchemin :</div>
+    <div style="display:flex;gap:8px;margin-top:4px">
+      <input type="text" id="saveCodeIn" placeholder="Collez votre code ici..." style="flex:1;padding:8px 12px;background:var(--bg-input);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font-size:0.8rem;font-family:monospace;outline:none">
+      <button class="btn btn-sm" onclick="restoreSaveCode(document.getElementById('saveCodeIn').value)" style="font-size:0.8rem">📜 Restaurer</button>
+    </div>
+  </div>`;
+
   // ====== APERÇU ======
   h+=`<div class="sensei-preview" id="senseiPreview">
     <div class="sensei-preview-title">Aperçu en direct</div>`;
@@ -5285,6 +5380,45 @@ function updateSenseiPreview(){
 // ================================================================
 // EXPORT / IMPORT / RESET
 // ================================================================
+// ================================================================
+// PARCHEMIN DE TRANSFERT — sauvegarde portable
+// ================================================================
+function loadAvatar(input){
+  const file=input.files[0];if(!file)return;
+  const reader=new FileReader();
+  reader.onload=function(e){
+    // Resize to max 150px to keep localStorage small
+    const img=new Image();
+    img.onload=function(){
+      const max=150;const ratio=Math.min(max/img.width,max/img.height,1);
+      const c=document.createElement('canvas');c.width=img.width*ratio;c.height=img.height*ratio;
+      c.getContext('2d').drawImage(img,0,0,c.width,c.height);
+      setNote('sensei_avatar',c.toDataURL('image/jpeg',0.7));
+      render();toast('Avatar mis à jour');
+    };
+    img.src=e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+function generateSaveCode(){
+  try{return btoa(unescape(encodeURIComponent(JSON.stringify(S))))}catch(e){return''}
+}
+function restoreSaveCode(code){
+  try{
+    const json=decodeURIComponent(escape(atob(code.trim())));
+    const data=JSON.parse(json);
+    if(data.c)S.c={...S.c,...data.c};
+    if(data.n)S.n={...S.n,...data.n};
+    if(data.sensei)S.sensei={...S.sensei,...data.sensei};
+    if(data.darkMode!==undefined)S.darkMode=data.darkMode;
+    if(data.noAnim!==undefined)S.noAnim=data.noAnim;
+    save();applyThemeOnLoad();buildSidebar();render();
+    toast('Parchemin restauré — bienvenue, '+senseiFullName()+' !');
+    return true;
+  }catch(e){toast('Code invalide');return false}
+}
+
 function doExport(){
   const j=JSON.stringify(S,null,2);
   const b=new Blob([j],{type:'application/json'});
