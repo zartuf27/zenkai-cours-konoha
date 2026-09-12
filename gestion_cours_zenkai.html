@@ -1242,7 +1242,7 @@ body {
   <div class="header-right">
     <span id="headerSensei" style="font-size:0.75rem;color:var(--text-dim);cursor:pointer;margin-right:6px" onclick="nav('sensei')"></span>
     <button class="btn btn-sm" id="themeToggle" onclick="toggleTheme()" title="Mode sombre / clair">🌙</button>
-    <button class="btn btn-sm btn-danger" onclick="doReset()">Reset</button>
+    <button class="btn btn-sm" onclick="nav('reglages')" title="Réglages">⚙️</button>
   </div>
 </div>
 
@@ -3706,6 +3706,7 @@ const VIEWS=[
   {id:'bilan',icon:'📊',label:'Fin de mois'},
   {id:'historique',icon:'📜',label:'Historique'},
   {id:'sensei',icon:'👤',label:'Sensei'},
+  {id:'reglages',icon:'⚙️',label:'Réglages'},
 ];
 
 let curView='dashboard', curCours=null;
@@ -3769,6 +3770,7 @@ function render(){
     case'bilan':el.innerHTML=renderBilan();break;
     case'historique':el.innerHTML=renderHistorique();break;
     case'sensei':el.innerHTML=renderSensei();break;
+    case'reglages':el.innerHTML=renderReglages();break;
   }
 }
 
@@ -5250,18 +5252,13 @@ function renderSensei(){
     <div style="font-size:0.72rem;color:var(--text-muted);margin-top:6px;font-style:italic">Désactive les particules, les pulsations et toutes les animations visuelles</div>
   </div>`;
 
-  // Bouton profil configuré (visible pendant onboarding) + relancer tuto
+  // Bouton profil configuré (visible pendant onboarding)
   if(isFirstVisit()){
     h+=`<div class="sensei-field" style="text-align:center;padding:20px 0">
       <button class="btn btn-primary" onclick="playSuccess();startTourGuide()" style="font-size:1rem;padding:12px 28px">
         ✅ Profil configuré — Découvrir l'app
       </button>
       <div style="font-size:0.72rem;color:var(--text-muted);margin-top:8px">Lance le guide des onglets personnalisé selon votre profil</div>
-    </div>`;
-  }else{
-    h+=`<div class="sensei-field">
-      <label>Aide</label>
-      <button class="btn btn-sm" onclick="localStorage.removeItem('zenkai_onboarded');showOnboarding()" style="font-size:0.8rem">🎓 Relancer le tutoriel de bienvenue</button>
     </div>`;
   }
 
@@ -5279,22 +5276,6 @@ function renderSensei(){
         ${avatarData?`<button class="btn btn-sm" onclick="setNote('sensei_avatar','');render()" style="font-size:0.75rem;margin-left:4px">✕</button>`:''}
         <div style="font-size:0.72rem;color:var(--text-muted);margin-top:4px">Affiché sur votre carte sensei (stocké dans votre navigateur)</div>
       </div>
-    </div>
-  </div>`;
-
-  // Parchemin de transfert
-  h+=`<div class="sensei-field">
-    <label>📜 Parchemin de Transfert</label>
-    <div style="font-size:0.78rem;color:var(--text-dim);margin-bottom:8px">Sauvegardez votre profil + progression. Copiez ce code et gardez-le (Discord, notes, fichier). Collez-le sur un autre appareil pour tout retrouver.</div>
-    <div style="display:flex;gap:8px;margin-bottom:8px">
-      <button class="btn btn-sm btn-primary" onclick="document.getElementById('saveCodeOut').textContent=generateSaveCode();toast('Code généré')" style="font-size:0.8rem">📜 Générer mon parchemin</button>
-      <button class="btn btn-sm" onclick="clipCopy(document.getElementById('saveCodeOut').textContent,'Parchemin')" style="font-size:0.8rem">📋 Copier</button>
-    </div>
-    <div id="saveCodeOut" class="save-code" style="min-height:40px"></div>
-    <div style="margin-top:12px;font-size:0.78rem;color:var(--text-dim)">Restaurer un parchemin :</div>
-    <div style="display:flex;gap:8px;margin-top:4px">
-      <input type="text" id="saveCodeIn" placeholder="Collez votre code ici..." style="flex:1;padding:8px 12px;background:var(--bg-input);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font-size:0.8rem;font-family:monospace;outline:none">
-      <button class="btn btn-sm" onclick="restoreSaveCode(document.getElementById('saveCodeIn').value)" style="font-size:0.8rem">📜 Restaurer</button>
     </div>
   </div>`;
 
@@ -5381,6 +5362,54 @@ function updateSenseiPreview(){
 // ================================================================
 // PARCHEMIN DE TRANSFERT — sauvegarde portable
 // ================================================================
+// ================================================================
+// RÉGLAGES
+// ================================================================
+function renderReglages(){
+  let h=`<div class="page-header"><div class="page-title">⚙️ Réglages</div>
+    <div class="page-desc">Sauvegarde, restauration et paramètres</div></div>`;
+
+  // Parchemin de transfert
+  h+=`<div class="scroll-card">
+    <div class="scroll-stamp">📜</div>
+    <div class="scroll-title"><span class="scroll-brush">📜</span> Parchemin de Transfert</div>
+    <div style="font-size:0.82rem;color:var(--text-dim);margin-bottom:14px;line-height:1.6">
+      Sauvegardez <strong>tout</strong> — profil, progression, historique, avatar — dans un code unique.<br>
+      Copiez-le et gardez-le (Discord, notes, fichier). Collez-le sur <strong>n'importe quel appareil</strong> pour tout retrouver.
+    </div>
+    <div style="display:flex;gap:8px;margin-bottom:10px">
+      <button class="btn btn-sm btn-primary" onclick="document.getElementById('saveCodeOut').textContent=generateSaveCode();toast('Parchemin généré')" style="font-size:0.85rem">📜 Générer mon parchemin</button>
+      <button class="btn btn-sm" onclick="clipCopy(document.getElementById('saveCodeOut').textContent,'Parchemin')" style="font-size:0.85rem">📋 Copier</button>
+    </div>
+    <div id="saveCodeOut" class="save-code" style="min-height:40px"></div>
+    <div style="margin-top:16px;padding-top:14px;border-top:1px dashed var(--border-warm)">
+      <div style="font-size:0.82rem;color:var(--text-dim);margin-bottom:8px">Restaurer un parchemin :</div>
+      <div style="display:flex;gap:8px">
+        <input type="text" id="saveCodeIn" placeholder="Collez votre code ici..." style="flex:1;padding:8px 12px;background:var(--bg-input);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font-size:0.82rem;font-family:monospace;outline:none">
+        <button class="btn btn-sm" onclick="restoreSaveCode(document.getElementById('saveCodeIn').value)" style="font-size:0.85rem">📜 Restaurer</button>
+      </div>
+    </div>
+  </div>`;
+
+  // Aide
+  h+=`<div class="card" style="padding:20px;margin-bottom:16px">
+    <div style="font-weight:600;color:var(--text-bright);margin-bottom:12px">🎓 Aide</div>
+    <button class="btn btn-sm" onclick="localStorage.removeItem('zenkai_onboarded');showOnboarding()" style="font-size:0.82rem">🎓 Relancer le tutoriel de bienvenue</button>
+  </div>`;
+
+  // Zone dangereuse
+  h+=`<div class="card" style="padding:20px;border-color:var(--konoha-red)">
+    <div style="font-weight:600;color:var(--konoha-red-bright);margin-bottom:12px">⚠ Zone dangereuse</div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <button class="btn btn-sm btn-danger" onclick="doReset()">🗑️ Réinitialiser la progression</button>
+      <button class="btn btn-sm btn-danger" onclick="if(confirm('Tout supprimer ? Profil, progression, historique — TOUT.')){localStorage.removeItem('zenkai_v2');localStorage.removeItem('zenkai_onboarded');location.reload()}">💀 Tout effacer</button>
+    </div>
+    <div style="font-size:0.72rem;color:var(--text-muted);margin-top:8px">Réinitialiser = remet la progression à zéro (garde le profil). Tout effacer = supprime tout comme au premier jour.</div>
+  </div>`;
+
+  return h;
+}
+
 function loadAvatar(input){
   const file=input.files[0];if(!file)return;
   const reader=new FileReader();
