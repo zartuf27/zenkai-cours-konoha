@@ -285,6 +285,54 @@
 [data-theme="dark"] .sidebar { background:var(--bg-surface); border-right-color:var(--border); }
 [data-theme="dark"] .mobile-nav { background:var(--bg-surface); border-bottom-color:var(--border); }
 
+/* ====== ONBOARDING ====== */
+.onboard-overlay {
+  position:fixed; inset:0; z-index:950;
+  background:rgba(0,0,0,0.7); display:flex; align-items:center; justify-content:center;
+  animation:fadeIn 0.4s; backdrop-filter:blur(6px);
+}
+.onboard-card {
+  background:var(--bg-card); border:1px solid var(--border);
+  border-radius:var(--radius-lg); padding:36px 32px;
+  max-width:520px; width:90%; position:relative; overflow:hidden;
+  text-align:center; animation:fadeIn 0.3s;
+}
+.onboard-card::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:4px;
+  background:var(--skin-gradient);
+}
+.onboard-icon { font-size:3rem; margin-bottom:12px; }
+.onboard-title { font-family:'Cinzel',serif; font-size:1.3rem; color:var(--accent-gold); margin-bottom:8px; }
+.onboard-text { font-size:0.88rem; color:var(--text-dim); line-height:1.7; margin-bottom:20px; }
+.onboard-steps { display:flex; justify-content:center; gap:6px; margin-bottom:20px; }
+.onboard-dot {
+  width:10px; height:10px; border-radius:50%;
+  background:var(--border); transition:var(--transition);
+}
+.onboard-dot.active { background:var(--skin-primary); transform:scale(1.3); }
+.onboard-dot.done { background:var(--accent-leaf); }
+.onboard-btns { display:flex; gap:8px; justify-content:center; }
+
+/* ====== TOOLTIP GUIDE ====== */
+.tooltip-guide {
+  position:fixed; z-index:960;
+  background:var(--bg-card); border:2px solid var(--skin-primary);
+  border-radius:var(--radius-lg); padding:16px 20px;
+  max-width:320px; box-shadow:0 4px 30px rgba(0,0,0,0.3);
+  animation:fadeIn 0.25s;
+}
+.tooltip-guide::after {
+  content:''; position:absolute; width:12px; height:12px;
+  background:var(--bg-card); border:2px solid var(--skin-primary);
+  border-right:none; border-bottom:none;
+  transform:rotate(45deg);
+}
+.tooltip-guide.arrow-left::after { left:-7px; top:20px; transform:rotate(-45deg); }
+.tooltip-guide.arrow-top::after { top:-7px; left:50%; margin-left:-6px; transform:rotate(45deg); }
+.tooltip-guide-title { font-weight:700; color:var(--skin-primary); font-size:0.88rem; margin-bottom:6px; }
+.tooltip-guide-text { font-size:0.8rem; color:var(--text-dim); line-height:1.6; }
+.tooltip-guide-btns { display:flex; gap:6px; margin-top:12px; justify-content:flex-end; }
+
 /* ====== MODE PRÉSENTATION ====== */
 .pres-overlay {
   position:fixed; inset:0; z-index:900;
@@ -3616,8 +3664,9 @@ function buildSidebar(){
   let mhtml='';
   VIEWS.forEach(v=>{
     const a=curView===v.id&&!curCours?'active':'';
-    shtml+=`<div class="sidebar-item ${a}" onclick="nav('${v.id}')"><span class="si-icon">${v.icon}</span>${v.label}</div>`;
-    mhtml+=`<div class="mobile-nav-item ${a}" onclick="nav('${v.id}')">${v.icon} ${v.label}</div>`;
+    const lbl=getSidebarLabel(v.id);
+    shtml+=`<div class="sidebar-item ${a}" onclick="nav('${v.id}')"><span class="si-icon">${v.icon}</span>${lbl}</div>`;
+    mhtml+=`<div class="mobile-nav-item ${a}" onclick="nav('${v.id}')">${v.icon} ${lbl}</div>`;
   });
   shtml+=`</div>`;
 
@@ -5061,6 +5110,21 @@ function renderSensei(){
     <div style="font-size:0.72rem;color:var(--text-muted);margin-top:6px;font-style:italic">Désactive les particules, les pulsations et toutes les animations visuelles</div>
   </div>`;
 
+  // Bouton profil configuré (visible pendant onboarding) + relancer tuto
+  if(isFirstVisit()){
+    h+=`<div class="sensei-field" style="text-align:center;padding:20px 0">
+      <button class="btn btn-primary" onclick="playSuccess();startTourGuide()" style="font-size:1rem;padding:12px 28px">
+        ✅ Profil configuré — Découvrir l'app
+      </button>
+      <div style="font-size:0.72rem;color:var(--text-muted);margin-top:8px">Lance le guide des onglets personnalisé selon votre profil</div>
+    </div>`;
+  }else{
+    h+=`<div class="sensei-field">
+      <label>Aide</label>
+      <button class="btn btn-sm" onclick="localStorage.removeItem('zenkai_onboarded');showOnboarding()" style="font-size:0.8rem">🎓 Relancer le tutoriel de bienvenue</button>
+    </div>`;
+  }
+
   // ====== APERÇU ======
   h+=`<div class="sensei-preview" id="senseiPreview">
     <div class="sensei-preview-title">Aperçu en direct</div>`;
@@ -5169,9 +5233,239 @@ let tt;
 function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');clearTimeout(tt);tt=setTimeout(()=>t.classList.remove('show'),2500)}
 
 // ================================================================
+// ONBOARDING — tuto première visite
+// ================================================================
+
+// Sons (synthèse audio, pas de fichier externe)
+function playClick(){
+  try{const a=new AudioContext();const o=a.createOscillator();const g=a.createGain();
+  o.connect(g);g.connect(a.destination);o.frequency.value=600;o.type='sine';
+  g.gain.setValueAtTime(0.08,a.currentTime);g.gain.exponentialRampToValueAtTime(0.001,a.currentTime+0.12);
+  o.start(a.currentTime);o.stop(a.currentTime+0.12)}catch(e){}
+}
+function playSuccess(){
+  try{const a=new AudioContext();const now=a.currentTime;
+  [523,659,784].forEach((f,i)=>{const o=a.createOscillator();const g=a.createGain();
+  o.connect(g);g.connect(a.destination);o.frequency.value=f;o.type='sine';
+  g.gain.setValueAtTime(0.06,now+i*0.12);g.gain.exponentialRampToValueAtTime(0.001,now+i*0.12+0.3);
+  o.start(now+i*0.12);o.stop(now+i*0.12+0.3)})}catch(e){}
+}
+
+// Mot de fin personnalisé selon type + nature
+const ONBOARD_FINAL={
+  sage:'Le chemin est devant vous. Avancez avec sagesse, sensei.',
+  dur:'Pas de temps à perdre. Vos élèves n\'attendent pas. Au travail.',
+  guerrier:'La flamme est allumée ! Montrez-leur ce que signifie être un ninja de Konoha !',
+  bienveillant:'Vos élèves ont de la chance de vous avoir. Prenez soin d\'eux, et de vous.',
+  mysterieux:'Le vent tourne... il est temps de transmettre ce que vous savez.',
+  stratege:'Système initialisé. Toutes les variables sont en place. Bonne session.',
+  veteran:'Encore un jour pour transmettre. C\'est tout ce qui compte, sensei.',
+  fraternel:'La team est prête ! On va faire du bon boulot ensemble. Fonce !',
+  ironique:'Voilà, c\'est configuré. Essayez de ne pas tout casser dès le premier cours.',
+  ermite:'Bon ! C\'est pas tout ça, mais on a des ninjas à former. Allons-y, à notre façon !',
+  ombre:'Configuration terminée. Mode opérationnel activé. Bonne mission, sensei.',
+  sensei_noble:'Que l\'honneur de Konoha guide chacun de vos enseignements, sensei.',
+  rebelle:'Les règles sont faites pour être comprises, pas suivies aveuglément. Enseignez ça.',
+  mentor:'Centrez-vous, respirez. Vous êtes exactement là où vous devez être.',
+  chasseur:'L\'instinct ne trompe pas. Faites confiance au vôtre, sensei.',
+  tacticien:'Toutes les pièces sont en place. Le jeu peut commencer, sensei.'
+};
+
+// Descriptions d'onglets personnalisées par type
+const TOUR_TIPS_TYPED={
+  dur:{
+    cours:'Vos cours. Pas de place pour l\'improvisation. Chaque étape est là pour être cochée.',
+    annonces:'Vos ordres de mission. Un clic, c\'est copié. Pas de bavardage.',
+    bilan:'Votre rapport. Les chiffres parlent. Le reste, c\'est du bruit.',
+    historique:'Votre dossier. Chaque cours donné est enregistré. Pas de triche possible.'
+  },
+  guerrier:{
+    cours:'Vos champs de bataille ! Chaque cours est un combat à mener avec passion !',
+    annonces:'L\'appel au combat ! Copiez et lancez le cri de guerre !',
+    bilan:'Vos victoires du mois ! Chaque cours donné est une flamme de plus !',
+    historique:'Votre tableau d\'honneur ! Regardez le chemin parcouru !'
+  },
+  bienveillant:{
+    cours:'Vos cours, préparés avec soin. Chaque élève mérite le meilleur de vous.',
+    annonces:'Vos annonces. Un simple clic pour inviter vos élèves avec bienveillance.',
+    bilan:'Votre bilan. Chaque cours donné est une graine plantée.',
+    historique:'Votre parcours. Regardez tout ce que vous avez transmis.'
+  },
+  ermite:{
+    cours:'Les cours ! Bon, c\'est pas le plus fun, mais c\'est là que la magie opère.',
+    annonces:'Les convocations ! Un clic, hop, copié. Même moi j\'y arrive.',
+    bilan:'Le bilan du mois... enfin, à peu près. L\'important c\'est de s\'amuser !',
+    historique:'L\'historique ! Impressionnant hein ? Ou pas. On verra.'
+  },
+  ombre:{
+    cours:'Dossiers de formation. Consultez, exécutez, passez au suivant.',
+    annonces:'Canal de transmission. Copie sécurisée en un clic.',
+    bilan:'Rapport opérationnel. Données brutes, pas de fioritures.',
+    historique:'Logs d\'activité. Chaque opération d\'enseignement est tracée.'
+  },
+  ironique:{
+    cours:'Vos cours. Oui, il faut vraiment les donner, pas juste les regarder.',
+    annonces:'Le spam officiel. Mais au moins celui-là est utile.',
+    bilan:'Le moment de vérité. Combien de cours ce mois ? Hmm...',
+    historique:'La preuve que vous faites vraiment quelque chose. Utile pour les sceptiques.'
+  },
+  chasseur:{
+    cours:'Votre territoire de chasse. Chaque cours est une piste à suivre.',
+    annonces:'L\'appel de la meute. Un cri, et les élèves rappliquent.',
+    bilan:'Le tableau de chasse du mois. Combien de proies... euh, d\'élèves formés ?',
+    historique:'Vos traces dans la forêt. Chaque pas compte.'
+  },
+  rebelle:{
+    cours:'Les cours. Ouais, même les rebelles enseignent. Surprenant, hein ?',
+    annonces:'Les appels. Ou pas. C\'est vous qui décidez comment vous les faites.',
+    bilan:'Ce que vous avez foutu ce mois. Au moins c\'est honnête.',
+    historique:'La preuve que le système peut pas vous ignorer.'
+  }
+};
+
+function getTourTip(viewId){
+  const s=getSensei();
+  const typed=TOUR_TIPS_TYPED[s.type];
+  if(typed&&typed[viewId])return typed[viewId];
+  return SIDEBAR_TIPS[viewId]?SIDEBAR_TIPS[viewId].text:'';
+}
+
+let onboardStep=0;
+function isFirstVisit(){return!localStorage.getItem('zenkai_onboarded')}
+function finishOnboarding(){localStorage.setItem('zenkai_onboarded','1');playSuccess();closeOnboarding();buildSidebar()}
+
+// Phase 1 : Accueil → ouvre la page sensei
+function showOnboarding(){
+  const html=`<div class="onboard-overlay" id="onboardOverlay" style="animation:fadeIn 0.4s">
+    <div class="onboard-card" style="animation:slideInRight 0.35s ease-out">
+      <div class="onboard-icon" style="animation:pulse-glow 2s ease-in-out infinite">🍃</div>
+      <div class="onboard-title">Bienvenue à l'Académie de Konoha</div>
+      <div class="onboard-text">Ce support de cours s'adapte entièrement à vous.<br>Commencez par <strong>configurer votre profil</strong> — le reste suivra.</div>
+      <div class="onboard-btns">
+        <button class="btn btn-primary" onclick="playClick();closeOnboarding();nav('sensei')">👤 Configurer mon profil</button>
+      </div>
+      <div style="margin-top:12px"><span style="font-size:0.72rem;color:var(--text-muted);cursor:pointer" onclick="finishOnboarding();nav('dashboard')">Passer le tutoriel</span></div>
+    </div>
+  </div>`;
+  document.body.insertAdjacentHTML('beforeend',html);
+}
+
+function closeOnboarding(){
+  const el=document.getElementById('onboardOverlay');
+  if(el){el.style.opacity='0';el.style.transition='opacity 0.3s';setTimeout(()=>el.remove(),300)}
+}
+
+// Phase 2 : Tuto des onglets (lancé après le profil)
+function startTourGuide(){
+  if(localStorage.getItem('zenkai_onboarded'))return; // déjà fait
+  const s=getSensei();
+  const t=senseiTypeInfo();
+  const nat=D.natures.find(n=>n.id===s.nature);
+  const tourViews=['dashboard','cours','annonces','bilan','historique'];
+  let step=0;
+
+  function showTourStep(){
+    closeTourStep();
+    if(step>=tourViews.length){
+      // Fin du tour — mot personnalisé
+      const finalMsg=ONBOARD_FINAL[s.type]||ONBOARD_FINAL.sage;
+      const html=`<div class="onboard-overlay" id="onboardOverlay" style="animation:fadeIn 0.3s">
+        <div class="onboard-card" style="animation:slideInRight 0.35s ease-out">
+          <div class="onboard-icon" style="animation:pulse-glow 2s ease-in-out infinite">${nat?nat.icon:t.icon}</div>
+          <div class="onboard-title">C'est prêt, ${esc(s.prenom)} !</div>
+          <div class="onboard-text">
+            <div style="font-style:italic;color:${t.couleur};font-size:0.95rem;margin-bottom:16px;line-height:1.7">« ${finalMsg} »</div>
+            <div style="font-size:0.82rem;color:var(--text-dim)"><strong>Astuce :</strong> Cliquez sur "✅ Cours donné +1" quand vous donnez un cours.</div>
+          </div>
+          <div class="onboard-steps">${tourViews.map((_,i)=>'<div class="onboard-dot done"></div>').join('')}<div class="onboard-dot active"></div></div>
+          <div class="onboard-btns">
+            <button class="btn btn-primary" onclick="playSuccess();finishOnboarding();nav('dashboard')">Commencer à enseigner</button>
+          </div>
+        </div>
+      </div>`;
+      document.body.insertAdjacentHTML('beforeend',html);
+      return;
+    }
+    const vid=tourViews[step];
+    const lbl=getSidebarLabel(vid);
+    const v=VIEWS.find(x=>x.id===vid);
+    const tip=getTourTip(vid);
+    nav(vid);
+    setTimeout(()=>{
+      const dots=tourViews.map((_,i)=>`<div class="onboard-dot ${i<step?'done':''} ${i===step?'active':''}"></div>`).join('');
+      const html=`<div class="onboard-overlay" id="onboardOverlay" style="animation:fadeIn 0.25s;background:rgba(0,0,0,0.5)">
+        <div class="onboard-card" style="animation:slideInRight 0.3s ease-out;text-align:left">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:12px">
+            <span style="font-size:1.6rem">${v?v.icon:''}</span>
+            <div>
+              <div class="onboard-title" style="font-size:1.05rem;margin:0">${lbl}</div>
+              <div style="font-size:0.68rem;color:var(--text-muted)">Étape ${step+1}/${tourViews.length}</div>
+            </div>
+          </div>
+          <div class="onboard-text" style="text-align:left;font-size:0.85rem">${tip}</div>
+          <div class="onboard-steps">${dots}</div>
+          <div class="onboard-btns">
+            ${step>0?'<button class="btn" onclick="playClick();onboardTourBack()">← Retour</button>':''}
+            <button class="btn btn-primary" onclick="playClick();onboardTourNext()">Suivant →</button>
+          </div>
+          <div style="margin-top:10px;text-align:center"><span style="font-size:0.72rem;color:var(--text-muted);cursor:pointer" onclick="finishOnboarding();nav('dashboard')">Passer</span></div>
+        </div>
+      </div>`;
+      document.body.insertAdjacentHTML('beforeend',html);
+    },150);
+  }
+
+  window.onboardTourNext=function(){step++;showTourStep()};
+  window.onboardTourBack=function(){step--;showTourStep()};
+  showTourStep();
+}
+
+function closeTourStep(){
+  const el=document.getElementById('onboardOverlay');
+  if(el)el.remove();
+}
+
+// ====== TOOLTIP GUIDE (post-onboarding) ======
+const SIDEBAR_TIPS={
+  dashboard:{title:'Tableau de bord',text:'Vue d\'ensemble de votre progression. Votre carte sensei et vos stats.'},
+  cours:{title:'Cours',text:'Tous vos cours classés par module. Cliquez pour voir le contenu, cocher les étapes et marquer "cours donné".'},
+  mudras:{title:'Mudras',text:'Référence des 12 signes de main. Cochez ceux que vous maîtrisez.'},
+  natures:{title:'Natures',text:'Les 5 natures de chakra, le cycle de supériorité et les Kekkei Genkai.'},
+  armes:{title:'Armes',text:'Catalogue des 8 armes ninja standard.'},
+  hierarchie:{title:'Hiérarchie',text:'Les 10 rangs ninja de Konoha.'},
+  admin:{title:'Règlement',text:'La directive de Yamamoto Jakka sur le format des annonces.'},
+  annonces:{title:'Annonces',text:'Annonces prêtes à copier-coller pour vos appels au tableau. Un clic = copié.'},
+  bilan:{title:'Fin de mois',text:'Générez votre rapport Discord de fin de mois. Sélectionnez un jour et copiez.'},
+  historique:{title:'Historique',text:'Vos statistiques complètes : graphiques, classement des cours, journal.'},
+  sensei:{title:'Sensei',text:'Votre profil. Changez votre nom, nature, personnalité — tout s\'adapte.'}
+};
+
+// Sidebar labels adaptés au type de sensei
+const SIDEBAR_LABELS={
+  dur:{annonces:'Ordres de mission',admin:'Protocole',bilan:'Rapport'},
+  guerrier:{annonces:'Appel au combat',bilan:'Victoires du mois'},
+  ombre:{annonces:'Transmission',admin:'Directive',bilan:'Rapport opérationnel',historique:'Logs'},
+  ermite:{annonces:'Convocations',bilan:'Ce que j\'ai fait (à peu près)'},
+  ironique:{annonces:'Spam officiel',bilan:'Le bilan (si ça intéresse quelqu\'un)'},
+  chasseur:{annonces:'Appel de la meute',bilan:'Tableau de chasse'},
+  sensei_noble:{annonces:'Décrets',admin:'Code d\'honneur',bilan:'Rapport solennel'},
+  rebelle:{annonces:'Appels (ou pas)',admin:'Les "règles"',bilan:'Ce que j\'ai foutu ce mois'},
+  tacticien:{annonces:'Déploiements',bilan:'Analyse mensuelle',historique:'Base de données'}
+};
+
+function getSidebarLabel(viewId){
+  const s=getSensei();
+  const custom=SIDEBAR_LABELS[s.type];
+  if(custom&&custom[viewId])return custom[viewId];
+  const v=VIEWS.find(v=>v.id===viewId);
+  return v?v.label:viewId;
+}
+
+// ================================================================
 // INIT
 // ================================================================
 load();applyThemeOnLoad();buildSidebar();render();
+if(isFirstVisit())setTimeout(showOnboarding,300);
 function updateHeaderSensei(){
   const el=document.getElementById('headerSensei');
   const ni=document.getElementById('headerNatureIcon');
