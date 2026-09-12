@@ -4691,7 +4691,7 @@ function renderBilan(){
   }
 
   let h=`<div class="page-header"><div class="page-title">Bilan de fin de mois</div>
-    <div class="page-desc">1 jour IRL = 1 mois IG — Sélectionnez un jour pour générer le rapport</div></div>`;
+    <div class="page-desc">Rapport pour le Parchemin (Discord Académie). Sélectionnez un jour, cliquez Copier, collez sur Discord.</div></div>`;
 
   // Sélecteur de jour
   h+=`<div class="card" style="margin-bottom:16px;padding:14px">
@@ -4717,7 +4717,7 @@ function renderBilan(){
   // Message Discord
   h+=`<div class="card" style="margin-bottom:16px">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-      <div style="font-weight:600;color:var(--text-bright)">Message Discord — ${selDate}</div>
+      <div style="font-weight:600;color:var(--text-bright)">📜 Parchemin — ${selDate}</div>
       <button class="btn btn-sm btn-primary" onclick="clipCopy(document.getElementById('bilanText').getAttribute('data-raw'),'Bilan')">📋 Copier</button>
     </div>
     <pre id="bilanText" data-raw="${esc(discord)}" style="background:var(--bg-input);border:1px solid var(--border);border-radius:var(--radius);padding:14px;font-family:'Noto Sans JP',monospace;font-size:0.85rem;color:var(--text);white-space:pre-wrap;line-height:1.8;margin:0">${esc(discord)}</pre>
@@ -5276,49 +5276,49 @@ const TOUR_TIPS_TYPED={
   dur:{
     cours:'Vos cours. Pas de place pour l\'improvisation. Chaque étape est là pour être cochée.',
     annonces:'Vos ordres de mission. Un clic, c\'est copié. Pas de bavardage.',
-    bilan:'Votre rapport. Les chiffres parlent. Le reste, c\'est du bruit.',
+    bilan:'Votre rapport pour le Parchemin. Cliquez "Copier", collez sur Discord. Les chiffres parlent.',
     historique:'Votre dossier. Chaque cours donné est enregistré. Pas de triche possible.'
   },
   guerrier:{
     cours:'Vos champs de bataille ! Chaque cours est un combat à mener avec passion !',
     annonces:'L\'appel au combat ! Copiez et lancez le cri de guerre !',
-    bilan:'Vos victoires du mois ! Chaque cours donné est une flamme de plus !',
+    bilan:'Votre rapport pour le Parchemin ! Chaque cours donné est une flamme de plus dans votre bilan !',
     historique:'Votre tableau d\'honneur ! Regardez le chemin parcouru !'
   },
   bienveillant:{
     cours:'Vos cours, préparés avec soin. Chaque élève mérite le meilleur de vous.',
     annonces:'Vos annonces. Un simple clic pour inviter vos élèves avec bienveillance.',
-    bilan:'Votre bilan. Chaque cours donné est une graine plantée.',
+    bilan:'Votre rapport pour le Parchemin. Chaque cours donné est une graine plantée. Un clic pour le partager.',
     historique:'Votre parcours. Regardez tout ce que vous avez transmis.'
   },
   ermite:{
     cours:'Les cours ! Bon, c\'est pas le plus fun, mais c\'est là que la magie opère.',
     annonces:'Les convocations ! Un clic, hop, copié. Même moi j\'y arrive.',
-    bilan:'Le bilan du mois... enfin, à peu près. L\'important c\'est de s\'amuser !',
+    bilan:'Le rapport pour le Parchemin ! Un clic, copié, collé. Même pas besoin de réfléchir !',
     historique:'L\'historique ! Impressionnant hein ? Ou pas. On verra.'
   },
   ombre:{
     cours:'Dossiers de formation. Consultez, exécutez, passez au suivant.',
     annonces:'Canal de transmission. Copie sécurisée en un clic.',
-    bilan:'Rapport opérationnel. Données brutes, pas de fioritures.',
+    bilan:'Rapport opérationnel pour le Parchemin. Données pré-formatées. Copier, coller, terminé.',
     historique:'Logs d\'activité. Chaque opération d\'enseignement est tracée.'
   },
   ironique:{
     cours:'Vos cours. Oui, il faut vraiment les donner, pas juste les regarder.',
     annonces:'Le spam officiel. Mais au moins celui-là est utile.',
-    bilan:'Le moment de vérité. Combien de cours ce mois ? Hmm...',
+    bilan:'Le rapport pour le Parchemin. Un clic au lieu de 10 minutes de rédaction. De rien.',
     historique:'La preuve que vous faites vraiment quelque chose. Utile pour les sceptiques.'
   },
   chasseur:{
     cours:'Votre territoire de chasse. Chaque cours est une piste à suivre.',
     annonces:'L\'appel de la meute. Un cri, et les élèves rappliquent.',
-    bilan:'Le tableau de chasse du mois. Combien de proies... euh, d\'élèves formés ?',
+    bilan:'Votre tableau de chasse pour le Parchemin. Un clic, et la meute sait ce que vous avez fait.',
     historique:'Vos traces dans la forêt. Chaque pas compte.'
   },
   rebelle:{
     cours:'Les cours. Ouais, même les rebelles enseignent. Surprenant, hein ?',
     annonces:'Les appels. Ou pas. C\'est vous qui décidez comment vous les faites.',
-    bilan:'Ce que vous avez foutu ce mois. Au moins c\'est honnête.',
+    bilan:'Votre rapport pour le Parchemin. Un clic. Même les rebelles doivent rendre des comptes.',
     historique:'La preuve que le système peut pas vous ignorer.'
   }
 };
@@ -5435,7 +5435,7 @@ const SIDEBAR_TIPS={
   hierarchie:{title:'Hiérarchie',text:'Les 10 rangs ninja de Konoha.'},
   admin:{title:'Règlement',text:'La directive de Yamamoto Jakka sur le format des annonces.'},
   annonces:{title:'Annonces',text:'Annonces prêtes à copier-coller pour vos appels au tableau. Un clic = copié.'},
-  bilan:{title:'Fin de mois',text:'Générez votre rapport Discord de fin de mois. Sélectionnez un jour et copiez.'},
+  bilan:{title:'Fin de mois',text:'Votre rapport pour le Parchemin (Discord de l\'Académie). Chaque cours que vous marquez "donné" ou "proposé" s\'ajoute ici automatiquement. En fin de mois, sélectionnez le jour, cliquez Copier, et collez directement sur le Parchemin. Tout est pré-rempli : nom, rang, cours, heures.'},
   historique:{title:'Historique',text:'Vos statistiques complètes : graphiques, classement des cours, journal.'},
   sensei:{title:'Sensei',text:'Votre profil. Changez votre nom, nature, personnalité — tout s\'adapte.'}
 };
