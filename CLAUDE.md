@@ -32,18 +32,12 @@ Déploiement auto en ~1 min. Chaque prof ouvre le même lien, son profil/progres
 gestion_cours_zenkai.html  — App principale (~4900 lignes, tout-en-un)
 donnees_cours.json         — Données structurées (synchronisé avec le HTML)
 CLAUDE.md                  — Ce fichier (instructions pour Claude)
-.gitignore                 — Exclut les images lourdes
+.gitignore                 — Exclut images lourdes + .claude/
 théorique/                 — Cours théoriques (.docx, .md) + images
 Pratique/                  — 13 cours pratiques (.docx)
 Cours du sensei renard/    — Cours d'un autre sensei (7 .md + HTML + script)
-Hishiba/                   — Fiche personnage (texte, profil)
-carnet_sensei_eraku.html   — Carnet personnel d'Eraku
-carnet-une-porte.html      — Carnet "une porte"
-analyse_croisee.md         — Liens entre cours, prérequis
-inventaire_cours.md        — Inventaire des fichiers
-Propositions de nouveaux cours.docx
+Propositions de nouveaux cours.docx — Idées de nouveaux cours
 Format tableau.docx        — Directive format annonces (Yamamoto Jakka)
-compte rendu.docx
 ```
 
 ## Les 24 cours (par module)

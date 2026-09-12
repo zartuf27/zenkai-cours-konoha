@@ -1081,64 +1081,6 @@
           "prerequis": ["escorte_placement"]
         }
       ]
-    },
-    {
-      "id": "hishiba_zakuto",
-      "titre": "Hishiba Zakuto — Mémoire d'un Shinobi",
-      "categorie": "theorique",
-      "module": "Fondamentaux",
-      "rang_requis": "Apprenti Genin",
-      "public_cible": "Tous",
-      "auteur": "Eraku Morikawa",
-      "prerequis": ["volonte_feu"],
-      "description": "Hommage à Hishiba Zakuto, ninja de la Reconnaissance et ami le plus proche d'Eraku. Sa vie, ses actes, et ce que sa mémoire enseigne à ceux qui restent.",
-      "techniques": [
-        {
-          "id": "hishiba_parcours",
-          "nom": "Qui était Hishiba Zakuto",
-          "description": "Ninja de la Reconnaissance, combattant aérien redoutable, surnommé le Tigre de Jade. Son parcours, ses missions, ce qui faisait de lui un shinobi d'exception.",
-          "type": "connaissance",
-          "etapes": [
-            "Connaître son rôle au sein de la Reconnaissance",
-            "Comprendre son profil de combat : taijutsu aérien, puissance explosive",
-            "Retenir ses faits d'armes : l'affaire Ori Souta, la Section Hana Do",
-            "Comprendre ce qui le distinguait : la loyauté sans condition"
-          ],
-          "mudras": [],
-          "rang": "Apprenti Genin",
-          "prerequis": []
-        },
-        {
-          "id": "hishiba_liens",
-          "nom": "Les liens qui forgent un shinobi",
-          "description": "L'amitié entre ninjas dépasse le simple lien de mission. Hishiba n'était pas un frère d'armes — il était un ami. La différence compte.",
-          "type": "connaissance",
-          "etapes": [
-            "Distinguer camarade de mission et ami véritable",
-            "Comprendre que la confiance se construit hors du champ de bataille",
-            "Savoir que ces liens sont une force, pas une faiblesse",
-            "Accepter que perdre quelqu'un de proche change un shinobi à jamais"
-          ],
-          "mudras": [],
-          "rang": "Apprenti Genin",
-          "prerequis": []
-        },
-        {
-          "id": "hishiba_flamme",
-          "nom": "Porter la flamme des absents",
-          "description": "Un ninja tombé ne disparaît pas s'il reste dans la mémoire de ceux qui avancent. Lien direct avec la Volonté du Feu : les rêves se transmettent.",
-          "type": "connaissance",
-          "etapes": [
-            "Comprendre que le deuil n'est pas une faiblesse",
-            "Transformer le souvenir en force, pas en chaîne",
-            "Continuer d'avancer — c'est la dernière volonté de ceux qui partent",
-            "Transmettre l'histoire des tombés aux générations futures"
-          ],
-          "mudras": [],
-          "rang": "Apprenti Genin",
-          "prerequis": []
-        }
-      ]
     }
   ]
 }
