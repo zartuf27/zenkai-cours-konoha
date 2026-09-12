@@ -4766,14 +4766,38 @@ function resetBilan(){
 // ================================================================
 // HISTORIQUE — Stats complètes du sensei
 // ================================================================
+// SVG Camembert helper
+function svgPie(slices,size){
+  if(!slices.length||slices.every(s=>!s.val))return'';
+  const total=slices.reduce((a,s)=>a+s.val,0);
+  if(!total)return'';
+  const r=size/2-2,cx=size/2,cy=size/2;
+  let startAngle=-Math.PI/2,svg=`<svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}">`;
+  slices.forEach(s=>{
+    if(!s.val)return;
+    const angle=(s.val/total)*Math.PI*2;
+    const endAngle=startAngle+angle;
+    const large=angle>Math.PI?1:0;
+    const x1=cx+r*Math.cos(startAngle),y1=cy+r*Math.sin(startAngle);
+    const x2=cx+r*Math.cos(endAngle),y2=cy+r*Math.sin(endAngle);
+    if(s.val===total){svg+=`<circle cx="${cx}" cy="${cy}" r="${r}" fill="${s.color}"/>`}
+    else{svg+=`<path d="M${cx},${cy} L${x1},${y1} A${r},${r} 0 ${large},1 ${x2},${y2} Z" fill="${s.color}"/>`}
+    startAngle=endAngle;
+  });
+  svg+=`</svg>`;return svg;
+}
+
+let histoFilter=null; // null=global, 'dd/mm/yyyy'=jour
+function setHistoFilter(d){histoFilter=d;render();}
+
 function renderHistorique(){
   const s=getSensei();
-  const hist=getCoursHistory();
+  const allHist=getCoursHistory();
   const nat=s.nature?D.natures.find(n=>n.id===s.nature):null;
   const typeInfo=senseiTypeInfo();
 
-  if(hist.length===0){
-    return`<div class="page-header"><div class="page-title">📜 Historique du Sensei</div>
+  if(allHist.length===0){
+    return`<div class="page-header"><div class="page-title">📜 Registre du Sensei</div>
       <div class="page-desc">Statistiques et parcours d'enseignement</div></div>
       <div class="card" style="text-align:center;padding:60px 20px">
         <div style="font-size:2.5rem;margin-bottom:12px">${nat?nat.icon:typeInfo.icon}</div>
@@ -4782,94 +4806,157 @@ function renderHistorique(){
       </div>`;
   }
 
+  // Jours disponibles
+  const allDays={};
+  allHist.forEach(e=>{if(!allDays[e.date])allDays[e.date]=[];allDays[e.date].push(e)});
+  const dayKeys=Object.keys(allDays).sort((a,b)=>{const pa=a.split('/'),pb=b.split('/');return new Date(pb[2],pb[1]-1,pb[0])-new Date(pa[2],pa[1]-1,pa[0])});
+
+  // Filtre
+  const isGlobal=!histoFilter;
+  const hist=isGlobal?allHist:(allDays[histoFilter]||[]);
+  const filterLabel=isGlobal?'Global':histoFilter+' (mois IG)';
+
   // ====== CALCULS ======
   const totalCours=hist.length;
   const totalDonnes=hist.filter(e=>!e.noEleve).length;
   const totalProposes=hist.filter(e=>e.noEleve).length;
   const tauxPresence=totalCours?Math.round(totalDonnes/totalCours*100):0;
 
-  // Par jour
   const parJour={};
   hist.forEach(e=>{if(!parJour[e.date])parJour[e.date]=[];parJour[e.date].push(e)});
-  const jourKeys=Object.keys(parJour);
-  const nbJours=jourKeys.length;
+  const jourKeys2=Object.keys(parJour);
+  const nbJours=jourKeys2.length;
   const moyParJour=nbJours?Math.round(totalCours/nbJours*10)/10:0;
 
-  // Par module
   const parModule={};
   hist.forEach(e=>{const c=cours(e.id);if(c){if(!parModule[c.mod])parModule[c.mod]=0;parModule[c.mod]++}});
   const modEntries=Object.entries(parModule).sort((a,b)=>b[1]-a[1]);
   const maxMod=modEntries.length?modEntries[0][1]:0;
 
-  // Par cours
-  const parCours={};
-  hist.forEach(e=>{if(!parCours[e.id])parCours[e.id]={titre:e.titre,count:0,noEleve:0};parCours[e.id].count++;if(e.noEleve)parCours[e.id].noEleve++});
-  const coursEntries=Object.entries(parCours).sort((a,b)=>b[1].count-a[1].count);
+  const parCours2={};
+  hist.forEach(e=>{if(!parCours2[e.id])parCours2[e.id]={titre:e.titre,count:0,noEleve:0};parCours2[e.id].count++;if(e.noEleve)parCours2[e.id].noEleve++});
+  const coursEntries=Object.entries(parCours2).sort((a,b)=>b[1].count-a[1].count);
   const maxCours=coursEntries.length?coursEntries[0][1].count:0;
 
-  // Par heure
   const parHeure={};
-  hist.forEach(e=>{const h=e.heure?e.heure.split(':')[0]:'??';if(!parHeure[h])parHeure[h]=0;parHeure[h]++});
-  const heureKeys=Object.keys(parHeure).sort();
-  const maxHeure=Math.max(...Object.values(parHeure));
+  hist.forEach(e=>{const hr=e.heure?e.heure.split(':')[0]:'??';if(!parHeure[hr])parHeure[hr]=0;parHeure[hr]++});
+  const maxHeure=Object.values(parHeure).length?Math.max(...Object.values(parHeure)):0;
 
-  // Par catégorie
   let nbTheo=0,nbPrat=0;
   hist.forEach(e=>{const c=cours(e.id);if(c){if(c.cat==='theorique')nbTheo++;else nbPrat++}});
 
-  // Dates
   const dates=hist.map(e=>e.ts).sort();
   const premier=new Date(dates[0]).toLocaleDateString('fr-FR');
   const dernier=new Date(dates[dates.length-1]).toLocaleDateString('fr-FR');
 
-  // ====== RENDU ======
-  let h=`<div class="page-header"><div class="page-title">📜 Historique du Sensei</div>
-    <div class="page-desc">Parcours d'enseignement de ${senseiFullName()}</div></div>`;
+  // Couleurs pour camemberts
+  const pieColors=['var(--skin-primary)','var(--skin-secondary)','var(--accent-leaf)','var(--accent-orange)','var(--konoha-red)','var(--suiton)','var(--futon)','var(--doton)'];
+  const getPC=(i)=>pieColors[i%pieColors.length];
 
-  // ====== CARTE IDENTITÉ SENSEI ======
+  // ====== RENDU ======
+  let h=`<div class="page-header"><div class="page-title">📜 Registre du Sensei</div>
+    <div class="page-desc">Parcours d'enseignement de ${senseiFullName()} — ${filterLabel}</div></div>`;
+
+  // ====== SÉLECTEUR GLOBAL / JOUR ======
+  h+=`<div class="card" style="margin-bottom:20px;padding:14px">
+    <div style="font-size:0.72rem;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted);margin-bottom:8px">Période</div>
+    <div style="display:flex;flex-wrap:wrap;gap:6px">
+      <div class="nature-opt ${isGlobal?'selected':''}" onclick="setHistoFilter(null)" style="min-width:auto;flex:0 0 auto;padding:6px 14px">
+        <div class="no-check">✓</div>
+        <div class="no-name" style="font-size:0.78rem">🌐 Global</div>
+        <div class="no-element">${allHist.length} cours</div>
+      </div>`;
+  dayKeys.forEach(d=>{
+    const sel=histoFilter===d?'selected':'';
+    h+=`<div class="nature-opt ${sel}" onclick="setHistoFilter('${d}')" style="min-width:auto;flex:0 0 auto;padding:6px 14px">
+      <div class="no-check">✓</div>
+      <div class="no-name" style="font-size:0.78rem">${d}</div>
+      <div class="no-element">${allDays[d].length} cours</div>
+    </div>`;
+  });
+  h+=`</div></div>`;
+
+  // ====== CARTE SENSEI ======
   h+=`<div class="sensei-card" data-type="${s.type}" style="margin-bottom:24px">
     <div class="sensei-card-avatar">${nat?nat.icon:typeInfo.icon}</div>
     <div class="sensei-card-info">
       <div class="sensei-card-name">${esc(senseiFullName())}</div>
       <div class="sensei-card-meta">${s.rang?s.rang+' · ':''}${typeInfo.icon} ${typeInfo.nom}</div>
-      <div style="font-size:0.75rem;color:var(--text-dim);margin-top:2px">Actif depuis le ${premier} · Dernier cours : ${dernier}</div>
+      <div style="font-size:0.75rem;color:var(--text-dim);margin-top:2px">${isGlobal?'Actif depuis le '+premier+' · Dernier cours : '+dernier:'Jour : '+histoFilter}</div>
     </div>
     ${nat?`<div class="sensei-card-nature">${nat.icon} ${nat.nom}</div>`:''}
   </div>`;
 
-  // ====== STATS PRINCIPALES ======
+  // ====== STATS ======
   h+=`<div class="stats-grid" style="margin-bottom:24px">
-    <div class="stat-card"><div class="stat-value">${totalCours}</div><div class="stat-label">Cours total</div>
+    <div class="stat-card"><div class="stat-value">${totalCours}</div><div class="stat-label">Cours${isGlobal?' total':''}</div>
       <div class="stat-sub">${totalDonnes} donnés · ${totalProposes} proposés</div></div>
-    <div class="stat-card accent-fire"><div class="stat-value">${nbJours}</div><div class="stat-label">Jours d'activité</div>
-      <div class="stat-sub">Moyenne ${moyParJour} cours/jour</div></div>
+    ${isGlobal?`<div class="stat-card accent-fire"><div class="stat-value">${nbJours}</div><div class="stat-label">Jours d'activité</div>
+      <div class="stat-sub">Moyenne ${moyParJour} cours/jour</div></div>`:''}
     <div class="stat-card accent-leaf"><div class="stat-value">${tauxPresence}%</div><div class="stat-label">Taux de présence</div>
       <div class="pbar pbar-lg" style="margin-top:8px"><div class="pbar-fill${tauxPresence===100?' complete':''}" style="width:${tauxPresence}%"></div></div></div>
-    <div class="stat-card accent-orange"><div class="stat-value">${nbTheo}<span style="font-size:0.9rem;color:var(--text-dim)">/${nbPrat}</span></div><div class="stat-label">Théorique / Pratique</div>
-      <div class="stat-sub">${totalCours?Math.round(nbTheo/totalCours*100):0}% théo · ${totalCours?Math.round(nbPrat/totalCours*100):0}% prat</div></div>
+    <div class="stat-card accent-orange"><div class="stat-value">${nbTheo}<span style="font-size:0.9rem;color:var(--text-dim)">/${nbPrat}</span></div><div class="stat-label">Théo / Prat</div>
+      <div class="stat-sub">${totalCours?Math.round(nbTheo/totalCours*100):0}% · ${totalCours?Math.round(nbPrat/totalCours*100):0}%</div></div>
   </div>`;
 
-  // ====== GRAPHE ACTIVITÉ PAR JOUR (barres horizontales style parchemin) ======
-  h+=`<div class="card" style="padding:20px;margin-bottom:16px">
-    <div style="font-family:'Cinzel',serif;font-size:0.95rem;color:var(--accent-gold);margin-bottom:16px;display:flex;align-items:center;gap:8px">
-      📅 Activité par jour <span style="font-size:0.7rem;color:var(--text-muted);font-family:'Noto Sans JP',sans-serif">(1 jour IRL = 1 mois IG)</span>
-    </div>`;
-  const joursSorted=jourKeys.sort((a,b)=>{const pa=a.split('/'),pb=b.split('/');return new Date(pa[2],pa[1]-1,pa[0])-new Date(pb[2],pb[1]-1,pb[0])});
-  const maxJour=Math.max(...joursSorted.map(d=>parJour[d].length));
-  joursSorted.forEach(d=>{
-    const entries=parJour[d];
-    const proposed=entries.filter(e=>e.noEleve).length;
-    const given=entries.length-proposed;
-    const pct=maxJour?Math.round(entries.length/maxJour*100):0;
-    h+=`<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
-      <span style="font-size:0.72rem;color:var(--text-dim);width:70px;flex-shrink:0;text-align:right">${d}</span>
-      <div style="flex:1;height:22px;background:rgba(0,0,0,0.04);border-radius:4px;overflow:hidden;position:relative">
-        <div style="height:100%;width:${pct}%;background:var(--skin-gradient);border-radius:4px;transition:width 0.3s"></div>
-        <span style="position:absolute;right:6px;top:50%;transform:translateY(-50%);font-size:0.65rem;font-weight:600;color:var(--text-dim)">${given}${proposed?'+'+proposed+'⚠':''}</span>
+  // ====== CAMEMBERTS ======
+  h+=`<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;margin-bottom:20px">`;
+
+  // Camembert Théo/Prat
+  h+=`<div class="card" style="padding:20px;text-align:center">
+    <div style="font-family:'Cinzel',serif;font-size:0.85rem;color:var(--accent-gold);margin-bottom:12px">📖 Théorique vs Pratique</div>
+    <div style="display:flex;justify-content:center;margin-bottom:12px">${svgPie([{val:nbTheo,color:'var(--skin-primary)'},{val:nbPrat,color:'var(--skin-secondary)'}],130)}</div>
+    <div style="display:flex;justify-content:center;gap:16px;font-size:0.75rem">
+      <span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--skin-primary);margin-right:4px"></span>Théo ${nbTheo}</span>
+      <span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--skin-secondary);margin-right:4px"></span>Prat ${nbPrat}</span>
+    </div>
+  </div>`;
+
+  // Camembert Donnés/Proposés
+  h+=`<div class="card" style="padding:20px;text-align:center">
+    <div style="font-family:'Cinzel',serif;font-size:0.85rem;color:var(--accent-gold);margin-bottom:12px">✅ Donnés vs Proposés</div>
+    <div style="display:flex;justify-content:center;margin-bottom:12px">${svgPie([{val:totalDonnes,color:'var(--accent-leaf)'},{val:totalProposes,color:'var(--accent-orange)'}],130)}</div>
+    <div style="display:flex;justify-content:center;gap:16px;font-size:0.75rem">
+      <span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--accent-leaf);margin-right:4px"></span>Donnés ${totalDonnes}</span>
+      <span><span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--accent-orange);margin-right:4px"></span>Proposés ${totalProposes}</span>
+    </div>
+  </div>`;
+
+  // Camembert par module
+  if(modEntries.length>1){
+    h+=`<div class="card" style="padding:20px;text-align:center">
+      <div style="font-family:'Cinzel',serif;font-size:0.85rem;color:var(--accent-gold);margin-bottom:12px">🏯 Par module</div>
+      <div style="display:flex;justify-content:center;margin-bottom:12px">${svgPie(modEntries.map(([m,c],i)=>({val:c,color:getPC(i)})),130)}</div>
+      <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:8px;font-size:0.68rem">
+        ${modEntries.map(([m,c],i)=>`<span><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${getPC(i)};margin-right:3px"></span>${modIcons[m]||''} ${c}</span>`).join('')}
       </div>
     </div>`;
-  });
+  }
   h+=`</div>`;
+
+  // ====== GRAPHE ACTIVITÉ (barres) — uniquement en mode global ======
+  if(isGlobal&&jourKeys2.length>1){
+    h+=`<div class="card" style="padding:20px;margin-bottom:16px">
+      <div style="font-family:'Cinzel',serif;font-size:0.95rem;color:var(--accent-gold);margin-bottom:16px;display:flex;align-items:center;gap:8px">
+        📅 Activité par jour <span style="font-size:0.7rem;color:var(--text-muted);font-family:'Noto Sans JP',sans-serif">(1 jour IRL = 1 mois IG)</span>
+      </div>`;
+    const joursSorted=jourKeys2.sort((a,b)=>{const pa=a.split('/'),pb=b.split('/');return new Date(pa[2],pa[1]-1,pa[0])-new Date(pb[2],pb[1]-1,pb[0])});
+    const maxJour=Math.max(...joursSorted.map(d=>parJour[d].length));
+    joursSorted.forEach(d=>{
+      const entries=parJour[d];
+      const proposed=entries.filter(e=>e.noEleve).length;
+      const given=entries.length-proposed;
+      const pct=maxJour?Math.round(entries.length/maxJour*100):0;
+      h+=`<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;cursor:pointer" onclick="setHistoFilter('${d}')">
+        <span style="font-size:0.72rem;color:var(--text-dim);width:70px;flex-shrink:0;text-align:right">${d}</span>
+        <div style="flex:1;height:22px;background:rgba(0,0,0,0.04);border-radius:4px;overflow:hidden;position:relative">
+          <div style="height:100%;width:${pct}%;background:var(--skin-gradient);border-radius:4px;transition:width 0.3s"></div>
+          <span style="position:absolute;right:6px;top:50%;transform:translateY(-50%);font-size:0.65rem;font-weight:600;color:var(--text-dim)">${given}${proposed?'+'+proposed+'⚠':''}</span>
+        </div>
+      </div>`;
+    });
+    h+=`</div>`;
+  }
 
   // ====== RÉPARTITION PAR MODULE (barres) ======
   h+=`<div class="card" style="padding:20px;margin-bottom:16px">
@@ -4887,7 +4974,7 @@ function renderHistorique(){
   });
   h+=`</div>`;
 
-  // ====== HEURES D'ACTIVITÉ (graphe en colonnes) ======
+  // ====== HEURES (colonnes) ======
   h+=`<div class="card" style="padding:20px;margin-bottom:16px">
     <div style="font-family:'Cinzel',serif;font-size:0.95rem;color:var(--accent-gold);margin-bottom:16px">⏰ Heures d'enseignement</div>
     <div style="display:flex;align-items:flex-end;gap:3px;height:120px;padding:0 4px">`;
@@ -4903,7 +4990,7 @@ function renderHistorique(){
   }
   h+=`</div></div>`;
 
-  // ====== TOP COURS ======
+  // ====== CLASSEMENT ======
   h+=`<div class="card" style="padding:20px;margin-bottom:16px">
     <div style="font-family:'Cinzel',serif;font-size:0.95rem;color:var(--accent-gold);margin-bottom:16px">🏆 Classement des cours</div>`;
   coursEntries.forEach(([id,data],i)=>{
@@ -4924,18 +5011,18 @@ function renderHistorique(){
   });
   h+=`</div>`;
 
-  // ====== JOURNAL COMPLET (tableau) ======
+  // ====== JOURNAL ======
   h+=`<div class="card" style="padding:20px">
-    <div style="font-family:'Cinzel',serif;font-size:0.95rem;color:var(--accent-gold);margin-bottom:16px">📋 Journal complet</div>
+    <div style="font-family:'Cinzel',serif;font-size:0.95rem;color:var(--accent-gold);margin-bottom:16px">📋 Journal${isGlobal?' complet':' — '+histoFilter}</div>
     <table style="width:100%;border-collapse:collapse;font-size:0.78rem">
       <tr style="border-bottom:2px solid var(--border);color:var(--text-muted);font-size:0.65rem;text-transform:uppercase;letter-spacing:1px">
-        <td style="padding:8px 6px">Date</td><td style="padding:8px 6px">Heure</td><td style="padding:8px 6px">Cours</td><td style="padding:8px 6px">Module</td><td style="padding:8px 6px;text-align:center">Statut</td></tr>`;
+        ${isGlobal?'<td style="padding:8px 6px">Date</td>':''}<td style="padding:8px 6px">Heure</td><td style="padding:8px 6px">Cours</td><td style="padding:8px 6px">Module</td><td style="padding:8px 6px;text-align:center">Statut</td></tr>`;
   [...hist].reverse().forEach((e,i)=>{
     const c=cours(e.id);
     const mod=c?c.mod:'—';
     const icon=c?modIcons[mod]||'':'';
     h+=`<tr style="border-bottom:1px solid var(--border);${i%2?'background:var(--bg-card-alt)':''}">
-      <td style="padding:6px;color:var(--text-dim)">${e.date}</td>
+      ${isGlobal?`<td style="padding:6px;color:var(--text-dim)">${e.date}</td>`:''}
       <td style="padding:6px;color:var(--text)">${e.heure}</td>
       <td style="padding:6px;color:var(--text-bright);cursor:pointer" onclick="openCours('${e.id}')">${e.titre}</td>
       <td style="padding:6px;color:var(--text-dim)">${icon} ${mod}</td>
