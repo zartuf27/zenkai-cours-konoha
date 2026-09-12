@@ -65,7 +65,12 @@
 | # | Fichier | Résumé |
 |---|---------|--------|
 | 36 | `Format tableau.docx` | Directive de Yamamoto Jakka : format des appels aux cours, système de blâmes. |
-| 37 | `gestion_cours_zenkai.html` | Application HTML de suivi pour le sensei (23 cours, mudras, natures, armes, hiérarchie). |
-| 38 | `donnees_cours.json` | Données structurées de tous les cours (23 entrées). |
+| 37 | `gestion_cours_zenkai.html` | Application HTML de suivi pour le sensei (25 cours, mudras, natures, armes, hiérarchie). |
+| 38 | `donnees_cours.json` | Données structurées de tous les cours (26 entrées, dont Hishiba Zakuto). |
 | 39 | `Propositions de nouveaux cours.docx` | 13 idées de nouveaux cours par Eraku Morikawa (compléments, originaux, décalés). |
 | 40 | `analyse_croisee.md` | Analyse des liens entre cours, prérequis, et progression pédagogique. |
+| 41 | `carnet_sensei_eraku.html` | Carnet personnel d'Eraku Morikawa : journal illustré, portraits d'élèves, hommage à Hishiba Zakuto. |
+| 42 | `carnet-une-porte.html` | Version courte / alternative du carnet du sensei. |
+| 43 | `compte rendu.docx` | Compte rendu de cours ou de session. |
+| 44 | `Cours du sensei renard/` | Cours alternatifs du sensei Renard : 7 cours en .md + HTML (Règles d'Or, Volonté du Feu, Mudras, Armes, Histoire, Nature de Chakra, Traité diplomatique). |
+| 45 | `Hishiba/` | Dossier de référence sur Hishiba Zakuto : textes RP, profil, images (PNG/WebP). |

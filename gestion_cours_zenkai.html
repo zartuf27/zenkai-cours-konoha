@@ -3538,8 +3538,8 @@ function applySenseiName(html,coursId){
   const typeInfo=senseiTypeInfo();
   const natInfo=s.nature?D.natures.find(n=>n.id===s.nature):null;
   let out=html;
-  // Replace name
-  if(name!=='Eraku Morikawa') out=out.replace(/Eraku Morikawa/g,name);
+  // Replace name (escape HTML to prevent injection from localStorage)
+  if(name!=='Eraku Morikawa') out=out.replace(/Eraku Morikawa/g,esc(name));
   // Replace quote text if personality is not sage and we have a courseId
   if(coursId&&type!=='sage'&&SENSEI_QUOTES[coursId]){
     const origQuote=SENSEI_QUOTES[coursId].sage;

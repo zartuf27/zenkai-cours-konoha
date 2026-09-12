@@ -4,6 +4,9 @@ théorique/regle d or/*.png
 Hishiba/*.png
 Hishiba/*.webp
 
+# Claude Code
+.claude/
+
 # Fichiers système
 .DS_Store
 Thumbs.db
