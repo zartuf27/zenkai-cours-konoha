@@ -4457,7 +4457,7 @@ function renderAdmin(){
 function copyModuleAnnonces(mod){
   const s=getSensei();
   const prof=senseiProf();
-  const lieu=s.lieu||'RDV Devant l\'académie';
+  const lieu='RDV Devant l\'académie';
   const lines=[];
   D.cours.filter(c=>c.mod===mod&&coursVisibleForSensei(c)).forEach(c=>{
     if(c.cat==='theorique'){
@@ -4478,7 +4478,7 @@ function copyModuleAnnonces(mod){
 
 function renderAnnonces(){
   const prof=senseiProf();
-  const lieu=getSensei().lieu||'RDV Devant l\'académie';
+  const lieu='RDV Devant l\'académie';
 
   // Build announcements dynamically from D.cours (filtered by nature)
   const items=[];
@@ -5008,13 +5008,6 @@ function renderSensei(){
       oninput="setSenseiField('signe',this.value);updateSenseiPreview()">
   </div>`;
 
-  // Lieu de RDV
-  h+=`<div class="sensei-field">
-    <label>Lieu de rendez-vous (annonces)</label>
-    <input type="text" value="${esc(s.lieu||'')}" placeholder="RDV Devant l'académie"
-      oninput="setSenseiField('lieu',this.value);updateSenseiPreview()">
-  </div>`;
-
   // Rang
   h+=`<div class="sensei-field">
     <label>Rang</label>
@@ -5134,7 +5127,7 @@ function renderSensei(){
   const profStr=senseiProf();
   h+=`<div style="margin-bottom:14px">
     <div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted);margin-bottom:4px">Annonce de cours</div>
-    <div style="font-family:monospace;font-size:0.85rem;color:var(--text-bright);padding:8px 12px;background:rgba(0,0,0,0.03);border-radius:var(--radius)" id="previewAnnonce">${esc(exCours.titre)} — ${exCours.rang} — ${esc(s.lieu||'RDV Devant l\'académie')} — ${esc(profStr)}</div>
+    <div style="font-family:monospace;font-size:0.85rem;color:var(--text-bright);padding:8px 12px;background:rgba(0,0,0,0.03);border-radius:var(--radius)" id="previewAnnonce">${esc(exCours.titre)} — ${exCours.rang} — ${esc('RDV Devant l\'académie')} — ${esc(profStr)}</div>
   </div>`;
 
   // Signature preview
@@ -5193,7 +5186,7 @@ function updateSenseiPreview(){
   const sig=document.getElementById('previewSignature');
   if(el){
     const exCours=D.cours[0];
-    el.textContent=exCours.titre+' — '+exCours.rang+' — '+(getSensei().lieu||'RDV Devant l\'académie')+' — '+senseiProf();
+    el.textContent=exCours.titre+' — '+exCours.rang+' — '+('RDV Devant l\'académie')+' — '+senseiProf();
   }
   if(sig){
     const t=senseiTypeInfo();
