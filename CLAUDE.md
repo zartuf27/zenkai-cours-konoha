@@ -29,26 +29,28 @@ Déploiement auto en ~1 min. Chaque prof ouvre le même lien, son profil/progres
 ## Structure du dossier
 
 ```
-gestion_cours_zenkai.html  — App principale (~4900 lignes, tout-en-un)
+gestion_cours_zenkai.html  — App principale (~5800 lignes, tout-en-un)
 donnees_cours.json         — Données structurées (synchronisé avec le HTML)
 CLAUDE.md                  — Ce fichier (instructions pour Claude)
 .gitignore                 — Exclut images lourdes + .claude/
 théorique/                 — Cours théoriques (.docx, .md) + images
 Pratique/                  — 13 cours pratiques (.docx)
 Cours du sensei renard/    — Cours d'un autre sensei (7 .md + HTML + script)
+Kenjustu.docx              — Source du cours Kenjutsu (lame double / Nitōryū)
+COURS NATURE PRATIQUE.docx — Source des 4 cours nature (Katon, Futon, Suiton, Doton)
 Propositions de nouveaux cours.docx — Idées de nouveaux cours
 Format tableau.docx        — Directive format annonces (Yamamoto Jakka)
 ```
 
-## Les 24 cours (par module)
+## Les 30 cours (par module)
 
 | Module | Cours |
 |--------|-------|
 | Fondamentaux | Règles d'Or, Nindo, Volonté du Feu, Histoire de Konoha |
 | Chakra | Décomposition du Chakra, Mudras, Nature de Chakra |
-| Combat | Théorie Taijutsu, Armes Ninja |
+| Combat | Théorie Taijutsu, Armes Ninja, Kenjutsu — Initiation, Kenjutsu — Lame Double (Nitōryū) |
 | Taijutsu | Bourrasque de Konoha, Pied de l'Aube |
-| Ninjutsu | Saut de Chakra, Analyse et Combat par Nature, Techniques Raiton, Permutation |
+| Ninjutsu | Saut de Chakra, Analyse et Combat par Nature, Techniques Raiton, Techniques Katon, Techniques Futon, Techniques Suiton, Techniques Doton, Permutation |
 | Spécialisation | Infiltration (théorie), Infiltration (pratique), La Traque, L'Enquête |
 | Terrain | Course d'orientation, Pays du Feu — Visite |
 | Tactique | Jeu du Roi, Capture de Drapeau, Simulation de Mission, Simulation d'Escorte |
@@ -70,11 +72,11 @@ Format tableau.docx        — Directive format annonces (Yamamoto Jakka)
 | 📢 Annonces | `annonces` | Annonces copy-to-clipboard + copie par module |
 | 📊 Fin de mois | `bilan` | Sélecteur jour, message Discord prêt à copier, reset |
 | 📜 Historique | `historique` | Stats sensei, graphiques, classement, journal complet |
-| 👤 Sensei | `sensei` | Profil complet (9 champs), aperçu en direct |
+| 👤 Sensei | `sensei` | Profil complet (11 champs), aperçu en direct |
 
 Navigation : `VIEWS[]` → `buildSidebar()` → `nav(viewId)` → `render()` → `renderXxx()`
 
-### Profil Sensei (9 axes de personnalisation)
+### Profil Sensei (11 axes de personnalisation)
 
 | Champ | Stockage | Impact |
 |-------|----------|--------|
@@ -83,8 +85,10 @@ Navigation : `VIEWS[]` → `buildSidebar()` → `nav(viewId)` → `render()` →
 | Rang | `S.sensei.rang` | Carte sensei, header, bilan Discord (de Genin Confirmé à Hokage) |
 | Lieu de RDV | `S.sensei.lieu` | Toutes les annonces |
 | Phrase signature | `S.sensei.signature` | Override toutes les citations si rempli |
-| Type de Sensei | `S.sensei.type` | 384 citations, greeting, animation avatar |
+| Type de Sensei | `S.sensei.type` | 480 citations, greeting, animation avatar |
 | Nature de Chakra | `S.sensei.nature` | Skin couleurs, particules, filtrage cours, closing lines, favicon |
+| Spécialisation combat | `S.sensei.specCombat` | `taijutsu` ou `kenjutsu` |
+| Type de lame | `S.sensei.typeLame` | Si kenjutsu : `simple`, `double` ou `lourde` |
 | Apparence | `S.darkMode` | Mode clair / sombre |
 | Animations | `S.noAnim` | On/off particules, pulsations, transitions |
 
@@ -92,7 +96,7 @@ Navigation : `VIEWS[]` → `buildSidebar()` → `nav(viewId)` → `render()` →
 
 Sage 🍃, Implacable 🗡️, Guerrier 🔥, Bienveillant 🌸, Énigmatique 🌙, Stratège ♟️, Vétéran 🩸, Grand Frère 🤝, Provocateur 😏, Ermite 🐸, Ombre 🦇, Noble 👑, Rebelle 💢, Mentor spirituel 📿, Chasseur 🐺, Manipulateur 🎭
 
-Chaque type : 1 citation par cours (16 × 24 = 384) + greeting dashboard + animation avatar spécifique.
+Chaque type : 1 citation par cours (16 × 30 = 480) + greeting dashboard + animation avatar spécifique.
 
 Certains types modifient les **labels de la sidebar** (`SIDEBAR_LABELS`) :
 - Ombre : Annonces→"Transmission", Bilan→"Rapport opérationnel", Historique→"Logs"
@@ -115,16 +119,35 @@ Affecte : header, SVG, sidebar, progress bars, boutons, badges, stat cards, fond
 ### Système de citations (encouragements de fin de cours)
 
 Chaque citation combine **type de personnalité + nature de chakra** :
-1. `SENSEI_QUOTES[coursId][type]` — phrase de personnalité (384 entrées)
+1. `SENSEI_QUOTES[coursId][type]` — phrase de personnalité (480 entrées)
 2. `NATURE_CLOSING[nature][module]` — closing line nature (5 × 8 = 40 entrées)
 3. Si `S.sensei.signature` est rempli → override tout par cette phrase unique
 
 ### Filtrage des cours par nature
 
 ```javascript
-const COURS_NATURE={raiton_cours:'raiton'};
-// Pour ajouter : katon_cours:'katon', futon_cours:'futon', etc.
+const COURS_NATURE={raiton_cours:'raiton',katon_cours:'katon',futon_cours:'futon',suiton_cours:'suiton',doton_cours:'doton'};
 ```
+
+Les cours de techniques par nature ne sont visibles que pour le sensei dont c'est la nature.
+
+### Double mode de lecture (cours théoriques)
+
+Les cours théoriques disposent de 2 onglets dans le bloc contenu :
+- **📋 À retenir** — Bullet points structurés des acquis essentiels (constante `RESUME`)
+- **🎤 Guide oral** — Texte RP à lire à haute voix avec annotations et anecdotes (constante `CONTENU`)
+
+Les cours pratiques n'affichent que le guide oral. Le mode Présentation utilise toujours le guide oral.
+
+### Cours Kenjutsu (structure modulaire par type de lame)
+
+Le Kenjutsu est structuré en cours séparés par voie de la lame :
+- **Kenjutsu — Initiation** : base commune (Bushidō, Kokyu, Metsuke, Maai, Engagement)
+- **Kenjutsu — Lame Double (Nitōryū)** : gardes spécifiques double lame, origines, démonstration
+- *(à venir)* Kenjutsu — Lame Simple
+- *(à venir)* Kenjutsu — Lame Lourde
+
+Chaque cours de voie a `kenjutsu_cours` comme prérequis.
 
 ### Compteur "Cours donné"
 
@@ -183,6 +206,7 @@ Overlay plein écran déclenché depuis la page détail d'un cours. Affiche le c
 | Constante | Contenu |
 |-----------|---------|
 | `const D` | Objet principal : meta, rangs, mudras, natures, kekkei, armes, cours[] |
+| `const RESUME` | Bullet points "À retenir" par cours théorique (11 entrées) |
 | `const CONTENU` | Guides oraux (HTML) par cours ID |
 | `const INTERACTIF` | Blocs interactifs (Nindo uniquement) |
 | `const NOTES_PROF` | Notes copiables in-game (copy + html) par cours ID |
@@ -200,9 +224,9 @@ Overlay plein écran déclenché depuis la page détail d'un cours. Affiche le c
 
 | Clé | Contenu |
 |-----|---------|
-| `S.c` | Checkboxes (progression techniques) |
+| `S.c` | Checkboxes (progression techniques) + états onglets contenu |
 | `S.n` | Notes texte + `cours_history` + `given_count_*` + `given_last_*` |
-| `S.sensei` | `{prenom, nom, signe, nature, type, rang, lieu, signature}` |
+| `S.sensei` | `{prenom, nom, signe, nature, type, rang, lieu, signature, specCombat, typeLame}` |
 | `S.darkMode` | Boolean |
 | `S.noAnim` | Boolean |
 
@@ -227,11 +251,12 @@ Overlay plein écran déclenché depuis la page détail d'un cours. Affiche le c
 
 1. Ajouter dans `D.cours[]` : `{id, titre, cat, mod, rang, cible, auteur, prereq, desc, techs[]}`
 2. Ajouter dans `CONTENU[id]` : HTML du guide oral
-3. Ajouter dans `NOTES_PROF[id]` : `{copy: '...', html: '...'}`
-4. Ajouter dans `SENSEI_QUOTES[id]` : objet avec 16 clés (sage, dur, guerrier, bienveillant, mysterieux, stratege, veteran, fraternel, ironique, ermite, ombre, sensei_noble, rebelle, mentor, chasseur, tacticien)
-5. Si nature-spécifique : ajouter dans `COURS_NATURE`
-6. Mettre à jour `donnees_cours.json`
-7. `git add . && git commit -m "..." && git push`
+3. Si théorique : ajouter dans `RESUME[id]` : HTML des bullet points "À retenir"
+4. Ajouter dans `NOTES_PROF[id]` : `{copy: '...', html: '...'}`
+5. Ajouter dans `SENSEI_QUOTES[id]` : objet avec 16 clés (sage, dur, guerrier, bienveillant, mysterieux, stratege, veteran, fraternel, ironique, ermite, ombre, sensei_noble, rebelle, mentor, chasseur, tacticien)
+6. Si nature-spécifique : ajouter dans `COURS_NATURE`
+7. Mettre à jour `donnees_cours.json`
+8. `git add . && git commit -m "..." && git push`
 
 ### Icônes
 
@@ -253,7 +278,7 @@ Overlay plein écran déclenché depuis la page détail d'un cours. Affiche le c
 
 ### Fichiers .docx
 - Certains proviennent de copier-coller Discord (nettoyer emojis Discord, timestamps, réactions)
-- Senseis auteurs : Akio Fukurō, Jihon Ichirin, Inoshi Baikutai, Gaoh Uragiri, Yumi Amano, Gromlof, Yamamoto Jakka
+- Senseis auteurs : Akio Fukurō, Jihon Ichirin, Inoshi Baikutai, Gaoh Uragiri, Yumi Amano, Gromlof, Yamamoto Jakka, Tetsuya Fubetsu, Nagi Kinzetsu
 
 ### Cohérence lore Zenkai-RP
 - 5 clans fondateurs : Senju, Uchiha, Hyūga, Nara, Akimichi
@@ -261,8 +286,9 @@ Overlay plein écran déclenché depuis la page détail d'un cours. Affiche le c
 - 10 rangs (Apprenti Genin → Hokage), senseis à partir de Genin Confirmé
 - Cycle : Katon > Futon > Raiton > Doton > Suiton > Katon
 - 12 mudras, 10 Kekkei Genkai + 1 Kekkei Tōta (Jinton)
+- Kenjutsu : Nitōryū inventé par Myosashi Shinmen (Pays du Fer)
 
 ### Synchronisation
 - HTML, JSON et fichiers source doivent rester synchronisés
-- Chaque cours = 5 composants : `D.cours[]`, `CONTENU{}`, `NOTES_PROF{}`, `SENSEI_QUOTES{}` (16 types), optionnel `COURS_NATURE`
+- Chaque cours = 5-6 composants : `D.cours[]`, `CONTENU{}`, `RESUME{}` (si théorique), `NOTES_PROF{}`, `SENSEI_QUOTES{}` (16 types), optionnel `COURS_NATURE`
 - Après modif : `git push` pour déployer sur GitHub Pages

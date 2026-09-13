@@ -2,7 +2,7 @@
   "meta": {
     "titre": "Cours RP Zenkai - Konoha",
     "version": "1.0",
-    "derniere_maj": "2026-06-25"
+    "derniere_maj": "2026-09-13"
   },
   "rangs": [
     "Apprenti Genin",
@@ -813,6 +813,218 @@
           "type": "taijutsu",
           "etapes": ["Exécuter la technique au corps à corps"],
           "mudras": [],
+          "rang": "Genin Confirmé",
+          "prerequis": []
+        }
+      ]
+    },
+    {
+      "id": "katon_cours",
+      "titre": "Techniques Katon",
+      "categorie": "pratique",
+      "module": "Techniques Ninjutsu",
+      "rang_requis": "Genin",
+      "public_cible": "Genin et plus",
+      "auteur": null,
+      "prerequis": ["mudras_cours", "nature_theorie"],
+      "description": "Techniques du feu : 2 jutsus offensifs et 2 jutsus défensifs/avancés Katon.",
+      "techniques": [
+        {
+          "id": "kat_boule",
+          "nom": "Boule de Feu",
+          "description": "Projectile rapide : boule de feu incandescente projetée à grande vitesse.",
+          "type": "ninjutsu",
+          "etapes": ["Composer les mudras", "Concentrer le chakra dans les poumons", "Expulser la boule de feu", "Viser la cible"],
+          "mudras": ["tigre", "serpent"],
+          "rang": "Genin",
+          "prerequis": []
+        },
+        {
+          "id": "kat_mur",
+          "nom": "Mur de Feu",
+          "description": "Défense contre projectiles : ligne droite de flamme en face du lanceur.",
+          "type": "ninjutsu",
+          "etapes": ["Composer les mudras", "Concentrer le chakra dans les poumons", "Expulser sous forme de ligne de flamme", "Maintenir le barrage"],
+          "mudras": ["rat", "tigre"],
+          "rang": "Genin",
+          "prerequis": []
+        },
+        {
+          "id": "kat_balsamine",
+          "nom": "Balsamine",
+          "description": "Attaque multiple différée : 3 boules de feu emmagasinées, utilisables à volonté dans un laps de temps.",
+          "type": "ninjutsu",
+          "etapes": ["Composer les mudras", "Emmagasiner 3 boules de feu", "Cracher à volonté dans le temps imparti", "Viser les cibles"],
+          "mudras": ["tigre", "belier", "singe"],
+          "rang": "Genin Confirmé",
+          "prerequis": []
+        },
+        {
+          "id": "kat_shuriken",
+          "nom": "Shurikens Pourpres",
+          "description": "Pluie de projectiles enflammés : boule de feu combinée à un lancé de shurikens.",
+          "type": "ninjutsu",
+          "etapes": ["Composer les mudras", "Expulser une boule de feu", "Enchaîner un lancé de shurikens à travers", "Diriger la pluie ardente"],
+          "mudras": ["dragon", "rat", "tigre"],
+          "rang": "Genin Confirmé",
+          "prerequis": []
+        }
+      ]
+    },
+    {
+      "id": "futon_cours",
+      "titre": "Techniques Futon",
+      "categorie": "pratique",
+      "module": "Techniques Ninjutsu",
+      "rang_requis": "Genin",
+      "public_cible": "Genin et plus",
+      "auteur": null,
+      "prerequis": ["mudras_cours", "nature_theorie"],
+      "description": "Techniques du vent : 2 jutsus offensifs/défensifs et 2 jutsus avancés Futon.",
+      "techniques": [
+        {
+          "id": "fut_spirale",
+          "nom": "Spirale de Vent",
+          "description": "Projectile repoussant : spirale de vent projetée en direction de la cible.",
+          "type": "ninjutsu",
+          "etapes": ["Composer les mudras", "Concentrer le chakra dans les poumons", "Expulser la spirale de vent", "Viser la cible"],
+          "mudras": ["coq", "singe"],
+          "rang": "Genin",
+          "prerequis": []
+        },
+        {
+          "id": "fut_mur",
+          "nom": "Mur de Vent",
+          "description": "Défense et barrière : mur de vent créé face au lanceur.",
+          "type": "ninjutsu",
+          "etapes": ["Composer les mudras", "Concentrer le chakra", "Créer le mur de vent", "Maintenir la barrière"],
+          "mudras": ["lievre", "coq"],
+          "rang": "Genin",
+          "prerequis": []
+        },
+        {
+          "id": "fut_cinglantes",
+          "nom": "Spirales Cinglantes",
+          "description": "Projectiles multiples : trois spirales de vent projetées simultanément.",
+          "type": "ninjutsu",
+          "etapes": ["Composer les mudras", "Concentrer le chakra dans les poumons", "Expulser trois spirales", "Viser la zone cible"],
+          "mudras": ["coq", "rat", "belier"],
+          "rang": "Genin Confirmé",
+          "prerequis": []
+        },
+        {
+          "id": "fut_onde",
+          "nom": "Onde de Choc",
+          "description": "Projection et repousse : sphère de futon créant une onde de choc au contact.",
+          "type": "ninjutsu",
+          "etapes": ["Composer les mudras", "Projeter la sphère de futon", "L'onde de choc se déclenche au contact", "Repousser la cible"],
+          "mudras": ["sanglier", "coq", "dragon"],
+          "rang": "Genin Confirmé",
+          "prerequis": []
+        }
+      ]
+    },
+    {
+      "id": "suiton_cours",
+      "titre": "Techniques Suiton",
+      "categorie": "pratique",
+      "module": "Techniques Ninjutsu",
+      "rang_requis": "Genin",
+      "public_cible": "Genin et plus",
+      "auteur": null,
+      "prerequis": ["mudras_cours", "nature_theorie"],
+      "description": "Techniques de l'eau : 2 jutsus offensifs/défensifs et 2 jutsus avancés Suiton.",
+      "techniques": [
+        {
+          "id": "sui_crystal",
+          "nom": "Crystal Aqueux",
+          "description": "Projectile tranchant : suiton lancé depuis la main.",
+          "type": "ninjutsu",
+          "etapes": ["Composer les mudras", "Concentrer le chakra dans la main", "Lancer le projectile tranchant", "Viser la cible"],
+          "mudras": ["chien", "rat"],
+          "rang": "Genin",
+          "prerequis": []
+        },
+        {
+          "id": "sui_mur",
+          "nom": "Mur Aqueux",
+          "description": "Défense contre projectiles : rempart d'eau bloquant les jutsu adverses.",
+          "type": "ninjutsu",
+          "etapes": ["Composer les mudras", "Concentrer le chakra dans les paumes", "Faire surgir le rempart d'eau", "Bloquer les projectiles"],
+          "mudras": ["singe", "chien"],
+          "rang": "Genin",
+          "prerequis": []
+        },
+        {
+          "id": "sui_bulles",
+          "nom": "Bulles d'Eau",
+          "description": "Projectiles multiples : bulles d'eau infligeant des dégâts au contact.",
+          "type": "ninjutsu",
+          "etapes": ["Composer les mudras", "Concentrer le chakra dans la bouche", "Expulser les bulles", "Les bulles infligent des dégâts au contact"],
+          "mudras": ["chien", "dragon", "sanglier"],
+          "rang": "Genin Confirmé",
+          "prerequis": []
+        },
+        {
+          "id": "sui_prison",
+          "nom": "Prison Aqueuse",
+          "description": "Capture et contrôle : prison aqueuse ovale avec maintien requis.",
+          "type": "ninjutsu",
+          "etapes": ["Composer les mudras", "Concentrer le chakra dans la main", "Capturer la cible dans la prison", "Maintenir le jutsu actif"],
+          "mudras": ["cheval", "chien", "lievre"],
+          "rang": "Genin Confirmé",
+          "prerequis": []
+        }
+      ]
+    },
+    {
+      "id": "doton_cours",
+      "titre": "Techniques Doton",
+      "categorie": "pratique",
+      "module": "Techniques Ninjutsu",
+      "rang_requis": "Genin",
+      "public_cible": "Genin et plus",
+      "auteur": null,
+      "prerequis": ["mudras_cours", "nature_theorie"],
+      "description": "Techniques de la terre : 2 jutsus défensifs/offensifs et 2 jutsus avancés Doton.",
+      "techniques": [
+        {
+          "id": "dot_mur",
+          "nom": "Mur de Roche",
+          "description": "Défense et blocage : mur de doton surgi de la terre.",
+          "type": "ninjutsu",
+          "etapes": ["Composer les mudras", "Concentrer le chakra dans les mains", "Unifier avec la terre", "Faire surgir le mur"],
+          "mudras": ["serpent", "belier"],
+          "rang": "Genin",
+          "prerequis": []
+        },
+        {
+          "id": "dot_expulsion",
+          "nom": "Expulsion Rocheuse",
+          "description": "Projectiles multiples : bouts de pierre lancés depuis la bouche.",
+          "type": "ninjutsu",
+          "etapes": ["Composer les mudras", "Former les projectiles de pierre", "Lancer depuis la bouche", "Viser l'adversaire"],
+          "mudras": ["rat", "serpent"],
+          "rang": "Genin",
+          "prerequis": []
+        },
+        {
+          "id": "dot_mouvante",
+          "nom": "Terre Mouvante",
+          "description": "Contrôle de zone : sol mouvant et déstabilisant, ralentissant les ennemis.",
+          "type": "ninjutsu",
+          "etapes": ["Composer les mudras", "Concentrer le chakra dans les mains", "Toucher le sol avec la paume", "Le sol devient mouvant et déstabilisant"],
+          "mudras": ["serpent", "sanglier", "chien"],
+          "rang": "Genin Confirmé",
+          "prerequis": []
+        },
+        {
+          "id": "dot_prison",
+          "nom": "Prison de Roche",
+          "description": "Capture et immobilisation : prison de roche autour de la cible avec maintien requis.",
+          "type": "ninjutsu",
+          "etapes": ["Composer les mudras", "Concentrer le chakra dans les mains", "Unifier avec la terre", "Provoquer l'éruption de la prison", "Maintenir le jutsu actif"],
+          "mudras": ["tigre", "rat", "serpent"],
           "rang": "Genin Confirmé",
           "prerequis": []
         }

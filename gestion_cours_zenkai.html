@@ -1140,6 +1140,48 @@ body {
 .contenu-toggle .ct-arrow { transition:transform 0.2s; }
 .contenu-toggle.open .ct-arrow { transform:rotate(90deg); }
 
+/* ====== READING MODE TABS (théorique) ====== */
+.reading-tabs {
+  display:flex;
+  gap:0;
+  margin-bottom:0;
+  border-bottom:2px solid var(--border);
+}
+.reading-tab {
+  padding:10px 20px;
+  cursor:pointer;
+  font-size:0.82rem;
+  font-weight:600;
+  color:var(--text-dim);
+  background:var(--bg-card);
+  border:1px solid var(--border);
+  border-bottom:none;
+  border-radius:var(--radius-lg) var(--radius-lg) 0 0;
+  transition:var(--transition);
+  position:relative;
+  top:2px;
+}
+.reading-tab:hover { color:var(--text); background:var(--bg-hover); }
+.reading-tab.active {
+  color:var(--accent-gold-bright);
+  background:var(--bg-main);
+  border-bottom:2px solid var(--bg-main);
+}
+.reading-tab .tab-icon { margin-right:6px; }
+.contenu-block.tab-content {
+  border:1px solid var(--border);
+  border-top:none;
+  border-radius:0 0 var(--radius-lg) var(--radius-lg);
+  margin-bottom:16px;
+}
+.resume-block { padding:20px 24px; }
+.resume-block h3 { margin:0 0 12px; font-size:0.95rem; color:var(--accent-gold-bright); }
+.resume-block ul { margin:0 0 16px; padding-left:20px; }
+.resume-block li { margin-bottom:8px; line-height:1.5; font-size:0.85rem; }
+.resume-block li strong { color:var(--accent-gold); }
+.resume-section { margin-bottom:20px; }
+.resume-section:last-child { margin-bottom:0; }
+
 /* ====== INTERACTIVE COURSE ====== */
 .interactif-wrapper{max-width:720px}
 .interactif-steps{display:flex;align-items:center;gap:0;margin-bottom:20px;overflow-x:auto;padding:4px 0}
@@ -1275,10 +1317,481 @@ body {
 // ================================================================
 // DATA
 // ================================================================
-const D={"meta":{"titre":"Cours RP Zenkai - Konoha","version":"1.0"},"rangs":["Apprenti Genin","Genin","Genin Confirmé","Chūnin","Konin","Tokubetsu Jōnin","Jōnin","Commandant Jōnin","Sanin","Hokage"],"mudras":[{"id":"rat","nom":"Rat","fonction":"Initie la mise en mouvement du chakra"},{"id":"boeuf","nom":"Bœuf","fonction":"Structure le chakra, empêche la dispersion"},{"id":"tigre","nom":"Tigre","fonction":"Amplifie et intensifie le flux"},{"id":"lievre","nom":"Lièvre","fonction":"Fluidifie le flux de chakra"},{"id":"dragon","nom":"Dragon","fonction":"Concentre le chakra sous forme dense"},{"id":"serpent","nom":"Serpent","fonction":"Apporte la précision au modelage"},{"id":"cheval","nom":"Cheval","fonction":"Intensifie et accélère le flux"},{"id":"belier","nom":"Bélier","fonction":"Équilibre et harmonise le chakra"},{"id":"singe","nom":"Singe","fonction":"Coordonne les enchaînements complexes"},{"id":"coq","nom":"Coq / Oiseau","fonction":"Projette et dirige le chakra"},{"id":"chien","nom":"Chien","fonction":"Protège et structure en défense"},{"id":"sanglier","nom":"Sanglier","fonction":"Libération brutale du chakra"}],"natures":[{"id":"katon","nom":"Katon","element":"Feu","force":"Inflige des brûlures","icon":"🔥","sup":"futon","inf":"suiton"},{"id":"futon","nom":"Futon","element":"Vent","force":"Accélère la vitesse","icon":"🌬️","sup":"raiton","inf":"katon"},{"id":"raiton","nom":"Raiton","element":"Foudre","force":"Étourdit la cible","icon":"⚡","sup":"doton","inf":"futon"},{"id":"doton","nom":"Doton","element":"Terre","force":"Renforce la robustesse","icon":"🌍","sup":"suiton","inf":"raiton"},{"id":"suiton","nom":"Suiton","element":"Eau","force":"Absorbe le chakra","icon":"💧","sup":"katon","inf":"doton"}],"kekkei":[{"nom":"Bakuton","el":["Doton","Raiton"],"art":"Explosions"},{"nom":"Deiton","el":["Doton","Suiton"],"art":"Boue"},{"nom":"Futton","el":["Suiton","Katon"],"art":"Vapeur"},{"nom":"Hyoton","el":["Suiton","Futon"],"art":"Glace"},{"nom":"Jiton","el":["Doton","Futon"],"art":"Magnétisme"},{"nom":"Mokuton","el":["Doton","Suiton"],"art":"Bois"},{"nom":"Shakuton","el":["Katon","Futon"],"art":"Chaleur"},{"nom":"Yoton","el":["Doton","Katon"],"art":"Lave"},{"nom":"Ranton","el":["Suiton","Raiton"],"art":"Orage"},{"nom":"Jinton","el":["Katon","Futon","Doton"],"art":"Particules (Kekkei Tōta)"}],"armes":[{"nom":"Katana","taille":"~1m total","desc":"Sabre traditionnel à lame courbée. Frappes rapides et précises. Améliorable au chakra."},{"nom":"Kunai","taille":"20-30 cm","desc":"Poignard robuste avec anneau. Attaque, lancer, grimper, creuser. L'arme la plus polyvalente."},{"nom":"Shuriken","taille":"5-10 cm","desc":"Étoile métallique à plusieurs pointes. Distance ou corps à corps. Matériel indispensable."},{"nom":"Senbon","taille":"15-25 cm","desc":"Aiguilles fines et légères. Points vitaux ou neutralisation discrète."},{"nom":"Makibishi","taille":"2-5 cm","desc":"Pointes métalliques dispersées au sol pour ralentir ou blesser."},{"nom":"Clochettes","taille":"Quelques cm","desc":"Dispositifs sonores. Combinables avec un Kunai pour décentraliser l'attention."},{"nom":"Bombe fumigène","taille":"5-10 cm","desc":"Nuage de fumée pour masquer les mouvements, fuir ou surprendre. Effet temporaire."},{"nom":"Parchemin explosif","taille":"10-20 cm","desc":"Sceau de Fuinjutsu déclenchant une explosion. Piège ou arme à distance."}],"cours":[{"id":"regles_or","titre":"Les Règles d'Or du Ninja","cat":"theorique","mod":"Fondamentaux","rang":"Apprenti Genin","cible":"Tous","auteur":null,"prereq":[],"desc":"Les 8 règles fondamentales : loyauté, hiérarchie, mission, protection, secret, respect, maîtrise de soi, honneur.","techs":[{"id":"regle_loyaute","nom":"1. Loyauté envers le village","desc":"Agir dans l'intérêt du village et sous l'autorité du Hokage.","type":"connaissance","etapes":["Comprendre le principe de loyauté","Savoir l'appliquer en situation"],"mudras":[],"rang":"Apprenti Genin","prereq":[]},{"id":"regle_hierarchie","nom":"2. Respect de la hiérarchie","desc":"Respecter et exécuter les ordres des supérieurs avec discipline.","type":"connaissance","etapes":["Connaître la chaîne de commandement","Appliquer les ordres avec discipline"],"mudras":[],"rang":"Apprenti Genin","prereq":[]},{"id":"regle_mission","nom":"3. Priorité à la mission","desc":"Accomplir la mission avec sérieux et détermination.","type":"connaissance","etapes":["Comprendre la priorité de la mission","Gérer les dilemmes mission vs personnel"],"mudras":[],"rang":"Apprenti Genin","prereq":[]},{"id":"regle_protection","nom":"4. Protection des habitants","desc":"Un shinobi est avant tout un protecteur du village et de ses civils.","type":"connaissance","etapes":["Intégrer le rôle de protecteur","Identifier les civils à protéger"],"mudras":[],"rang":"Apprenti Genin","prereq":[]},{"id":"regle_secret","nom":"5. Secret et discrétion","desc":"Les informations sur les missions et techniques doivent rester confidentielles.","type":"connaissance","etapes":["Comprendre le secret ninja","Savoir ce qui est confidentiel"],"mudras":[],"rang":"Apprenti Genin","prereq":[]},{"id":"regle_respect","nom":"6. Respect entre shinobi","desc":"Faire preuve de respect envers ses camarades et préserver l'unité.","type":"connaissance","etapes":["Pratiquer le respect mutuel","Préserver la cohésion d'équipe"],"mudras":[],"rang":"Apprenti Genin","prereq":[]},{"id":"regle_maitrise","nom":"7. Maîtrise de soi","desc":"Contrôler ses émotions et éviter toute violence inutile.","type":"connaissance","etapes":["Apprendre le contrôle émotionnel","Éviter la violence inutile"],"mudras":[],"rang":"Apprenti Genin","prereq":[]},{"id":"regle_honneur","nom":"8. Honneur et responsabilité","desc":"Chaque shinobi est responsable de ses actes et représente le village.","type":"connaissance","etapes":["Comprendre la responsabilité individuelle","Agir en représentant du village"],"mudras":[],"rang":"Apprenti Genin","prereq":[]}]},{"id":"nindo","titre":"Le Nindo","cat":"theorique","mod":"Fondamentaux","rang":"Tous grades","cible":"Tous","auteur":null,"prereq":["regles_or"],"desc":"Le chemin du ninja : philosophie de vie personnelle de chaque shinobi, forgée dans l'adversité.","techs":[{"id":"nindo_comprendre","nom":"Comprendre le Nindo","desc":"Code personnel, pas un objectif. Court, direct, reflet de vos valeurs.","type":"connaissance","etapes":["Distinguer Nindo et objectif","Comprendre que le Nindo est personnel","Identifier ses propres valeurs"],"mudras":[],"rang":"Apprenti Genin","prereq":[]},{"id":"nindo_forger","nom":"Forger son Nindo","desc":"Construire son code à travers les épreuves et l'introspection.","type":"connaissance","etapes":["Réfléchir à ses expériences formatrices","Formuler un Nindo court et direct","Le tester face aux dilemmes"],"mudras":[],"rang":"Genin","prereq":["nindo_comprendre"]}]},{"id":"volonte_feu","titre":"La Volonté du Feu","cat":"theorique","mod":"Fondamentaux","rang":"Apprenti Genin","cible":"Tous","auteur":null,"prereq":["nindo"],"desc":"Doctrine fondatrice : protéger Konoha à tout prix, transmettre les rêves entre générations.","techs":[{"id":"volonte_d1","nom":"Protéger Konoha","desc":"Le village passe avant tout. Chaque habitant est un membre de la famille de Konoha.","type":"connaissance","etapes":["Comprendre le sacrifice pour le village","Intégrer le concept de famille de Konoha","Appliquer en situation de crise"],"mudras":[],"rang":"Apprenti Genin","prereq":[]},{"id":"volonte_d2","nom":"La transmission des rêves","desc":"Les rêves non accomplis se transmettent. L'héritage d'Hashirama perdure.","type":"connaissance","etapes":["Comprendre la transmission intergénérationnelle","Connaître l'histoire d'Hashirama","Identifier les rêves hérités"],"mudras":[],"rang":"Apprenti Genin","prereq":[]}]},{"id":"histoire","titre":"Histoire de Konoha","cat":"theorique","mod":"Fondamentaux","rang":"Apprenti Genin","cible":"Tous","auteur":null,"prereq":["volonte_feu"],"desc":"Des clans en guerre à la fondation, le rôle des grands clans, l'institutionnalisation par Tobirama.","techs":[{"id":"hist_1","nom":"I. Avant Konoha","desc":"Pays du Feu en guerre : Senju, Uchiha, Hyūga, Nara, Akimichi.","type":"connaissance","etapes":["Connaître le contexte pré-Konoha","Identifier les 5 grands clans"],"mudras":[],"rang":"Apprenti Genin","prereq":[]},{"id":"hist_2","nom":"II. Fondation de Konoha","desc":"Alliance Senju-Uchiha, création de Konohagakure, Premier Hokage.","type":"connaissance","etapes":["Comprendre l'alliance Senju-Uchiha","Le rôle d'Hashirama et Madara","Lier la fondation à la Volonté du Feu"],"mudras":[],"rang":"Apprenti Genin","prereq":[]},{"id":"hist_3","nom":"III. Rôle des grands clans","desc":"Senju (architectes), Uchiha (militaire), Hyūga (sentinelles), Nara (cerveaux), Akimichi (logistique).","type":"connaissance","etapes":["Rôle du clan Senju","Rôle du clan Uchiha","Rôle du clan Hyūga","Rôle du clan Nara","Rôle du clan Akimichi"],"mudras":[],"rang":"Apprenti Genin","prereq":[]},{"id":"hist_4","nom":"IV. Tobirama Hokage","desc":"Académie, ANBU, système de missions. Crise politique.","type":"connaissance","etapes":["Institutions créées par Tobirama","La crise de succession"],"mudras":[],"rang":"Apprenti Genin","prereq":[]}]},{"id":"decomposition_chakra","titre":"D\u00e9composition du Chakra","cat":"theorique","mod":"Chakra","rang":"Apprenti Genin","cible":"Tous","auteur":null,"prereq":[],"desc":"De quoi le chakra est-il fait : \u00e9nergies, r\u00e9seau, Tenketsu et Compensation.","techs":[{"id":"dc_composantes","nom":"Les deux composantes","desc":"Le chakra na\u00eet de la fusion de l'\u00e9nergie physique (Yang, Y\u00f4ton) et de l'\u00e9nergie spirituelle (Yin, Inton).","type":"connaissance","etapes":["Comprendre la d\u00e9composition du chakra en deux \u00e9nergies","Conna\u00eetre l'\u00e9nergie physique (Yang, Y\u00f4ton) : corps, cellules, force vitale","Conna\u00eetre l'\u00e9nergie spirituelle (Yin, Inton) : esprit, exp\u00e9rience, volont\u00e9","Comprendre que le d\u00e9s\u00e9quilibre \u00e9puise le chakra"],"mudras":[],"rang":"Apprenti Genin","prereq":[]},{"id":"dc_reseau","nom":"R\u00e9seau et noyau","desc":"Le chakra circule dans un r\u00e9seau propre, depuis un noyau situ\u00e9 dans l'abdomen.","type":"connaissance","etapes":["Conna\u00eetre le noyau du chakra (abdomen)","Comprendre la circulation dans le r\u00e9seau","Comprendre la s\u00e9paration en flux (pieds, mains, technique)"],"mudras":[],"rang":"Apprenti Genin","prereq":["dc_composantes"]},{"id":"dc_tenketsu","nom":"Les Tenketsu","desc":"361 points de chakra dont 64 importants. Carrefours du r\u00e9seau.","type":"connaissance","etapes":["Savoir ce qu'est un Tenketsu","Retenir : 361 au total, 64 importants","Comprendre le blocage d'un Tenketsu chez l'adversaire"],"mudras":[],"rang":"Apprenti Genin","prereq":["dc_reseau"]},{"id":"dc_compensation","nom":"La Compensation (Sosa\u00ef)","desc":"Deux jutsus de m\u00eame niveau et de m\u00eame nature s'annulent mutuellement.","type":"connaissance","etapes":["Comprendre le principe de Sosa\u00ef","Retenir les deux conditions : m\u00eame niveau + m\u00eame nature","Distinguer Compensation, sup\u00e9riorit\u00e9 de niveau et cycle des natures"],"mudras":[],"rang":"Apprenti Genin","prereq":["dc_tenketsu"]}]},{"id":"mudras_cours","titre":"Les Mudras","cat":"theorique","mod":"Chakra","rang":"Apprenti Genin","cible":"Tous","auteur":null,"prereq":[],"desc":"Les 12 signes de main : langage du chakra. Sans mudras, le chakra est instable et les jutsu ratent.","techs":[{"id":"mudras_theorie","nom":"Théorie des Mudras","desc":"Ce que sont les mudras, leurs 3 fonctions : canaliser, transformer, stabiliser.","type":"connaissance","etapes":["Savoir ce qu'est un mudra","Les 3 fonctions (canaliser, transformer, stabiliser)","Comprendre l'importance de l'ordre"],"mudras":[],"rang":"Apprenti Genin","prereq":[]},{"id":"mudras_maitrise","nom":"Maîtrise des 12 Mudras","desc":"Exécuter chaque mudra avec précision, rapidité et fluidité. Doit devenir un réflexe.","type":"mudras","etapes":[],"mudras":["rat","boeuf","tigre","lievre","dragon","serpent","cheval","belier","singe","coq","chien","sanglier"],"rang":"Apprenti Genin","prereq":["mudras_theorie"]}]},{"id":"nature_theorie","titre":"Nature de Chakra","cat":"theorique","mod":"Chakra","rang":"Apprenti Genin","cible":"Tous","auteur":null,"prereq":["mudras_cours"],"desc":"Hiérarchie des 5 natures, test de la feuille, Kekkei Genkai.","techs":[{"id":"nat_cycle","nom":"Cycle des 5 Natures","desc":"Katon > Futon > Raiton > Doton > Suiton > Katon.","type":"connaissance","etapes":["Mémoriser le cycle","Forces de chaque nature","Identifier sa nature (test de la feuille)"],"mudras":[],"rang":"Apprenti Genin","prereq":[]},{"id":"nat_test","nom":"Le Test de la Feuille","desc":"Déterminer sa nature : brûle, humidifie, s'effrite, plie, se coupe.","type":"connaissance","etapes":["Connaître les 5 réactions","Interpréter le résultat"],"mudras":[],"rang":"Apprenti Genin","prereq":[]},{"id":"nat_kekkei","nom":"Kekkei Genkai","desc":"Combinaisons avancées : Mokuton, Hyoton, Yoton, Jinton...","type":"connaissance","etapes":["Connaître les principales combinaisons","Comprendre le Kekkei Tōta","Kekkei Genkai spéciaux (Shoton, Meiton...)"],"mudras":[],"rang":"Genin","prereq":[]}]},{"id":"taijutsu_theorie","titre":"Théorie du Taijutsu","cat":"theorique","mod":"Combat","rang":"Apprenti Genin","cible":"Tous","auteur":null,"prereq":[],"desc":"Combat à mains nues et maniement d'armes. Force physique et mentale, sans chakra ni mudras.","techs":[{"id":"tai_fond","nom":"Fondamentaux du Taijutsu","desc":"Les 3 branches ninja. Taijutsu = savoir-faire + vitesse + force.","type":"connaissance","etapes":["Distinguer Ninjutsu, Genjutsu, Taijutsu","Taijutsu = savoir-faire, pas force brute","Avantage : rapidité d'exécution (pas de mudras)"],"mudras":[],"rang":"Apprenti Genin","prereq":[]}]},{"id":"armes_cours","titre":"Les Armes Ninja","cat":"theorique","mod":"Combat","rang":"Apprenti Genin","cible":"Tous","auteur":null,"prereq":[],"desc":"Catalogue des armes : caractéristiques, tailles et utilisations tactiques.","techs":[{"id":"armes_lancer","nom":"Armes de lancer","desc":"Kunai, Shuriken, Senbon.","type":"connaissance","etapes":["Le Kunai et ses utilisations","Le Shuriken","Le Senbon"],"mudras":[],"rang":"Apprenti Genin","prereq":[]},{"id":"armes_melee","nom":"Armes de mêlée","desc":"Le Katana et l'infusion de chakra.","type":"connaissance","etapes":["Le Katana et ses propriétés","Infusion de chakra dans une arme"],"mudras":[],"rang":"Apprenti Genin","prereq":[]},{"id":"armes_tact","nom":"Équipement tactique","desc":"Makibishi, Clochettes, Bombe fumigène, Parchemin explosif.","type":"connaissance","etapes":["Makibishi","Clochettes + Kunai","Bombe fumigène","Parchemin explosif (Fuinjutsu)"],"mudras":[],"rang":"Apprenti Genin","prereq":[]}]},{"id":"infiltration","titre":"Infiltration","cat":"theorique","mod":"Spécialisation","rang":"Apprenti Genin","cible":"Apprentis Genin / Genin","auteur":"Akio Fukurō","prereq":["regles_or"],"desc":"Bases de l'infiltration : discrétion, changement de tenue, d'attitude, d'apparence, mensonge.","techs":[{"id":"infil_tenue","nom":"Changement de tenue","desc":"Adapter sa tenue à l'environnement et au type de mission.","type":"connaissance","etapes":["Adapter sa tenue à l'environnement","Couverture vestimentaire crédible"],"mudras":[],"rang":"Apprenti Genin","prereq":[]},{"id":"infil_attitude","nom":"Changement d'attitude","desc":"S'identifier à un autre. Ni trop suspicieux, ni trop impatient.","type":"connaissance","etapes":["Jouer un rôle","Contrôler ses réactions naturelles"],"mudras":[],"rang":"Apprenti Genin","prereq":[]},{"id":"infil_apparence","nom":"Changement d'apparence","desc":"Modifier son physique. Se préparer psychologiquement.","type":"connaissance","etapes":["Modifications d'apparence","Préparation psychologique"],"mudras":[],"rang":"Genin","prereq":[]},{"id":"infil_mensonge","nom":"Mensonge convaincant","desc":"Rôle crédible et adapté. Tenir sous pression. S'adapter à l'imprévu.","type":"connaissance","etapes":["Choisir un rôle crédible","Maintenir sous pression","S'adapter aux imprévus"],"mudras":[],"rang":"Genin","prereq":[]}]},{"id":"bourrasque","titre":"La Bourrasque Ardente","cat":"pratique","mod":"Taijutsu","rang":"Genin","cible":"Genin+","auteur":null,"prereq":["taijutsu_theorie"],"desc":"Coup de pied rotatif 360°. Souplesse des hanches, jambe comme un fouet.","techs":[{"id":"bour_kick","nom":"Série de Low Kicks","desc":"Coups de pied bas sur Pao puis surface rigide.","type":"taijutsu","etapes":["Low kick duo sur Pao (×10)","Monter l'intensité","Low kick rotatif sur surface rigide (×10)"],"mudras":[],"rang":"Genin","prereq":[]},{"id":"bour_rot","nom":"La Bourrasque (360°)","desc":"Saut + rotation 360° + extension jambe.","type":"taijutsu","etapes":["Saut + rotation 360° retombée (×5)","Extension jambe non-appui pendant rotation","Au sol : vitesse, épaules/hanches, jambe tendue"],"mudras":[],"rang":"Genin","prereq":["bour_kick"]}]},{"id":"pied_aube","titre":"Le Pied de l'Aube","cat":"pratique","mod":"Taijutsu","rang":"Genin","cible":"Genin+","auteur":null,"prereq":["taijutsu_theorie"],"desc":"Technique de saut offensif. Puissance de saut via fessiers.","techs":[{"id":"pa_fess","nom":"Fessiers et élasticité","desc":"Tour de terrain : canard, saut groupé, grenouille, sprint.","type":"taijutsu","etapes":["Position accroupie / canard","Saut groupé vertical","Saut de grenouille","Sprint"],"mudras":[],"rang":"Genin","prereq":[]},{"id":"pa_squat","nom":"Squats en binôme","desc":"Face à face, saut sur épaules au signal. Chanter 'L'Aube est l'espoir de Konoha'.","type":"taijutsu","etapes":["Squats en binôme","Saut sur épaules au signal","Alternance"],"mudras":[],"rang":"Genin","prereq":[]},{"id":"pa_tech","nom":"Technique du Pied de l'Aube","desc":"Offensive surprise. Comble l'espace, ouverture d'enchaînement.","type":"taijutsu","etapes":["Démonstration HG","Exécution","Application offensive surprise"],"mudras":[],"rang":"Genin","prereq":[]}]},{"id":"saut_chakra","titre":"Saut de Chakra","cat":"pratique","mod":"Ninjutsu","rang":"Genin","cible":"Genin+","auteur":null,"prereq":["mudras_cours","nature_theorie"],"desc":"Concentrer le chakra dans les pieds. Précision, pas force brute. Mobilité = survie.","techs":[{"id":"sc_principe","nom":"Principes","desc":"Concentration dans la plante des pieds. Angles selon la situation.","type":"connaissance","etapes":["Principe de concentration","Risques (trop/pas assez)","Angles : haut, avant, côté, arrière"],"mudras":[],"rang":"Genin","prereq":[]},{"id":"sc_exec","nom":"Exécution du Saut","desc":"Échauffement, malaxage (roll 50+), propulsion.","type":"chakra","etapes":["Échauffement sans chakra","Malaxer et concentrer (roll 50+)","Libérer pour propulsion","Rejoindre le toit de l'Académie"],"mudras":["rat","belier","tigre"],"rang":"Genin","prereq":["sc_principe"]}]},{"id":"nature_combat","titre":"Analyse et Combat par Nature","cat":"pratique","mod":"Ninjutsu","rang":"Genin Confirmé","cible":"Genins confirmés","auteur":"Jihon Ichirin","prereq":["nature_theorie"],"desc":"Analyser un combat, adapter ses techniques. Observer, réfléchir, agir.","techs":[{"id":"nc_analyse","nom":"Analyse forces/faiblesses","desc":"Groupes mixtes par nature. Discussion puis exposé.","type":"connaissance","etapes":["Former groupes mixtes","Discussion forces/faiblesses (10 min)","Exposer les conclusions"],"mudras":[],"rang":"Genin Confirmé","prereq":[]},{"id":"nc_combat","nom":"Combat tactique","desc":"Combats en équipe avec analyse. Débriefing structuré.","type":"taijutsu","etapes":["Combat construit en équipe","Analyser pendant le combat","Débriefing : 2 positifs + 2 à améliorer","Le vainqueur affronte les Chūnins"],"mudras":[],"rang":"Genin Confirmé","prereq":[]}]},{"id":"jeu_roi","titre":"Le Jeu du Roi","cat":"pratique","mod":"Tactique","rang":"Genin","cible":"Genin+","auteur":"Yumi Amano","prereq":["taijutsu_theorie","regles_or"],"desc":"Protection de cible (Roi = professeur). Si le Roi est blessé, tout le monde échoue.","techs":[{"id":"jr_def","nom":"Protection de cible","desc":"Organiser la défense, gérer les menaces.","type":"tactique","etapes":["Défense autour du Roi","Gérer menaces multiples","Protéger sans blesser le Roi"],"mudras":[],"rang":"Genin","prereq":[]},{"id":"jr_att","nom":"Capture stratégique","desc":"Capturer le Roi sans le blesser. Combat, diplomatie, négociation.","type":"tactique","etapes":["Stratégie de capture","Coordonner en équipe","Capturer sans blesser"],"mudras":[],"rang":"Genin","prereq":[]}]},{"id":"capture_drapeau","titre":"Capture de Drapeau","cat":"pratique","mod":"Tactique","rang":"Genin","cible":"Genin+","auteur":null,"prereq":["taijutsu_theorie","regles_or"],"desc":"1-3 manches : diplomatie (7 min) + combat (5 min). Adaptation entre manches.","techs":[{"id":"cd_diplo","nom":"Phase Diplomatie","desc":"7 min de négociation avant chaque combat.","type":"tactique","etapes":["Stratégie diplomatique","Négocier 7 minutes","Adapter selon le résultat"],"mudras":[],"rang":"Genin","prereq":[]},{"id":"cd_combat","nom":"Phase Combat","desc":"5 min. Coordination offensive, défense de position.","type":"tactique","etapes":["Défense de position","Coordination offensive","Priorités en temps réel","Débriefing entre manches"],"mudras":[],"rang":"Genin","prereq":[]}]},{"id":"raiton_cours","titre":"Techniques Raiton","cat":"pratique","mod":"Ninjutsu","rang":"Genin","cible":"Genin+","auteur":null,"prereq":["mudras_cours","nature_theorie"],"desc":"Techniques de la foudre : 4 jutsus Raiton offensifs/défensifs et 2 techniques de Taijutsu.","techs":[{"id":"rai_rayon","nom":"Rayon Instantané","desc":"Rayon d'éclair canalisé depuis la paume. Plus la canalisation est longue, plus il dure.","type":"ninjutsu","etapes":["Composer les mudras","Concentrer le chakra dans la paume droite","Canaliser et viser","Maintenir le rayon"],"mudras":["serpent","lievre"],"rang":"Genin","prereq":[]},{"id":"rai_boule","nom":"Boule Fulgurante","desc":"Boule de foudre projetée en ligne droite. Offensif fort, favorise le corps à corps.","type":"ninjutsu","etapes":["Composer les mudras","Concentrer le chakra dans les deux paumes","Diriger les paumes vers la cible","Projeter la boule de foudre"],"mudras":["dragon","serpent"],"rang":"Genin","prereq":[]},{"id":"rai_ruee","nom":"Ruée Foudroyante","desc":"Ruée de foudre au sol, reste un moment et inflige des dégâts au contact. Contrôle de zone.","type":"ninjutsu","etapes":["Composer les mudras","Libérer le chakra au sol","Diriger la ruée vers la cible","La ligne persiste et inflige des dégâts"],"mudras":["singe","cheval","serpent"],"rang":"Genin Confirmé","prereq":[]},{"id":"rai_zone","nom":"Zone Fulgurante","desc":"Zone électrique circulaire autour du lanceur. Large zone d'effet.","type":"ninjutsu","etapes":["Composer les mudras","Concentrer le chakra dans les paumes","Libérer au sol","La zone électrique se forme autour"],"mudras":["serpent","rat","chien"],"rang":"Genin Confirmé","prereq":[]},{"id":"rai_bourrasque","nom":"Bourrasque Ardente","desc":"Technique de taijutsu au corps à corps.","type":"taijutsu","etapes":["Exécuter la technique au corps à corps"],"mudras":[],"rang":"Genin","prereq":[]},{"id":"rai_pied_aube","nom":"Pied de l'Aube","desc":"Technique de taijutsu au corps à corps.","type":"taijutsu","etapes":["Exécuter la technique au corps à corps"],"mudras":[],"rang":"Genin Confirmé","prereq":[]}]},{"id":"katon_cours","titre":"Techniques Katon","cat":"pratique","mod":"Ninjutsu","rang":"Genin","cible":"Genin+","auteur":null,"prereq":["mudras_cours","nature_theorie"],"desc":"Techniques du feu : 2 jutsus offensifs et 2 jutsus défensifs/avancés Katon.","techs":[{"id":"kat_boule","nom":"Boule de Feu","desc":"Projectile rapide : concentrer le chakra dans les poumons et l'expulser sous forme d'une boule de feu incandescente.","type":"ninjutsu","etapes":["Composer les mudras","Concentrer le chakra dans les poumons","Expulser la boule de feu","Viser la cible"],"mudras":["tigre","serpent"],"rang":"Genin","prereq":[]},{"id":"kat_mur","nom":"Mur de Feu","desc":"Défense contre projectiles : ligne droite de flamme en face du lanceur.","type":"ninjutsu","etapes":["Composer les mudras","Concentrer le chakra dans les poumons","Expulser sous forme de ligne de flamme","Maintenir le barrage"],"mudras":["rat","tigre"],"rang":"Genin","prereq":[]},{"id":"kat_balsamine","nom":"Balsamine","desc":"Attaque multiple différée : 3 boules de feu emmagasinées, utilisables à volonté dans un laps de temps.","type":"ninjutsu","etapes":["Composer les mudras","Emmagasiner 3 boules de feu","Cracher à volonté dans le temps imparti","Viser les cibles"],"mudras":["tigre","belier","singe"],"rang":"Genin Confirmé","prereq":[]},{"id":"kat_shuriken","nom":"Shurikens Pourpres","desc":"Pluie de projectiles enflammés : boule de feu combinée à un lancé de shurikens pour créer une pluie ardente.","type":"ninjutsu","etapes":["Composer les mudras","Expulser une boule de feu","Enchaîner un lancé de shurikens à travers","Diriger la pluie ardente"],"mudras":["dragon","rat","tigre"],"rang":"Genin Confirmé","prereq":[]}]},{"id":"futon_cours","titre":"Techniques Futon","cat":"pratique","mod":"Ninjutsu","rang":"Genin","cible":"Genin+","auteur":null,"prereq":["mudras_cours","nature_theorie"],"desc":"Techniques du vent : 2 jutsus offensifs/défensifs et 2 jutsus avancés Futon.","techs":[{"id":"fut_spirale","nom":"Spirale de Vent","desc":"Projectile repoussant : expulser une petite spirale de vent en direction de la cible.","type":"ninjutsu","etapes":["Composer les mudras","Concentrer le chakra dans les poumons","Expulser la spirale de vent","Viser la cible"],"mudras":["coq","singe"],"rang":"Genin","prereq":[]},{"id":"fut_mur","nom":"Mur de Vent","desc":"Défense et barrière : créer un mur de vent face à soi.","type":"ninjutsu","etapes":["Composer les mudras","Concentrer le chakra","Créer le mur de vent","Maintenir la barrière"],"mudras":["lievre","coq"],"rang":"Genin","prereq":[]},{"id":"fut_cinglantes","nom":"Spirales Cinglantes","desc":"Projectiles multiples : trois petites spirales de vent projetées simultanément.","type":"ninjutsu","etapes":["Composer les mudras","Concentrer le chakra dans les poumons","Expulser trois spirales","Viser la zone cible"],"mudras":["coq","rat","belier"],"rang":"Genin Confirmé","prereq":[]},{"id":"fut_onde","nom":"Onde de Choc","desc":"Projection et repousse : sphère de futon créant une onde de choc au contact.","type":"ninjutsu","etapes":["Composer les mudras","Projeter la sphère de futon","L'onde de choc se déclenche au contact","Repousser la cible"],"mudras":["sanglier","coq","dragon"],"rang":"Genin Confirmé","prereq":[]}]},{"id":"suiton_cours","titre":"Techniques Suiton","cat":"pratique","mod":"Ninjutsu","rang":"Genin","cible":"Genin+","auteur":null,"prereq":["mudras_cours","nature_theorie"],"desc":"Techniques de l'eau : 2 jutsus offensifs/défensifs et 2 jutsus avancés Suiton.","techs":[{"id":"sui_crystal","nom":"Crystal Aqueux","desc":"Projectile tranchant : concentrer le chakra dans la main pour lancer un suiton tranchant.","type":"ninjutsu","etapes":["Composer les mudras","Concentrer le chakra dans la main","Lancer le projectile tranchant","Viser la cible"],"mudras":["chien","rat"],"rang":"Genin","prereq":[]},{"id":"sui_mur","nom":"Mur Aqueux","desc":"Défense contre projectiles : faire surgir un rempart d'eau bloquant les projectiles de jutsu.","type":"ninjutsu","etapes":["Composer les mudras","Concentrer le chakra dans les paumes","Faire surgir le rempart d'eau","Bloquer les projectiles"],"mudras":["singe","chien"],"rang":"Genin","prereq":[]},{"id":"sui_bulles","nom":"Bulles d'Eau","desc":"Projectiles multiples : expulser des bulles d'eau infligeant des dégâts au contact.","type":"ninjutsu","etapes":["Composer les mudras","Concentrer le chakra dans la bouche","Expulser les bulles","Les bulles infligent des dégâts au contact"],"mudras":["chien","dragon","sanglier"],"rang":"Genin Confirmé","prereq":[]},{"id":"sui_prison","nom":"Prison Aqueuse","desc":"Capture et contrôle : emprisonner une cible dans une prison aqueuse ovale. Maintien requis.","type":"ninjutsu","etapes":["Composer les mudras","Concentrer le chakra dans la main","Capturer la cible dans la prison","Maintenir le jutsu actif"],"mudras":["cheval","chien","lievre"],"rang":"Genin Confirmé","prereq":[]}]},{"id":"doton_cours","titre":"Techniques Doton","cat":"pratique","mod":"Ninjutsu","rang":"Genin","cible":"Genin+","auteur":null,"prereq":["mudras_cours","nature_theorie"],"desc":"Techniques de la terre : 2 jutsus défensifs/offensifs et 2 jutsus avancés Doton.","techs":[{"id":"dot_mur","nom":"Mur de Roche","desc":"Défense et blocage : unifier le chakra avec la terre pour faire surgir un mur de doton.","type":"ninjutsu","etapes":["Composer les mudras","Concentrer le chakra dans les mains","Unifier avec la terre","Faire surgir le mur"],"mudras":["serpent","belier"],"rang":"Genin","prereq":[]},{"id":"dot_expulsion","nom":"Expulsion Rocheuse","desc":"Projectiles multiples : créer des petits bouts de pierre lancés depuis la bouche.","type":"ninjutsu","etapes":["Composer les mudras","Former les projectiles de pierre","Lancer depuis la bouche","Viser l'adversaire"],"mudras":["rat","serpent"],"rang":"Genin","prereq":[]},{"id":"dot_mouvante","nom":"Terre Mouvante","desc":"Contrôle de zone : rendre le sol mouvant et déstabilisant, ralentissant les ennemis.","type":"ninjutsu","etapes":["Composer les mudras","Concentrer le chakra dans les mains","Toucher le sol avec la paume","Le sol devient mouvant et déstabilisant"],"mudras":["serpent","sanglier","chien"],"rang":"Genin Confirmé","prereq":[]},{"id":"dot_prison","nom":"Prison de Roche","desc":"Capture et immobilisation : provoquer l'éruption d'une prison de roche autour de la cible. Maintien requis.","type":"ninjutsu","etapes":["Composer les mudras","Concentrer le chakra dans les mains","Unifier avec la terre","Provoquer l'éruption de la prison","Maintenir le jutsu actif"],"mudras":["tigre","rat","serpent"],"rang":"Genin Confirmé","prereq":[]}]},{"id":"permutation","titre":"Permutation","cat":"pratique","mod":"Ninjutsu","rang":"Genin Confirmé","cible":"Genin Confirmé+","auteur":null,"prereq":["mudras_cours"],"desc":"Technique de substitution : remplacer son corps par un objet pour esquiver une attaque.","techs":[{"id":"perm_principe","nom":"Principe de la Permutation","desc":"Comprendre le mécanisme de substitution : remplacer son corps par un objet au moment de l'impact.","type":"connaissance","etapes":["Comprendre le principe de substitution","Identifier les objets utilisables","Choisir le bon timing"],"mudras":[],"rang":"Genin Confirmé","prereq":[]},{"id":"perm_exec","nom":"Exécution de la Permutation","desc":"Réaliser la substitution au bon moment pour esquiver une attaque.","type":"ninjutsu","etapes":["Anticiper l'attaque adverse","Exécuter la substitution","Se repositionner après la permutation"],"mudras":[],"rang":"Genin Confirmé","prereq":["perm_principe"]}]},{"id":"infiltration_pratique","titre":"Infiltration — Exercice pratique","cat":"pratique","mod":"Spécialisation","rang":"Apprenti Genin","cible":"Apprentis Genin / Genins / Genins Confirmés","auteur":"Akio Fukurō","prereq":["infiltration"],"desc":"Exercice de terrain au Hameau des rizières. Infiltration parmi des senseis jouant des bandits, récolte d'informations.","techs":[{"id":"infil_p_infiltrer","nom":"S'infiltrer sans être repéré","desc":"Se déguiser, adopter un rôle civil et entrer sans être identifié.","type":"tactique","etapes":["Se déguiser en civil crédible","Entrer sans attirer l'attention","Éviter les comportements suspects"],"mudras":[],"rang":"Apprenti Genin","prereq":[]},{"id":"infil_p_recolte","nom":"Récolter l'information","desc":"Exploiter les faiblesses des PNJ pour obtenir l'info secrète.","type":"tactique","etapes":["Identifier le défaut du PNJ","Adapter son approche","Transmettre l'info via radio"],"mudras":[],"rang":"Apprenti Genin","prereq":[]}]},{"id":"traque","titre":"La Traque","cat":"pratique","mod":"Spécialisation","rang":"Genin","cible":"Genin+","auteur":"Inoshi Baikutai & Gaoh Uragiri","prereq":["regles_or"],"desc":"Localiser et interpeller une personne recherchée parmi des leurres.","techs":[{"id":"traq_recherche","nom":"Recherche et identification","desc":"Exploiter les indices pour localiser la bonne cible.","type":"tactique","etapes":["Analyser les indices","Quadriller la zone","Distinguer cible et leurres"],"mudras":[],"rang":"Genin","prereq":[]},{"id":"traq_interpellation","nom":"Interpellation","desc":"Confirmer l'identité et procéder à l'interpellation.","type":"tactique","etapes":["Confirmer l'identité","Procéder à l'interpellation","Débriefing collectif"],"mudras":[],"rang":"Genin","prereq":[]}]},{"id":"enquete","titre":"L'Enquête","cat":"pratique","mod":"Spécialisation","rang":"Genin","cible":"Genin+","auteur":"Inoshi Baikutai","prereq":["regles_or"],"desc":"Scénario d'enquête : interroger les témoins, recueillir les indices, fournir un rapport.","techs":[{"id":"enq_interrogatoire","nom":"Interrogatoire","desc":"Mener des interrogatoires structurés.","type":"tactique","etapes":["Identifier les témoins","Poser les bonnes questions","Recouper les témoignages"],"mudras":[],"rang":"Genin","prereq":[]},{"id":"enq_rapport","nom":"Analyse et rapport","desc":"Assembler les infos et fournir une conclusion argumentée.","type":"tactique","etapes":["Organiser les indices","Formuler une hypothèse","Rendre un rapport fiable"],"mudras":[],"rang":"Genin","prereq":[]}]},{"id":"orientation_terrain","titre":"Course d'orientation","cat":"pratique","mod":"Terrain","rang":"Apprenti Genin","cible":"Apprentis Genin / Genin","auteur":"Akio Fukurō","prereq":[],"desc":"Course d'orientation par énigmes à travers le Pays du Feu. 4 lieux à trouver.","techs":[{"id":"orient_enigme","nom":"Décrypter les indices","desc":"Résoudre les énigmes pour identifier les lieux.","type":"connaissance","etapes":["Analyser l'indice","Identifier le lieu","S'orienter vers la destination"],"mudras":[],"rang":"Apprenti Genin","prereq":[]},{"id":"orient_analyse","nom":"Analyse du terrain","desc":"Observer l'environnement sur place.","type":"connaissance","etapes":["Observer l'environnement","Identifier l'élément demandé","Transmettre par radio"],"mudras":[],"rang":"Apprenti Genin","prereq":[]}]},{"id":"pays_feu_visite","titre":"Pays du Feu — Visite","cat":"pratique","mod":"Terrain","rang":"Apprenti Genin","cible":"Tous","auteur":"Jihon Ichirin","prereq":[],"desc":"Visite guidée du Pays du Feu : géographie, zones dangereuses, frontières.","techs":[{"id":"pf_geo","nom":"Géographie du Pays du Feu","desc":"Lieux clés, itinéraires, zones sûres et dangereuses.","type":"connaissance","etapes":["Identifier les lieux principaux","Connaître les itinéraires","Zones sûres vs dangereuses"],"mudras":[],"rang":"Apprenti Genin","prereq":[]},{"id":"pf_front","nom":"Frontières et zones interdites","desc":"Frontières sensibles et zones interdites.","type":"connaissance","etapes":["Pays frontaliers","Zones interdites (Marais, Ame)","Enjeux diplomatiques"],"mudras":[],"rang":"Apprenti Genin","prereq":[]}]},{"id":"simulation_mission","titre":"Simulation de Mission","cat":"pratique","mod":"Tactique","rang":"Genin","cible":"Genin+","auteur":"Gromlof","prereq":["regles_or","volonte_feu"],"desc":"Mission simulée avec dilemmes moraux : obéir ou protéger le village.","techs":[{"id":"sim_dilemme1","nom":"Mission vs Village","desc":"Transmettre une info à un contact qui est un espion ennemi.","type":"tactique","etapes":["Recevoir la mission","Identifier la menace","Décider : mission ou village"],"mudras":[],"rang":"Genin","prereq":[]},{"id":"sim_dilemme2","nom":"Mission vs Protection","desc":"Un marchand de Konoha se fait attaquer pendant la mission.","type":"tactique","etapes":["Évaluer la situation","Intervenir ou poursuivre","Assumer les conséquences"],"mudras":[],"rang":"Genin","prereq":[]}]},{"id":"simulation_escorte","titre":"Simulation d'Escorte","cat":"pratique","mod":"Tactique","rang":"Genin","cible":"Genin+","auteur":"Yumi Amano","prereq":["regles_or","taijutsu_theorie"],"desc":"Mission d'escorte simulée avec imprévus en terrain ouvert.","techs":[{"id":"esc_placement","nom":"Placement défensif","desc":"Organiser la protection en mouvement.","type":"tactique","etapes":["Répartir les rôles","Maintenir la formation","Adapter au terrain"],"mudras":[],"rang":"Genin","prereq":[]},{"id":"esc_imprevu","nom":"Réaction à l'imprévu","desc":"Gérer les situations imprévues.","type":"tactique","etapes":["Détecter la menace","Protéger la cible","Communiquer en temps réel"],"mudras":[],"rang":"Genin","prereq":[]}]}],"admin":{"titre":"Directive aux Professeurs — Format d'Appel au Tableau","auteur":"Yamamoto Jakka","role":"Responsable Professeur / TKJ","regles":["Inscrire votre nom et prénom à la fin de chaque annonce de cours","Ne JAMAIS inscrire un cours simplement comme « cours » ou « c »","Le village entier voit vos appels — soignez la présentation","Après ce rappel, toute infraction = blâme","Au bout de 3 blâmes = congédiement"],"exemple":"[Intitulé du cours] — [Rang requis] — [Lieu] — [Nom Prénom du Professeur]"}};
+const D={"meta":{"titre":"Cours RP Zenkai - Konoha","version":"1.0"},"rangs":["Apprenti Genin","Genin","Genin Confirmé","Chūnin","Konin","Tokubetsu Jōnin","Jōnin","Commandant Jōnin","Sanin","Hokage"],"mudras":[{"id":"rat","nom":"Rat","fonction":"Initie la mise en mouvement du chakra"},{"id":"boeuf","nom":"Bœuf","fonction":"Structure le chakra, empêche la dispersion"},{"id":"tigre","nom":"Tigre","fonction":"Amplifie et intensifie le flux"},{"id":"lievre","nom":"Lièvre","fonction":"Fluidifie le flux de chakra"},{"id":"dragon","nom":"Dragon","fonction":"Concentre le chakra sous forme dense"},{"id":"serpent","nom":"Serpent","fonction":"Apporte la précision au modelage"},{"id":"cheval","nom":"Cheval","fonction":"Intensifie et accélère le flux"},{"id":"belier","nom":"Bélier","fonction":"Équilibre et harmonise le chakra"},{"id":"singe","nom":"Singe","fonction":"Coordonne les enchaînements complexes"},{"id":"coq","nom":"Coq / Oiseau","fonction":"Projette et dirige le chakra"},{"id":"chien","nom":"Chien","fonction":"Protège et structure en défense"},{"id":"sanglier","nom":"Sanglier","fonction":"Libération brutale du chakra"}],"natures":[{"id":"katon","nom":"Katon","element":"Feu","force":"Inflige des brûlures","icon":"🔥","sup":"futon","inf":"suiton"},{"id":"futon","nom":"Futon","element":"Vent","force":"Accélère la vitesse","icon":"🌬️","sup":"raiton","inf":"katon"},{"id":"raiton","nom":"Raiton","element":"Foudre","force":"Étourdit la cible","icon":"⚡","sup":"doton","inf":"futon"},{"id":"doton","nom":"Doton","element":"Terre","force":"Renforce la robustesse","icon":"🌍","sup":"suiton","inf":"raiton"},{"id":"suiton","nom":"Suiton","element":"Eau","force":"Absorbe le chakra","icon":"💧","sup":"katon","inf":"doton"}],"kekkei":[{"nom":"Bakuton","el":["Doton","Raiton"],"art":"Explosions"},{"nom":"Deiton","el":["Doton","Suiton"],"art":"Boue"},{"nom":"Futton","el":["Suiton","Katon"],"art":"Vapeur"},{"nom":"Hyoton","el":["Suiton","Futon"],"art":"Glace"},{"nom":"Jiton","el":["Doton","Futon"],"art":"Magnétisme"},{"nom":"Mokuton","el":["Doton","Suiton"],"art":"Bois"},{"nom":"Shakuton","el":["Katon","Futon"],"art":"Chaleur"},{"nom":"Yoton","el":["Doton","Katon"],"art":"Lave"},{"nom":"Ranton","el":["Suiton","Raiton"],"art":"Orage"},{"nom":"Jinton","el":["Katon","Futon","Doton"],"art":"Particules (Kekkei Tōta)"}],"armes":[{"nom":"Katana","taille":"~1m total","desc":"Sabre traditionnel à lame courbée. Frappes rapides et précises. Améliorable au chakra."},{"nom":"Kunai","taille":"20-30 cm","desc":"Poignard robuste avec anneau. Attaque, lancer, grimper, creuser. L'arme la plus polyvalente."},{"nom":"Shuriken","taille":"5-10 cm","desc":"Étoile métallique à plusieurs pointes. Distance ou corps à corps. Matériel indispensable."},{"nom":"Senbon","taille":"15-25 cm","desc":"Aiguilles fines et légères. Points vitaux ou neutralisation discrète."},{"nom":"Makibishi","taille":"2-5 cm","desc":"Pointes métalliques dispersées au sol pour ralentir ou blesser."},{"nom":"Clochettes","taille":"Quelques cm","desc":"Dispositifs sonores. Combinables avec un Kunai pour décentraliser l'attention."},{"nom":"Bombe fumigène","taille":"5-10 cm","desc":"Nuage de fumée pour masquer les mouvements, fuir ou surprendre. Effet temporaire."},{"nom":"Parchemin explosif","taille":"10-20 cm","desc":"Sceau de Fuinjutsu déclenchant une explosion. Piège ou arme à distance."}],"cours":[{"id":"regles_or","titre":"Les Règles d'Or du Ninja","cat":"theorique","mod":"Fondamentaux","rang":"Apprenti Genin","cible":"Tous","auteur":null,"prereq":[],"desc":"Les 8 règles fondamentales : loyauté, hiérarchie, mission, protection, secret, respect, maîtrise de soi, honneur.","techs":[{"id":"regle_loyaute","nom":"1. Loyauté envers le village","desc":"Agir dans l'intérêt du village et sous l'autorité du Hokage.","type":"connaissance","etapes":["Comprendre le principe de loyauté","Savoir l'appliquer en situation"],"mudras":[],"rang":"Apprenti Genin","prereq":[]},{"id":"regle_hierarchie","nom":"2. Respect de la hiérarchie","desc":"Respecter et exécuter les ordres des supérieurs avec discipline.","type":"connaissance","etapes":["Connaître la chaîne de commandement","Appliquer les ordres avec discipline"],"mudras":[],"rang":"Apprenti Genin","prereq":[]},{"id":"regle_mission","nom":"3. Priorité à la mission","desc":"Accomplir la mission avec sérieux et détermination.","type":"connaissance","etapes":["Comprendre la priorité de la mission","Gérer les dilemmes mission vs personnel"],"mudras":[],"rang":"Apprenti Genin","prereq":[]},{"id":"regle_protection","nom":"4. Protection des habitants","desc":"Un shinobi est avant tout un protecteur du village et de ses civils.","type":"connaissance","etapes":["Intégrer le rôle de protecteur","Identifier les civils à protéger"],"mudras":[],"rang":"Apprenti Genin","prereq":[]},{"id":"regle_secret","nom":"5. Secret et discrétion","desc":"Les informations sur les missions et techniques doivent rester confidentielles.","type":"connaissance","etapes":["Comprendre le secret ninja","Savoir ce qui est confidentiel"],"mudras":[],"rang":"Apprenti Genin","prereq":[]},{"id":"regle_respect","nom":"6. Respect entre shinobi","desc":"Faire preuve de respect envers ses camarades et préserver l'unité.","type":"connaissance","etapes":["Pratiquer le respect mutuel","Préserver la cohésion d'équipe"],"mudras":[],"rang":"Apprenti Genin","prereq":[]},{"id":"regle_maitrise","nom":"7. Maîtrise de soi","desc":"Contrôler ses émotions et éviter toute violence inutile.","type":"connaissance","etapes":["Apprendre le contrôle émotionnel","Éviter la violence inutile"],"mudras":[],"rang":"Apprenti Genin","prereq":[]},{"id":"regle_honneur","nom":"8. Honneur et responsabilité","desc":"Chaque shinobi est responsable de ses actes et représente le village.","type":"connaissance","etapes":["Comprendre la responsabilité individuelle","Agir en représentant du village"],"mudras":[],"rang":"Apprenti Genin","prereq":[]}]},{"id":"nindo","titre":"Le Nindo","cat":"theorique","mod":"Fondamentaux","rang":"Tous grades","cible":"Tous","auteur":null,"prereq":["regles_or"],"desc":"Le chemin du ninja : philosophie de vie personnelle de chaque shinobi, forgée dans l'adversité.","techs":[{"id":"nindo_comprendre","nom":"Comprendre le Nindo","desc":"Code personnel, pas un objectif. Court, direct, reflet de vos valeurs.","type":"connaissance","etapes":["Distinguer Nindo et objectif","Comprendre que le Nindo est personnel","Identifier ses propres valeurs"],"mudras":[],"rang":"Apprenti Genin","prereq":[]},{"id":"nindo_forger","nom":"Forger son Nindo","desc":"Construire son code à travers les épreuves et l'introspection.","type":"connaissance","etapes":["Réfléchir à ses expériences formatrices","Formuler un Nindo court et direct","Le tester face aux dilemmes"],"mudras":[],"rang":"Genin","prereq":["nindo_comprendre"]}]},{"id":"volonte_feu","titre":"La Volonté du Feu","cat":"theorique","mod":"Fondamentaux","rang":"Apprenti Genin","cible":"Tous","auteur":null,"prereq":["nindo"],"desc":"Doctrine fondatrice : protéger Konoha à tout prix, transmettre les rêves entre générations.","techs":[{"id":"volonte_d1","nom":"Protéger Konoha","desc":"Le village passe avant tout. Chaque habitant est un membre de la famille de Konoha.","type":"connaissance","etapes":["Comprendre le sacrifice pour le village","Intégrer le concept de famille de Konoha","Appliquer en situation de crise"],"mudras":[],"rang":"Apprenti Genin","prereq":[]},{"id":"volonte_d2","nom":"La transmission des rêves","desc":"Les rêves non accomplis se transmettent. L'héritage d'Hashirama perdure.","type":"connaissance","etapes":["Comprendre la transmission intergénérationnelle","Connaître l'histoire d'Hashirama","Identifier les rêves hérités"],"mudras":[],"rang":"Apprenti Genin","prereq":[]}]},{"id":"histoire","titre":"Histoire de Konoha","cat":"theorique","mod":"Fondamentaux","rang":"Apprenti Genin","cible":"Tous","auteur":null,"prereq":["volonte_feu"],"desc":"Des clans en guerre à la fondation, le rôle des grands clans, l'institutionnalisation par Tobirama.","techs":[{"id":"hist_1","nom":"I. Avant Konoha","desc":"Pays du Feu en guerre : Senju, Uchiha, Hyūga, Nara, Akimichi.","type":"connaissance","etapes":["Connaître le contexte pré-Konoha","Identifier les 5 grands clans"],"mudras":[],"rang":"Apprenti Genin","prereq":[]},{"id":"hist_2","nom":"II. Fondation de Konoha","desc":"Alliance Senju-Uchiha, création de Konohagakure, Premier Hokage.","type":"connaissance","etapes":["Comprendre l'alliance Senju-Uchiha","Le rôle d'Hashirama et Madara","Lier la fondation à la Volonté du Feu"],"mudras":[],"rang":"Apprenti Genin","prereq":[]},{"id":"hist_3","nom":"III. Rôle des grands clans","desc":"Senju (architectes), Uchiha (militaire), Hyūga (sentinelles), Nara (cerveaux), Akimichi (logistique).","type":"connaissance","etapes":["Rôle du clan Senju","Rôle du clan Uchiha","Rôle du clan Hyūga","Rôle du clan Nara","Rôle du clan Akimichi"],"mudras":[],"rang":"Apprenti Genin","prereq":[]},{"id":"hist_4","nom":"IV. Tobirama Hokage","desc":"Académie, ANBU, système de missions. Crise politique.","type":"connaissance","etapes":["Institutions créées par Tobirama","La crise de succession"],"mudras":[],"rang":"Apprenti Genin","prereq":[]}]},{"id":"decomposition_chakra","titre":"D\u00e9composition du Chakra","cat":"theorique","mod":"Chakra","rang":"Apprenti Genin","cible":"Tous","auteur":null,"prereq":[],"desc":"De quoi le chakra est-il fait : \u00e9nergies, r\u00e9seau, Tenketsu et Compensation.","techs":[{"id":"dc_composantes","nom":"Les deux composantes","desc":"Le chakra na\u00eet de la fusion de l'\u00e9nergie physique (Yang, Y\u00f4ton) et de l'\u00e9nergie spirituelle (Yin, Inton).","type":"connaissance","etapes":["Comprendre la d\u00e9composition du chakra en deux \u00e9nergies","Conna\u00eetre l'\u00e9nergie physique (Yang, Y\u00f4ton) : corps, cellules, force vitale","Conna\u00eetre l'\u00e9nergie spirituelle (Yin, Inton) : esprit, exp\u00e9rience, volont\u00e9","Comprendre que le d\u00e9s\u00e9quilibre \u00e9puise le chakra"],"mudras":[],"rang":"Apprenti Genin","prereq":[]},{"id":"dc_reseau","nom":"R\u00e9seau et noyau","desc":"Le chakra circule dans un r\u00e9seau propre, depuis un noyau situ\u00e9 dans l'abdomen.","type":"connaissance","etapes":["Conna\u00eetre le noyau du chakra (abdomen)","Comprendre la circulation dans le r\u00e9seau","Comprendre la s\u00e9paration en flux (pieds, mains, technique)"],"mudras":[],"rang":"Apprenti Genin","prereq":["dc_composantes"]},{"id":"dc_tenketsu","nom":"Les Tenketsu","desc":"361 points de chakra dont 64 importants. Carrefours du r\u00e9seau.","type":"connaissance","etapes":["Savoir ce qu'est un Tenketsu","Retenir : 361 au total, 64 importants","Comprendre le blocage d'un Tenketsu chez l'adversaire"],"mudras":[],"rang":"Apprenti Genin","prereq":["dc_reseau"]},{"id":"dc_compensation","nom":"La Compensation (Sosa\u00ef)","desc":"Deux jutsus de m\u00eame niveau et de m\u00eame nature s'annulent mutuellement.","type":"connaissance","etapes":["Comprendre le principe de Sosa\u00ef","Retenir les deux conditions : m\u00eame niveau + m\u00eame nature","Distinguer Compensation, sup\u00e9riorit\u00e9 de niveau et cycle des natures"],"mudras":[],"rang":"Apprenti Genin","prereq":["dc_tenketsu"]}]},{"id":"mudras_cours","titre":"Les Mudras","cat":"theorique","mod":"Chakra","rang":"Apprenti Genin","cible":"Tous","auteur":null,"prereq":[],"desc":"Les 12 signes de main : langage du chakra. Sans mudras, le chakra est instable et les jutsu ratent.","techs":[{"id":"mudras_theorie","nom":"Théorie des Mudras","desc":"Ce que sont les mudras, leurs 3 fonctions : canaliser, transformer, stabiliser.","type":"connaissance","etapes":["Savoir ce qu'est un mudra","Les 3 fonctions (canaliser, transformer, stabiliser)","Comprendre l'importance de l'ordre"],"mudras":[],"rang":"Apprenti Genin","prereq":[]},{"id":"mudras_maitrise","nom":"Maîtrise des 12 Mudras","desc":"Exécuter chaque mudra avec précision, rapidité et fluidité. Doit devenir un réflexe.","type":"mudras","etapes":[],"mudras":["rat","boeuf","tigre","lievre","dragon","serpent","cheval","belier","singe","coq","chien","sanglier"],"rang":"Apprenti Genin","prereq":["mudras_theorie"]}]},{"id":"nature_theorie","titre":"Nature de Chakra","cat":"theorique","mod":"Chakra","rang":"Apprenti Genin","cible":"Tous","auteur":null,"prereq":["mudras_cours"],"desc":"Hiérarchie des 5 natures, test de la feuille, Kekkei Genkai.","techs":[{"id":"nat_cycle","nom":"Cycle des 5 Natures","desc":"Katon > Futon > Raiton > Doton > Suiton > Katon.","type":"connaissance","etapes":["Mémoriser le cycle","Forces de chaque nature","Identifier sa nature (test de la feuille)"],"mudras":[],"rang":"Apprenti Genin","prereq":[]},{"id":"nat_test","nom":"Le Test de la Feuille","desc":"Déterminer sa nature : brûle, humidifie, s'effrite, plie, se coupe.","type":"connaissance","etapes":["Connaître les 5 réactions","Interpréter le résultat"],"mudras":[],"rang":"Apprenti Genin","prereq":[]},{"id":"nat_kekkei","nom":"Kekkei Genkai","desc":"Combinaisons avancées : Mokuton, Hyoton, Yoton, Jinton...","type":"connaissance","etapes":["Connaître les principales combinaisons","Comprendre le Kekkei Tōta","Kekkei Genkai spéciaux (Shoton, Meiton...)"],"mudras":[],"rang":"Genin","prereq":[]}]},{"id":"taijutsu_theorie","titre":"Théorie du Taijutsu","cat":"theorique","mod":"Combat","rang":"Apprenti Genin","cible":"Tous","auteur":null,"prereq":[],"desc":"Combat à mains nues et maniement d'armes. Force physique et mentale, sans chakra ni mudras.","techs":[{"id":"tai_fond","nom":"Fondamentaux du Taijutsu","desc":"Les 3 branches ninja. Taijutsu = savoir-faire + vitesse + force.","type":"connaissance","etapes":["Distinguer Ninjutsu, Genjutsu, Taijutsu","Taijutsu = savoir-faire, pas force brute","Avantage : rapidité d'exécution (pas de mudras)"],"mudras":[],"rang":"Apprenti Genin","prereq":[]}]},{"id":"armes_cours","titre":"Les Armes Ninja","cat":"theorique","mod":"Combat","rang":"Apprenti Genin","cible":"Tous","auteur":null,"prereq":[],"desc":"Catalogue des armes : caractéristiques, tailles et utilisations tactiques.","techs":[{"id":"armes_lancer","nom":"Armes de lancer","desc":"Kunai, Shuriken, Senbon.","type":"connaissance","etapes":["Le Kunai et ses utilisations","Le Shuriken","Le Senbon"],"mudras":[],"rang":"Apprenti Genin","prereq":[]},{"id":"armes_melee","nom":"Armes de mêlée","desc":"Le Katana et l'infusion de chakra.","type":"connaissance","etapes":["Le Katana et ses propriétés","Infusion de chakra dans une arme"],"mudras":[],"rang":"Apprenti Genin","prereq":[]},{"id":"armes_tact","nom":"Équipement tactique","desc":"Makibishi, Clochettes, Bombe fumigène, Parchemin explosif.","type":"connaissance","etapes":["Makibishi","Clochettes + Kunai","Bombe fumigène","Parchemin explosif (Fuinjutsu)"],"mudras":[],"rang":"Apprenti Genin","prereq":[]}]},{"id":"kenjutsu_cours","titre":"Kenjutsu — Initiation","cat":"theorique","mod":"Combat","rang":"Genin","cible":"Genin+","auteur":"Tetsuya Fubetsu & Nagi Kinzetsu","prereq":["taijutsu_theorie","armes_cours"],"desc":"Initiation au Kenjutsu : le Bushidō, les 3 principes communs à toutes les voies (Kokyu, Metsuke, Maai) et l'engagement du sabreur.","techs":[{"id":"kenj_bushido","nom":"Le Bushidō — 8 Vertus du Samouraï","desc":"Code d'honneur du sabreur : intégrité, honneur, courage, maîtrise, respect, loyauté, sincérité, compassion.","type":"connaissance","etapes":["Connaître les 8 vertus","Comprendre le lien avec les Règles d'Or","Appliquer le code du sabreur"],"mudras":[],"rang":"Genin","prereq":[]},{"id":"kenj_kokyu","nom":"Kokyu — La Respiration","desc":"Gérer son rythme cardiaque : respiration lente pour l'analyse, accélérée pour l'action.","type":"connaissance","etapes":["Respiration lente et maîtrisée pour l'analyse","Respiration accélérée pour les techniques éprouvantes","Alterner selon la situation de combat"],"mudras":[],"rang":"Genin","prereq":[]},{"id":"kenj_metsuke","nom":"Metsuke — Le Regard","desc":"Lire les intentions de l'adversaire en observant l'ensemble du corps, pas une seule partie.","type":"connaissance","etapes":["Observer l'adversaire dans son ensemble","Lire la posture, l'équilibre, les épaules, les hanches","Anticiper l'attaque avant le mouvement de la lame"],"mudras":[],"rang":"Genin","prereq":[]},{"id":"kenj_maai","nom":"Maai — La Distance","desc":"Les 3 distances de combat : Tōma (longue), Issoku-Itto (un pas une coupe), Chikama (courte).","type":"connaissance","etapes":["Tōma : observation et recherche d'ouverture","Issoku-Itto-no-Maai : distance idéale, un pas suffit","Chikama : courte distance, combat rapide et dangereux"],"mudras":[],"rang":"Genin","prereq":[]},{"id":"kenj_engagement","nom":"Engagement et responsabilité","desc":"S'engager sur une voie de la lame est un choix de vie. On ne change pas de lame sans raison valable.","type":"connaissance","etapes":["Comprendre l'engagement à vie","Choisir sa voie en connaissance de cause","Accepter la discipline permanente"],"mudras":[],"rang":"Genin","prereq":[]}]},{"id":"kenjutsu_double","titre":"Kenjutsu — Lame Double (Nitōryū)","cat":"theorique","mod":"Combat","rang":"Genin","cible":"Genin+","auteur":"Tetsuya Fubetsu & Nagi Kinzetsu","prereq":["kenjutsu_cours"],"desc":"Le Nitōryū : combat à deux épées. Origine, les 4 gardes spécifiques à la double lame et démonstration.","techs":[{"id":"nito_origine","nom":"Origines du Nitōryū","desc":"Le Nitōryū (combat à deux épées) a été inventé par Myosashi Shinmen, vagabond samouraï du Pays du Fer.","type":"connaissance","etapes":["Connaître l'origine du Nitōryū","Comprendre que deux lames = deux fois plus de discipline","Différencier puissance et discipline"],"mudras":[],"rang":"Genin","prereq":[]},{"id":"nito_chudan","nom":"Chūdan-no-Kamae — Garde du milieu","desc":"Lame principale vers la gorge, seconde lame plus basse pour le flanc. Garde équilibrée, peu d'ouvertures.","type":"connaissance","etapes":["Positionner la lame principale vers la gorge/visage","Maintenir la seconde lame en protection du flanc","Alterner attaque et défense avec peu de mouvements"],"mudras":[],"rang":"Genin","prereq":[]},{"id":"nito_jodan","nom":"Jōdan-no-Kamae — Garde haute","desc":"Lame dominante au-dessus de la tête, seconde devant le corps. Agressive, forte pression psychologique. Défaut : ouverture du corps.","type":"connaissance","etapes":["Lever la lame dominante au-dessus de la tête","Protéger le corps avec la seconde","Comprendre le risque d'ouverture si l'attaque rate"],"mudras":[],"rang":"Genin","prereq":[]},{"id":"nito_gedan","nom":"Gedan-no-Kamae — Garde basse","desc":"Lames vers le sol, près des jambes. Semble faible mais très dangereuse : attaque remontante difficile à anticiper. Efficace contre le Taijutsu.","type":"connaissance","etapes":["Positionner les lames vers le sol","Exploiter l'angle mort visuel de l'adversaire","Remonter l'attaque par surprise"],"mudras":[],"rang":"Genin","prereq":[]},{"id":"nito_hasso","nom":"Hasso-no-Kamae — Garde latérale","desc":"Lame dominante près de l'épaule, quasi verticale, seconde devant le corps. Changement de direction très rapide. Demande le plus de coordination.","type":"connaissance","etapes":["Placer la lame dominante près de l'épaule","Enchaîner coupes horizontales, verticales ou diagonales","Maîtriser la coordination des deux lames"],"mudras":[],"rang":"Genin","prereq":[]}]},{"id":"infiltration","titre":"Infiltration","cat":"theorique","mod":"Spécialisation","rang":"Apprenti Genin","cible":"Apprentis Genin / Genin","auteur":"Akio Fukurō","prereq":["regles_or"],"desc":"Bases de l'infiltration : discrétion, changement de tenue, d'attitude, d'apparence, mensonge.","techs":[{"id":"infil_tenue","nom":"Changement de tenue","desc":"Adapter sa tenue à l'environnement et au type de mission.","type":"connaissance","etapes":["Adapter sa tenue à l'environnement","Couverture vestimentaire crédible"],"mudras":[],"rang":"Apprenti Genin","prereq":[]},{"id":"infil_attitude","nom":"Changement d'attitude","desc":"S'identifier à un autre. Ni trop suspicieux, ni trop impatient.","type":"connaissance","etapes":["Jouer un rôle","Contrôler ses réactions naturelles"],"mudras":[],"rang":"Apprenti Genin","prereq":[]},{"id":"infil_apparence","nom":"Changement d'apparence","desc":"Modifier son physique. Se préparer psychologiquement.","type":"connaissance","etapes":["Modifications d'apparence","Préparation psychologique"],"mudras":[],"rang":"Genin","prereq":[]},{"id":"infil_mensonge","nom":"Mensonge convaincant","desc":"Rôle crédible et adapté. Tenir sous pression. S'adapter à l'imprévu.","type":"connaissance","etapes":["Choisir un rôle crédible","Maintenir sous pression","S'adapter aux imprévus"],"mudras":[],"rang":"Genin","prereq":[]}]},{"id":"bourrasque","titre":"La Bourrasque Ardente","cat":"pratique","mod":"Taijutsu","rang":"Genin","cible":"Genin+","auteur":null,"prereq":["taijutsu_theorie"],"desc":"Coup de pied rotatif 360°. Souplesse des hanches, jambe comme un fouet.","techs":[{"id":"bour_kick","nom":"Série de Low Kicks","desc":"Coups de pied bas sur Pao puis surface rigide.","type":"taijutsu","etapes":["Low kick duo sur Pao (×10)","Monter l'intensité","Low kick rotatif sur surface rigide (×10)"],"mudras":[],"rang":"Genin","prereq":[]},{"id":"bour_rot","nom":"La Bourrasque (360°)","desc":"Saut + rotation 360° + extension jambe.","type":"taijutsu","etapes":["Saut + rotation 360° retombée (×5)","Extension jambe non-appui pendant rotation","Au sol : vitesse, épaules/hanches, jambe tendue"],"mudras":[],"rang":"Genin","prereq":["bour_kick"]}]},{"id":"pied_aube","titre":"Le Pied de l'Aube","cat":"pratique","mod":"Taijutsu","rang":"Genin","cible":"Genin+","auteur":null,"prereq":["taijutsu_theorie"],"desc":"Technique de saut offensif. Puissance de saut via fessiers.","techs":[{"id":"pa_fess","nom":"Fessiers et élasticité","desc":"Tour de terrain : canard, saut groupé, grenouille, sprint.","type":"taijutsu","etapes":["Position accroupie / canard","Saut groupé vertical","Saut de grenouille","Sprint"],"mudras":[],"rang":"Genin","prereq":[]},{"id":"pa_squat","nom":"Squats en binôme","desc":"Face à face, saut sur épaules au signal. Chanter 'L'Aube est l'espoir de Konoha'.","type":"taijutsu","etapes":["Squats en binôme","Saut sur épaules au signal","Alternance"],"mudras":[],"rang":"Genin","prereq":[]},{"id":"pa_tech","nom":"Technique du Pied de l'Aube","desc":"Offensive surprise. Comble l'espace, ouverture d'enchaînement.","type":"taijutsu","etapes":["Démonstration HG","Exécution","Application offensive surprise"],"mudras":[],"rang":"Genin","prereq":[]}]},{"id":"saut_chakra","titre":"Saut de Chakra","cat":"pratique","mod":"Ninjutsu","rang":"Genin","cible":"Genin+","auteur":null,"prereq":["mudras_cours","nature_theorie"],"desc":"Concentrer le chakra dans les pieds. Précision, pas force brute. Mobilité = survie.","techs":[{"id":"sc_principe","nom":"Principes","desc":"Concentration dans la plante des pieds. Angles selon la situation.","type":"connaissance","etapes":["Principe de concentration","Risques (trop/pas assez)","Angles : haut, avant, côté, arrière"],"mudras":[],"rang":"Genin","prereq":[]},{"id":"sc_exec","nom":"Exécution du Saut","desc":"Échauffement, malaxage (roll 50+), propulsion.","type":"chakra","etapes":["Échauffement sans chakra","Malaxer et concentrer (roll 50+)","Libérer pour propulsion","Rejoindre le toit de l'Académie"],"mudras":["rat","belier","tigre"],"rang":"Genin","prereq":["sc_principe"]}]},{"id":"nature_combat","titre":"Analyse et Combat par Nature","cat":"pratique","mod":"Ninjutsu","rang":"Genin Confirmé","cible":"Genins confirmés","auteur":"Jihon Ichirin","prereq":["nature_theorie"],"desc":"Analyser un combat, adapter ses techniques. Observer, réfléchir, agir.","techs":[{"id":"nc_analyse","nom":"Analyse forces/faiblesses","desc":"Groupes mixtes par nature. Discussion puis exposé.","type":"connaissance","etapes":["Former groupes mixtes","Discussion forces/faiblesses (10 min)","Exposer les conclusions"],"mudras":[],"rang":"Genin Confirmé","prereq":[]},{"id":"nc_combat","nom":"Combat tactique","desc":"Combats en équipe avec analyse. Débriefing structuré.","type":"taijutsu","etapes":["Combat construit en équipe","Analyser pendant le combat","Débriefing : 2 positifs + 2 à améliorer","Le vainqueur affronte les Chūnins"],"mudras":[],"rang":"Genin Confirmé","prereq":[]}]},{"id":"jeu_roi","titre":"Le Jeu du Roi","cat":"pratique","mod":"Tactique","rang":"Genin","cible":"Genin+","auteur":"Yumi Amano","prereq":["taijutsu_theorie","regles_or"],"desc":"Protection de cible (Roi = professeur). Si le Roi est blessé, tout le monde échoue.","techs":[{"id":"jr_def","nom":"Protection de cible","desc":"Organiser la défense, gérer les menaces.","type":"tactique","etapes":["Défense autour du Roi","Gérer menaces multiples","Protéger sans blesser le Roi"],"mudras":[],"rang":"Genin","prereq":[]},{"id":"jr_att","nom":"Capture stratégique","desc":"Capturer le Roi sans le blesser. Combat, diplomatie, négociation.","type":"tactique","etapes":["Stratégie de capture","Coordonner en équipe","Capturer sans blesser"],"mudras":[],"rang":"Genin","prereq":[]}]},{"id":"capture_drapeau","titre":"Capture de Drapeau","cat":"pratique","mod":"Tactique","rang":"Genin","cible":"Genin+","auteur":null,"prereq":["taijutsu_theorie","regles_or"],"desc":"1-3 manches : diplomatie (7 min) + combat (5 min). Adaptation entre manches.","techs":[{"id":"cd_diplo","nom":"Phase Diplomatie","desc":"7 min de négociation avant chaque combat.","type":"tactique","etapes":["Stratégie diplomatique","Négocier 7 minutes","Adapter selon le résultat"],"mudras":[],"rang":"Genin","prereq":[]},{"id":"cd_combat","nom":"Phase Combat","desc":"5 min. Coordination offensive, défense de position.","type":"tactique","etapes":["Défense de position","Coordination offensive","Priorités en temps réel","Débriefing entre manches"],"mudras":[],"rang":"Genin","prereq":[]}]},{"id":"raiton_cours","titre":"Techniques Raiton","cat":"pratique","mod":"Ninjutsu","rang":"Genin","cible":"Genin+","auteur":null,"prereq":["mudras_cours","nature_theorie"],"desc":"Techniques de la foudre : 4 jutsus Raiton offensifs/défensifs et 2 techniques de Taijutsu.","techs":[{"id":"rai_rayon","nom":"Rayon Instantané","desc":"Rayon d'éclair canalisé depuis la paume. Plus la canalisation est longue, plus il dure.","type":"ninjutsu","etapes":["Composer les mudras","Concentrer le chakra dans la paume droite","Canaliser et viser","Maintenir le rayon"],"mudras":["serpent","lievre"],"rang":"Genin","prereq":[]},{"id":"rai_boule","nom":"Boule Fulgurante","desc":"Boule de foudre projetée en ligne droite. Offensif fort, favorise le corps à corps.","type":"ninjutsu","etapes":["Composer les mudras","Concentrer le chakra dans les deux paumes","Diriger les paumes vers la cible","Projeter la boule de foudre"],"mudras":["dragon","serpent"],"rang":"Genin","prereq":[]},{"id":"rai_ruee","nom":"Ruée Foudroyante","desc":"Ruée de foudre au sol, reste un moment et inflige des dégâts au contact. Contrôle de zone.","type":"ninjutsu","etapes":["Composer les mudras","Libérer le chakra au sol","Diriger la ruée vers la cible","La ligne persiste et inflige des dégâts"],"mudras":["singe","cheval","serpent"],"rang":"Genin Confirmé","prereq":[]},{"id":"rai_zone","nom":"Zone Fulgurante","desc":"Zone électrique circulaire autour du lanceur. Large zone d'effet.","type":"ninjutsu","etapes":["Composer les mudras","Concentrer le chakra dans les paumes","Libérer au sol","La zone électrique se forme autour"],"mudras":["serpent","rat","chien"],"rang":"Genin Confirmé","prereq":[]},{"id":"rai_bourrasque","nom":"Bourrasque Ardente","desc":"Technique de taijutsu au corps à corps.","type":"taijutsu","etapes":["Exécuter la technique au corps à corps"],"mudras":[],"rang":"Genin","prereq":[]},{"id":"rai_pied_aube","nom":"Pied de l'Aube","desc":"Technique de taijutsu au corps à corps.","type":"taijutsu","etapes":["Exécuter la technique au corps à corps"],"mudras":[],"rang":"Genin Confirmé","prereq":[]}]},{"id":"katon_cours","titre":"Techniques Katon","cat":"pratique","mod":"Ninjutsu","rang":"Genin","cible":"Genin+","auteur":null,"prereq":["mudras_cours","nature_theorie"],"desc":"Techniques du feu : 2 jutsus offensifs et 2 jutsus défensifs/avancés Katon.","techs":[{"id":"kat_boule","nom":"Boule de Feu","desc":"Projectile rapide : concentrer le chakra dans les poumons et l'expulser sous forme d'une boule de feu incandescente.","type":"ninjutsu","etapes":["Composer les mudras","Concentrer le chakra dans les poumons","Expulser la boule de feu","Viser la cible"],"mudras":["tigre","serpent"],"rang":"Genin","prereq":[]},{"id":"kat_mur","nom":"Mur de Feu","desc":"Défense contre projectiles : ligne droite de flamme en face du lanceur.","type":"ninjutsu","etapes":["Composer les mudras","Concentrer le chakra dans les poumons","Expulser sous forme de ligne de flamme","Maintenir le barrage"],"mudras":["rat","tigre"],"rang":"Genin","prereq":[]},{"id":"kat_balsamine","nom":"Balsamine","desc":"Attaque multiple différée : 3 boules de feu emmagasinées, utilisables à volonté dans un laps de temps.","type":"ninjutsu","etapes":["Composer les mudras","Emmagasiner 3 boules de feu","Cracher à volonté dans le temps imparti","Viser les cibles"],"mudras":["tigre","belier","singe"],"rang":"Genin Confirmé","prereq":[]},{"id":"kat_shuriken","nom":"Shurikens Pourpres","desc":"Pluie de projectiles enflammés : boule de feu combinée à un lancé de shurikens pour créer une pluie ardente.","type":"ninjutsu","etapes":["Composer les mudras","Expulser une boule de feu","Enchaîner un lancé de shurikens à travers","Diriger la pluie ardente"],"mudras":["dragon","rat","tigre"],"rang":"Genin Confirmé","prereq":[]}]},{"id":"futon_cours","titre":"Techniques Futon","cat":"pratique","mod":"Ninjutsu","rang":"Genin","cible":"Genin+","auteur":null,"prereq":["mudras_cours","nature_theorie"],"desc":"Techniques du vent : 2 jutsus offensifs/défensifs et 2 jutsus avancés Futon.","techs":[{"id":"fut_spirale","nom":"Spirale de Vent","desc":"Projectile repoussant : expulser une petite spirale de vent en direction de la cible.","type":"ninjutsu","etapes":["Composer les mudras","Concentrer le chakra dans les poumons","Expulser la spirale de vent","Viser la cible"],"mudras":["coq","singe"],"rang":"Genin","prereq":[]},{"id":"fut_mur","nom":"Mur de Vent","desc":"Défense et barrière : créer un mur de vent face à soi.","type":"ninjutsu","etapes":["Composer les mudras","Concentrer le chakra","Créer le mur de vent","Maintenir la barrière"],"mudras":["lievre","coq"],"rang":"Genin","prereq":[]},{"id":"fut_cinglantes","nom":"Spirales Cinglantes","desc":"Projectiles multiples : trois petites spirales de vent projetées simultanément.","type":"ninjutsu","etapes":["Composer les mudras","Concentrer le chakra dans les poumons","Expulser trois spirales","Viser la zone cible"],"mudras":["coq","rat","belier"],"rang":"Genin Confirmé","prereq":[]},{"id":"fut_onde","nom":"Onde de Choc","desc":"Projection et repousse : sphère de futon créant une onde de choc au contact.","type":"ninjutsu","etapes":["Composer les mudras","Projeter la sphère de futon","L'onde de choc se déclenche au contact","Repousser la cible"],"mudras":["sanglier","coq","dragon"],"rang":"Genin Confirmé","prereq":[]}]},{"id":"suiton_cours","titre":"Techniques Suiton","cat":"pratique","mod":"Ninjutsu","rang":"Genin","cible":"Genin+","auteur":null,"prereq":["mudras_cours","nature_theorie"],"desc":"Techniques de l'eau : 2 jutsus offensifs/défensifs et 2 jutsus avancés Suiton.","techs":[{"id":"sui_crystal","nom":"Crystal Aqueux","desc":"Projectile tranchant : concentrer le chakra dans la main pour lancer un suiton tranchant.","type":"ninjutsu","etapes":["Composer les mudras","Concentrer le chakra dans la main","Lancer le projectile tranchant","Viser la cible"],"mudras":["chien","rat"],"rang":"Genin","prereq":[]},{"id":"sui_mur","nom":"Mur Aqueux","desc":"Défense contre projectiles : faire surgir un rempart d'eau bloquant les projectiles de jutsu.","type":"ninjutsu","etapes":["Composer les mudras","Concentrer le chakra dans les paumes","Faire surgir le rempart d'eau","Bloquer les projectiles"],"mudras":["singe","chien"],"rang":"Genin","prereq":[]},{"id":"sui_bulles","nom":"Bulles d'Eau","desc":"Projectiles multiples : expulser des bulles d'eau infligeant des dégâts au contact.","type":"ninjutsu","etapes":["Composer les mudras","Concentrer le chakra dans la bouche","Expulser les bulles","Les bulles infligent des dégâts au contact"],"mudras":["chien","dragon","sanglier"],"rang":"Genin Confirmé","prereq":[]},{"id":"sui_prison","nom":"Prison Aqueuse","desc":"Capture et contrôle : emprisonner une cible dans une prison aqueuse ovale. Maintien requis.","type":"ninjutsu","etapes":["Composer les mudras","Concentrer le chakra dans la main","Capturer la cible dans la prison","Maintenir le jutsu actif"],"mudras":["cheval","chien","lievre"],"rang":"Genin Confirmé","prereq":[]}]},{"id":"doton_cours","titre":"Techniques Doton","cat":"pratique","mod":"Ninjutsu","rang":"Genin","cible":"Genin+","auteur":null,"prereq":["mudras_cours","nature_theorie"],"desc":"Techniques de la terre : 2 jutsus défensifs/offensifs et 2 jutsus avancés Doton.","techs":[{"id":"dot_mur","nom":"Mur de Roche","desc":"Défense et blocage : unifier le chakra avec la terre pour faire surgir un mur de doton.","type":"ninjutsu","etapes":["Composer les mudras","Concentrer le chakra dans les mains","Unifier avec la terre","Faire surgir le mur"],"mudras":["serpent","belier"],"rang":"Genin","prereq":[]},{"id":"dot_expulsion","nom":"Expulsion Rocheuse","desc":"Projectiles multiples : créer des petits bouts de pierre lancés depuis la bouche.","type":"ninjutsu","etapes":["Composer les mudras","Former les projectiles de pierre","Lancer depuis la bouche","Viser l'adversaire"],"mudras":["rat","serpent"],"rang":"Genin","prereq":[]},{"id":"dot_mouvante","nom":"Terre Mouvante","desc":"Contrôle de zone : rendre le sol mouvant et déstabilisant, ralentissant les ennemis.","type":"ninjutsu","etapes":["Composer les mudras","Concentrer le chakra dans les mains","Toucher le sol avec la paume","Le sol devient mouvant et déstabilisant"],"mudras":["serpent","sanglier","chien"],"rang":"Genin Confirmé","prereq":[]},{"id":"dot_prison","nom":"Prison de Roche","desc":"Capture et immobilisation : provoquer l'éruption d'une prison de roche autour de la cible. Maintien requis.","type":"ninjutsu","etapes":["Composer les mudras","Concentrer le chakra dans les mains","Unifier avec la terre","Provoquer l'éruption de la prison","Maintenir le jutsu actif"],"mudras":["tigre","rat","serpent"],"rang":"Genin Confirmé","prereq":[]}]},{"id":"permutation","titre":"Permutation","cat":"pratique","mod":"Ninjutsu","rang":"Genin Confirmé","cible":"Genin Confirmé+","auteur":null,"prereq":["mudras_cours"],"desc":"Technique de substitution : remplacer son corps par un objet pour esquiver une attaque.","techs":[{"id":"perm_principe","nom":"Principe de la Permutation","desc":"Comprendre le mécanisme de substitution : remplacer son corps par un objet au moment de l'impact.","type":"connaissance","etapes":["Comprendre le principe de substitution","Identifier les objets utilisables","Choisir le bon timing"],"mudras":[],"rang":"Genin Confirmé","prereq":[]},{"id":"perm_exec","nom":"Exécution de la Permutation","desc":"Réaliser la substitution au bon moment pour esquiver une attaque.","type":"ninjutsu","etapes":["Anticiper l'attaque adverse","Exécuter la substitution","Se repositionner après la permutation"],"mudras":[],"rang":"Genin Confirmé","prereq":["perm_principe"]}]},{"id":"infiltration_pratique","titre":"Infiltration — Exercice pratique","cat":"pratique","mod":"Spécialisation","rang":"Apprenti Genin","cible":"Apprentis Genin / Genins / Genins Confirmés","auteur":"Akio Fukurō","prereq":["infiltration"],"desc":"Exercice de terrain au Hameau des rizières. Infiltration parmi des senseis jouant des bandits, récolte d'informations.","techs":[{"id":"infil_p_infiltrer","nom":"S'infiltrer sans être repéré","desc":"Se déguiser, adopter un rôle civil et entrer sans être identifié.","type":"tactique","etapes":["Se déguiser en civil crédible","Entrer sans attirer l'attention","Éviter les comportements suspects"],"mudras":[],"rang":"Apprenti Genin","prereq":[]},{"id":"infil_p_recolte","nom":"Récolter l'information","desc":"Exploiter les faiblesses des PNJ pour obtenir l'info secrète.","type":"tactique","etapes":["Identifier le défaut du PNJ","Adapter son approche","Transmettre l'info via radio"],"mudras":[],"rang":"Apprenti Genin","prereq":[]}]},{"id":"traque","titre":"La Traque","cat":"pratique","mod":"Spécialisation","rang":"Genin","cible":"Genin+","auteur":"Inoshi Baikutai & Gaoh Uragiri","prereq":["regles_or"],"desc":"Localiser et interpeller une personne recherchée parmi des leurres.","techs":[{"id":"traq_recherche","nom":"Recherche et identification","desc":"Exploiter les indices pour localiser la bonne cible.","type":"tactique","etapes":["Analyser les indices","Quadriller la zone","Distinguer cible et leurres"],"mudras":[],"rang":"Genin","prereq":[]},{"id":"traq_interpellation","nom":"Interpellation","desc":"Confirmer l'identité et procéder à l'interpellation.","type":"tactique","etapes":["Confirmer l'identité","Procéder à l'interpellation","Débriefing collectif"],"mudras":[],"rang":"Genin","prereq":[]}]},{"id":"enquete","titre":"L'Enquête","cat":"pratique","mod":"Spécialisation","rang":"Genin","cible":"Genin+","auteur":"Inoshi Baikutai","prereq":["regles_or"],"desc":"Scénario d'enquête : interroger les témoins, recueillir les indices, fournir un rapport.","techs":[{"id":"enq_interrogatoire","nom":"Interrogatoire","desc":"Mener des interrogatoires structurés.","type":"tactique","etapes":["Identifier les témoins","Poser les bonnes questions","Recouper les témoignages"],"mudras":[],"rang":"Genin","prereq":[]},{"id":"enq_rapport","nom":"Analyse et rapport","desc":"Assembler les infos et fournir une conclusion argumentée.","type":"tactique","etapes":["Organiser les indices","Formuler une hypothèse","Rendre un rapport fiable"],"mudras":[],"rang":"Genin","prereq":[]}]},{"id":"orientation_terrain","titre":"Course d'orientation","cat":"pratique","mod":"Terrain","rang":"Apprenti Genin","cible":"Apprentis Genin / Genin","auteur":"Akio Fukurō","prereq":[],"desc":"Course d'orientation par énigmes à travers le Pays du Feu. 4 lieux à trouver.","techs":[{"id":"orient_enigme","nom":"Décrypter les indices","desc":"Résoudre les énigmes pour identifier les lieux.","type":"connaissance","etapes":["Analyser l'indice","Identifier le lieu","S'orienter vers la destination"],"mudras":[],"rang":"Apprenti Genin","prereq":[]},{"id":"orient_analyse","nom":"Analyse du terrain","desc":"Observer l'environnement sur place.","type":"connaissance","etapes":["Observer l'environnement","Identifier l'élément demandé","Transmettre par radio"],"mudras":[],"rang":"Apprenti Genin","prereq":[]}]},{"id":"pays_feu_visite","titre":"Pays du Feu — Visite","cat":"pratique","mod":"Terrain","rang":"Apprenti Genin","cible":"Tous","auteur":"Jihon Ichirin","prereq":[],"desc":"Visite guidée du Pays du Feu : géographie, zones dangereuses, frontières.","techs":[{"id":"pf_geo","nom":"Géographie du Pays du Feu","desc":"Lieux clés, itinéraires, zones sûres et dangereuses.","type":"connaissance","etapes":["Identifier les lieux principaux","Connaître les itinéraires","Zones sûres vs dangereuses"],"mudras":[],"rang":"Apprenti Genin","prereq":[]},{"id":"pf_front","nom":"Frontières et zones interdites","desc":"Frontières sensibles et zones interdites.","type":"connaissance","etapes":["Pays frontaliers","Zones interdites (Marais, Ame)","Enjeux diplomatiques"],"mudras":[],"rang":"Apprenti Genin","prereq":[]}]},{"id":"simulation_mission","titre":"Simulation de Mission","cat":"pratique","mod":"Tactique","rang":"Genin","cible":"Genin+","auteur":"Gromlof","prereq":["regles_or","volonte_feu"],"desc":"Mission simulée avec dilemmes moraux : obéir ou protéger le village.","techs":[{"id":"sim_dilemme1","nom":"Mission vs Village","desc":"Transmettre une info à un contact qui est un espion ennemi.","type":"tactique","etapes":["Recevoir la mission","Identifier la menace","Décider : mission ou village"],"mudras":[],"rang":"Genin","prereq":[]},{"id":"sim_dilemme2","nom":"Mission vs Protection","desc":"Un marchand de Konoha se fait attaquer pendant la mission.","type":"tactique","etapes":["Évaluer la situation","Intervenir ou poursuivre","Assumer les conséquences"],"mudras":[],"rang":"Genin","prereq":[]}]},{"id":"simulation_escorte","titre":"Simulation d'Escorte","cat":"pratique","mod":"Tactique","rang":"Genin","cible":"Genin+","auteur":"Yumi Amano","prereq":["regles_or","taijutsu_theorie"],"desc":"Mission d'escorte simulée avec imprévus en terrain ouvert.","techs":[{"id":"esc_placement","nom":"Placement défensif","desc":"Organiser la protection en mouvement.","type":"tactique","etapes":["Répartir les rôles","Maintenir la formation","Adapter au terrain"],"mudras":[],"rang":"Genin","prereq":[]},{"id":"esc_imprevu","nom":"Réaction à l'imprévu","desc":"Gérer les situations imprévues.","type":"tactique","etapes":["Détecter la menace","Protéger la cible","Communiquer en temps réel"],"mudras":[],"rang":"Genin","prereq":[]}]}],"admin":{"titre":"Directive aux Professeurs — Format d'Appel au Tableau","auteur":"Yamamoto Jakka","role":"Responsable Professeur / TKJ","regles":["Inscrire votre nom et prénom à la fin de chaque annonce de cours","Ne JAMAIS inscrire un cours simplement comme « cours » ou « c »","Le village entier voit vos appels — soignez la présentation","Après ce rappel, toute infraction = blâme","Au bout de 3 blâmes = congédiement"],"exemple":"[Intitulé du cours] — [Rang requis] — [Lieu] — [Nom Prénom du Professeur]"}};
 
 // ================================================================
-// CONTENU THÉORIQUE
+// RÉSUMÉ "À RETENIR" — bullet points essentiels par cours théorique
+// ================================================================
+const RESUME={
+"regles_or":`
+<div class="resume-block">
+<div class="resume-section">
+<h3>Les 8 Règles d'Or du Ninja</h3>
+<ul>
+<li><strong>1. Loyauté envers le village</strong> — Le village passe avant tout : intérêts personnels, amitiés, et même famille si nécessaire.</li>
+<li><strong>2. Respect de la hiérarchie</strong> — On exécute l'ordre sur le terrain. La discussion vient au rapport, pas pendant l'action.</li>
+<li><strong>3. Priorité à la mission</strong> — Ne jamais abandonner sans raison valable. La Volonté du Feu nuance ce point (cours suivant).</li>
+<li><strong>4. Protection des habitants</strong> — Les civils sont la raison d'être du ninja. Sans eux, pas de village à protéger.</li>
+<li><strong>5. Secret et discrétion</strong> — Toute information est confidentielle, même entre shinobi non concernés. Le cloisonnement protège tout le monde.</li>
+<li><strong>6. Respect entre shinobi</strong> — Les rivalités personnelles ne doivent jamais compromettre l'unité du village.</li>
+<li><strong>7. Maîtrise de soi</strong> — Contrôler ses émotions, pas les nier. C'est vous qui décidez, pas votre colère.</li>
+<li><strong>8. Honneur et responsabilité</strong> — Chaque acte reflète Konoha. Un comportement déshonorant salit le village entier.</li>
+</ul>
+</div>
+<div class="resume-section">
+<h3>L'essentiel</h3>
+<ul>
+<li>Ces 8 règles sont les <strong>piliers</strong> de tout ninja de Konoha — pas une cage, mais des fondations.</li>
+<li>Elles doivent être connues <strong>par cœur</strong> avant la première mission.</li>
+</ul>
+</div>
+</div>`,
+
+"nindo":`
+<div class="resume-block">
+<div class="resume-section">
+<h3>Le Nindo — Chemin du Ninja</h3>
+<ul>
+<li>Le Nindo est une <strong>philosophie de vie personnelle</strong>, pas un objectif. Il n'a pas de point d'arrivée.</li>
+<li>Il doit être <strong>court, direct</strong> et refléter vos valeurs profondes.</li>
+<li>Exemples : « Je ne laisse personne derrière » — « La force existe pour protéger, jamais pour détruire ».</li>
+<li><strong>Ce n'est PAS un Nindo :</strong> « Je veux devenir Hokage » (c'est un objectif) ou « Je veux être le plus fort » (ça ne reflète pas de valeurs).</li>
+<li>Le Nindo se <strong>forge dans l'adversité</strong> — il est normal de ne pas encore en avoir un.</li>
+<li>On peut s'inspirer d'un mentor, mais le Nindo doit rester <strong>personnel</strong>.</li>
+<li>Il <strong>évolue avec vous</strong> tout au long de votre vie de ninja.</li>
+</ul>
+</div>
+</div>`,
+
+"volonte_feu":`
+<div class="resume-block">
+<div class="resume-section">
+<h3>Doctrine 1 — Protéger Konoha</h3>
+<ul>
+<li>Le village passe avant tout. Tous les sacrifices sont nécessaires pour protéger Konoha.</li>
+<li>Chaque habitant de Konoha est un membre de la <strong>famille</strong> — ninja ou civil, lié par le sang ou non.</li>
+<li>La Volonté du Feu transforme le devoir en <strong>conviction personnelle</strong> : ce n'est plus un ordre, c'est un choix.</li>
+</ul>
+</div>
+<div class="resume-section">
+<h3>Doctrine 2 — La transmission des rêves</h3>
+<ul>
+<li>Un ninja peut mourir, mais ses idéaux <strong>ne meurent jamais</strong> — si quelqu'un les porte.</li>
+<li>Les rêves non accomplis se transmettent aux descendants ou disciples.</li>
+<li>Hashirama rêvait de paix. Il est mort, mais ce rêve vit à travers chaque shinobi de Konoha.</li>
+<li>Chaque élève porte les rêves de ceux qui l'ont formé.</li>
+</ul>
+</div>
+<div class="resume-section">
+<h3>L'essentiel</h3>
+<ul>
+<li>La Volonté du Feu n'est pas quelque chose qu'on reçoit. C'est quelque chose qu'on <strong>choisit de porter</strong> chaque jour.</li>
+</ul>
+</div>
+</div>`,
+
+"histoire":`
+<div class="resume-block">
+<div class="resume-section">
+<h3>I. Avant Konoha</h3>
+<ul>
+<li>Le Pays du Feu était un territoire en guerre, fracturé entre clans.</li>
+<li><strong>5 clans dominants :</strong> Senju (polyvalence), Uchiha (puissance brute + Sharingan), Hyūga (Byakugan + Jōken), Nara (stratégie + ombres), Akimichi (robustesse + logistique).</li>
+</ul>
+</div>
+<div class="resume-section">
+<h3>II. Fondation de Konoha</h3>
+<ul>
+<li><strong>Hashirama Senju</strong> et <strong>Madara Uchiha</strong> : amis d'enfance devenus chefs rivaux, unis par le désir de protéger les enfants de la guerre.</li>
+<li>Ils forgent une alliance « impensable » → création de <strong>Konohagakure</strong>.</li>
+<li>Konoha n'est pas bâtie sur une victoire militaire, mais sur un <strong>choix de paix</strong> entre ennemis.</li>
+<li>Hashirama devient le <strong>Premier Hokage</strong> et incarne la Volonté du Feu.</li>
+</ul>
+</div>
+<div class="resume-section">
+<h3>III. Rôle des grands clans</h3>
+<ul>
+<li><strong>Senju</strong> — Architectes du village : politique, infrastructure, lois, protection.</li>
+<li><strong>Uchiha</strong> — Pilier militaire : Police de Konoha, mais isolés en périphérie. Intégration jamais complète.</li>
+<li><strong>Hyūga</strong> — Sentinelles silencieuses : sécurité, renseignement, séparation Sōke/Bunke.</li>
+<li><strong>Nara</strong> — Cerveaux et archives : stratégie, renseignement, stabilisateurs politiques.</li>
+<li><strong>Akimichi</strong> — Logistique et médiateurs : main-d'œuvre, greniers, administration, confiance universelle.</li>
+</ul>
+</div>
+<div class="resume-section">
+<h3>IV. Tobirama et l'institutionnalisation</h3>
+<ul>
+<li>Tobirama est méthodique : il transforme le village-idée en <strong>village-institution</strong>.</li>
+<li>Créations : <strong>Académie Ninja</strong>, <strong>ANBU</strong>, système de <strong>missions classifiées</strong> (D-C-B-A-S), protocoles de sécurité.</li>
+<li>Sa mort crée une <strong>crise de succession</strong> qui paralyse Konoha (pas de 3e Hokage officiel).</li>
+</ul>
+</div>
+</div>`,
+
+"decomposition_chakra":`
+<div class="resume-block">
+<div class="resume-section">
+<h3>Composition du chakra</h3>
+<ul>
+<li>Le chakra naît de la <strong>fusion de deux énergies</strong> : physique (Yang / Yôton) et spirituelle (Yin / Inton).</li>
+<li>Énergie physique = corps, cellules, force vitale → se renforce par l'<strong>entraînement</strong>.</li>
+<li>Énergie spirituelle = esprit, expérience, volonté → se renforce par la <strong>méditation</strong>.</li>
+<li>Un <strong>déséquilibre</strong> entre les deux épuise le chakra et rend la fusion instable.</li>
+</ul>
+</div>
+<div class="resume-section">
+<h3>Réseau et noyau</h3>
+<ul>
+<li>Le chakra circule dans un <strong>réseau propre</strong>, depuis un <strong>noyau situé dans l'abdomen</strong>.</li>
+<li>Il peut se <strong>séparer en plusieurs flux</strong> simultanés (pieds, mains, technique en cours).</li>
+</ul>
+</div>
+<div class="resume-section">
+<h3>Les Tenketsu</h3>
+<ul>
+<li><strong>361 Tenketsu</strong> au total, dont <strong>64 importants</strong> (carrefours majeurs).</li>
+<li>Maîtriser ses Tenketsu = diriger son énergie avec <strong>précision</strong>.</li>
+<li>Fermer un Tenketsu adverse <strong>bloque le passage du chakra</strong> à cet endroit.</li>
+</ul>
+</div>
+<div class="resume-section">
+<h3>La Compensation (Sosaï)</h3>
+<ul>
+<li>Deux jutsus s'annulent si <strong>même niveau + même nature</strong> (les deux conditions réunies).</li>
+<li>Si le niveau diffère → la technique la plus forte passe.</li>
+<li>Si la nature diffère → on entre dans le <strong>cycle des natures</strong>.</li>
+</ul>
+</div>
+</div>`,
+
+"mudras_cours":`
+<div class="resume-block">
+<div class="resume-section">
+<h3>Les Mudras — Langage du chakra</h3>
+<ul>
+<li>Il existe <strong>12 mudras</strong> : Rat, Bœuf, Tigre, Lièvre, Dragon, Serpent, Cheval, Bélier, Singe, Coq, Chien, Sanglier.</li>
+<li>Sans mudras, le chakra est <strong>instable</strong> et les jutsu ratent.</li>
+<li>3 fonctions : <strong>canaliser</strong>, <strong>transformer</strong> et <strong>stabiliser</strong> le chakra.</li>
+<li>L'exécution doit être <strong>précise, rapide et fluide</strong>. L'ordre est crucial.</li>
+<li>Les mudras doivent devenir un <strong>réflexe instinctif</strong> — si vous réfléchissez, vous êtes en retard.</li>
+</ul>
+</div>
+<div class="resume-section">
+<h3>Tableau des 12 Mudras</h3>
+<ul>
+<li><strong>Rat</strong> — Initie la mise en mouvement du chakra</li>
+<li><strong>Bœuf</strong> — Structure le chakra, empêche la dispersion</li>
+<li><strong>Tigre</strong> — Amplifie et intensifie le flux</li>
+<li><strong>Lièvre</strong> — Fluidifie le flux de chakra</li>
+<li><strong>Dragon</strong> — Concentre le chakra sous forme dense</li>
+<li><strong>Serpent</strong> — Apporte la précision (mudra clé du Raiton et du Doton)</li>
+<li><strong>Cheval</strong> — Intensifie et accélère le flux</li>
+<li><strong>Bélier / Chèvre</strong> — Équilibre et harmonise le chakra</li>
+<li><strong>Singe</strong> — Coordonne les enchaînements complexes</li>
+<li><strong>Coq / Oiseau</strong> — Projette et dirige le chakra</li>
+<li><strong>Chien</strong> — Protège et structure en défense</li>
+<li><strong>Sanglier / Cochon</strong> — Libération brutale du chakra</li>
+</ul>
+</div>
+</div>`,
+
+"nature_theorie":`
+<div class="resume-block">
+<div class="resume-section">
+<h3>Le cycle des 5 Natures</h3>
+<ul>
+<li><strong>Katon 🔥</strong> (Feu) — Inflige des brûlures → bat le Futon, perd contre le Suiton</li>
+<li><strong>Futon 🌬️</strong> (Vent) — Accélère la vitesse → bat le Raiton, perd contre le Katon</li>
+<li><strong>Raiton ⚡</strong> (Foudre) — Étourdit la cible → bat le Doton, perd contre le Futon</li>
+<li><strong>Doton 🌍</strong> (Terre) — Renforce la robustesse → bat le Suiton, perd contre le Raiton</li>
+<li><strong>Suiton 💧</strong> (Eau) — Absorbe le chakra → bat le Katon, perd contre le Doton</li>
+</ul>
+</div>
+<div class="resume-section">
+<h3>Le Test de la Feuille</h3>
+<ul>
+<li><strong>Katon</strong> — la feuille brûle</li>
+<li><strong>Suiton</strong> — la feuille s'humidifie</li>
+<li><strong>Doton</strong> — la feuille s'effrite</li>
+<li><strong>Raiton</strong> — la feuille se plie</li>
+<li><strong>Futon</strong> — la feuille se coupe</li>
+</ul>
+</div>
+<div class="resume-section">
+<h3>Les Kekkei Genkai</h3>
+<ul>
+<li>Combinaison de <strong>2 natures</strong> = Kekkei Genkai (ex: Mokuton = Doton + Suiton).</li>
+<li>Combinaison de <strong>3 natures</strong> = Kekkei Tōta (Jinton = Katon + Futon + Doton).</li>
+<li>Principaux : Mokuton (Bois), Hyoton (Glace), Yoton (Lave), Bakuton (Explosions), Ranton (Orage), Shakuton (Chaleur).</li>
+</ul>
+</div>
+</div>`,
+
+"taijutsu_theorie":`
+<div class="resume-block">
+<div class="resume-section">
+<h3>Les 3 branches du combat ninja</h3>
+<ul>
+<li><strong>Ninjutsu</strong> — Techniques basées sur le chakra et les mudras.</li>
+<li><strong>Genjutsu</strong> — Illusions qui trompent les sens de l'adversaire.</li>
+<li><strong>Taijutsu</strong> — Combat à mains nues, avec ou sans armes.</li>
+</ul>
+</div>
+<div class="resume-section">
+<h3>Le Taijutsu</h3>
+<ul>
+<li>Ne requiert généralement <strong>ni chakra ni mudras</strong>.</li>
+<li>Avantage principal : <strong>rapidité d'exécution</strong> (le corps est l'arme, pas de temps de composition).</li>
+<li>Ce n'est PAS de la force brute — c'est un <strong>savoir-faire</strong> : maîtrise du corps, vitesse, timing, positionnement.</li>
+<li>Un combattant techniquement malin bat un adversaire plus fort mais moins précis.</li>
+</ul>
+</div>
+</div>`,
+
+"armes_cours":`
+<div class="resume-block">
+<div class="resume-section">
+<h3>Armes de lancer</h3>
+<ul>
+<li><strong>Kunai</strong> (20-30 cm) — Poignard polyvalent : attaquer, lancer, grimper, creuser. L'arme la plus polyvalente du ninja.</li>
+<li><strong>Shuriken</strong> (5-10 cm) — Étoile métallique. Distance ou corps à corps. Matériel indispensable.</li>
+<li><strong>Senbon</strong> (15-25 cm) — Aiguilles fines. Points vitaux et neutralisation discrète.</li>
+</ul>
+</div>
+<div class="resume-section">
+<h3>Armes de mêlée</h3>
+<ul>
+<li><strong>Katana</strong> (~1m) — Sabre courbé. Frappes rapides et précises. Améliorable au chakra.</li>
+</ul>
+</div>
+<div class="resume-section">
+<h3>Équipement tactique</h3>
+<ul>
+<li><strong>Makibishi</strong> (2-5 cm) — Pointes au sol pour ralentir ou blesser.</li>
+<li><strong>Clochettes</strong> — Dispositifs sonores, combinables avec un kunai pour diviser l'attention.</li>
+<li><strong>Bombe fumigène</strong> (5-10 cm) — Nuage de fumée pour masquer, fuir ou surprendre.</li>
+<li><strong>Parchemin explosif</strong> (10-20 cm) — Sceau de Fuinjutsu déclenchant une explosion. Piège ou arme à distance.</li>
+</ul>
+</div>
+</div>`,
+
+"kenjutsu_cours":`
+<div class="resume-block">
+<div class="resume-section">
+<h3>Le Bushidō — 8 Vertus du Samouraï</h3>
+<ul>
+<li><strong>Intégrité</strong> — Être juste et honnête, agir selon ses principes même sans témoin.</li>
+<li><strong>Honneur</strong> — La boussole morale qui guide chaque choix et chaque acte.</li>
+<li><strong>Courage</strong> — Affronter la peur, pas l'ignorer. Avancer malgré les obstacles.</li>
+<li><strong>Maîtrise</strong> — Discipline et contrôle de soi permanent.</li>
+<li><strong>Respect</strong> — Traiter chacun avec dignité, en toute circonstance.</li>
+<li><strong>Loyauté</strong> — Rester fidèle à ses alliés et ses engagements.</li>
+<li><strong>Sincérité</strong> — Être honnête avec les autres et avec soi-même. La parole donnée est un serment.</li>
+<li><strong>Compassion</strong> — Comprendre la souffrance d'autrui et agir avec bienveillance.</li>
+</ul>
+</div>
+<div class="resume-section">
+<h3>Les 4 Principes fondamentaux</h3>
+<ul>
+<li><strong>Kokyu (Respiration)</strong> — Respiration lente pour l'analyse et le sang-froid. Respiration rapide pour les techniques éprouvantes et les moments critiques.</li>
+<li><strong>Metsuke (Regard)</strong> — Observer l'adversaire dans son <strong>ensemble</strong>, pas une seule partie. Lire posture, équilibre, épaules, hanches, pieds pour anticiper l'attaque.</li>
+<li><strong>Maai (Distance)</strong> — 3 distances : <strong>Tōma</strong> (longue, observation), <strong>Issoku-Itto</strong> (un pas = une coupe), <strong>Chikama</strong> (courte, rapide et dangereux).</li>
+</ul>
+</div>
+<div class="resume-section">
+<h3>L'essentiel</h3>
+<ul>
+<li>S'engager sur une voie de la lame est un <strong>choix de vie</strong>. On ne change pas de lame sans raison valable.</li>
+<li>3 voies possibles : <strong>lame simple</strong>, <strong>lame double</strong> (Nitōryū) ou <strong>lame lourde</strong>.</li>
+</ul>
+</div>
+</div>`,
+
+"kenjutsu_double":`
+<div class="resume-block">
+<div class="resume-section">
+<h3>Le Nitōryū — Combat à deux épées</h3>
+<ul>
+<li>Inventé par <strong>Myosashi Shinmen</strong>, vagabond samouraï du Pays du Fer.</li>
+<li>Deux lames n'offrent pas deux fois plus de puissance — elles demandent <strong>deux fois plus de discipline</strong>.</li>
+</ul>
+</div>
+<div class="resume-section">
+<h3>Les 4 gardes de la double lame (Shisei)</h3>
+<ul>
+<li><strong>Chūdan-no-Kamae (garde du milieu)</strong> — Lame principale vers la gorge, seconde en protection du flanc. Équilibrée, peu d'ouvertures. La plus utilisée.</li>
+<li><strong>Jōdan-no-Kamae (garde haute)</strong> — Lame dominante au-dessus de la tête. Très agressive, pression psychologique. Défaut : ouverture du corps si l'attaque rate.</li>
+<li><strong>Gedan-no-Kamae (garde basse)</strong> — Lames vers le sol. Semble faible mais dangereuse : attaque remontante difficile à anticiper. Efficace contre le Taijutsu.</li>
+<li><strong>Hasso-no-Kamae (garde latérale)</strong> — Lame dominante près de l'épaule. Changement de direction très rapide. Demande le plus de coordination.</li>
+</ul>
+</div>
+</div>`,
+
+"kenjutsu_cours":`
+<h2>Kenjutsu — Initiation à la Voie de la Lame</h2>
+<p style="color:var(--text-dim);font-style:italic;border-left:3px solid var(--accent-gold);padding-left:12px;margin-bottom:16px">Support professeur — Sources : Tetsuya Fubetsu & Nagi Kinzetsu. Ce cours sert d'initiation, pas de formation complète.</p>
+
+<h3>OUVERTURE</h3>
+<p>Accroche à dire :</p>
+<p style="background:var(--bg-parchment);padding:10px 14px;border-radius:6px;font-style:italic">« Le maniement des lames jumelles est sans doute l'une des disciplines les plus impressionnantes que l'on puisse observer. Nos techniques sont impressionnantes, nous virevoltons dans les airs, nous tailladons à une vitesse folle et nous nous déplaçons rapidement sur de longues distances. Lorsqu'un shinobi combat avec deux sabres, beaucoup pensent immédiatement qu'il est deux fois plus dangereux qu'un autre. Pourtant, cette idée est fausse. Deux lames n'offrent pas deux fois plus de puissance. Elles demandent deux fois plus de discipline. »</p>
+
+<p><strong>Point clé à marteler :</strong> L'art de la double lame porte le nom de <strong>Nitōryū</strong> — combat à deux épées. Peu importe la longueur, la largeur ou la forme. Cet art a été inventé par le vagabond samouraï <strong>Myosashi Shinmen</strong>, né au Pays du Fer.</p>
+
+<h3>PARTIE 1 — Le Bushidō (Les 8 Vertus du Samouraï)</h3>
+<p><strong>Transition :</strong></p>
+<p style="background:var(--bg-parchment);padding:10px 14px;border-radius:6px;font-style:italic">« Nous ne sommes pas des samouraïs mais des ninjas. Cependant, la voie de la lame emprunte au Bushidō ses fondations morales. Voici les 8 vertus que tout sabreur doit connaître. »</p>
+
+<table class="contenu-table">
+<tr><th>#</th><th>Vertu</th><th>Signification</th></tr>
+<tr><td>1</td><td>Intégrité</td><td>Être juste et honnête, agir selon ses principes même sans témoin</td></tr>
+<tr><td>2</td><td>Honneur</td><td>La boussole morale qui guide chaque choix et chaque acte</td></tr>
+<tr><td>3</td><td>Courage</td><td>Affronter la peur, avancer malgré les obstacles</td></tr>
+<tr><td>4</td><td>Maîtrise</td><td>Discipline et contrôle de soi permanent</td></tr>
+<tr><td>5</td><td>Respect</td><td>Traiter chacun avec dignité, en toute circonstance</td></tr>
+<tr><td>6</td><td>Loyauté</td><td>Rester fidèle à ses alliés et ses engagements</td></tr>
+<tr><td>7</td><td>Sincérité</td><td>Être vrai avec les autres et soi-même. La parole donnée est un serment</td></tr>
+<tr><td>8</td><td>Compassion</td><td>Comprendre la souffrance d'autrui, agir avec bienveillance</td></tr>
+</table>
+
+<h3>PARTIE 2 — Les 3 Principes communs à toutes les voies</h3>
+
+<h4>1. Kokyu — La Respiration</h4>
+<p><strong>Point clé :</strong> Le Kokyu permet de gérer son rythme cardiaque.</p>
+<ul>
+<li><strong>Respiration lente</strong> — calme, apaisée → garder son sang-froid, maîtrise des émotions, analyser l'adversaire</li>
+<li><strong>Respiration accélérée</strong> — afflux sanguin → agir rapidement dans les moments critiques, techniques éprouvantes pour le corps</li>
+</ul>
+<p style="background:var(--bg-input);padding:8px 14px;border-radius:6px">→ Faire respirer les élèves : 5 inspirations lentes, puis 5 rapides. Sentir la différence.</p>
+
+<h4>2. Metsuke — Le Regard</h4>
+<p><strong>Point clé :</strong> Un épéiste expérimenté n'observe pas la lame de l'ennemi — il observe <strong>tout le corps</strong>.</p>
+<ul>
+<li>Regard large et détendu : posture, équilibre, épaules, hanches, pieds</li>
+<li>Avant qu'une lame ne bouge, le corps <strong>prépare naturellement</strong> le mouvement</li>
+<li>Les épaules s'orientent, les hanches pivotent, les jambes prennent appui</li>
+<li>En observant ces détails, on <strong>anticipe l'attaque</strong> avant que l'arme ne quitte sa position</li>
+</ul>
+
+<h4>3. Maai — La Distance</h4>
+<p><strong>Point clé :</strong> Le Maai n'est pas juste une mesure de distance — c'est l'espace dans lequel chacun peut agir.</p>
+<ul>
+<li><strong>Tōma (longue distance)</strong> — Personne ne peut toucher l'autre sans se déplacer. Observation, recherche d'ouvertures.</li>
+<li><strong>Issoku-Itto-no-Maai (un pas, une coupe)</strong> — La distance idéale. Un simple pas suffit pour atteindre l'adversaire. C'est là que se jouent la majorité des combats.</li>
+<li><strong>Chikama (courte distance)</strong> — Si proches qu'il n'y a presque plus besoin d'avancer. Mouvements rapides, erreurs difficiles à corriger, combat très dangereux.</li>
+</ul>
+
+<h3>PARTIE 3 — L'Engagement</h3>
+<p style="background:var(--bg-parchment);padding:10px 14px;border-radius:6px;font-style:italic">« Lorsqu'un shinobi s'engage sur une voie, il se DOIT d'y dédier sa vie. On ne change pas de lame comme on change de slip tous les matins. Une voie est un mode de vie, une rigueur et des principes qu'on épouse jusqu'à notre mort. »</p>
+<p><strong>Point important :</strong> Si un shinobi souhaite changer de voie de la lame pour des raisons non justifiées, ses lames lui seront reprises. La vie de ninja est trop courte pour perdre du temps à recommencer.</p>
+
+<h3>FERMETURE</h3>
+<p>Récap' oral : rappeler les 8 vertus, les 3 principes (Kokyu, Metsuke, Maai), et la gravité de l'engagement.</p>
+<p>Phrase de fermeture :</p>
+<p style="background:var(--bg-parchment);padding:10px 14px;border-radius:6px;font-style:italic">« La voie du samouraï n'est pas celle de la force, mais celle du cœur et de l'esprit. Avant de brandir une lame, soyez digne de la porter. »</p>
+`,
+
+"kenjutsu_double":`
+<h2>Kenjutsu — Lame Double (Nitōryū)</h2>
+<p style="color:var(--text-dim);font-style:italic;border-left:3px solid var(--accent-gold);padding-left:12px;margin-bottom:16px">Support professeur — Sources : Tetsuya Fubetsu & Nagi Kinzetsu. Prérequis : cours d'initiation au Kenjutsu.</p>
+
+<h3>OUVERTURE — Le Nitōryū</h3>
+<p>Accroche à dire :</p>
+<p style="background:var(--bg-parchment);padding:10px 14px;border-radius:6px;font-style:italic">« Le maniement des lames jumelles est sans doute l'une des disciplines les plus impressionnantes que l'on puisse observer. Nous virevoltons dans les airs, nous tailladons à une vitesse folle et nous nous déplaçons rapidement sur de longues distances. Mais deux lames n'offrent pas deux fois plus de puissance. Elles demandent deux fois plus de discipline. »</p>
+
+<p><strong>Point clé :</strong> L'art de la double lame porte le nom de <strong>Nitōryū</strong> — combat à deux épées. Peu importe la longueur, la largeur ou la forme. Cet art a été inventé par le vagabond samouraï <strong>Myosashi Shinmen</strong>, né au Pays du Fer.</p>
+
+<h3>PARTIE 1 — Les 4 gardes du Nitōryū (Shisei)</h3>
+
+<h4>1. Chūdan-no-Kamae — La garde du milieu</h4>
+<p>La garde la plus utilisée.</p>
+<ul>
+<li>Lame principale dirigée vers la gorge ou le visage de l'adversaire</li>
+<li>Seconde lame légèrement plus basse pour protéger le flanc ou dévier une attaque</li>
+<li>Garde <strong>équilibrée</strong> : permet d'attaquer et de défendre avec peu de mouvements inutiles</li>
+<li>Offre <strong>peu d'ouvertures</strong> à l'adversaire</li>
+</ul>
+
+<h4>2. Jōdan-no-Kamae — La garde haute</h4>
+<p>Posture très agressive.</p>
+<ul>
+<li>Lame dominante levée au-dessus de la tête ou de l'épaule</li>
+<li>Seconde lame reste devant le corps pour protection</li>
+<li>L'adversaire comprend immédiatement qu'une <strong>frappe puissante</strong> peut arriver à tout moment</li>
+<li>Forte <strong>pression psychologique</strong></li>
+<li><strong>Défaut :</strong> en levant l'arme, vous ouvrez davantage votre corps. Si l'attaque échoue, l'adversaire dispose d'une ouverture importante.</li>
+</ul>
+
+<h4>3. Gedan-no-Kamae — La garde basse</h4>
+<p>La garde la plus trompeuse.</p>
+<ul>
+<li>Les deux lames restent dirigées vers le sol, proches des jambes</li>
+<li>Beaucoup pensent qu'une garde basse est une garde faible — <strong>en réalité, elle est très dangereuse</strong></li>
+<li>Un adversaire observe presque toujours les épaules ou le regard. <strong>Très peu regardent les jambes</strong></li>
+<li>Une attaque remontante depuis le bas est souvent plus difficile à anticiper</li>
+<li>Particulièrement <strong>efficace contre les utilisateurs de Taijutsu</strong> qui cherchent à réduire la distance</li>
+</ul>
+
+<h4>4. Hasso-no-Kamae — La garde latérale</h4>
+<p>La garde la plus exigeante en coordination.</p>
+<ul>
+<li>Lame dominante placée près de l'épaule, presque verticale</li>
+<li>Seconde lame reste devant le corps</li>
+<li>Permet de changer <strong>très rapidement de direction</strong> : coupe horizontale, verticale ou diagonale avec peu de préparation</li>
+<li>Souvent utilisée par les sabreurs qui privilégient la <strong>fluidité plutôt que la puissance</strong></li>
+<li>Probablement la garde qui demande le <strong>plus de coordination</strong> avec deux lames</li>
+</ul>
+
+<h3>PARTIE 2 — Démonstration</h3>
+<p><strong>Passage pratique :</strong></p>
+<ul>
+<li>Démonstration des enchaînements classiques entre les 4 gardes</li>
+<li>Démonstration de la technique de rang D</li>
+<li>Démonstration de la technique de rang C</li>
+<li>Démonstration de la technique de rang B (si Chūnin)</li>
+<li>Démonstration de la technique de rang A (si Tokubetsu Jōnin)</li>
+</ul>
+
+<h3>PARTIE 3 — Critères de sélection pour les recommandations forgeron</h3>
+<p><strong>Accepté :</strong></p>
+<ul>
+<li>Participation positive, curiosité, questionnement, volontariat, investissement</li>
+<li>Recherches approfondies ou connaissances démontrées pendant le cours</li>
+<li>Motivations RP : travail d'équipe, service du village, héritage, développement de la voie</li>
+<li>Avoir réfléchi à un nom pour ses lames avec une vraie recherche</li>
+</ul>
+<p><strong>Recalé :</strong></p>
+<ul>
+<li>Motivation purement PvP</li>
+<li>Comportement perturbateur, harcèlement, impatience, négativité</li>
+</ul>
+
+<h3>FERMETURE</h3>
+<p style="background:var(--bg-parchment);padding:10px 14px;border-radius:6px;font-style:italic">« La voie du samouraï n'est pas celle de la force, mais celle du cœur et de l'esprit. Deux lames, c'est deux fois plus de responsabilité. Soyez-en dignes. »</p>
+`,
+
+"infiltration":`
+<div class="resume-block">
+<div class="resume-section">
+<h3>Les 4 piliers de l'infiltration</h3>
+<ul>
+<li><strong>1. Changement de tenue</strong> — Adapter sa tenue à l'environnement. Paysan dans un hameau, pas prince perdu.</li>
+<li><strong>2. Changement d'attitude</strong> — S'identifier à quelqu'un d'autre. Pas trop suspicieux, pas trop impatient. Contrôler ses réactions naturelles.</li>
+<li><strong>3. Changement d'apparence</strong> — Modifier son physique (cheveux, posture). Se préparer psychologiquement au changement d'identité.</li>
+<li><strong>4. Mensonge convaincant</strong> — Trouver un rôle crédible et adapté. Maintenir sa couverture sous pression. S'adapter aux imprévus.</li>
+</ul>
+</div>
+<div class="resume-section">
+<h3>L'essentiel</h3>
+<ul>
+<li>L'infiltration repose sur la <strong>discrétion totale</strong> — un ninja qui tressaille au bruit d'un kunai grille immédiatement sa couverture.</li>
+<li>Rôle crédible + attitude naturelle + apparence adaptée + mensonge solide = <strong>infiltration réussie</strong>.</li>
+</ul>
+</div>
+</div>`
+};
+
+// ================================================================
+// CONTENU THÉORIQUE — Guide oral RP (texte à lire à haute voix)
 // ================================================================
 const CONTENU={
 "regles_or":`
@@ -2662,6 +3175,51 @@ html:`
 <p style="background:var(--bg-parchment);padding:10px 14px;border-radius:6px;font-style:italic">🍃 Une arme ne vaut que par celui qui la manie. Connaissez vos outils — un kunai bien placé vaut cent techniques mal maîtrisées. Eraku Morikawa</p>
 `},
 
+"kenjutsu_cours":{
+copy:`🗡️ Notes du prof : Kenjutsu — Initiation
+
+🔹 8 Vertus du Bushidō : Intégrité, Honneur, Courage, Maîtrise, Respect, Loyauté, Sincérité, Compassion.
+🔹 Kokyu (Respiration) : lente pour l'analyse, rapide pour l'action.
+🔹 Metsuke (Regard) : observer le corps entier, pas la lame. Anticiper avant le mouvement.
+🔹 Maai (Distance) : Tōma (longue), Issoku-Itto (un pas = une coupe), Chikama (courte).
+🔹 Engagement à vie : on ne change pas de voie de la lame sans raison valable.
+
+🍃 La voie du samouraï n'est pas celle de la force, mais celle du cœur et de l'esprit. Eraku Morikawa`,
+html:`
+<ul>
+<li>🗡️ 8 Vertus du Bushidō : Intégrité, Honneur, Courage, Maîtrise, Respect, Loyauté, Sincérité, Compassion.</li>
+<li>🗡️ Kokyu (Respiration) : lente pour l'analyse, rapide pour l'action.</li>
+<li>🗡️ Metsuke (Regard) : observer le corps entier. Anticiper avant le mouvement.</li>
+<li>🗡️ Maai : 3 distances — Tōma (longue), Issoku-Itto (idéale), Chikama (courte).</li>
+<li>🗡️ Engagement à vie : une voie de la lame est un choix définitif.</li>
+</ul>
+<p style="background:var(--bg-parchment);padding:10px 14px;border-radius:6px;font-style:italic">🍃 La voie du samouraï n'est pas celle de la force, mais celle du cœur et de l'esprit. Eraku Morikawa</p>
+`},
+
+"kenjutsu_double":{
+copy:`🗡️ Notes du prof : Lame Double (Nitōryū)
+
+🔹 Nitōryū = combat à deux épées. Inventé par Myosashi Shinmen (Pays du Fer).
+🔹 Deux lames = deux fois plus de discipline, pas de puissance.
+🔹 4 gardes :
+  ⚔️ Chūdan (milieu) : équilibrée, peu d'ouvertures
+  ⚔️ Jōdan (haute) : agressive, pression psychologique, mais ouverture si raté
+  ⚔️ Gedan (basse) : trompeuse, efficace contre le Taijutsu
+  ⚔️ Hasso (latérale) : fluide, changements de direction rapides
+
+🍃 Deux lames, c'est deux fois plus de responsabilité. Soyez-en dignes. Eraku Morikawa`,
+html:`
+<ul>
+<li>🗡️ Nitōryū = combat à deux épées. Inventé par Myosashi Shinmen (Pays du Fer).</li>
+<li>🗡️ 4 gardes : Chūdan (milieu, équilibrée), Jōdan (haute, agressive), Gedan (basse, trompeuse), Hasso (latérale, fluide).</li>
+<li>🗡️ Chūdan : lame principale vers la gorge, seconde en protection du flanc.</li>
+<li>🗡️ Jōdan : frappe puissante depuis le haut, mais ouverture du corps si raté.</li>
+<li>🗡️ Gedan : attaque remontante, peu de gens regardent les jambes. Anti-Taijutsu.</li>
+<li>🗡️ Hasso : changement de direction instantané. Demande le plus de coordination.</li>
+</ul>
+<p style="background:var(--bg-parchment);padding:10px 14px;border-radius:6px;font-style:italic">🍃 Deux lames, c'est deux fois plus de responsabilité. Soyez-en dignes. Eraku Morikawa</p>
+`},
+
 "infiltration":{
 copy:`🕵️ Notes du prof : Infiltration
 
@@ -3563,6 +4121,42 @@ armes_cours:{
   chasseur:'Un bon chasseur connaît la portée exacte de chaque arme comme il connaît la distance de son bond. Kunai, shuriken, senbon — chacun a sa zone de frappe.',
   tacticien:'L\'arme visible est une déclaration. L\'arme cachée est une surprise. Portez toujours les deux, et ne montrez que celle que vous voulez qu\'on voie.'
 },
+kenjutsu_cours:{
+  sage:'La lame est le prolongement de l\'esprit. Si votre esprit est troublé, votre lame tremblera. Trouvez la paix intérieure avant de dégainer.',
+  dur:'Le Kenjutsu ne tolère pas l\'amateurisme. Une lame mal tenue, c\'est un doigt en moins. Soyez précis ou rangez votre sabre.',
+  guerrier:'La lame est le bras du guerrier, et le guerrier est le cœur de la lame ! Brandissez-la avec fierté et faites trembler vos ennemis !',
+  bienveillant:'La voie de la lame est longue et exigeante. Ne vous découragez pas si vos premières gardes sont maladroites — la maîtrise viendra avec la patience.',
+  mysterieux:'Une lame silencieuse est plus dangereuse qu\'une lame qui brille. Le vrai sabreur ne montre jamais son acier avant le dernier instant.',
+  stratege:'Le Kenjutsu repose sur quatre piliers : respiration, regard, posture, distance. Maîtrisez-les séparément, puis combinez-les. C\'est de la tactique, pas de la brutalité.',
+  veteran:'J\'ai croisé un sabreur du Pays du Fer qui m\'a désarmé sans que je voie sa lame bouger. Ce jour-là, j\'ai compris que le Kenjutsu commence dans le regard, pas dans la main.',
+  fraternel:'La première fois qu\'on tient deux lames, on se sent un peu ridicule. C\'est normal. On va y aller doucement, une garde après l\'autre. Tu vas voir, ça vient vite.',
+  ironique:'Le Kenjutsu : l\'art de tenir deux objets tranchants sans se couper soi-même. Ça a l\'air simple dit comme ça. Spoiler : ça ne l\'est pas.',
+  ermite:'J\'ai trouvé ma première lame plantée dans un arbre, au milieu de nulle part. Je ne sais toujours pas qui l\'avait laissée là. Mais elle m\'a tout appris.',
+  ombre:'La lame est l\'outil le plus silencieux après le poison. Un sabreur entraîné élimine sa cible avant que le son de l\'acier ne parvienne aux oreilles des autres.',
+  sensei_noble:'La lame est le symbole le plus noble du guerrier. La manier exige honneur, discipline et une volonté de fer. Le Bushidō n\'est pas optionnel.',
+  rebelle:'Le Kenjutsu, c\'est pas des gardes élégantes et des révérences. C\'est du métal, de la sueur et des cicatrices. C\'est ça la réalité de la lame.',
+  mentor:'Avant de maîtriser la lame, maîtrisez votre souffle. Avant de maîtriser votre souffle, maîtrisez votre esprit. La voie de l\'épée commence à l\'intérieur.',
+  chasseur:'Un sabreur est un prédateur avec des crocs d\'acier. Le Metsuke est son flair. Le Maai est sa distance de bond. Chaque garde est une posture de chasse.',
+  tacticien:'Trois principes, trois distances, une lame — ou deux. Le bon sabreur ne connaît pas la meilleure technique, il connaît le bon principe pour chaque instant.'
+},
+kenjutsu_double:{
+  sage:'Deux lames, deux responsabilités. La seconde n\'est pas là pour frapper plus fort — elle est là pour protéger ce que la première ne peut pas couvrir.',
+  dur:'Deux lames dans les mains d\'un amateur, c\'est deux chances de se couper soi-même. Maîtrisez les gardes ou rangez la seconde.',
+  guerrier:'Deux lames qui dansent ensemble, c\'est une tempête d\'acier ! Le Nitōryū est l\'art du guerrier qui refuse de choisir entre attaque et défense !',
+  bienveillant:'Le Nitōryū peut sembler écrasant au début — deux lames, quatre gardes, tout en même temps. Mais chaque maître a commencé par tenir maladroitement sa seconde épée.',
+  mysterieux:'Deux lames créent deux ombres. L\'adversaire ne sait plus laquelle frappera en premier. C\'est dans ce doute que le Nitōryū trouve sa force.',
+  stratege:'Le Nitōryū offre quatre gardes avec des applications radicalement différentes. Chūdan pour le contrôle, Jōdan pour la pression, Gedan pour la surprise, Hasso pour la fluidité.',
+  veteran:'J\'ai combattu un maître du Nitōryū une seule fois. Sa Gedan m\'a eu — je regardais ses épaules, la lame est montée depuis mes pieds. Depuis, je ne sous-estime plus la garde basse.',
+  fraternel:'La double lame, c\'est comme apprendre à écrire des deux mains. Au début c\'est bizarre et maladroit, mais quand ça clique, c\'est magnifique.',
+  ironique:'Le Nitōryū : l\'art de se compliquer la vie avec deux lames quand une seule suffirait. Mais bon, c\'est spectaculaire, je ne peux pas nier.',
+  ermite:'J\'ai croisé Myosashi Shinmen une fois. Enfin, je crois que c\'était lui. Un vieux avec deux bâtons qui battait trois samuraïs. Les légendes commencent toujours simplement.',
+  ombre:'Deux lames silencieuses dans le noir. La première détourne l\'attention, la seconde tranche. Le Nitōryū est fait pour les opérations où une seule frappe ne suffit pas.',
+  sensei_noble:'Le Nitōryū est la voie la plus exigeante du Kenjutsu. Deux lames signifient deux fois plus de discipline, deux fois plus de rigueur. Les indignes n\'y survivent pas.',
+  rebelle:'Deux lames, c\'est excessif ? Parfait. J\'aime l\'excès. Le Nitōryū, c\'est pour ceux qui refusent de se contenter d\'une seule épée.',
+  mentor:'Porter deux lames, c\'est accepter que votre corps devienne un instrument à deux voix. Chaque main doit penser indépendamment — et pourtant agir en harmonie.',
+  chasseur:'Deux lames, c\'est deux crocs. Le Chūdan tient la proie à distance, le Gedan la surprend par en bas. Le Nitōryū est l\'art du prédateur qui ne rate pas.',
+  tacticien:'Quatre gardes, quatre réponses tactiques. Le Nitōryū n\'est pas du spectacle — c\'est un système de combat complet. Analysez chaque garde comme un outil, pas comme une pose.'
+},
 infiltration:{
   sage:'L\'infiltration ne commence pas quand vous entrez en territoire ennemi. Elle commence quand vous décidez qui vous allez être.',
   dur:'En infiltration, une seule erreur suffit. Vous serez repéré, capturé, interrogé. Et là, personne ne viendra vous chercher. Soyez parfait.',
@@ -3928,6 +4522,7 @@ doton_cours:{
 function getSensei(){
   if(!S.sensei)S.sensei={prenom:'Eraku',nom:'Morikawa',signe:'cheveux brun',nature:'',type:'sage',rang:'',lieu:'RDV Devant l\'académie',signature:''};
   if(!S.sensei.type)S.sensei.type='sage';
+  if(!S.sensei.specCombat)S.sensei.specCombat='taijutsu';
   return S.sensei;
 }
 function senseiFullName(){const s=getSensei();return(s.prenom+' '+s.nom).trim()||'Sensei';}
@@ -4514,11 +5109,27 @@ function renderDetail(){
   if(CONTENU[c.id]){
     const cKey='contenu_open_'+c.id;
     const isOpen=S.c[cKey];
+    const hasResume=!!RESUME[c.id];
+    const tabKey='contenu_tab_'+c.id;
+    if(hasResume && !S.c[tabKey]) S.c[tabKey]='retenir';
+    const curTab=hasResume?S.c[tabKey]||'retenir':'oral';
     h+=`<div class="contenu-toggle${isOpen?' open':''}" onclick="S.c['${cKey}']=!S.c['${cKey}'];save();render()">
       <span class="ct-arrow">▶</span> Contenu du cours
     </div>`;
     if(isOpen){
-      h+=`<div class="contenu-block">${applySenseiName(CONTENU[c.id],c.id)}</div>`;
+      if(hasResume){
+        h+=`<div class="reading-tabs">
+          <div class="reading-tab${curTab==='retenir'?' active':''}" onclick="S.c['${tabKey}']='retenir';save();render()"><span class="tab-icon">📋</span>À retenir</div>
+          <div class="reading-tab${curTab==='oral'?' active':''}" onclick="S.c['${tabKey}']='oral';save();render()"><span class="tab-icon">🎤</span>Guide oral</div>
+        </div>`;
+        if(curTab==='retenir'){
+          h+=`<div class="contenu-block tab-content">${RESUME[c.id]}</div>`;
+        } else {
+          h+=`<div class="contenu-block tab-content">${applySenseiName(CONTENU[c.id],c.id)}</div>`;
+        }
+      } else {
+        h+=`<div class="contenu-block">${applySenseiName(CONTENU[c.id],c.id)}</div>`;
+      }
     }
   }
 
@@ -5654,6 +6265,52 @@ function renderSensei(){
   });
   h+=`<div style="font-size:0.72rem;color:var(--text-muted);margin-top:6px;font-style:italic">La nature de chakra modifie le thème de couleur de toute l'application</div>
   </div></div>`;
+
+  // Spécialisation combat
+  const specCombat=s.specCombat||'taijutsu';
+  const typeLame=s.typeLame||'';
+  h+=`<div class="sensei-field">
+    <label>Spécialisation de combat</label>
+    <div style="display:flex;gap:10px;margin-top:4px;flex-wrap:wrap">
+      <div class="nature-opt ${specCombat==='taijutsu'?'selected':''}" onclick="setSenseiField('specCombat','taijutsu');setSenseiField('typeLame','');render()" style="min-width:140px;flex:1;max-width:220px">
+        <div class="no-check">✓</div>
+        <div class="no-icon">🥋</div>
+        <div class="no-name">Taijutsu</div>
+        <div class="no-element" style="font-size:0.68rem">Combat à mains nues</div>
+      </div>
+      <div class="nature-opt ${specCombat==='kenjutsu'?'selected':''}" onclick="setSenseiField('specCombat','kenjutsu');if(!getSensei().typeLame)setSenseiField('typeLame','simple');render()" style="min-width:140px;flex:1;max-width:220px">
+        <div class="no-check">✓</div>
+        <div class="no-icon">🗡️</div>
+        <div class="no-name">Kenjutsu</div>
+        <div class="no-element" style="font-size:0.68rem">Voie de la lame</div>
+      </div>
+    </div>`;
+  if(specCombat==='kenjutsu'){
+    h+=`<div style="margin-top:12px">
+      <div style="font-size:0.78rem;color:var(--text-dim);margin-bottom:8px">Type de lame</div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <div class="nature-opt ${typeLame==='simple'?'selected':''}" onclick="setSenseiField('typeLame','simple');render()" style="min-width:120px;flex:1;max-width:180px">
+          <div class="no-check">✓</div>
+          <div class="no-icon">⚔️</div>
+          <div class="no-name" style="font-size:0.78rem">Lame simple</div>
+          <div class="no-element" style="font-size:0.65rem">Un sabre, une voie</div>
+        </div>
+        <div class="nature-opt ${typeLame==='double'?'selected':''}" onclick="setSenseiField('typeLame','double');render()" style="min-width:120px;flex:1;max-width:180px">
+          <div class="no-check">✓</div>
+          <div class="no-icon">⚔️⚔️</div>
+          <div class="no-name" style="font-size:0.78rem">Lame double</div>
+          <div class="no-element" style="font-size:0.65rem">Nitōryū — deux lames</div>
+        </div>
+        <div class="nature-opt ${typeLame==='lourde'?'selected':''}" onclick="setSenseiField('typeLame','lourde');render()" style="min-width:120px;flex:1;max-width:180px">
+          <div class="no-check">✓</div>
+          <div class="no-icon">🔱</div>
+          <div class="no-name" style="font-size:0.78rem">Lame lourde</div>
+          <div class="no-element" style="font-size:0.65rem">Puissance brute</div>
+        </div>
+      </div>
+    </div>`;
+  }
+  h+=`</div>`;
 
   // Mode sombre
   const isDark=document.documentElement.getAttribute('data-theme')==='dark';
