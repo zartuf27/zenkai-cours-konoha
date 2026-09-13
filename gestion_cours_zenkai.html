@@ -5804,7 +5804,7 @@ function renderBilan(){
     discord+=`Aucun cours ce jour.\n`;
   }else{
     selHist.forEach(e=>{
-      discord+=`• ${e.titre} — ${e.heure}${e.noEleve?' (proposé, 0 élève présent)':''}\n`;
+      discord+=`• ${e.titre} — ${e.heure}${e.noEleve?' (aucun élève présent)':''}\n`;
     });
   }
 
