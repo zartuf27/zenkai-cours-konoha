@@ -7,6 +7,10 @@ Hishiba/*.webp
 # Claude Code
 .claude/
 
+# Sources .docx (déjà intégrées dans le HTML)
+COURS NATURE PRATIQUE.docx
+Kenjustu.docx
+
 # Fichiers système
 .DS_Store
 Thumbs.db
