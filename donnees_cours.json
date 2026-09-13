@@ -485,6 +485,132 @@
       ]
     },
     {
+      "id": "kenjutsu_cours",
+      "titre": "Kenjutsu — Initiation",
+      "categorie": "theorique",
+      "module": "Bases du Combat",
+      "rang_requis": "Genin",
+      "public_cible": "Genin et plus",
+      "auteur": "Tetsuya Fubetsu & Nagi Kinzetsu",
+      "prerequis": ["taijutsu_theorie", "armes_cours"],
+      "description": "Initiation au Kenjutsu : le Bushidō, les 3 principes communs à toutes les voies (Kokyu, Metsuke, Maai) et l'engagement du sabreur.",
+      "techniques": [
+        {
+          "id": "kenj_bushido",
+          "nom": "Le Bushidō — 8 Vertus du Samouraï",
+          "description": "Code d'honneur du sabreur : intégrité, honneur, courage, maîtrise, respect, loyauté, sincérité, compassion.",
+          "type": "connaissance",
+          "etapes": ["Connaître les 8 vertus", "Comprendre le lien avec les Règles d'Or", "Appliquer le code du sabreur"],
+          "mudras": [],
+          "rang": "Genin",
+          "prerequis": []
+        },
+        {
+          "id": "kenj_kokyu",
+          "nom": "Kokyu — La Respiration",
+          "description": "Gérer son rythme cardiaque : respiration lente pour l'analyse, accélérée pour l'action.",
+          "type": "connaissance",
+          "etapes": ["Respiration lente et maîtrisée pour l'analyse", "Respiration accélérée pour les techniques éprouvantes", "Alterner selon la situation de combat"],
+          "mudras": [],
+          "rang": "Genin",
+          "prerequis": []
+        },
+        {
+          "id": "kenj_metsuke",
+          "nom": "Metsuke — Le Regard",
+          "description": "Lire les intentions de l'adversaire en observant l'ensemble du corps, pas une seule partie.",
+          "type": "connaissance",
+          "etapes": ["Observer l'adversaire dans son ensemble", "Lire la posture, l'équilibre, les épaules, les hanches", "Anticiper l'attaque avant le mouvement de la lame"],
+          "mudras": [],
+          "rang": "Genin",
+          "prerequis": []
+        },
+        {
+          "id": "kenj_maai",
+          "nom": "Maai — La Distance",
+          "description": "Les 3 distances de combat : Tōma (longue), Issoku-Itto (un pas une coupe), Chikama (courte).",
+          "type": "connaissance",
+          "etapes": ["Tōma : observation et recherche d'ouverture", "Issoku-Itto-no-Maai : distance idéale, un pas suffit", "Chikama : courte distance, combat rapide et dangereux"],
+          "mudras": [],
+          "rang": "Genin",
+          "prerequis": []
+        },
+        {
+          "id": "kenj_engagement",
+          "nom": "Engagement et responsabilité",
+          "description": "S'engager sur une voie de la lame est un choix de vie. On ne change pas de lame sans raison valable.",
+          "type": "connaissance",
+          "etapes": ["Comprendre l'engagement à vie", "Choisir sa voie en connaissance de cause", "Accepter la discipline permanente"],
+          "mudras": [],
+          "rang": "Genin",
+          "prerequis": []
+        }
+      ]
+    },
+    {
+      "id": "kenjutsu_double",
+      "titre": "Kenjutsu — Lame Double (Nitōryū)",
+      "categorie": "theorique",
+      "module": "Bases du Combat",
+      "rang_requis": "Genin",
+      "public_cible": "Genin et plus",
+      "auteur": "Tetsuya Fubetsu & Nagi Kinzetsu",
+      "prerequis": ["kenjutsu_cours"],
+      "description": "Le Nitōryū : combat à deux épées. Origine, les 4 gardes spécifiques à la double lame et démonstration.",
+      "techniques": [
+        {
+          "id": "nito_origine",
+          "nom": "Origines du Nitōryū",
+          "description": "Le Nitōryū a été inventé par Myosashi Shinmen, vagabond samouraï du Pays du Fer.",
+          "type": "connaissance",
+          "etapes": ["Connaître l'origine du Nitōryū", "Comprendre que deux lames = deux fois plus de discipline", "Différencier puissance et discipline"],
+          "mudras": [],
+          "rang": "Genin",
+          "prerequis": []
+        },
+        {
+          "id": "nito_chudan",
+          "nom": "Chūdan-no-Kamae — Garde du milieu",
+          "description": "Lame principale vers la gorge, seconde lame en protection du flanc. Garde équilibrée.",
+          "type": "connaissance",
+          "etapes": ["Positionner la lame principale vers la gorge/visage", "Maintenir la seconde lame en protection du flanc", "Alterner attaque et défense"],
+          "mudras": [],
+          "rang": "Genin",
+          "prerequis": []
+        },
+        {
+          "id": "nito_jodan",
+          "nom": "Jōdan-no-Kamae — Garde haute",
+          "description": "Lame dominante au-dessus de la tête. Agressive, forte pression psychologique. Défaut : ouverture du corps.",
+          "type": "connaissance",
+          "etapes": ["Lever la lame dominante au-dessus de la tête", "Protéger le corps avec la seconde", "Comprendre le risque d'ouverture"],
+          "mudras": [],
+          "rang": "Genin",
+          "prerequis": []
+        },
+        {
+          "id": "nito_gedan",
+          "nom": "Gedan-no-Kamae — Garde basse",
+          "description": "Lames vers le sol. Semble faible mais très dangereuse : attaque remontante difficile à anticiper.",
+          "type": "connaissance",
+          "etapes": ["Positionner les lames vers le sol", "Exploiter l'angle mort visuel", "Remonter l'attaque par surprise"],
+          "mudras": [],
+          "rang": "Genin",
+          "prerequis": []
+        },
+        {
+          "id": "nito_hasso",
+          "nom": "Hasso-no-Kamae — Garde latérale",
+          "description": "Lame dominante près de l'épaule. Changement de direction très rapide. Demande le plus de coordination.",
+          "type": "connaissance",
+          "etapes": ["Placer la lame dominante près de l'épaule", "Enchaîner coupes horizontales, verticales ou diagonales", "Maîtriser la coordination des deux lames"],
+          "mudras": [],
+          "rang": "Genin",
+          "prerequis": []
+        }
+      ]
+    },
+    {
       "id": "infiltration",
       "titre": "Infiltration (Théorie)",
       "categorie": "theorique",

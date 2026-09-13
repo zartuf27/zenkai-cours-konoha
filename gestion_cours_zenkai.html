@@ -4920,15 +4920,25 @@ function renderDash(){
 let fText='',fCat='',fRang='',fEtat='',fMod='';
 // Map course IDs to their required nature (only nature-specific combat courses)
 const COURS_NATURE={raiton_cours:'raiton',katon_cours:'katon',futon_cours:'futon',suiton_cours:'suiton',doton_cours:'doton'};
+// Map course IDs to their required combat spec (kenjutsu or taijutsu)
+const COURS_SPEC={kenjutsu_cours:'kenjutsu',kenjutsu_double:'kenjutsu',bourrasque:'taijutsu',pied_aube:'taijutsu'};
 // Returns the nature ID if this is a nature-locked course, or null
 function coursNature(cid){return COURS_NATURE[cid]||null;}
-// Check if a nature course should be visible for this sensei
+// Returns the combat spec if this is a spec-locked course, or null
+function coursSpec(cid){return COURS_SPEC[cid]||null;}
+// Check if a course should be visible for this sensei
 function coursVisibleForSensei(c){
   const nat=coursNature(c.id);
-  if(!nat)return true; // not nature-specific → always visible
-  const senNat=getSensei().nature;
-  if(!senNat)return true; // no nature chosen → show all
-  return nat===senNat;
+  if(nat){
+    const senNat=getSensei().nature;
+    if(senNat&&nat!==senNat)return false;
+  }
+  const spec=coursSpec(c.id);
+  if(spec){
+    const senSpec=getSensei().specCombat||'taijutsu';
+    if(spec!==senSpec)return false;
+  }
+  return true;
 }
 
 function renderCoursList(){
@@ -6528,10 +6538,16 @@ function loadAvatar(input){
 function generateSaveCode(){
   try{return btoa(unescape(encodeURIComponent(JSON.stringify(S))))}catch(e){return''}
 }
+function validateSaveData(d){
+  if(!d||typeof d!=='object'||Array.isArray(d))return false;
+  const keys=['c','n','sensei','darkMode','noAnim'];
+  return keys.some(k=>k in d);
+}
 function restoreSaveCode(code){
   try{
     const json=decodeURIComponent(escape(atob(code.trim())));
     const data=JSON.parse(json);
+    if(!validateSaveData(data)){toast('Format de sauvegarde non reconnu');return false}
     if(data.c)S.c={...S.c,...data.c};
     if(data.n)S.n={...S.n,...data.n};
     if(data.sensei)S.sensei={...S.sensei,...data.sensei};
@@ -6555,6 +6571,7 @@ function showModal(){document.getElementById('modalBg').classList.add('open');do
 function closeModal(){document.getElementById('modalBg').classList.remove('open')}
 function doImport(){
   try{const d=JSON.parse(document.getElementById('importArea').value);
+    if(!validateSaveData(d)){toast('Format de sauvegarde non reconnu');return}
     if(d.c)S.c={...S.c,...d.c};if(d.n)S.n={...S.n,...d.n};
     if(d.sensei)S.sensei={...S.sensei,...d.sensei};
     if(d.darkMode!==undefined)S.darkMode=d.darkMode;
