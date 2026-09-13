@@ -49,6 +49,14 @@
     { "id": "ranton", "nom": "Ranton", "elements": ["suiton","raiton"], "art": "Orage" },
     { "id": "jinton", "nom": "Jinton", "elements": ["katon","futon","doton"], "art": "Particules (Kekkei Tōta)" }
   ],
+  "kekkei_speciaux": [
+    { "id": "shoton", "nom": "Shoton", "source": "Chakra + Doton", "art": "Cristal" },
+    { "id": "inkuton", "nom": "Inkuton", "source": "Chakra + Encre", "art": "Encre" },
+    { "id": "kami", "nom": "Kami", "source": "Chakra + Papier", "art": "Papier" },
+    { "id": "taiton", "nom": "Taiton", "source": "Chakra + Futton", "art": "Vent" },
+    { "id": "kaminari", "nom": "Kaminari", "source": "Chakra + Raiton", "art": "Foudre Noire" },
+    { "id": "meiton", "nom": "Meiton", "source": "Chakra", "art": "Manipulation du Chakra" }
+  ],
   "armes": [
     { "id": "katana", "nom": "Katana", "taille": "60-80 cm de lame (~1m total)", "description": "Sabre traditionnel à lame courbée. Combat rapproché, frappes rapides et précises. Peut être amélioré en y insufflant du chakra." },
     { "id": "makibishi", "nom": "Makibishi", "taille": "2-5 cm", "description": "Petites pointes métalliques dispersées au sol pour ralentir ou blesser les ennemis." },

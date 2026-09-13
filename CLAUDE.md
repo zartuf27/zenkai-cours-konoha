@@ -185,13 +185,21 @@ Sur chaque page de cours détaillé :
 Flow en 2 phases :
 1. **Pop-up d'accueil** → redirige vers la page Sensei pour configurer le profil
 2. **Guide des onglets** — lancé via le bouton "✅ Profil configuré — Découvrir l'app"
-   - 5 étapes (Dashboard, Cours, Annonces, Bilan, Historique)
+   - 6 étapes (Dashboard, Cours, Notes de cours, Annonces, Bilan, Historique)
    - Descriptions **personnalisées par type** (`TOUR_TIPS_TYPED`) : 8 types ont des textes uniques
    - Mot de fin personnalisé par type + nature + prénom (`ONBOARD_FINAL`)
    - Sons : tick au clic (`playClick`), accord Do-Mi-Sol en fin (`playSuccess`)
    - Animations : slide, pulse, fade
 
 Le flag `zenkai_onboarded` dans localStorage empêche de relancer le tuto. Bouton "🎓 Relancer" dans la page Sensei.
+
+### Graphify
+
+Le projet utilise **Graphify** pour l'analyse structurelle du code. Fichiers dans `graphify-out/` :
+- `graph.json` — graphe du projet (154 nœuds, 118 arêtes, 39 communautés)
+- `graph.html` — visualisation interactive
+- `GRAPH_REPORT.md` — rapport d'analyse
+- Mise à jour : `graphify update .` après chaque modification significative
 
 ### Page Fin de mois (📊) — Rapport pour le Parchemin
 
