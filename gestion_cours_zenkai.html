@@ -1839,6 +1839,75 @@ doton_cours:{
 };
 
 // ================================================================
+// SPEC_FLAVOR — anecdotes liées à la spécialisation combat (taijutsu/kenjutsu + type de lame)
+// ================================================================
+const SPEC_FLAVOR={
+regles_or:{
+  taijutsu:'Un poing sans discipline frappe dans le vide. Les règles canalisent votre force comme l\'appui canalise le coup — sans elles, rien ne porte.',
+  kenjutsu:'Le Bushidō et les Règles d\'Or se rejoignent : la lame sans code est un danger pour son porteur. La discipline du sabreur commence ici.',
+  simple:'Une lame, un tranchant, une direction. La simplicité de la lame simple exige la même rigueur que ces huit règles : pas de superflu, que l\'essentiel.',
+  double:'Deux lames obéissent aux mêmes règles qu\'un village : coordination, respect mutuel, discipline. Le Nitōryū sans code est un chaos à deux mains.',
+  lourde:'Le poids de la lame lourde vous rappelle le poids de la responsabilité. Ces règles sont le contrepoids qui maintient l\'équilibre.'
+},
+nindo:{
+  taijutsu:'Un combattant au corps-à-corps met son corps en jeu à chaque échange. Son Nindo doit être gravé dans ses muscles autant que dans son esprit.',
+  kenjutsu:'Le sabreur qui dégaine sans Nindo ne sait pas pourquoi il frappe. La lame amplifie l\'intention — encore faut-il en avoir une.',
+  simple:'La lame simple est un choix de clarté. Votre Nindo devrait l\'être aussi — une phrase, une direction, un tranchant.',
+  double:'Le Nitōryū demande de penser en deux directions à la fois. Votre Nindo est le centre qui unifie les deux — sans lui, vos lames se contredisent.',
+  lourde:'La lame lourde ne permet qu\'un coup à la fois. Votre Nindo doit être aussi décisif — une conviction, pas un doute.'
+},
+volonte_feu:{
+  taijutsu:'Protéger le village à mains nues, sans artifice, c\'est peut-être la forme la plus pure de la Volonté du Feu. Votre corps est votre serment.',
+  kenjutsu:'La lame du sabreur de Konoha n\'est pas un outil de destruction — c\'est un bouclier qui tranche ce qui menace le village.',
+  simple:'Une lame simple pointée vers l\'ennemi, un village protégé derrière soi. La Volonté du Feu dans sa forme la plus directe.',
+  double:'Deux lames croisées devant le village — un rempart d\'acier forgé par la conviction. Le Nitōryū au service de Konoha.',
+  lourde:'Le poids de la lame lourde est le poids de la promesse : protéger ce village, quoi qu\'il en coûte. Chaque frappe honore cette promesse.'
+},
+histoire:{
+  taijutsu:'Les premiers shinobi n\'avaient ni ninjutsu ni genjutsu — juste leurs poings et leur volonté. Le taijutsu est l\'art le plus ancien de Konoha.',
+  kenjutsu:'Les samouraïs du Pays du Fer et les shinobi de Konoha ont marché côte à côte dans l\'histoire. Le Kenjutsu est ce pont entre deux traditions.',
+  simple:'La lame simple est l\'arme la plus ancienne du combattant — forgée bien avant que le chakra ne soit compris. Son histoire est celle du courage brut.',
+  double:'Le Nitōryū de Myosashi Shinmen est né au Pays du Fer, mais il a traversé les frontières pour atteindre Konoha. Chaque tradition enrichit celles qui la reçoivent.',
+  lourde:'Les lames lourdes étaient portées par les gardiens des portes de Konoha. Leur poids symbolisait l\'engagement de ne jamais reculer.'
+},
+taijutsu_theorie:{
+  taijutsu:'Vous avez choisi la voie du corps — la plus ancienne, la plus honnête. Chaque technique que vous apprendrez ici est un prolongement naturel de ce choix.',
+  kenjutsu:'Même un sabreur doit savoir se battre sans sa lame. Le jour où votre katana est brisé ou hors de portée, seul le taijutsu vous sauvera.',
+  simple:'La lame simple prolonge le bras — mais le bras doit d\'abord savoir frapper seul. Le taijutsu est le socle sur lequel votre Kenjutsu repose.',
+  double:'Le Nitōryū exige une coordination corporelle extrême. Sans fondations en taijutsu, vos deux lames ne seront que deux bâtons qui s\'entrechoquent.',
+  lourde:'La lame lourde demande une puissance physique que seul le taijutsu peut construire. Force des jambes, rotation des hanches — tout commence ici.'
+},
+armes_cours:{
+  taijutsu:'Même un spécialiste du corps-à-corps doit connaître les armes — ne serait-ce que pour savoir comment les contrer quand elles sont pointées vers vous.',
+  kenjutsu:'Ce catalogue est votre bibliothèque de base. Avant de maîtriser la lame, vous devez comprendre chaque outil à votre disposition — et ceux de vos adversaires.',
+  simple:'La lame simple est l\'aboutissement d\'une lignée d\'armes qui commence par le kunai. Comprendre toute la famille, c\'est comprendre pourquoi vous avez choisi le sabre.',
+  double:'Le Nitōryū combine deux sabres avec le reste de l\'arsenal shinobi. Un bon sabreur double sait quand poser ses lames pour un kunai — et quand les reprendre.',
+  lourde:'La lame lourde est le point final du catalogue des armes — la plus exigeante, la plus dévastatrice. Comprendre les autres armes, c\'est comprendre ce qu\'elle surpasse.'
+},
+decomposition_chakra:{
+  taijutsu:'Le taijutsu ne consomme presque pas de chakra — mais comprendre le vôtre vous permet de sentir celui de l\'adversaire et d\'anticiper ses techniques.',
+  kenjutsu:'Le chakra infusé dans la lame change tout — portée, tranchant, vitesse. Comprendre la décomposition du chakra, c\'est comprendre ce qui fait vibrer votre acier.',
+  simple:'Une lame, un flux de chakra, une direction. L\'infusion de chakra dans une lame simple est la forme la plus pure de cette décomposition.',
+  double:'Répartir son chakra entre deux lames exige une compréhension fine de la décomposition — trop dans l\'une, l\'autre devient un poids mort.',
+  lourde:'La lame lourde absorbe davantage de chakra à chaque infusion. Comprendre vos réserves, c\'est savoir combien de frappes chargées vous pouvez vous permettre.'
+},
+bourrasque:{
+  taijutsu:'La Bourrasque est votre technique — la quintessence du taijutsu rotatif. Tout votre entraînement au corps-à-corps culmine dans cette rotation.',
+  kenjutsu:'Un sabreur qui maîtrise la Bourrasque à mains nues peut imaginer ce qu\'elle devient avec une lame en extension. Le rayon de frappe double.',
+  simple:'Imaginez la Bourrasque avec un sabre en main — le cercle de mort s\'élargit, et chaque degré de rotation devient tranchant.',
+  double:'Deux lames en rotation 360° — c\'est une tempête d\'acier que rien ne traverse. Le Nitōryū donne à la Bourrasque une dimension terrifiante.',
+  lourde:'La lame lourde en rotation génère une force centrifuge dévastatrice. La Bourrasque avec une lame lourde ne repousse pas — elle broie.'
+},
+pied_aube:{
+  taijutsu:'Le Pied de l\'Aube est la preuve que la gravité est l\'alliée du combattant au corps-à-corps. Votre corps est le projectile — il n\'y a rien de plus pur.',
+  kenjutsu:'Un sabreur qui descend du ciel avec sa lame multiplie l\'impact. Le Pied de l\'Aube enseigne la trajectoire — la lame fait le reste.',
+  simple:'Descendre du ciel lame en avant, toute la gravité dans le tranchant — c\'est le Pied de l\'Aube traduit en Kenjutsu. Dévastateur.',
+  double:'Deux lames qui tombent simultanément depuis les hauteurs — l\'adversaire ne peut en bloquer qu\'une. Le Nitōryū rend le Pied de l\'Aube imparable.',
+  lourde:'Le poids de la lame lourde additionné à la gravité du Pied de l\'Aube — c\'est une frappe que même un mur de Doton aurait du mal à contenir.'
+}
+};
+
+// ================================================================
 // RÉSUMÉ "À RETENIR" — bullet points essentiels par cours théorique
 // ================================================================
 const RESUME={
@@ -5199,6 +5268,17 @@ function applySenseiName(html,coursId){
     let flavorHtml='';
     if(fl.intro&&fl.intro[type]) flavorHtml+=`<div class="flavor-intro">${fl.intro[type]}</div>`;
     if(fl.nature&&s.nature&&fl.nature[s.nature]) flavorHtml+=`<div class="flavor-nature" data-icon="${natInfo?natInfo.icon:'🔮'}">${fl.nature[s.nature]}</div>`;
+    // Inject combat spec flavor
+    const sf=SPEC_FLAVOR[coursId];
+    if(sf){
+      const spec=s.specCombat||'taijutsu';
+      const lame=s.typeLame||'';
+      const specText=(spec==='kenjutsu'&&lame&&sf[lame])?sf[lame]:(sf[spec]||null);
+      if(specText){
+        const specIcon=spec==='kenjutsu'?'🗡️':'🥋';
+        flavorHtml+=`<div class="flavor-nature" data-icon="${specIcon}">${specText}</div>`;
+      }
+    }
     if(flavorHtml){
       const h2End=out.indexOf('</h2>');
       if(h2End!==-1) out=out.slice(0,h2End+5)+flavorHtml+out.slice(h2End+5);

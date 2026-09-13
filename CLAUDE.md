@@ -29,7 +29,7 @@ Déploiement auto en ~1 min. Chaque prof ouvre le même lien, son profil/progres
 ## Structure du dossier
 
 ```
-gestion_cours_zenkai.html  — App principale (~5800 lignes, tout-en-un)
+gestion_cours_zenkai.html  — App principale (~7400 lignes, tout-en-un)
 donnees_cours.json         — Données structurées (synchronisé avec le HTML)
 CLAUDE.md                  — Ce fichier (instructions pour Claude)
 .gitignore                 — Exclut images lourdes + .claude/
@@ -131,6 +131,14 @@ const COURS_NATURE={raiton_cours:'raiton',katon_cours:'katon',futon_cours:'futon
 
 Les cours de techniques par nature ne sont visibles que pour le sensei dont c'est la nature.
 
+### Filtrage des cours par spécialisation combat
+
+```javascript
+const COURS_SPEC={kenjutsu_cours:'kenjutsu',kenjutsu_double:'kenjutsu',bourrasque:'taijutsu',pied_aube:'taijutsu'};
+```
+
+Les cours Kenjutsu ne sont visibles que pour les senseis Kenjutsu. Bourrasque et Pied de l'Aube uniquement pour les senseis Taijutsu. Le filtrage utilise `coursVisibleForSensei()` qui combine nature + spécialisation.
+
 ### Double mode de lecture (cours théoriques)
 
 Les cours théoriques disposent de 2 onglets dans le bloc contenu :
@@ -138,6 +146,21 @@ Les cours théoriques disposent de 2 onglets dans le bloc contenu :
 - **🎤 Guide oral** — Texte RP à lire à haute voix avec annotations et anecdotes (constante `CONTENU`)
 
 Les cours pratiques n'affichent que le guide oral. Le mode Présentation utilise toujours le guide oral.
+
+### Adaptation du contenu par personnalité + nature + spécialisation
+
+Le contenu des cours s'adapte dynamiquement sur 3 axes, injectés après le titre via `applySenseiName()` :
+
+1. **`COURS_FLAVOR[coursId].intro[type]`** — Intro personnalisée par type de sensei (16 variantes × 18 cours = 288 textes). Ton, vocabulaire, métaphores adaptés à la personnalité.
+2. **`COURS_FLAVOR[coursId].nature[nature]`** — Anecdote/métaphore reliant le thème du cours à l'élément du sensei (5 variantes × 18 cours = 90 textes).
+3. **`SPEC_FLAVOR[coursId][spec/lame]`** — Touche combat adaptée à la spécialisation Taijutsu ou Kenjutsu + type de lame (5 variantes × 9 cours = 45 textes).
+
+Logique de sélection `SPEC_FLAVOR` :
+- Sensei Taijutsu → variante `taijutsu`
+- Sensei Kenjutsu sans type de lame → variante `kenjutsu`
+- Sensei Kenjutsu + lame simple/double/lourde → variante `simple`/`double`/`lourde`
+
+Affichage : blocs CSS `.flavor-intro` (bordure skin, italique) et `.flavor-nature` (fond teinté, icône nature/spec).
 
 ### Cours Kenjutsu (structure modulaire par type de lame)
 
@@ -182,7 +205,7 @@ Le **Parchemin** = le canal Discord de l'Académie où les senseis postent leur 
   **- Date :** 12/09/2026
   **- Cours effectué(s) (Avec l'heure) :**
   • Techniques Raiton — 14:15
-  • Les Règles d'Or — 16:00 (proposé, 0 élève présent)
+  • Les Règles d'Or — 16:00 (aucun élève présent)
   ```
 - Bouton 🗑️ Remettre à zéro
 - Lien vers la page Historique
@@ -206,6 +229,8 @@ Overlay plein écran déclenché depuis la page détail d'un cours. Affiche le c
 | Constante | Contenu |
 |-----------|---------|
 | `const D` | Objet principal : meta, rangs, mudras, natures, kekkei, armes, cours[] |
+| `const COURS_FLAVOR` | Intros personnalité + anecdotes nature par cours (18 cours × 21 variantes) |
+| `const SPEC_FLAVOR` | Anecdotes spécialisation combat par cours (9 cours × 5 variantes) |
 | `const RESUME` | Bullet points "À retenir" par cours théorique (11 entrées) |
 | `const CONTENU` | Guides oraux (HTML) par cours ID |
 | `const INTERACTIF` | Blocs interactifs (Nindo uniquement) |
