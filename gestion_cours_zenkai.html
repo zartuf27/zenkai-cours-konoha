@@ -5692,14 +5692,14 @@ function renderDetail(){
     ${givenLast?'<span style=\"font-size:0.72rem;color:var(--text-dim)\">· Dernier : '+givenLast+'</span>':''}
   </div>`;
 
-  // Notes du sensei
+  // Notes du prof
   if(NOTES_PROF[c.id]){
     const np=NOTES_PROF[c.id];
     const nKey='notes_open_'+c.id;
     const nOpen=S.c[nKey];
     h+=`<div style="margin-bottom:14px;display:flex;gap:8px;align-items:center;flex-wrap:wrap">
       <button class="btn btn-sm" onclick="S.c['${nKey}']=!S.c['${nKey}'];save();render()" style="font-size:0.8rem;background:var(--bg-parchment);border:1px solid var(--accent-gold);color:var(--accent-gold)">
-        ${nOpen?'📝 Masquer les notes':'📝 Notes du sensei'}
+        ${nOpen?'📝 Masquer les notes':'📝 Notes du prof'}
       </button>`;
     if(nOpen){
       if(np.copy){
@@ -7423,7 +7423,7 @@ function closeTourStep(){
 const SIDEBAR_TIPS={
   dashboard:{title:'Tableau de bord',text:'Vue d\'ensemble de votre progression. Votre carte sensei et vos stats.'},
   cours:{title:'Cours',text:'Tous vos cours classés par module. Cliquez pour voir le contenu, cocher les étapes et marquer "cours donné".'},
-  detail:{title:'Notes de cours',text:'Chaque cours dispose de <strong>notes copiables</strong> prêtes à coller en jeu. Cliquez sur 📝 Notes du sensei pour les afficher, puis 📋 Copier pour les avoir dans votre presse-papier. Les notes s\'adaptent automatiquement à votre nom et votre personnalité.'},
+  detail:{title:'Notes de cours',text:'Chaque cours dispose de <strong>notes copiables</strong> prêtes à coller en jeu. Cliquez sur 📝 Notes du prof pour les afficher, puis 📋 Copier pour les avoir dans votre presse-papier. Les notes s\'adaptent automatiquement à votre nom et votre personnalité.'},
   mudras:{title:'Mudras',text:'Référence des 12 signes de main. Cochez ceux que vous maîtrisez.'},
   natures:{title:'Natures',text:'Les 5 natures de chakra, le cycle de supériorité et les Kekkei Genkai.'},
   armes:{title:'Armes',text:'Catalogue des 8 armes ninja standard.'},
