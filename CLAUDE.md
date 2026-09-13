@@ -29,15 +29,15 @@ Déploiement auto en ~1 min. Chaque prof ouvre le même lien, son profil/progres
 ## Structure du dossier
 
 ```
-gestion_cours_zenkai.html  — App principale (~7400 lignes, tout-en-un)
+gestion_cours_zenkai.html  — App principale (~7500 lignes, tout-en-un)
 donnees_cours.json         — Données structurées (synchronisé avec le HTML)
+img_cycle_natures.png      — Schéma cycle des 5 natures (utilisé dans les cours)
+img_kekkei_genkai.png      — Diagramme des Kekkei Genkai (utilisé dans les cours)
 CLAUDE.md                  — Ce fichier (instructions pour Claude)
-.gitignore                 — Exclut images lourdes + .claude/
+.gitignore                 — Exclut images lourdes, .docx sources, .claude/
 théorique/                 — Cours théoriques (.docx, .md) + images
 Pratique/                  — 13 cours pratiques (.docx)
 Cours du sensei renard/    — Cours d'un autre sensei (7 .md + HTML + script)
-Kenjustu.docx              — Source du cours Kenjutsu (lame double / Nitōryū)
-COURS NATURE PRATIQUE.docx — Source des 4 cours nature (Katon, Futon, Suiton, Doton)
 Propositions de nouveaux cours.docx — Idées de nouveaux cours
 Format tableau.docx        — Directive format annonces (Yamamoto Jakka)
 ```
@@ -310,8 +310,9 @@ Overlay plein écran déclenché depuis la page détail d'un cours. Affiche le c
 - Chronologie : post-Tobirama, crise de succession (pas de 3e Hokage)
 - 10 rangs (Apprenti Genin → Hokage), senseis à partir de Genin Confirmé
 - Cycle : Katon > Futon > Raiton > Doton > Suiton > Katon
-- 12 mudras, 10 Kekkei Genkai + 1 Kekkei Tōta (Jinton)
+- 12 mudras, 9 Kekkei Genkai (2 natures) + 6 Kekkei Genkai spéciaux (chakra pur) + 1 Kekkei Tōta (Jinton = 3 natures)
 - Kenjutsu : Nitōryū inventé par Myosashi Shinmen (Pays du Fer)
+- Images de référence : `img_cycle_natures.png` (cycle), `img_kekkei_genkai.png` (diagramme KG)
 
 ### Synchronisation
 - HTML, JSON et fichiers source doivent rester synchronisés
