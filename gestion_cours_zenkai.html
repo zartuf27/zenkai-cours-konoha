@@ -2050,6 +2050,14 @@ const RESUME={
 <li>Si la nature diffère → on entre dans le <strong>cycle des natures</strong>.</li>
 </ul>
 </div>
+<div class="resume-section">
+<h3>Hiérarchie des Natures (ouverture)</h3>
+<ul>
+<li><strong>Cycle :</strong> 🔥 Katon → 🌬️ Futon → ⚡ Raiton → 🌍 Doton → 💧 Suiton → 🔥 Katon</li>
+<li><strong>Test de la feuille :</strong> brûle (Katon), humidifie (Suiton), s'effrite (Doton), plie (Raiton), se coupe (Futon).</li>
+<li>Chaque nature a une <strong>force spéciale</strong> : brûlures, absorption, étourdissement, robustesse, vitesse.</li>
+</ul>
+</div>
 </div>`,
 
 "mudras_cours":`
@@ -2721,6 +2729,38 @@ const CONTENU={
 <li>La <strong>Compensation</strong> (Sosaï) annule deux jutsus de même niveau et de même nature</li>
 </ol>
 
+<h2>PARTIE 6 — Ouverture vers les Natures</h2>
+<p><strong>Transition :</strong></p>
+<p style="background:var(--bg-parchment);padding:10px 14px;border-radius:6px;font-style:italic">« Maintenant que vous savez comment le chakra circule et ce qui se passe quand deux techniques se rencontrent, il est temps d'aborder ce qui donne sa couleur à votre chakra : les Natures. »</p>
+
+<h3>Hiérarchie des Natures</h3>
+<p>Le chakra se décline en <strong>5 natures élémentaires</strong> qui forment un cycle de supériorité :</p>
+<div style="text-align:center;margin:16px 0"><img src="img_cycle_natures.png" alt="Cycle des 5 Natures" style="max-width:280px;border-radius:var(--radius-lg)"></div>
+<p style="text-align:center;font-size:0.95rem;font-weight:600;margin:12px 0">🔥 Katon → 🌬️ Futon → ⚡ Raiton → 🌍 Doton → 💧 Suiton → 🔥 Katon</p>
+
+<h3>Test de la Feuille</h3>
+<p>Le test d'affinité se fait avec une feuille de papier spéciale. Selon votre nature :</p>
+<ul>
+<li><strong>🔥 Katon</strong> — la feuille brûle</li>
+<li><strong>💧 Suiton</strong> — la feuille s'humidifie</li>
+<li><strong>🌍 Doton</strong> — la feuille se salit et s'effrite</li>
+<li><strong>⚡ Raiton</strong> — la feuille plie (les ions froissent le papier)</li>
+<li><strong>🌬️ Futon</strong> — la feuille se coupe en deux</li>
+</ul>
+
+<h3>Forces de chaque nature</h3>
+<table class="contenu-table">
+<tr><th>Nature</th><th>Élément</th><th>Force spéciale</th></tr>
+<tr><td>🔥 Katon</td><td>Feu</td><td>Inflige des brûlures</td></tr>
+<tr><td>💧 Suiton</td><td>Eau</td><td>Absorbe le chakra</td></tr>
+<tr><td>⚡ Raiton</td><td>Foudre</td><td>Étourdit la cible</td></tr>
+<tr><td>🌍 Doton</td><td>Terre</td><td>Renforce la robustesse</td></tr>
+<tr><td>🌬️ Futon</td><td>Vent</td><td>Accélère la vitesse de déplacement</td></tr>
+</table>
+
+<p style="font-size:0.85rem;color:var(--text-dim);font-style:italic">Ces notions sont approfondies dans le cours « Nature de Chakra » qui présente aussi les Kekkei Genkai (combinaisons avancées).</p>
+
+<h2>FERMETURE — Récap' et ouverture</h2>
 <p><strong>Phrase de fermeture :</strong></p>
 <p style="background:var(--bg-parchment);padding:10px 14px;border-radius:6px;font-style:italic">« Maintenant vous savez de quoi le chakra est fait. Vous savez d'où il vient, comment il circule, et ce qui se passe quand deux techniques se rencontrent. La prochaine étape, c'est apprendre à le mettre en forme. C'est le rôle des Mudras et des Natures, dans les modules suivants.<br><br>Retenez une chose : le chakra n'est pas un réservoir à vider. C'est un courant à maîtriser. »</p>
 `,
@@ -2798,37 +2838,60 @@ const CONTENU={
 "nature_theorie":`
 <h2>Le Cycle des 5 Natures</h2>
 <p>Chaque nature de chakra est supérieure à une autre et inférieure à une autre, formant un cycle :</p>
+<div style="text-align:center;margin:16px 0"><img src="img_cycle_natures.png" alt="Cycle des 5 Natures" style="max-width:320px;border-radius:var(--radius-lg)"></div>
 <p style="text-align:center;font-size:1rem;font-weight:600;margin:12px 0">🔥 Katon → 🌬️ Futon → ⚡ Raiton → 🌍 Doton → 💧 Suiton → 🔥 Katon</p>
 <table class="contenu-table">
 <tr><th>Nature</th><th>Élément</th><th>Force spéciale</th><th>Bat</th><th>Perd contre</th></tr>
-<tr><td>Katon</td><td>Feu</td><td>Inflige des brûlures</td><td>Futon</td><td>Suiton</td></tr>
-<tr><td>Futon</td><td>Vent</td><td>Accélère la vitesse</td><td>Raiton</td><td>Katon</td></tr>
-<tr><td>Raiton</td><td>Foudre</td><td>Étourdit la cible</td><td>Doton</td><td>Futon</td></tr>
-<tr><td>Doton</td><td>Terre</td><td>Renforce la robustesse</td><td>Suiton</td><td>Raiton</td></tr>
-<tr><td>Suiton</td><td>Eau</td><td>Absorbe le chakra</td><td>Katon</td><td>Doton</td></tr>
+<tr><td>🔥 Katon</td><td>Feu</td><td>Inflige des brûlures</td><td>Futon</td><td>Suiton</td></tr>
+<tr><td>🌬️ Futon</td><td>Vent</td><td>Accélère la vitesse de déplacement</td><td>Raiton</td><td>Katon</td></tr>
+<tr><td>⚡ Raiton</td><td>Foudre</td><td>Étourdit la cible</td><td>Doton</td><td>Futon</td></tr>
+<tr><td>🌍 Doton</td><td>Terre</td><td>Renforce la robustesse</td><td>Suiton</td><td>Raiton</td></tr>
+<tr><td>💧 Suiton</td><td>Eau</td><td>Absorbe le chakra</td><td>Katon</td><td>Doton</td></tr>
 </table>
 
 <h2>Le Test de la Feuille</h2>
-<p>Méthode pour déterminer sa nature de chakra :</p>
+<p>Méthode pour déterminer sa nature de chakra. Le shinobi concentre son chakra dans une feuille de papier spéciale et observe la réaction :</p>
 <ul>
-<li><strong>Katon</strong> — la feuille brûle</li>
-<li><strong>Suiton</strong> — la feuille s'humidifie</li>
-<li><strong>Doton</strong> — la feuille s'effrite</li>
-<li><strong>Raiton</strong> — la feuille se plie</li>
-<li><strong>Futon</strong> — la feuille se coupe</li>
+<li><strong>🔥 Katon</strong> — la feuille brûle</li>
+<li><strong>💧 Suiton</strong> — la feuille s'humidifie</li>
+<li><strong>🌍 Doton</strong> — la feuille se salit et s'effrite</li>
+<li><strong>⚡ Raiton</strong> — la feuille plie (les ions froissent le papier)</li>
+<li><strong>🌬️ Futon</strong> — la feuille se coupe en deux</li>
 </ul>
 
 <h2>Kekkei Genkai — Combinaisons avancées</h2>
 <p>Certains shinobi peuvent combiner deux natures pour créer un élément unique :</p>
+<div style="text-align:center;margin:16px 0"><img src="img_kekkei_genkai.png" alt="Diagramme des Kekkei Genkai" style="max-width:400px;border-radius:var(--radius-lg)"></div>
+
+<h3>Kekkei Genkai — 2 natures de chakra</h3>
 <table class="contenu-table">
 <tr><th>Kekkei Genkai</th><th>Combinaison</th><th>Art</th></tr>
-<tr><td>Mokuton</td><td>Doton + Suiton</td><td>Bois</td></tr>
-<tr><td>Hyoton</td><td>Suiton + Futon</td><td>Glace</td></tr>
-<tr><td>Yoton</td><td>Doton + Katon</td><td>Lave</td></tr>
 <tr><td>Bakuton</td><td>Doton + Raiton</td><td>Explosions</td></tr>
+<tr><td>Deiton</td><td>Doton + Suiton</td><td>Boue</td></tr>
+<tr><td>Futton</td><td>Suiton + Katon</td><td>Vapeur</td></tr>
+<tr><td>Hyoton</td><td>Suiton + Futon</td><td>Glace</td></tr>
+<tr><td>Jiton</td><td>Doton + Futon</td><td>Magnétisme</td></tr>
+<tr><td>Mokuton</td><td>Doton + Suiton</td><td>Bois</td></tr>
 <tr><td>Ranton</td><td>Suiton + Raiton</td><td>Orage</td></tr>
 <tr><td>Shakuton</td><td>Katon + Futon</td><td>Chaleur</td></tr>
-<tr><td>Jinton</td><td>Katon + Futon + Doton</td><td>Particules (Kekkei Tōta — 3 natures)</td></tr>
+<tr><td>Yoton</td><td>Doton + Katon</td><td>Lave</td></tr>
+</table>
+
+<h3>Kekkei Genkai spéciaux — Chakra pur</h3>
+<table class="contenu-table">
+<tr><th>Kekkei Genkai</th><th>Source</th><th>Art</th></tr>
+<tr><td>Shoton</td><td>Chakra + Doton</td><td>Cristal</td></tr>
+<tr><td>Inkuton</td><td>Chakra + Encre</td><td>Encre</td></tr>
+<tr><td>Kami</td><td>Chakra + Papier</td><td>Papier</td></tr>
+<tr><td>Taiton</td><td>Chakra + Futton</td><td>Vent</td></tr>
+<tr><td>Kaminari</td><td>Chakra + Raiton</td><td>Foudre Noire</td></tr>
+<tr><td>Meiton</td><td>Chakra</td><td>Manipulation du Chakra</td></tr>
+</table>
+
+<h3>Kekkei Tōta — 3 natures de chakra</h3>
+<table class="contenu-table">
+<tr><th>Kekkei Tōta</th><th>Combinaison</th><th>Art</th></tr>
+<tr><td>Jinton</td><td>Katon + Futon + Doton</td><td>Particules</td></tr>
 </table>
 `,
 
