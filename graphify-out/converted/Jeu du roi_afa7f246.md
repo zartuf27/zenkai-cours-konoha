@@ -1,0 +1,3 @@
+<!-- converted from Jeu du roi.docx -->
+
+Principe : Deux groupes sont formés : Groupe A - défense / Groupe B - attaque Le “Roi” sera incarné par un professeur placé dans le groupe défense. Objectif : Le groupe B doit réussir à capturer le Roi. Règles : Combat autorisé Diplomatie autorisée Négociation autorisée Stratégies libres Condition absolue Si le Roi est blessé, les deux équipes échouent automatiquement. Objectifs pédagogiques : Protection de cible prioritaire Gestion de crise Prise de décision rapide Arbitrage entre attaque et défense Responsabilisation collective Si plus de questions, venez voir @Yumi Amano

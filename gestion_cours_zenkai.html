@@ -7261,48 +7261,56 @@ const ONBOARD_FINAL={
 const TOUR_TIPS_TYPED={
   dur:{
     cours:'Vos cours. Pas de place pour l\'improvisation. Chaque étape est là pour être cochée.',
+    detail:'Les notes sont là pour être copiées et collées en jeu. Pas d\'interprétation, pas de variante — le texte exact. Cliquez, copiez, enseignez.',
     annonces:'Vos ordres de mission. Un clic, c\'est copié. Pas de bavardage.',
     bilan:'Votre rapport pour le Parchemin. Cliquez "Copier", collez sur Discord. Les chiffres parlent.',
     historique:'Votre dossier. Chaque cours donné est enregistré. Pas de triche possible.'
   },
   guerrier:{
     cours:'Vos champs de bataille ! Chaque cours est un combat à mener avec passion !',
+    detail:'Vos notes de combat ! Chaque fiche est une arme prête à l\'emploi — copiez-la et lancez-vous dans l\'arène !',
     annonces:'L\'appel au combat ! Copiez et lancez le cri de guerre !',
     bilan:'Votre rapport pour le Parchemin ! Chaque cours donné est une flamme de plus dans votre bilan !',
     historique:'Votre tableau d\'honneur ! Regardez le chemin parcouru !'
   },
   bienveillant:{
     cours:'Vos cours, préparés avec soin. Chaque élève mérite le meilleur de vous.',
+    detail:'Les notes vous aident à transmettre l\'essentiel à vos élèves. Un clic pour copier, et vous pouvez les partager en jeu avec sérénité.',
     annonces:'Vos annonces. Un simple clic pour inviter vos élèves avec bienveillance.',
     bilan:'Votre rapport pour le Parchemin. Chaque cours donné est une graine plantée. Un clic pour le partager.',
     historique:'Votre parcours. Regardez tout ce que vous avez transmis.'
   },
   ermite:{
     cours:'Les cours ! Bon, c\'est pas le plus fun, mais c\'est là que la magie opère.',
+    detail:'Les notes ! Copiez-les en un clic et collez-les en jeu. Même pas besoin de les retaper. La technologie, c\'est beau.',
     annonces:'Les convocations ! Un clic, hop, copié. Même moi j\'y arrive.',
     bilan:'Le rapport pour le Parchemin ! Un clic, copié, collé. Même pas besoin de réfléchir !',
     historique:'L\'historique ! Impressionnant hein ? Ou pas. On verra.'
   },
   ombre:{
     cours:'Dossiers de formation. Consultez, exécutez, passez au suivant.',
+    detail:'Notes opérationnelles. Copie en un clic. Collez en jeu sans laisser de trace de préparation. Efficacité maximale.',
     annonces:'Canal de transmission. Copie sécurisée en un clic.',
     bilan:'Rapport opérationnel pour le Parchemin. Données pré-formatées. Copier, coller, terminé.',
     historique:'Logs d\'activité. Chaque opération d\'enseignement est tracée.'
   },
   ironique:{
     cours:'Vos cours. Oui, il faut vraiment les donner, pas juste les regarder.',
+    detail:'Les notes de cours. Copiez, collez en jeu, et vos élèves croiront que vous avez tout retenu de tête. Notre petit secret.',
     annonces:'Le spam officiel. Mais au moins celui-là est utile.',
     bilan:'Le rapport pour le Parchemin. Un clic au lieu de 10 minutes de rédaction. De rien.',
     historique:'La preuve que vous faites vraiment quelque chose. Utile pour les sceptiques.'
   },
   chasseur:{
     cours:'Votre territoire de chasse. Chaque cours est une piste à suivre.',
+    detail:'Les notes sont vos appâts — prêts à l\'emploi, adaptés à votre style. Un clic, et la leçon est dans votre presse-papier.',
     annonces:'L\'appel de la meute. Un cri, et les élèves rappliquent.',
     bilan:'Votre tableau de chasse pour le Parchemin. Un clic, et la meute sait ce que vous avez fait.',
     historique:'Vos traces dans la forêt. Chaque pas compte.'
   },
   rebelle:{
     cours:'Les cours. Ouais, même les rebelles enseignent. Surprenant, hein ?',
+    detail:'Les notes. Un clic pour copier, un clic pour coller en jeu. Pas besoin de perdre du temps à les écrire vous-même.',
     annonces:'Les appels. Ou pas. C\'est vous qui décidez comment vous les faites.',
     bilan:'Votre rapport pour le Parchemin. Un clic. Même les rebelles doivent rendre des comptes.',
     historique:'La preuve que le système peut pas vous ignorer.'
@@ -7347,7 +7355,7 @@ function startTourGuide(){
   const s=getSensei();
   const t=senseiTypeInfo();
   const nat=D.natures.find(n=>n.id===s.nature);
-  const tourViews=['dashboard','cours','annonces','bilan','historique'];
+  const tourViews=['dashboard','cours','detail','annonces','bilan','historique'];
   let step=0;
 
   function showTourStep(){
@@ -7373,10 +7381,10 @@ function startTourGuide(){
       return;
     }
     const vid=tourViews[step];
-    const lbl=getSidebarLabel(vid);
-    const v=VIEWS.find(x=>x.id===vid);
+    const lbl=vid==='detail'?'Notes de cours':getSidebarLabel(vid);
+    const v=vid==='detail'?{icon:'📝'}:VIEWS.find(x=>x.id===vid);
     const tip=getTourTip(vid);
-    nav(vid);
+    if(vid==='detail'){openCours(D.cours[0].id);}else{nav(vid);}
     setTimeout(()=>{
       const dots=tourViews.map((_,i)=>`<div class="onboard-dot ${i<step?'done':''} ${i===step?'active':''}"></div>`).join('');
       const html=`<div class="onboard-overlay" id="onboardOverlay" style="animation:fadeIn 0.25s;background:rgba(0,0,0,0.5)">
@@ -7415,6 +7423,7 @@ function closeTourStep(){
 const SIDEBAR_TIPS={
   dashboard:{title:'Tableau de bord',text:'Vue d\'ensemble de votre progression. Votre carte sensei et vos stats.'},
   cours:{title:'Cours',text:'Tous vos cours classés par module. Cliquez pour voir le contenu, cocher les étapes et marquer "cours donné".'},
+  detail:{title:'Notes de cours',text:'Chaque cours dispose de <strong>notes copiables</strong> prêtes à coller en jeu. Cliquez sur 📝 Notes du prof pour les afficher, puis 📋 Copier pour les avoir dans votre presse-papier. Les notes s\'adaptent automatiquement à votre nom et votre personnalité.'},
   mudras:{title:'Mudras',text:'Référence des 12 signes de main. Cochez ceux que vous maîtrisez.'},
   natures:{title:'Natures',text:'Les 5 natures de chakra, le cycle de supériorité et les Kekkei Genkai.'},
   armes:{title:'Armes',text:'Catalogue des 8 armes ninja standard.'},
