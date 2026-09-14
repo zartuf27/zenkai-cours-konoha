@@ -29,7 +29,10 @@ Déploiement auto en ~1 min. Chaque prof ouvre le même lien, son profil/progres
 ## Structure du dossier
 
 ```
-gestion_cours_zenkai.html  — App principale (~7500 lignes, tout-en-un)
+gestion_cours_zenkai.html  — App principale (~7700 lignes, tout-en-un)
+sw.js                      — Service Worker PWA (cache hors-ligne)
+manifest.json              — Manifest PWA (installable sur mobile)
+icon-192.svg               — Icône PWA (symbole Konoha)
 donnees_cours.json         — Données structurées (synchronisé avec le HTML)
 img_cycle_natures.png      — Schéma cycle des 5 natures (utilisé dans les cours)
 img_kekkei_genkai.png      — Diagramme des Kekkei Genkai (utilisé dans les cours)
@@ -193,7 +196,7 @@ Le flag `zenkai_onboarded` dans localStorage empêche de relancer le tuto. Bouto
 ### Graphify — Mémoire structurelle
 
 Le projet utilise **Graphify** comme carte contextuelle et mémoire structurelle. Fichiers dans `graphify-out/` :
-- `graph.json` — graphe du projet (155 nœuds, 119 arêtes, 39 communautés)
+- `graph.json` — graphe du projet (170 nœuds, 132 arêtes, 41 communautés)
 - `graph.html` — visualisation interactive
 - `GRAPH_REPORT.md` — rapport d'analyse (hubs, communautés, gaps)
 - `converted/*.md` — sources .docx converties (contenu original des cours)
@@ -266,6 +269,18 @@ Overlay plein écran déclenché depuis la page détail d'un cours. Affiche le c
 | `S.sensei` | `{prenom, nom, signe, nature, type, rang, lieu, signature, specCombat, typeLame}` |
 | `S.darkMode` | Boolean |
 | `S.noAnim` | Boolean |
+
+### PWA & Outils
+
+| Outil | Fichier / CDN | Fonction |
+|-------|---------------|----------|
+| Service Worker | `sw.js` | Cache hors-ligne, cache-first strategy. Version dans `CACHE_NAME` |
+| Manifest | `manifest.json` | App installable sur mobile (standalone) |
+| QR Code | CDN `qrcode-generator` | Transfert profil par QR (Réglages → Générer QR) |
+| Export PDF | CDN `html2canvas` + `jsPDF` | Export Historique et cours en PDF |
+| Auto-restore | Hash URL `#restore=...` | Scan QR → profil restauré automatiquement |
+
+Pour mettre à jour le cache PWA : incrémenter la version dans `sw.js` (`zenkai-v1` → `zenkai-v2`).
 
 ### Fonctions clés
 
