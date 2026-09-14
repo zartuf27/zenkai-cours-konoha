@@ -29,7 +29,7 @@ Déploiement auto en ~1 min. Chaque prof ouvre le même lien, son profil/progres
 ## Structure du dossier
 
 ```
-gestion_cours_zenkai.html  — App principale (~8800 lignes, tout-en-un)
+gestion_cours_zenkai.html  — App principale (~8100 lignes, tout-en-un)
 sw.js                      — Service Worker PWA (cache hors-ligne)
 manifest.json              — Manifest PWA (installable sur mobile)
 icon-192.svg               — Icône PWA (symbole Konoha)
