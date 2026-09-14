@@ -196,7 +196,7 @@ Le flag `zenkai_onboarded` dans localStorage empêche de relancer le tuto. Bouto
 ### Graphify — Mémoire structurelle
 
 Le projet utilise **Graphify** comme carte contextuelle et mémoire structurelle. Fichiers dans `graphify-out/` :
-- `graph.json` — graphe du projet (170 nœuds, 132 arêtes, 41 communautés)
+- `graph.json` — graphe du projet (171 nœuds, 133 arêtes, 40 communautés)
 - `graph.html` — visualisation interactive
 - `GRAPH_REPORT.md` — rapport d'analyse (hubs, communautés, gaps)
 - `converted/*.md` — sources .docx converties (contenu original des cours)

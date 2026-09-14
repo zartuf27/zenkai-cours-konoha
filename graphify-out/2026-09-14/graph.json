@@ -97,17 +97,17 @@
       "node_kind": "heading",
       "norm_label": "fonctions cles",
       "source_file": "CLAUDE.md",
-      "source_location": "L260"
+      "source_location": "L270"
     },
     {
-      "id": "claude_graphify",
-      "label": "Graphify",
+      "id": "claude_graphify_m\u00e9moire_structurelle",
+      "label": "Graphify \u2014 M\u00e9moire structurelle",
       "_origin": "ast",
       "community": 0,
       "community_name": "Architecture du HTML",
       "file_type": "document",
       "node_kind": "heading",
-      "norm_label": "graphify",
+      "norm_label": "graphify \u2014 memoire structurelle",
       "source_file": "CLAUDE.md",
       "source_location": "L193"
     },
@@ -121,7 +121,7 @@
       "node_kind": "heading",
       "norm_label": "icones",
       "source_file": "CLAUDE.md",
-      "source_location": "L288"
+      "source_location": "L299"
     },
     {
       "id": "claude_interface_cours_simplifi\u00e9_2_onglets",
@@ -157,7 +157,7 @@
       "node_kind": "heading",
       "norm_label": "mode presentation (\ud83c\udfa4)",
       "source_file": "CLAUDE.md",
-      "source_location": "L225"
+      "source_location": "L235"
     },
     {
       "id": "claude_onboarding_tuto_premi\u00e8re_visite",
@@ -181,7 +181,7 @@
       "node_kind": "heading",
       "norm_label": "page fin de mois (\ud83d\udcca) \u2014 rapport pour le parchemin",
       "source_file": "CLAUDE.md",
-      "source_location": "L201"
+      "source_location": "L211"
     },
     {
       "id": "claude_page_historique",
@@ -193,7 +193,7 @@
       "node_kind": "heading",
       "norm_label": "page historique (\ud83d\udcdc)",
       "source_file": "CLAUDE.md",
-      "source_location": "L215"
+      "source_location": "L225"
     },
     {
       "id": "claude_persistence_localstorage_cl\u00e9_zenkai_v2",
@@ -205,7 +205,7 @@
       "node_kind": "heading",
       "norm_label": "persistence (localstorage cle `zenkai_v2`)",
       "source_file": "CLAUDE.md",
-      "source_location": "L250"
+      "source_location": "L260"
     },
     {
       "id": "claude_proc\u00e9dure_pour_ajouter_un_cours",
@@ -217,7 +217,7 @@
       "node_kind": "heading",
       "norm_label": "procedure pour ajouter un cours",
       "source_file": "CLAUDE.md",
-      "source_location": "L277"
+      "source_location": "L287"
     },
     {
       "id": "claude_profil_sensei_11_axes_de_personnalisation",
@@ -253,7 +253,7 @@
       "node_kind": "heading",
       "norm_label": "structure des donnees (inline dans le html)",
       "source_file": "CLAUDE.md",
-      "source_location": "L229"
+      "source_location": "L239"
     },
     {
       "id": "claude_syst\u00e8me_de_citations_encouragements_de_fin_de_cours",
@@ -603,6 +603,66 @@
       "source_location": "L1"
     },
     {
+      "id": "th\u00e9orique_histoire_du_village_1_le_clan_senju_architectes_du_village",
+      "label": "1. Le clan Senju \u2014 Architectes du village",
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "Histoire du Village de Konoha",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "1. le clan senju \u2014 architectes du village",
+      "source_file": "th\u00e9orique/histoire du village.md",
+      "source_location": "L58"
+    },
+    {
+      "id": "th\u00e9orique_histoire_du_village_2_le_clan_uchiha_pilier_du_village",
+      "label": "2. Le clan Uchiha \u2014 Pilier du village",
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "Histoire du Village de Konoha",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "2. le clan uchiha \u2014 pilier du village",
+      "source_file": "th\u00e9orique/histoire du village.md",
+      "source_location": "L66"
+    },
+    {
+      "id": "th\u00e9orique_histoire_du_village_3_le_clan_hy\u016bga_sentinelles_silencieuses",
+      "label": "3. Le clan Hy\u016bga \u2014 Sentinelles silencieuses",
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "Histoire du Village de Konoha",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "3. le clan hyuga \u2014 sentinelles silencieuses",
+      "source_file": "th\u00e9orique/histoire du village.md",
+      "source_location": "L77"
+    },
+    {
+      "id": "th\u00e9orique_histoire_du_village_4_le_clan_nara_cerveaux_et_archives",
+      "label": "4. Le clan Nara \u2014 Cerveaux et archives",
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "Histoire du Village de Konoha",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "4. le clan nara \u2014 cerveaux et archives",
+      "source_file": "th\u00e9orique/histoire du village.md",
+      "source_location": "L85"
+    },
+    {
+      "id": "th\u00e9orique_histoire_du_village_5_le_clan_akimichi_force_logistique_et_coh\u00e9sion_sociale",
+      "label": "5. Le clan Akimichi \u2014 Force logistique et coh\u00e9sion sociale",
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "Histoire du Village de Konoha",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "5. le clan akimichi \u2014 force logistique et cohesion sociale",
+      "source_file": "th\u00e9orique/histoire du village.md",
+      "source_location": "L98"
+    },
+    {
       "id": "th\u00e9orique_histoire_du_village_histoire_du_village_de_konoha",
       "label": "Histoire du Village de Konoha",
       "_origin": "ast",
@@ -615,18 +675,6 @@
       "source_location": "L1"
     },
     {
-      "id": "th\u00e9orique_histoire_du_village_i_avant_konoha_un_pays_du_feu_en_guerre",
-      "label": "I. Avant Konoha : un Pays du Feu en guerre",
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "Histoire du Village de Konoha",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "i. avant konoha : un pays du feu en guerre",
-      "source_file": "th\u00e9orique/histoire du village.md",
-      "source_location": "L11"
-    },
-    {
       "id": "th\u00e9orique_histoire_du_village_ii_hashirama_madara_et_la_fondation_de_konoha",
       "label": "II. Hashirama, Madara et la fondation de Konoha",
       "_origin": "ast",
@@ -637,6 +685,18 @@
       "norm_label": "ii. hashirama, madara et la fondation de konoha",
       "source_file": "th\u00e9orique/histoire du village.md",
       "source_location": "L34"
+    },
+    {
+      "id": "th\u00e9orique_histoire_du_village_iii_r\u00f4le_des_grands_clans_dans_la_naissance_de_konoha",
+      "label": "III. R\u00f4le des grands clans dans la naissance de Konoha",
+      "_origin": "ast",
+      "community": 2,
+      "community_name": "Histoire du Village de Konoha",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "iii. role des grands clans dans la naissance de konoha",
+      "source_file": "th\u00e9orique/histoire du village.md",
+      "source_location": "L56"
     },
     {
       "id": "th\u00e9orique_histoire_du_village_iv_tobirama_hokage_l_institutionnalisation_et_la_crise",
@@ -709,66 +769,6 @@
       "norm_label": "le batisseur d'institutions",
       "source_file": "th\u00e9orique/histoire du village.md",
       "source_location": "L113"
-    },
-    {
-      "id": "th\u00e9orique_histoire_du_village_les_akimichi_remparts_vivants",
-      "label": "Les Akimichi \u2014 Remparts vivants",
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "Histoire du Village de Konoha",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "les akimichi \u2014 remparts vivants",
-      "source_file": "th\u00e9orique/histoire du village.md",
-      "source_location": "L29"
-    },
-    {
-      "id": "th\u00e9orique_histoire_du_village_les_hy\u016bga_sentinelles_des_montagnes",
-      "label": "Les Hy\u016bga \u2014 Sentinelles des montagnes",
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "Histoire du Village de Konoha",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "les hyuga \u2014 sentinelles des montagnes",
-      "source_file": "th\u00e9orique/histoire du village.md",
-      "source_location": "L23"
-    },
-    {
-      "id": "th\u00e9orique_histoire_du_village_les_nara_cerveaux_de_l_ombre",
-      "label": "Les Nara \u2014 Cerveaux de l'ombre",
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "Histoire du Village de Konoha",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "les nara \u2014 cerveaux de l'ombre",
-      "source_file": "th\u00e9orique/histoire du village.md",
-      "source_location": "L26"
-    },
-    {
-      "id": "th\u00e9orique_histoire_du_village_les_senju_polyvalence_et_union",
-      "label": "Les Senju \u2014 Polyvalence et union",
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "Histoire du Village de Konoha",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "les senju \u2014 polyvalence et union",
-      "source_file": "th\u00e9orique/histoire du village.md",
-      "source_location": "L17"
-    },
-    {
-      "id": "th\u00e9orique_histoire_du_village_les_uchiha_fiert\u00e9_ardente",
-      "label": "Les Uchiha \u2014 Fiert\u00e9 ardente",
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "Histoire du Village de Konoha",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "les uchiha \u2014 fierte ardente",
-      "source_file": "th\u00e9orique/histoire du village.md",
-      "source_location": "L20"
     },
     {
       "id": "th\u00e9orique_histoire_du_village_r\u00e9capitulatif",
@@ -1179,6 +1179,78 @@
       "source_location": "L1"
     },
     {
+      "id": "th\u00e9orique_histoire_du_village_i_avant_konoha_un_pays_du_feu_en_guerre",
+      "label": "I. Avant Konoha : un Pays du Feu en guerre",
+      "_origin": "ast",
+      "community": 39,
+      "community_name": "I. Avant Konoha : un Pays du Feu en guerre",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "i. avant konoha : un pays du feu en guerre",
+      "source_file": "th\u00e9orique/histoire du village.md",
+      "source_location": "L11"
+    },
+    {
+      "id": "th\u00e9orique_histoire_du_village_les_akimichi_remparts_vivants",
+      "label": "Les Akimichi \u2014 Remparts vivants",
+      "_origin": "ast",
+      "community": 39,
+      "community_name": "I. Avant Konoha : un Pays du Feu en guerre",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "les akimichi \u2014 remparts vivants",
+      "source_file": "th\u00e9orique/histoire du village.md",
+      "source_location": "L29"
+    },
+    {
+      "id": "th\u00e9orique_histoire_du_village_les_hy\u016bga_sentinelles_des_montagnes",
+      "label": "Les Hy\u016bga \u2014 Sentinelles des montagnes",
+      "_origin": "ast",
+      "community": 39,
+      "community_name": "I. Avant Konoha : un Pays du Feu en guerre",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "les hyuga \u2014 sentinelles des montagnes",
+      "source_file": "th\u00e9orique/histoire du village.md",
+      "source_location": "L23"
+    },
+    {
+      "id": "th\u00e9orique_histoire_du_village_les_nara_cerveaux_de_l_ombre",
+      "label": "Les Nara \u2014 Cerveaux de l'ombre",
+      "_origin": "ast",
+      "community": 39,
+      "community_name": "I. Avant Konoha : un Pays du Feu en guerre",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "les nara \u2014 cerveaux de l'ombre",
+      "source_file": "th\u00e9orique/histoire du village.md",
+      "source_location": "L26"
+    },
+    {
+      "id": "th\u00e9orique_histoire_du_village_les_senju_polyvalence_et_union",
+      "label": "Les Senju \u2014 Polyvalence et union",
+      "_origin": "ast",
+      "community": 39,
+      "community_name": "I. Avant Konoha : un Pays du Feu en guerre",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "les senju \u2014 polyvalence et union",
+      "source_file": "th\u00e9orique/histoire du village.md",
+      "source_location": "L17"
+    },
+    {
+      "id": "th\u00e9orique_histoire_du_village_les_uchiha_fiert\u00e9_ardente",
+      "label": "Les Uchiha \u2014 Fiert\u00e9 ardente",
+      "_origin": "ast",
+      "community": 39,
+      "community_name": "I. Avant Konoha : un Pays du Feu en guerre",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "les uchiha \u2014 fierte ardente",
+      "source_file": "th\u00e9orique/histoire du village.md",
+      "source_location": "L20"
+    },
+    {
       "id": "claude",
       "label": "CLAUDE.md",
       "_origin": "ast",
@@ -1212,7 +1284,7 @@
       "node_kind": "heading",
       "norm_label": "coherence lore zenkai-rp",
       "source_file": "CLAUDE.md",
-      "source_location": "L310"
+      "source_location": "L321"
     },
     {
       "id": "claude_contexte_du_projet",
@@ -1248,7 +1320,7 @@
       "node_kind": "heading",
       "norm_label": "fichiers .docx",
       "source_file": "CLAUDE.md",
-      "source_location": "L306"
+      "source_location": "L317"
     },
     {
       "id": "claude_les_30_cours_par_module",
@@ -1272,7 +1344,7 @@
       "node_kind": "heading",
       "norm_label": "les documents sont pour le professeur, pas pour les eleves",
       "source_file": "CLAUDE.md",
-      "source_location": "L296"
+      "source_location": "L307"
     },
     {
       "id": "claude_r\u00e8gles_importantes",
@@ -1284,7 +1356,7 @@
       "node_kind": "heading",
       "norm_label": "regles importantes",
       "source_file": "CLAUDE.md",
-      "source_location": "L294"
+      "source_location": "L305"
     },
     {
       "id": "claude_structure_du_dossier",
@@ -1308,7 +1380,7 @@
       "node_kind": "heading",
       "norm_label": "style et ton",
       "source_file": "CLAUDE.md",
-      "source_location": "L301"
+      "source_location": "L312"
     },
     {
       "id": "claude_synchronisation",
@@ -1320,7 +1392,29 @@
       "node_kind": "heading",
       "norm_label": "synchronisation",
       "source_file": "CLAUDE.md",
-      "source_location": "L319"
+      "source_location": "L330"
+    },
+    {
+      "id": "sw",
+      "label": "sw.js",
+      "_origin": "ast",
+      "community": 40,
+      "community_name": "sw.js",
+      "file_type": "code",
+      "norm_label": "sw.js",
+      "source_file": "sw.js",
+      "source_location": "L1"
+    },
+    {
+      "id": "sw_core_assets",
+      "label": "CORE_ASSETS",
+      "_origin": "ast",
+      "community": 40,
+      "community_name": "sw.js",
+      "file_type": "code",
+      "norm_label": "core_assets",
+      "source_file": "sw.js",
+      "source_location": "L2"
     },
     {
       "id": "graphify_out_converted_cours_raiton_c4b2c82b",
@@ -1791,76 +1885,147 @@
       "source_location": "L18"
     },
     {
-      "id": "th\u00e9orique_histoire_du_village_1_le_clan_senju_architectes_du_village",
-      "label": "1. Le clan Senju \u2014 Architectes du village",
+      "id": "manifest",
+      "label": "manifest.json",
       "_origin": "ast",
       "community": 9,
-      "community_name": "III. R\u00f4le des grands clans dans la naissance de Konoha",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "1. le clan senju \u2014 architectes du village",
-      "source_file": "th\u00e9orique/histoire du village.md",
-      "source_location": "L58"
+      "community_name": "manifest.json",
+      "file_type": "code",
+      "norm_label": "manifest.json",
+      "source_file": "manifest.json",
+      "source_location": "L1"
     },
     {
-      "id": "th\u00e9orique_histoire_du_village_2_le_clan_uchiha_pilier_du_village",
-      "label": "2. Le clan Uchiha \u2014 Pilier du village",
+      "id": "manifest_background_color",
+      "label": "background_color",
       "_origin": "ast",
       "community": 9,
-      "community_name": "III. R\u00f4le des grands clans dans la naissance de Konoha",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "2. le clan uchiha \u2014 pilier du village",
-      "source_file": "th\u00e9orique/histoire du village.md",
-      "source_location": "L66"
+      "community_name": "manifest.json",
+      "file_type": "code",
+      "norm_label": "background_color",
+      "source_file": "manifest.json",
+      "source_location": "L9"
     },
     {
-      "id": "th\u00e9orique_histoire_du_village_3_le_clan_hy\u016bga_sentinelles_silencieuses",
-      "label": "3. Le clan Hy\u016bga \u2014 Sentinelles silencieuses",
+      "id": "manifest_categories",
+      "label": "categories",
       "_origin": "ast",
       "community": 9,
-      "community_name": "III. R\u00f4le des grands clans dans la naissance de Konoha",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "3. le clan hyuga \u2014 sentinelles silencieuses",
-      "source_file": "th\u00e9orique/histoire du village.md",
-      "source_location": "L77"
+      "community_name": "manifest.json",
+      "file_type": "code",
+      "norm_label": "categories",
+      "source_file": "manifest.json",
+      "source_location": "L12"
     },
     {
-      "id": "th\u00e9orique_histoire_du_village_4_le_clan_nara_cerveaux_et_archives",
-      "label": "4. Le clan Nara \u2014 Cerveaux et archives",
+      "id": "manifest_description",
+      "label": "description",
       "_origin": "ast",
       "community": 9,
-      "community_name": "III. R\u00f4le des grands clans dans la naissance de Konoha",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "4. le clan nara \u2014 cerveaux et archives",
-      "source_file": "th\u00e9orique/histoire du village.md",
-      "source_location": "L85"
+      "community_name": "manifest.json",
+      "file_type": "code",
+      "norm_label": "description",
+      "source_file": "manifest.json",
+      "source_location": "L4"
     },
     {
-      "id": "th\u00e9orique_histoire_du_village_5_le_clan_akimichi_force_logistique_et_coh\u00e9sion_sociale",
-      "label": "5. Le clan Akimichi \u2014 Force logistique et coh\u00e9sion sociale",
+      "id": "manifest_display",
+      "label": "display",
       "_origin": "ast",
       "community": 9,
-      "community_name": "III. R\u00f4le des grands clans dans la naissance de Konoha",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "5. le clan akimichi \u2014 force logistique et cohesion sociale",
-      "source_file": "th\u00e9orique/histoire du village.md",
-      "source_location": "L98"
+      "community_name": "manifest.json",
+      "file_type": "code",
+      "norm_label": "display",
+      "source_file": "manifest.json",
+      "source_location": "L7"
     },
     {
-      "id": "th\u00e9orique_histoire_du_village_iii_r\u00f4le_des_grands_clans_dans_la_naissance_de_konoha",
-      "label": "III. R\u00f4le des grands clans dans la naissance de Konoha",
+      "id": "manifest_icons",
+      "label": "icons",
       "_origin": "ast",
       "community": 9,
-      "community_name": "III. R\u00f4le des grands clans dans la naissance de Konoha",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "iii. role des grands clans dans la naissance de konoha",
-      "source_file": "th\u00e9orique/histoire du village.md",
-      "source_location": "L56"
+      "community_name": "manifest.json",
+      "file_type": "code",
+      "norm_label": "icons",
+      "source_file": "manifest.json",
+      "source_location": "L13"
+    },
+    {
+      "id": "manifest_lang",
+      "label": "lang",
+      "_origin": "ast",
+      "community": 9,
+      "community_name": "manifest.json",
+      "file_type": "code",
+      "norm_label": "lang",
+      "source_file": "manifest.json",
+      "source_location": "L11"
+    },
+    {
+      "id": "manifest_name",
+      "label": "name",
+      "_origin": "ast",
+      "community": 9,
+      "community_name": "manifest.json",
+      "file_type": "code",
+      "norm_label": "name",
+      "source_file": "manifest.json",
+      "source_location": "L2"
+    },
+    {
+      "id": "manifest_orientation",
+      "label": "orientation",
+      "_origin": "ast",
+      "community": 9,
+      "community_name": "manifest.json",
+      "file_type": "code",
+      "norm_label": "orientation",
+      "source_file": "manifest.json",
+      "source_location": "L8"
+    },
+    {
+      "id": "manifest_scope",
+      "label": "scope",
+      "_origin": "ast",
+      "community": 9,
+      "community_name": "manifest.json",
+      "file_type": "code",
+      "norm_label": "scope",
+      "source_file": "manifest.json",
+      "source_location": "L6"
+    },
+    {
+      "id": "manifest_short_name",
+      "label": "short_name",
+      "_origin": "ast",
+      "community": 9,
+      "community_name": "manifest.json",
+      "file_type": "code",
+      "norm_label": "short_name",
+      "source_file": "manifest.json",
+      "source_location": "L3"
+    },
+    {
+      "id": "manifest_start_url",
+      "label": "start_url",
+      "_origin": "ast",
+      "community": 9,
+      "community_name": "manifest.json",
+      "file_type": "code",
+      "norm_label": "start_url",
+      "source_file": "manifest.json",
+      "source_location": "L5"
+    },
+    {
+      "id": "manifest_theme_color",
+      "label": "theme_color",
+      "_origin": "ast",
+      "community": 9,
+      "community_name": "manifest.json",
+      "file_type": "code",
+      "norm_label": "theme_color",
+      "source_file": "manifest.json",
+      "source_location": "L10"
     }
   ],
   "links": [
@@ -1976,7 +2141,7 @@
     },
     {
       "source": "claude_architecture_du_html",
-      "target": "claude_graphify",
+      "target": "claude_graphify_m\u00e9moire_structurelle",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -1993,7 +2158,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L201",
+      "source_location": "L211",
       "weight": 1.0
     },
     {
@@ -2004,7 +2169,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L215",
+      "source_location": "L225",
       "weight": 1.0
     },
     {
@@ -2015,7 +2180,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L225",
+      "source_location": "L235",
       "weight": 1.0
     },
     {
@@ -2026,7 +2191,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L229",
+      "source_location": "L239",
       "weight": 1.0
     },
     {
@@ -2037,7 +2202,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L250",
+      "source_location": "L260",
       "weight": 1.0
     },
     {
@@ -2048,7 +2213,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L260",
+      "source_location": "L270",
       "weight": 1.0
     },
     {
@@ -2059,7 +2224,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L277",
+      "source_location": "L287",
       "weight": 1.0
     },
     {
@@ -2070,7 +2235,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L288",
+      "source_location": "L299",
       "weight": 1.0
     },
     {
@@ -2130,17 +2295,6 @@
     },
     {
       "source": "claude_claude_md_cours_rp_zenkai_konoha",
-      "target": "claude_r\u00e8gles_importantes",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "CLAUDE.md",
-      "source_location": "L294",
-      "weight": 1.0
-    },
-    {
-      "source": "claude_claude_md_cours_rp_zenkai_konoha",
       "target": "claude_contexte_du_projet",
       "relation": "contains",
       "_origin": "ast",
@@ -2148,6 +2302,17 @@
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
       "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "claude_claude_md_cours_rp_zenkai_konoha",
+      "target": "claude_r\u00e8gles_importantes",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "CLAUDE.md",
+      "source_location": "L305",
       "weight": 1.0
     },
     {
@@ -2180,7 +2345,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L296",
+      "source_location": "L307",
       "weight": 1.0
     },
     {
@@ -2191,7 +2356,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L301",
+      "source_location": "L312",
       "weight": 1.0
     },
     {
@@ -2202,7 +2367,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L306",
+      "source_location": "L317",
       "weight": 1.0
     },
     {
@@ -2213,7 +2378,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L310",
+      "source_location": "L321",
       "weight": 1.0
     },
     {
@@ -2224,7 +2389,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L319",
+      "source_location": "L330",
       "weight": 1.0
     },
     {
@@ -2698,6 +2863,149 @@
       "confidence_score": 1.0,
       "source_file": "GUIDE-PARTAGE.md",
       "source_location": "L97",
+      "weight": 1.0
+    },
+    {
+      "source": "manifest",
+      "target": "manifest_theme_color",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "manifest.json",
+      "source_location": "L10",
+      "weight": 1.0
+    },
+    {
+      "source": "manifest",
+      "target": "manifest_lang",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "manifest.json",
+      "source_location": "L11",
+      "weight": 1.0
+    },
+    {
+      "source": "manifest",
+      "target": "manifest_categories",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "manifest.json",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "manifest",
+      "target": "manifest_icons",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "manifest.json",
+      "source_location": "L13",
+      "weight": 1.0
+    },
+    {
+      "source": "manifest",
+      "target": "manifest_name",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "manifest.json",
+      "source_location": "L2",
+      "weight": 1.0
+    },
+    {
+      "source": "manifest",
+      "target": "manifest_short_name",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "manifest.json",
+      "source_location": "L3",
+      "weight": 1.0
+    },
+    {
+      "source": "manifest",
+      "target": "manifest_description",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "manifest.json",
+      "source_location": "L4",
+      "weight": 1.0
+    },
+    {
+      "source": "manifest",
+      "target": "manifest_start_url",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "manifest.json",
+      "source_location": "L5",
+      "weight": 1.0
+    },
+    {
+      "source": "manifest",
+      "target": "manifest_scope",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "manifest.json",
+      "source_location": "L6",
+      "weight": 1.0
+    },
+    {
+      "source": "manifest",
+      "target": "manifest_display",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "manifest.json",
+      "source_location": "L7",
+      "weight": 1.0
+    },
+    {
+      "source": "manifest",
+      "target": "manifest_orientation",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "manifest.json",
+      "source_location": "L8",
+      "weight": 1.0
+    },
+    {
+      "source": "manifest",
+      "target": "manifest_background_color",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "manifest.json",
+      "source_location": "L9",
+      "weight": 1.0
+    },
+    {
+      "source": "sw",
+      "target": "sw_core_assets",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "sw.js",
+      "source_location": "L2",
       "weight": 1.0
     },
     {
@@ -3175,5 +3483,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "3bbec6383fa16dd1cd227ebd69ddb946a9e4b9fc"
+  "built_at_commit": "5818476566ce6cd658b79985dce4c2b15d02af1f"
 }
