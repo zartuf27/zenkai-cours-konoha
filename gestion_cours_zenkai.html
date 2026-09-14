@@ -6532,10 +6532,29 @@ function renderBilan(){
     });
   }
 
-  let h=`<div class="page-header"><div class="page-title">Bilan de fin de mois</div>
-    <div class="page-desc">Rapport pour le Parchemin (Discord Académie). Sélectionnez un jour, cliquez Copier, collez sur Discord.</div></div>`;
+  // Stats du jour
+  const dayDonnes=selHist.filter(e=>!e.noEleve).length;
+  const dayProposes=selHist.filter(e=>e.noEleve).length;
+  const dayTotal=selHist.length;
+  // Stats globales
+  const globalTotal=hist.length;
+  const globalDonnes=hist.filter(e=>!e.noEleve).length;
+  const globalJours=dayKeys.length;
 
-  // Sélecteur de jour
+  let h=`<div class="page-header"><div class="page-title">${getSidebarLabel('bilan')}</div>
+    <div class="page-desc">Rapport pour le Parchemin — sélectionnez un jour, copiez, collez sur Discord.</div></div>`;
+
+  // ====== Stats globales rapides ======
+  h+=`<div class="stats-grid" style="margin-bottom:16px">
+    <div class="stat-card"><div class="stat-value">${globalTotal}</div><div class="stat-label">Cours total</div>
+      <div class="stat-sub">${globalDonnes} donnés · ${globalTotal-globalDonnes} proposés</div></div>
+    <div class="stat-card accent-fire"><div class="stat-value">${globalJours}</div><div class="stat-label">Jours actifs</div>
+      <div class="stat-sub">${globalJours?Math.round(globalTotal/globalJours*10)/10:0} cours/jour</div></div>
+    <div class="stat-card accent-leaf"><div class="stat-value">${dayTotal}</div><div class="stat-label">Aujourd'hui</div>
+      <div class="stat-sub">${dayDonnes} donnés${dayProposes?' · '+dayProposes+' proposés':''}</div></div>
+  </div>`;
+
+  // ====== Sélecteur de jour ======
   h+=`<div class="card" style="margin-bottom:16px;padding:14px">
     <div style="font-size:0.72rem;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted);margin-bottom:8px">Jour (= mois IG)</div>
     <div style="display:flex;flex-wrap:wrap;gap:6px">
@@ -6547,53 +6566,64 @@ function renderBilan(){
   dayKeys.forEach(d=>{
     if(d===todayStr)return;
     const count=allDays[d].length;
+    const donnes=allDays[d].filter(e=>!e.noEleve).length;
     const sel=selDate===d?'selected':'';
     h+=`<div class="nature-opt ${sel}" onclick="bilanSetDate('${d}')" style="min-width:auto;flex:0 0 auto;padding:6px 14px">
       <div class="no-check">✓</div>
       <div class="no-name" style="font-size:0.78rem">${d}</div>
-      <div class="no-element">${count} cours</div>
+      <div class="no-element">${count} cours${donnes<count?' · '+donnes+' ✓':''}</div>
     </div>`;
   });
   h+=`</div></div>`;
 
-  // Message Discord
+  // ====== Timeline du jour ======
+  h+=`<div class="scroll-card" style="margin-bottom:16px">
+    <div class="scroll-title"><span class="scroll-brush">📅</span> ${selDate}${selDate===todayStr?' — Aujourd\'hui':''}</div>`;
+  if(dayTotal===0){
+    h+=`<div style="text-align:center;color:var(--text-muted);font-style:italic;padding:20px 0">Aucun cours enregistré ce jour.</div>`;
+  }else{
+    const sorted=[...selHist].sort((a,b)=>a.heure.localeCompare(b.heure));
+    h+=`<div style="position:relative;padding-left:28px">`;
+    h+=`<div style="position:absolute;left:10px;top:4px;bottom:4px;width:2px;background:var(--skin-gradient);border-radius:1px;opacity:0.4"></div>`;
+    sorted.forEach((e,i)=>{
+      const isNoEleve=e.noEleve;
+      const dotColor=isNoEleve?'var(--accent-orange)':'var(--accent-leaf)';
+      const c=cours(e.id);
+      const catBadge=c?(c.cat==='theorique'?'📖':'⚔️'):'📚';
+      h+=`<div style="position:relative;margin-bottom:${i<sorted.length-1?'14px':'0'};padding:10px 14px;background:var(--bg-input);border:1px solid ${isNoEleve?'rgba(217,122,30,0.3)':'var(--border)'};border-radius:var(--radius-lg);cursor:pointer;transition:var(--transition)" onclick="openCours('${e.id}')" onmouseover="this.style.borderColor='var(--accent-gold)'" onmouseout="this.style.borderColor='${isNoEleve?'rgba(217,122,30,0.3)':'var(--border)'}'" >
+        <div style="position:absolute;left:-23px;top:14px;width:10px;height:10px;border-radius:50%;background:${dotColor};border:2px solid var(--bg-card)"></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap">
+          <div>
+            <span style="font-weight:600;color:var(--text-bright);font-size:0.88rem">${catBadge} ${e.titre}</span>
+            ${isNoEleve?'<span style="font-size:0.68rem;color:var(--accent-orange);margin-left:6px;font-weight:600">aucun élève</span>':''}
+          </div>
+          <span style="font-size:0.82rem;font-weight:700;color:var(--skin-primary);font-family:monospace">${e.heure}</span>
+        </div>
+        ${c?`<div style="font-size:0.68rem;color:var(--text-muted);margin-top:4px">${c.mod} · ${c.rang}</div>`:''}
+      </div>`;
+    });
+    h+=`</div>`;
+  }
+  h+=`</div>`;
+
+  // ====== Message Discord à copier ======
   h+=`<div class="card" style="margin-bottom:16px">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-      <div style="font-weight:600;color:var(--text-bright)">📜 Parchemin — ${selDate}</div>
-      <button class="btn btn-sm btn-primary" onclick="clipCopy(document.getElementById('bilanText').getAttribute('data-raw'),'Bilan')">📋 Copier</button>
+      <div style="font-weight:600;color:var(--text-bright)">📜 Parchemin — prêt à copier</div>
+      <div style="display:flex;gap:6px">
+        <button class="btn btn-sm btn-primary" onclick="clipCopy(document.getElementById('bilanText').getAttribute('data-raw'),'Bilan')">📋 Copier</button>
+      </div>
     </div>
     <pre id="bilanText" data-raw="${esc(discord)}" style="background:var(--bg-input);border:1px solid var(--border);border-radius:var(--radius);padding:14px;font-family:'Noto Sans JP',monospace;font-size:0.85rem;color:var(--text);white-space:pre-wrap;line-height:1.8;margin:0">${esc(discord)}</pre>
   </div>`;
 
-  // Détail des cours du jour sélectionné
-  h+=`<div style="font-weight:600;color:var(--text-bright);margin-bottom:10px">Cours du ${selDate} — ${selHist.length} cours</div>`;
-  if(selHist.length===0){
-    h+=`<div class="card" style="text-align:center;color:var(--text-muted);font-style:italic;padding:30px">Aucun cours enregistré ce jour.</div>`;
-  }else{
-    const parCours={};
-    selHist.forEach(e=>{if(!parCours[e.id])parCours[e.id]={titre:e.titre,entries:[]};parCours[e.id].entries.push(e)});
-    Object.values(parCours).forEach(group=>{
-      h+=`<div class="card" style="margin-bottom:8px;padding:12px">
-        <div style="display:flex;justify-content:space-between;align-items:center">
-          <span style="font-weight:600;color:var(--text-bright);font-size:0.9rem">${group.titre}</span>
-          <span style="font-size:0.78rem;color:var(--skin-primary);font-weight:600">${group.entries.length}×</span>
-        </div>
-        <div style="margin-top:6px;display:flex;flex-wrap:wrap;gap:4px">
-          ${group.entries.map(e=>`<span style="font-size:0.72rem;padding:2px 8px;background:${e.noEleve?'rgba(217,122,30,0.1)':'var(--bg-input)'};border:1px solid ${e.noEleve?'var(--accent-orange)':'var(--border)'};border-radius:12px;color:${e.noEleve?'var(--accent-orange)':'var(--text-dim)'}">${e.heure}${e.noEleve?' · 0 élève':''}</span>`).join('')}
-        </div>
-      </div>`;
-    });
-  }
-
-  // Lien historique
-  h+=`<div style="margin-top:20px;text-align:center">
-    <button class="btn" onclick="nav('historique')" style="font-size:0.85rem">📜 Voir l'historique complet & statistiques</button>
-  </div>`;
-
-  // Reset
-  h+=`<div style="margin-top:24px;display:flex;justify-content:space-between;align-items:center">
-    <span style="font-size:0.75rem;color:var(--text-muted)">Total : ${hist.length} cours depuis le début</span>
-    <button class="btn btn-sm btn-danger" onclick="resetBilan()">🗑️ Remettre à zéro</button>
+  // ====== Actions ======
+  h+=`<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-top:8px">
+    <button class="btn" onclick="nav('historique')" style="font-size:0.82rem">📜 Historique complet</button>
+    <div style="display:flex;align-items:center;gap:10px">
+      <span style="font-size:0.72rem;color:var(--text-muted)">${globalTotal} cours · ${globalJours} jours</span>
+      <button class="btn btn-sm btn-danger" onclick="resetBilan()">🗑️ Reset</button>
+    </div>
   </div>`;
 
   return h;
