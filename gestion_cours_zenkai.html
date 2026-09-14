@@ -5809,7 +5809,7 @@ function renderDetail(){
     const curTab=S.c[tabKey];
     const hasOral=!!CONTENU[c.id];
     const np=NOTES_PROF[c.id];
-    const hasMarqueurs=!!(np||(RESUME[c.id]));
+    const hasMarqueurs=!!(np||COURS_FLAVOR[c.id]);
 
     h+=`<div class="reading-tabs" style="margin-bottom:0">
       ${hasOral?`<div class="reading-tab${curTab==='oral'?' active':''}" onclick="S.c['${tabKey}']='oral';save();render()"><span class="tab-icon">🎤</span>Support oral</div>`:''}
@@ -5823,9 +5823,36 @@ function renderDetail(){
     }
 
     if(curTab==='marqueurs'&&hasMarqueurs){
+      const _s=getSensei();
+      const _type=_s.type||'sage';
+      const _nat=_s.nature;
+      const _typeInfo=senseiTypeInfo();
+      const _natInfo=_nat?D.natures.find(n=>n.id===_nat):null;
+      const fl=COURS_FLAVOR[c.id];
       let mContent='';
+
+      // 1. Phrase personnalité (intro flavor)
+      if(fl&&fl.intro&&fl.intro[_type]){
+        mContent+=`<div class="flavor-intro" style="margin-bottom:14px">${fl.intro[_type]}</div>`;
+      }
+      // 2. Anecdote nature (histoire courte)
+      if(fl&&fl.nature&&_nat&&fl.nature[_nat]){
+        mContent+=`<div class="flavor-nature" data-icon="${_natInfo?_natInfo.icon:'🔮'}" style="margin-bottom:14px">${fl.nature[_nat]}</div>`;
+      }
+      // 3. Anecdote spécialisation combat
+      const sf=SPEC_FLAVOR[c.id];
+      if(sf){
+        const spec=_s.specCombat||'taijutsu';
+        const lame=_s.typeLame||'';
+        const specText=(spec==='kenjutsu'&&lame&&sf[lame])?sf[lame]:(sf[spec]||null);
+        if(specText){
+          const specIcon=spec==='kenjutsu'?'🗡️':'🥋';
+          mContent+=`<div class="flavor-nature" data-icon="${specIcon}" style="margin-bottom:14px">${specText}</div>`;
+        }
+      }
+      // 4. Notes copiables (items essentiels)
       if(np&&np.html) mContent+=applySenseiName(np.html,c.id);
-      if(RESUME[c.id]) mContent+=RESUME[c.id];
+
       h+=`<div class="contenu-block tab-content" style="border-left:3px solid var(--accent-gold)">${mContent}</div>`;
       if(np&&np.copy){
         h+=`<div style="margin-bottom:14px;display:flex;gap:8px;align-items:center;flex-wrap:wrap">
