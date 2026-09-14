@@ -5410,7 +5410,7 @@ function applySenseiName(html,coursId){
     if(c&&NATURE_CLOSING[s.nature][c.mod]){
       const natLine=NATURE_CLOSING[s.nature][c.mod];
       // Inject into HTML version (before the "— Name" in parchment blocks)
-      out=out.replace(/((?:<strong>)?(?:Eraku Morikawa|[^<]{2,30}?)(?:<\/strong>)?<\/p>)/,natLine+' $1');
+      out=out.replace(/((?:<strong>)?[^<]{2,30}?(?:<\/strong>)?<\/p>)/,natLine+' $1');
       // Inject into plain text copy versions (before the last "Name" on its own line)
     }
   }
@@ -6527,7 +6527,7 @@ function renderBilan(){
       }
       const finalTime=`${String(hh).padStart(2,'0')}:${String(mm).padStart(2,'0')}`;
       usedTimes.add(finalTime);
-      discord+=`• ${e.titre} — ${finalTime}\n`;
+      discord+=`• ${e.titre} — ${finalTime}${e.noEleve?' (aucun élève présent)':''}\n`;
     });
   }
 
@@ -7532,7 +7532,7 @@ const SIDEBAR_TIPS={
   hierarchie:{title:'Hiérarchie',text:'Les 10 rangs ninja de Konoha.'},
   admin:{title:'Règlement',text:'La directive de Yamamoto Jakka sur le format des annonces.'},
   annonces:{title:'Annonces',text:'Annonces prêtes à copier-coller pour vos appels au tableau. Un clic = copié.'},
-  bilan:{title:'Fin de mois',text:'Votre rapport pour le Parchemin (Discord de l\'Académie). Chaque cours que vous marquez "donné" ou "proposé" s\'ajoute ici automatiquement. En fin de mois, sélectionnez le jour, cliquez Copier, et collez directement sur le Parchemin. Tout est pré-rempli : nom, rang, cours, heures.'},
+  bilan:{title:'Fin de mois',text:'Votre rapport pour le Parchemin (Discord de l\'Académie). Chaque cours que vous marquez "donné" ou "proposé" s\'ajoute ici automatiquement. En fin de mois, sélectionnez le jour, cliquez Copier, et collez directement sur le Parchemin.'},
   historique:{title:'Historique',text:'Vos statistiques complètes : graphiques, classement des cours, journal.'},
   sensei:{title:'Sensei',text:'Votre profil. Changez votre nom, nature, personnalité — tout s\'adapte.'}
 };
