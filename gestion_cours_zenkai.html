@@ -501,7 +501,7 @@ body {
 .btn-sm { padding:4px 10px; font-size:0.72rem; }
 
 /* ====== SIDEBAR + LAYOUT ====== */
-.layout { display:flex; min-height:calc(100vh - 56px); }
+.layout { display:flex; min-height:calc(100vh - 56px); overflow-x:hidden; }
 .sidebar {
   width: 220px;
   background: var(--bg-surface);
@@ -1030,9 +1030,89 @@ body {
     display:flex !important;
     overflow-x:auto; background:var(--bg-surface);
     border-bottom:1px solid var(--border);
+    -webkit-overflow-scrolling:touch;
   }
   .content { padding:16px; }
   .cours-grid { grid-template-columns:1fr; }
+  .stats-grid { grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:8px; }
+  .nature-wheel { gap:8px; }
+  .nature-card { min-width:140px; padding:12px; }
+  .kekkei-grid { grid-template-columns:repeat(auto-fill,minmax(160px,1fr)); gap:8px; }
+  .mudra-ref-grid { grid-template-columns:repeat(auto-fill,minmax(180px,1fr)); gap:8px; }
+  .filters { flex-direction:column; }
+  .filter-input { min-width:0; width:100%; }
+  .filter-select { width:100%; }
+  .annonce-field { flex-wrap:wrap; }
+  .af-label { width:auto; flex-shrink:1; }
+  .detail-title { font-size:1rem; }
+  .page-title { font-size:1.1rem; }
+  .nature-selector { gap:6px; }
+  .nature-opt { min-width:110px; padding:10px; }
+  .nature-opt .no-icon { font-size:1.1rem; }
+  .nature-opt .no-name { font-size:0.78rem; }
+}
+@media(max-width:480px) {
+  .header { padding:0 12px; height:48px; }
+  .header-title { font-size:0.95rem; letter-spacing:1px; }
+  .header-sub { font-size:0.55rem; letter-spacing:1.5px; }
+  .konoha-symbol { width:28px; height:28px; }
+  .header-left { gap:10px; }
+  .header-right .btn { padding:4px 8px; font-size:0.68rem; }
+  .content { padding:10px; }
+  .page-title { font-size:0.95rem; }
+  .page-desc { font-size:0.75rem; }
+  .stats-grid { grid-template-columns:1fr 1fr; gap:6px; }
+  .stat-value { font-size:1.3rem; }
+  .stat-label { font-size:0.62rem; }
+  .stat-card { padding:12px; }
+  .card { padding:12px; }
+  .cours-grid { gap:8px; }
+  .cours-card-title { font-size:0.85rem; }
+  .detail-header { padding:14px; }
+  .detail-title { font-size:0.9rem; }
+  .detail-meta { font-size:0.72rem; }
+  .tech-head { padding:10px 12px; }
+  .tech-name { font-size:0.82rem; }
+  .tech-body { padding:0 12px 12px; }
+  .contenu-block { padding:14px; font-size:0.82rem; }
+  .contenu-block table { display:block; overflow-x:auto; -webkit-overflow-scrolling:touch; }
+  .nature-wheel { justify-content:center; }
+  .nature-card { min-width:120px; max-width:none; flex:1 1 calc(50% - 4px); padding:10px; }
+  .nc-icon { font-size:1.2rem; }
+  .nc-name { font-size:0.85rem; }
+  .kekkei-grid { grid-template-columns:1fr; }
+  .mudra-ref-grid { grid-template-columns:1fr; }
+  .mudra-seq { gap:4px; }
+  .mudra-pill { padding:4px 8px; font-size:0.72rem; }
+  .admin-card { padding:14px; }
+  .annonce-card { padding:10px 12px; }
+  .annonce-field { padding:5px 6px; gap:6px; }
+  .af-label { font-size:0.62rem; width:80px; }
+  .af-value { font-size:0.75rem; }
+  .sensei-form { max-width:100%; }
+  .nature-opt { min-width:90px; padding:8px; }
+  .nature-opt .no-icon { font-size:1rem; margin-bottom:2px; }
+  .nature-opt .no-name { font-size:0.72rem; }
+  .nature-opt .no-element { font-size:0.62rem; }
+  .sensei-preview { padding:12px; }
+  .modal { padding:16px; max-width:calc(100vw - 32px); }
+  .modal textarea { min-height:120px; font-size:0.72rem; }
+  .check-sub { max-width:35%; font-size:0.62rem; }
+  .mobile-nav-item { padding:8px 12px; font-size:0.72rem; }
+  pre { font-size:0.75rem !important; padding:10px !important; }
+  .sensei-card { padding:12px 14px; gap:10px; flex-wrap:wrap; }
+  .sensei-card-avatar { width:40px; height:40px; font-size:1.2rem; }
+  .sensei-card-name { font-size:0.88rem; }
+  .sensei-card-nature { font-size:0.68rem; padding:3px 8px; }
+  .scroll-card { padding:14px; }
+  .scroll-title { font-size:0.85rem; margin-bottom:10px; }
+  .scroll-stamp { width:36px; height:36px; font-size:1.1rem; top:10px; right:10px; }
+  .nature-banner { padding:14px; }
+  .hierarchy-track { gap:0; }
+  .hier-node { padding:4px 8px; font-size:0.62rem; }
+  .hier-arrow { font-size:0.5rem; }
+  .btn { padding:5px 10px; font-size:0.72rem; }
+  .btn-sm { padding:3px 8px; font-size:0.65rem; }
 }
 @media(min-width:901px) {
   .mobile-nav { display:none !important; }
@@ -1108,6 +1188,10 @@ body {
   border-collapse:collapse;
   margin:12px 0;
   font-size:0.82rem;
+  display:table;
+}
+@media(max-width:480px){
+  .contenu-block .contenu-table { display:block; overflow-x:auto; -webkit-overflow-scrolling:touch; }
 }
 .contenu-block .contenu-table th {
   background:rgba(0,0,0,0.03);
