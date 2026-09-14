@@ -3,7 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#9a7b2e">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-192.svg">
 <title>Zenkai - Académie Ninja de Konoha</title>
+<script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js"></script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Cinzel:wght@700;900&display=swap');
 
@@ -5818,8 +5826,9 @@ function renderDetail(){
 
     if(curTab==='oral'&&hasOral){
       h+=`<div class="contenu-block tab-content">${applySenseiName(CONTENU[c.id],c.id)}</div>`;
-      h+=`<div style="margin-bottom:14px"><button class="btn btn-sm" onclick="openPresentation('${c.id}')" style="font-size:0.8rem">🎤 Mode Présentation</button>
-        <span style="font-size:0.72rem;color:var(--text-muted);margin-left:6px">Vue plein écran pour donner le cours</span></div>`;
+      h+=`<div style="margin-bottom:14px;display:flex;gap:8px;align-items:center;flex-wrap:wrap"><button class="btn btn-sm" onclick="openPresentation('${c.id}')" style="font-size:0.8rem">🎤 Mode Présentation</button>
+        <button class="btn btn-sm" onclick="exportPDF(null,'zenkai_${c.id}')" style="font-size:0.75rem">📄 PDF</button>
+        <span style="font-size:0.72rem;color:var(--text-muted)">Vue plein écran · Export</span></div>`;
     }
 
     if(curTab==='marqueurs'&&hasMarqueurs){
@@ -6695,7 +6704,8 @@ function renderHistorique(){
   const getPC=(i)=>pieColors[i%pieColors.length];
 
   // ====== RENDU ======
-  let h=`<div class="page-header"><div class="page-title">📜 Registre du Sensei</div>
+  let h=`<div class="page-header"><div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px"><div class="page-title">📜 Registre du Sensei</div>
+    <button class="btn btn-sm" onclick="exportPDF(null,'zenkai_historique_${senseiFullName().replace(/\s/g,'_')}')" style="font-size:0.75rem">📄 Exporter en PDF</button></div>
     <div class="page-desc">Parcours d'enseignement de ${senseiFullName()} — ${filterLabel}</div></div>`;
 
   // ====== SÉLECTEUR GLOBAL / JOUR ======
@@ -7230,6 +7240,14 @@ function renderReglages(){
         <button class="btn btn-sm" onclick="restoreSaveCode(document.getElementById('saveCodeIn').value)" style="font-size:0.85rem">📜 Restaurer</button>
       </div>
     </div>
+    <div style="margin-top:16px;padding-top:14px;border-top:1px dashed var(--border-warm)">
+      <div style="font-size:0.82rem;color:var(--text-dim);margin-bottom:8px">📱 QR Code — scannez depuis un autre appareil :</div>
+      <div style="display:flex;gap:8px;margin-bottom:10px">
+        <button class="btn btn-sm btn-primary" onclick="generateQR()" style="font-size:0.85rem">📱 Générer le QR Code</button>
+      </div>
+      <div id="qrCodeContainer" style="text-align:center"></div>
+      <div style="font-size:0.68rem;color:var(--text-muted);margin-top:6px;font-style:italic">Le QR contient un lien avec votre profil encodé. Scannez-le sur téléphone pour tout récupérer.</div>
+    </div>
   </div>`;
 
   // Aide
@@ -7314,6 +7332,69 @@ function doImport(){
   }catch(e){toast('JSON invalide')}
 }
 function doReset(){if(confirm('Réinitialiser toute la progression ?')){const sensei=S.sensei;const darkMode=S.darkMode;const noAnim=S.noAnim;S={c:{},n:{},sensei,darkMode,noAnim};save();buildSidebar();render();toast('Progression réinitialisée')}}
+
+// ================================================================
+// QR CODE — transfert par lien
+// ================================================================
+function generateQR(){
+  const container=document.getElementById('qrCodeContainer');
+  if(!container)return;
+  const code=generateSaveCode();
+  if(!code){toast('Rien à exporter');return;}
+  // Build URL with save data as hash parameter
+  const baseUrl=location.href.split('?')[0].split('#')[0];
+  const url=baseUrl+'#restore='+encodeURIComponent(code);
+  // QR can hold ~2k chars; if too long, use short version (profile only)
+  let qrData=url;
+  if(url.length>2500){
+    const profileOnly=btoa(unescape(encodeURIComponent(JSON.stringify({sensei:S.sensei,darkMode:S.darkMode,noAnim:S.noAnim}))));
+    qrData=baseUrl+'#restore='+encodeURIComponent(profileOnly);
+  }
+  try{
+    const qr=qrcode(0,'M');
+    qr.addData(qrData);
+    qr.make();
+    container.innerHTML=qr.createSvgTag(5,0);
+    container.querySelector('svg').style.maxWidth='220px';
+    container.querySelector('svg').style.borderRadius='8px';
+    toast('QR Code généré');
+  }catch(e){toast('Données trop volumineuses pour un QR. Utilisez le code texte.')}
+}
+
+// Auto-restore from URL hash
+(function(){
+  const hash=location.hash;
+  if(hash.startsWith('#restore=')){
+    const code=decodeURIComponent(hash.slice(9));
+    if(restoreSaveCode(code)){
+      history.replaceState(null,'',location.pathname);
+      toast('Profil restauré depuis le lien !');
+    }
+  }
+})();
+
+// ================================================================
+// EXPORT PDF — historique et cours
+// ================================================================
+function exportPDF(elementId,filename){
+  const el=document.getElementById(elementId)||document.querySelector('.content');
+  if(!el||typeof html2canvas==='undefined'){toast('Export non disponible');return;}
+  toast('Génération du PDF...');
+  html2canvas(el,{scale:2,useCORS:true,backgroundColor:getComputedStyle(document.documentElement).getPropertyValue('--bg-base').trim()||'#f5f0e8'}).then(canvas=>{
+    const {jsPDF}=window.jspdf;
+    const pdf=new jsPDF('p','mm','a4');
+    const imgW=210;
+    const imgH=canvas.height*imgW/canvas.width;
+    let yOff=0;
+    while(yOff<imgH){
+      if(yOff>0)pdf.addPage();
+      pdf.addImage(canvas.toDataURL('image/jpeg',0.92),'JPEG',0,-yOff,imgW,imgH);
+      yOff+=297;
+    }
+    pdf.save((filename||'zenkai_export')+'.pdf');
+    toast('PDF exporté');
+  }).catch(()=>toast('Erreur lors de l\'export'));
+}
 
 // ================================================================
 // TOAST
@@ -7589,6 +7670,11 @@ updateHeaderSensei();
 // Hook into save to keep header in sync
 const _origSave=save;
 save=function(){_origSave();updateHeaderSensei()};
+
+// ================================================================
+// PWA — Service Worker
+// ================================================================
+if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{});}
 </script>
 </body>
 </html>
