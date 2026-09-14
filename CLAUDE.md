@@ -71,21 +71,20 @@ Format tableau.docx        — Directive format annonces (Yamamoto Jakka)
 | 🔥 Natures | `natures` | 5 natures, cycle, kekkei genkai, bannière perso |
 | 👑 Hiérarchie | `hierarchie` | 10 rangs ninja |
 | 📋 Règlement | `admin` | Directive Yamamoto Jakka |
-| 📢 Annonces | `annonces` | Annonces copy-to-clipboard + copie par module |
+| 📢 Annonces | `annonces` | Annonces avec sélecteur de lieu (popup) + copie par module |
 | 📊 Fin de mois | `bilan` | Sélecteur jour, liste des cours avec heure |
 | 📜 Historique | `historique` | Stats sensei, graphiques, classement, journal complet |
 | 👤 Sensei | `sensei` | Profil complet (11 champs), aperçu en direct |
 
 Navigation : `VIEWS[]` → `buildSidebar()` → `nav(viewId)` → `render()` → `renderXxx()`
 
-### Profil Sensei (11 axes de personnalisation)
+### Profil Sensei (10 axes de personnalisation)
 
 | Champ | Stockage | Impact |
 |-------|----------|--------|
 | Prénom / Nom | `S.sensei.prenom/nom` | Signatures, contenu, annonces, header, onglet, favicon |
 | Signe distinctif | `S.sensei.signe` | Annonces ("cheveux brun") |
 | Rang | `S.sensei.rang` | Carte sensei, header, bilan Discord (de Genin Confirmé à Hokage) |
-| Lieu de RDV | `S.sensei.lieu` | Toutes les annonces |
 | Phrase signature | `S.sensei.signature` | Override toutes les citations si rempli |
 | Type de Sensei | `S.sensei.type` | 480 citations, greeting, animation avatar |
 | Nature de Chakra | `S.sensei.nature` | Skin couleurs, particules, filtrage cours, closing lines, favicon |
@@ -263,7 +262,7 @@ Overlay plein écran déclenché depuis la page détail d'un cours. Affiche le c
 |-----|---------|
 | `S.c` | Checkboxes (progression techniques) + états onglets contenu |
 | `S.n` | Notes texte + `cours_history` + `given_count_*` + `given_last_*` |
-| `S.sensei` | `{prenom, nom, signe, nature, type, rang, lieu, signature, specCombat, typeLame}` |
+| `S.sensei` | `{prenom, nom, signe, nature, type, rang, signature, specCombat, typeLame}` |
 | `S.darkMode` | Boolean |
 | `S.noAnim` | Boolean |
 

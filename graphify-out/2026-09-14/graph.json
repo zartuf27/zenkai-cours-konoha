@@ -121,7 +121,7 @@
       "node_kind": "heading",
       "norm_label": "icones",
       "source_file": "CLAUDE.md",
-      "source_location": "L311"
+      "source_location": "L315"
     },
     {
       "id": "claude_interface_cours_simplifi\u00e9_2_onglets",
@@ -217,7 +217,7 @@
       "node_kind": "heading",
       "norm_label": "procedure pour ajouter un cours",
       "source_file": "CLAUDE.md",
-      "source_location": "L299"
+      "source_location": "L303"
     },
     {
       "id": "claude_profil_sensei_11_axes_de_personnalisation",
@@ -1296,7 +1296,7 @@
       "node_kind": "heading",
       "norm_label": "coherence lore zenkai-rp",
       "source_file": "CLAUDE.md",
-      "source_location": "L333"
+      "source_location": "L337"
     },
     {
       "id": "claude_contexte_du_projet",
@@ -1332,7 +1332,7 @@
       "node_kind": "heading",
       "norm_label": "fichiers .docx",
       "source_file": "CLAUDE.md",
-      "source_location": "L329"
+      "source_location": "L333"
     },
     {
       "id": "claude_les_30_cours_par_module",
@@ -1356,7 +1356,7 @@
       "node_kind": "heading",
       "norm_label": "les documents sont pour le professeur, pas pour les eleves",
       "source_file": "CLAUDE.md",
-      "source_location": "L319"
+      "source_location": "L323"
     },
     {
       "id": "claude_r\u00e8gles_importantes",
@@ -1368,7 +1368,7 @@
       "node_kind": "heading",
       "norm_label": "regles importantes",
       "source_file": "CLAUDE.md",
-      "source_location": "L317"
+      "source_location": "L321"
     },
     {
       "id": "claude_structure_du_dossier",
@@ -1392,7 +1392,7 @@
       "node_kind": "heading",
       "norm_label": "style et ton",
       "source_file": "CLAUDE.md",
-      "source_location": "L324"
+      "source_location": "L328"
     },
     {
       "id": "claude_synchronisation",
@@ -1404,7 +1404,7 @@
       "node_kind": "heading",
       "norm_label": "synchronisation",
       "source_file": "CLAUDE.md",
-      "source_location": "L342"
+      "source_location": "L346"
     },
     {
       "id": "sw",
@@ -2247,7 +2247,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L299",
+      "source_location": "L303",
       "weight": 1.0
     },
     {
@@ -2258,7 +2258,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L311",
+      "source_location": "L315",
       "weight": 1.0
     },
     {
@@ -2335,7 +2335,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L317",
+      "source_location": "L321",
       "weight": 1.0
     },
     {
@@ -2368,7 +2368,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L319",
+      "source_location": "L323",
       "weight": 1.0
     },
     {
@@ -2379,7 +2379,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L324",
+      "source_location": "L328",
       "weight": 1.0
     },
     {
@@ -2390,7 +2390,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L329",
+      "source_location": "L333",
       "weight": 1.0
     },
     {
@@ -2401,7 +2401,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L333",
+      "source_location": "L337",
       "weight": 1.0
     },
     {
@@ -2412,7 +2412,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L342",
+      "source_location": "L346",
       "weight": 1.0
     },
     {
@@ -3506,5 +3506,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "a265c9ca2727d68e6821e96e1f45804443930b81"
+  "built_at_commit": "fb1f2c80ab17469bde9be6996228156b338dfbaa"
 }

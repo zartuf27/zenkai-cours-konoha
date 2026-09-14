@@ -2922,6 +2922,21 @@ const CONTENU={
 <p>De plus, ces deux natures sont <strong>adjacentes dans le cycle</strong> (le Raiton bat le Doton). Cette proximité élémentaire pourrait expliquer qu'elles partagent un socle commun de modelage : le Serpent agit comme un pont entre la précision conductrice de la foudre et la précision structurelle de la terre.</p>
 <p style="background:var(--bg-parchment);padding:10px 14px;border-radius:6px;font-style:italic">💡 Anecdote pour les élèves : « Le serpent vit entre la terre et l'orage. Il rampe dans le sol et surgit quand la foudre gronde. C'est peut-être pour ça que son mudra lie ces deux natures. »</p>
 
+<h3>PARTIE 5 - Mudras associés aux Natures de Chakra</h3>
+<p>Chaque nature de chakra possède un mudra de prédilection, celui qui canalise le mieux son affinité élémentaire :</p>
+<table class="contenu-table">
+<tr><th>Mudra</th><th>Nature</th><th>Avantage</th></tr>
+<tr><td>Rat</td><td>Techniques d'ombre (Nara)</td><td>—</td></tr>
+<tr><td>Tigre</td><td>Katon 🔥</td><td>Inflige des brûlures</td></tr>
+<tr><td>Coq / Oiseau</td><td>Futon 🌬️</td><td>Accélère la vitesse</td></tr>
+<tr><td>Serpent</td><td>Raiton ⚡</td><td>Étourdit la cible</td></tr>
+<tr><td>Serpent</td><td>Doton 🌍</td><td>Renforce la robustesse</td></tr>
+<tr><td>Chien</td><td>Suiton 💧</td><td>Absorbe le chakra</td></tr>
+</table>
+<p>Ces natures s'organisent en un cycle où chacune domine la suivante :</p>
+<div style="text-align:center;margin:16px 0"><img src="img_cycle_natures.png" alt="Cycle des 5 Natures de Chakra" style="max-width:320px;border-radius:var(--radius-lg)"></div>
+<p style="text-align:center;font-size:1rem;font-weight:600;margin:12px 0">🔥 Katon → 🌬️ Futon → ⚡ Raiton → 🌍 Doton → 💧 Suiton → 🔥 Katon</p>
+
 <h3>FERMETURE</h3>
 <p>Récap' oral : rappeler les 3 fonctions (canaliser, transformer, stabiliser), les 3 qualités d'exécution (précis, rapide, fluide) et l'importance de l'ordre.</p>
 <p>Phrase de fermeture :</p>
@@ -4638,7 +4653,7 @@ function iCalcScore(cid){
 // ================================================================
 const SK='zenkai_v2';
 let S={c:{},n:{}};
-function load(){try{const r=localStorage.getItem(SK);if(r){S=JSON.parse(r)}}catch(e){}if(!S.c)S.c={};if(!S.n)S.n={};if(!S.sensei)S.sensei={prenom:'',nom:'',signe:'',nature:'',type:'sage',rang:'',lieu:'',signature:''};if(!S.sensei.type)S.sensei.type='sage';if(S.sensei.signature===undefined)S.sensei.signature='';if(S.noAnim)document.documentElement.setAttribute('data-no-anim','')}
+function load(){try{const r=localStorage.getItem(SK);if(r){S=JSON.parse(r)}}catch(e){}if(!S.c)S.c={};if(!S.n)S.n={};if(!S.sensei)S.sensei={prenom:'',nom:'',signe:'',nature:'',type:'sage',rang:'',signature:''};if(!S.sensei.type)S.sensei.type='sage';if(S.sensei.signature===undefined)S.sensei.signature='';if(S.noAnim)document.documentElement.setAttribute('data-no-anim','')}
 function save(){localStorage.setItem(SK,JSON.stringify(S))}
 function chk(k){return!!S.c[k]}
 function tog(k){S.c[k]=!S.c[k];if(!S.c[k])delete S.c[k];save()}
@@ -5229,7 +5244,7 @@ doton_cours:{
 };
 
 function getSensei(){
-  if(!S.sensei)S.sensei={prenom:'',nom:'',signe:'',nature:'',type:'sage',rang:'',lieu:'',signature:''};
+  if(!S.sensei)S.sensei={prenom:'',nom:'',signe:'',nature:'',type:'sage',rang:'',signature:''};
   if(!S.sensei.type)S.sensei.type='sage';
   if(!S.sensei.specCombat)S.sensei.specCombat='taijutsu';
   return S.sensei;
@@ -5824,6 +5839,7 @@ function renderDetail(){
       h+=`<div class="contenu-block tab-content">${applySenseiName(CONTENU[c.id],c.id)}</div>`;
       h+=`<div style="margin-bottom:14px;display:flex;gap:8px;align-items:center;flex-wrap:wrap"><button class="btn btn-sm" onclick="openPresentation('${c.id}')" style="font-size:0.8rem">🎤 Mode Présentation</button>
         <button class="btn btn-sm" onclick="exportPDF(null,'zenkai_${c.id}')" style="font-size:0.75rem">📄 PDF</button>
+        ${np&&np.copy?`<button class="btn btn-sm" onclick="copyNotes('${c.id}',this)" style="font-size:0.8rem">📋 Copier pour in-game</button>`:''}
         <span style="font-size:0.72rem;color:var(--text-muted)">Vue plein écran · Export</span></div>`;
     }
 
@@ -6292,31 +6308,27 @@ function renderAdmin(){
 }
 
 function copyModuleAnnonces(mod){
-  const s=getSensei();
   const prof=senseiProf();
-  const lieu=s.lieu||'Lieu à définir';
-  const lines=[];
+  const bases=[];
   D.cours.filter(c=>c.mod===mod&&coursVisibleForSensei(c)).forEach(c=>{
     if(c.cat==='theorique'){
-      lines.push(c.titre+' — '+c.rang+' — '+lieu+' — '+prof);
+      bases.push(c.titre+' — '+c.rang);
     }else{
       const techRangs=[...new Set(c.techs.map(t=>t.rang))];
       if(techRangs.length<=1){
-        lines.push(c.titre+' — '+c.rang+' — '+lieu+' — '+prof);
+        bases.push(c.titre+' — '+c.rang);
       }else{
         c.techs.forEach(t=>{
-          lines.push(c.titre.replace(/^Techniques?\s+/i,'')+' — '+t.nom+' — '+t.rang+' — '+lieu+' — '+prof);
+          bases.push(c.titre.replace(/^Techniques?\s+/i,'')+' — '+t.nom+' — '+t.rang);
         });
       }
     }
   });
-  clipCopy(lines.join('\n'),'Module '+mod);
+  showLieuPicker(null,prof,null,null,bases,'Module '+mod);
 }
 
 function renderAnnonces(){
-  const s=getSensei();
   const prof=senseiProf();
-  const lieu=s.lieu||'Lieu à définir';
 
   // Build announcements dynamically from D.cours (filtered by nature)
   const items=[];
@@ -6347,16 +6359,16 @@ function renderAnnonces(){
   const sorted=Object.values(groups).sort((a,b)=>modOrder.indexOf(a.mod)-modOrder.indexOf(b.mod));
 
   let h=`<div class="page-header"><div class="page-title">Annonces de Cours</div>
-    <div class="page-desc">Cliquez sur une ligne pour copier l'annonce et ouvrir le cours. Format : Cours / Rang / Lieu / Professeur</div></div>`;
+    <div class="page-desc">Cliquez sur une ligne pour choisir le lieu, copier l'annonce et ouvrir le cours.</div></div>`;
 
   sorted.forEach(section=>{
     const icon=modIcons[section.mod]||'📚';
     h+=`<div style="margin-bottom:24px">
       <div style="font-size:0.95rem;font-weight:700;color:var(--accent-gold);margin-bottom:10px;display:flex;align-items:center;gap:8px">${icon} ${section.mod} <button class="btn btn-sm" onclick="event.stopPropagation();copyModuleAnnonces('${section.mod}')" style="font-size:0.68rem;padding:2px 8px;margin-left:4px">📋 Copier le module</button></div>`;
     section.items.forEach(item=>{
-      const nomLecon=`${item.nom} — ${item.rang} — ${lieu} — ${prof}`;
-      h+=`<div class="annonce-field" onclick="copyAndOpen(this,'${item.cid}')" style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:10px 14px;margin-bottom:4px">
-            <span class="af-value" data-text="${nomLecon.replace(/"/g,'&quot;')}" style="font-size:0.82rem">${item.nom}</span>
+      const base=`${item.nom} — ${item.rang}`;
+      h+=`<div class="annonce-field" onclick="copyAndOpen(this,'${item.cid}')" data-base="${base.replace(/"/g,'&quot;')}" data-prof="${prof.replace(/"/g,'&quot;')}" style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:10px 14px;margin-bottom:4px">
+            <span class="af-value" style="font-size:0.82rem">${item.nom}</span>
             <span class="badge badge-rang" style="font-size:0.55rem;flex-shrink:0">${item.rang}</span>
             <span class="af-copy">📋</span>
           </div>`;
@@ -6947,11 +6959,42 @@ function openPresentation(coursId){
   overlay.focus();
 }
 
+const LIEUX_ANNONCE=["Devant l'Académie","Salle 0-1 (Labo)","Salle 0-2","Salle 0-3","Salle 1-1","Salle 1-2"];
 function copyAndOpen(el,coursId){
-  const val=el.querySelector('.af-value');
-  const txt=val.getAttribute('data-text');
-  clipCopy(txt,'Annonce',el);
-  setTimeout(()=>openCours(coursId),1200);
+  const base=el.getAttribute('data-base');
+  const prof=el.getAttribute('data-prof');
+  showLieuPicker(base,prof,el,coursId);
+}
+function showLieuPicker(base,prof,srcEl,coursId,bases,label){
+  const old=document.getElementById('lieu-picker-overlay');
+  if(old)old.remove();
+  const ov=document.createElement('div');
+  ov.id='lieu-picker-overlay';
+  ov.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:9999;display:flex;align-items:center;justify-content:center';
+  const box=document.createElement('div');
+  box.style.cssText='background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius-lg);padding:20px 24px;max-width:340px;width:90%;box-shadow:var(--shadow-lg)';
+  box.innerHTML='<div style="font-weight:700;font-size:0.95rem;margin-bottom:14px;color:var(--accent-gold)">📍 Lieu du cours</div>';
+  LIEUX_ANNONCE.forEach(lieu=>{
+    const btn=document.createElement('button');
+    btn.className='btn';
+    btn.style.cssText='display:block;width:100%;text-align:left;margin-bottom:6px;padding:10px 14px;font-size:0.85rem';
+    btn.textContent=lieu;
+    btn.onclick=()=>{
+      ov.remove();
+      if(bases){
+        const txt=bases.map(b=>b+' — '+lieu+' — '+prof).join('\n');
+        clipCopy(txt,label||'Annonces',srcEl);
+      }else{
+        const txt=base+' — '+lieu+' — '+prof;
+        clipCopy(txt,'Annonce',srcEl);
+        if(coursId)setTimeout(()=>openCours(coursId),1200);
+      }
+    };
+    box.appendChild(btn);
+  });
+  ov.onclick=e=>{if(e.target===ov)ov.remove()};
+  ov.appendChild(box);
+  document.body.appendChild(ov);
 }
 
 // ================================================================
@@ -6987,14 +7030,6 @@ function renderSensei(){
     <label>Signe distinctif</label>
     <input type="text" id="sensei_signe" value="${esc(s.signe)}" placeholder="ex: cheveux brun, cicatrice sur l'œil, bandeau sur le front..."
       oninput="setSenseiField('signe',this.value);updateSenseiPreview()">
-  </div>`;
-
-  // Lieu de RDV
-  h+=`<div class="sensei-field">
-    <label>Lieu de rendez-vous</label>
-    <input type="text" id="sensei_lieu" value="${esc(s.lieu)}" placeholder="ex: Devant l'académie, Terrain d'entraînement 7..."
-      oninput="setSenseiField('lieu',this.value);updateSenseiPreview()">
-    <div style="font-size:0.72rem;color:var(--text-muted);margin-top:4px;font-style:italic">Utilisé dans toutes vos annonces de cours</div>
   </div>`;
 
   // Rang
@@ -7176,7 +7211,7 @@ function renderSensei(){
   const profStr=senseiProf();
   h+=`<div style="margin-bottom:14px">
     <div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted);margin-bottom:4px">Annonce de cours</div>
-    <div style="font-family:monospace;font-size:0.85rem;color:var(--text-bright);padding:8px 12px;background:rgba(0,0,0,0.03);border-radius:var(--radius)" id="previewAnnonce">${esc(exCours.titre)} — ${exCours.rang} — ${esc(s.lieu||'Lieu à définir')} — ${esc(profStr)}</div>
+    <div style="font-family:monospace;font-size:0.85rem;color:var(--text-bright);padding:8px 12px;background:rgba(0,0,0,0.03);border-radius:var(--radius)" id="previewAnnonce">${esc(exCours.titre)} — ${exCours.rang} — 📍 Lieu au clic — ${esc(profStr)}</div>
   </div>`;
 
   // Signature preview
@@ -7235,7 +7270,7 @@ function updateSenseiPreview(){
   const sig=document.getElementById('previewSignature');
   if(el){
     const exCours=D.cours[0];
-    el.textContent=exCours.titre+' — '+exCours.rang+' — '+(getSensei().lieu||'Lieu à définir')+' — '+senseiProf();
+    el.textContent=exCours.titre+' — '+exCours.rang+' — 📍 Lieu au clic — '+senseiProf();
   }
   if(sig){
     const t=senseiTypeInfo();
@@ -7333,10 +7368,10 @@ function validateSaveData(d){
   if(!keys.some(k=>k in d))return false;
   // Sanitize sensei fields — must be plain short strings
   if(d.sensei&&typeof d.sensei==='object'){
-    const strFields=['prenom','nom','signe','nature','type','rang','lieu','signature','specCombat','typeLame'];
+    const strFields=['prenom','nom','signe','nature','type','rang','signature','specCombat','typeLame'];
     strFields.forEach(f=>{if(d.sensei[f]!==undefined){if(typeof d.sensei[f]!=='string'||d.sensei[f].length>200)d.sensei[f]='';}});
     // Strip any HTML tags from text fields
-    ['prenom','nom','signe','lieu','signature'].forEach(f=>{if(d.sensei[f])d.sensei[f]=d.sensei[f].replace(/<[^>]*>/g,'');});
+    ['prenom','nom','signe','signature'].forEach(f=>{if(d.sensei[f])d.sensei[f]=d.sensei[f].replace(/<[^>]*>/g,'');});
   }
   return true;
 }
