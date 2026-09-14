@@ -3639,7 +3639,7 @@ copy:`🤞 Les Mudras
 🐯 Tigre → Katon 🔥
 🐓 Coq / Oiseau → Futon 🌬️
 🐍 Serpent → Raiton ⚡
-🐗 Sanglier / Cochon → Doton 🌍
+🐍 Serpent → Doton 🌍
 🐕 Chien → Suiton 💧
 
 🍃 Travaillez vos mudras jusqu'à ce qu'ils deviennent un réflexe. Le jour où votre vie en dépendra, vous n'aurez pas droit à l'erreur. Eraku Morikawa`,
@@ -3672,7 +3672,7 @@ html:`
 <tr><td>🐯 Tigre</td><td>Katon 🔥</td></tr>
 <tr><td>🐓 Coq / Oiseau</td><td>Futon 🌬️</td></tr>
 <tr><td>🐍 Serpent</td><td>Raiton ⚡</td></tr>
-<tr><td>🐗 Sanglier / Cochon</td><td>Doton 🌍</td></tr>
+<tr><td>🐍 Serpent</td><td>Doton 🌍</td></tr>
 <tr><td>🐕 Chien</td><td>Suiton 💧</td></tr>
 </table>
 <p style="background:var(--bg-parchment);padding:10px 14px;border-radius:6px;font-style:italic">🍃 Travaillez vos mudras jusqu'à ce qu'ils deviennent un réflexe. Le jour où votre vie en dépendra, vous n'aurez pas droit à l'erreur. Eraku Morikawa</p>
@@ -6423,18 +6423,22 @@ function renderBilan(){
   const selDate=bilanDate||todayStr;
   const selHist=allDays[selDate]||[];
 
-  const rang=s.rang||'Sensei';
-
-  // Message Discord pour la date sélectionnée
-  let discord=`**- Prénom Nom :** ${senseiFullName()}\n`;
-  discord+=`**- Rôle :** ${rang}\n`;
-  discord+=`**- Date :** ${selDate}\n`;
-  discord+=`**- Cours effectué(s) (Avec l'heure) :**\n`;
+  // Message Discord pour la date sélectionnée — cours uniquement, sans en-tête
+  let discord='';
   if(selHist.length===0){
     discord+=`Aucun cours ce jour.\n`;
   }else{
-    selHist.forEach(e=>{
-      discord+=`• ${e.titre} — ${e.heure}${e.noEleve?' (aucun élève présent)':''}\n`;
+    // Trier par heure, puis dédupliquer : si même créneau, décaler de +15 min
+    const sorted=[...selHist].sort((a,b)=>a.heure.localeCompare(b.heure));
+    const usedTimes=new Set();
+    sorted.forEach(e=>{
+      let [hh,mm]=e.heure.split(':').map(Number);
+      while(usedTimes.has(`${String(hh).padStart(2,'0')}:${String(mm).padStart(2,'0')}`)){
+        mm+=15;if(mm>=60){mm-=60;hh=(hh+1)%24;}
+      }
+      const finalTime=`${String(hh).padStart(2,'0')}:${String(mm).padStart(2,'0')}`;
+      usedTimes.add(finalTime);
+      discord+=`• ${e.titre} — ${finalTime}\n`;
     });
   }
 
