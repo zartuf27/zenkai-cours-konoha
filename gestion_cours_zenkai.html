@@ -12,6 +12,7 @@
 <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Cinzel:wght@700;900&display=swap');
 
@@ -5450,7 +5451,6 @@ function coursProg(c){
 function coursState(c){
   if(INTERACTIF[c.id]){const blocs=INTERACTIF[c.id],ist=getIState(c.id);if(ist.done.length>=blocs.length)return'maitrisee';if(ist.done.length>0)return'en-cours';return'non-vue'}
   const st=c.techs.map(techState);if(st.every(s=>s==='maitrisee'))return'maitrisee';if(st.some(s=>s!=='non-vue'))return'en-cours';return'non-vue'}
-function prereqOk(tid){const f=findTech(tid);return!f||techState(f.t)==='maitrisee'}
 
 function stBadge(s){const l={'non-vue':'Non vue','en-cours':'En cours','maitrisee':'Maîtrisée'};return`<span class="state-badge state-${s}">${l[s]}</span>`}
 function tIcon(t){return{connaissance:'📖',mudras:'🤞',taijutsu:'🥋',chakra:'🔥',tactique:'🎯',ninjutsu:'⚡'}[t]||'📌'}
@@ -5696,7 +5696,7 @@ function renderCoursList(){
       if(fMod&&c.mod!==fMod)return false;
       if(fRang&&c.rang!==fRang)return false;
       if(fEtat&&coursState(c)!==fEtat)return false;
-      if(srch&&!(c.titre+' '+c.desc+' '+c.techs.map(t=>t.nom+' '+t.desc).join(' ')).toLowerCase().includes(srch))return false;
+      if(srch){const haystack=(c.titre+' '+c.desc+' '+c.techs.map(t=>t.nom+' '+t.desc).join(' ')+' '+(CONTENU[c.id]||'').replace(/<[^>]*>/g,' ')).toLowerCase();if(!haystack.includes(srch))return false;}
       return true;
     });
     if(!fl.length)continue;
@@ -7701,6 +7701,40 @@ updateHeaderSensei();
 // Hook into save to keep header in sync
 const _origSave=save;
 save=function(){_origSave();updateHeaderSensei()};
+
+// ================================================================
+// CONFETTI — célébration à 100%
+// ================================================================
+function celebrate(){
+  if(typeof confetti==='undefined'||S.noAnim)return;
+  const s=getSensei();const nat=D.natures.find(n=>n.id===s.nature);
+  const colors=nat?{katon:['#d43a1a','#d97a1e','#ff6b35'],futon:['#2e8b57','#3cb371','#90ee90'],raiton:['#c8a84e','#daa520','#ffd700'],doton:['#8b6914','#a0522d','#cd853f'],suiton:['#1e6aa0','#4a90d9','#87ceeb']}[s.nature]||['#c8a84e','#d97a1e']:['#c8a84e','#d97a1e','#2e8b57'];
+  confetti({particleCount:80,spread:70,origin:{y:0.7},colors});
+}
+// Hook into tog() to detect 100% completion
+const _origTog=tog;
+tog=function(k){_origTog(k);
+  // Check if the current course just hit 100%
+  if(curCours){const c=cours(curCours);if(c&&coursProg(c).p===100)celebrate();}
+};
+
+// ================================================================
+// RACCOURCIS CLAVIER
+// ================================================================
+document.addEventListener('keydown',e=>{
+  if(e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA'||e.target.tagName==='SELECT')return;
+  const viewKeys={1:'dashboard',2:'cours',3:'mudras',4:'natures',5:'hierarchie',6:'annonces',7:'bilan',8:'historique',9:'sensei',0:'reglages'};
+  if(viewKeys[e.key]){e.preventDefault();nav(viewKeys[e.key]);return;}
+  if(e.key==='Escape'){
+    // Fermer présentation ou retour aux cours
+    const pres=document.getElementById('presentationOverlay');
+    if(pres){pres.remove();return;}
+    if(curView==='detail'){nav('cours');return;}
+  }
+  if(e.key==='p'||e.key==='P'){
+    if(curView==='detail'&&curCours&&CONTENU[curCours]){openPresentation(curCours);}
+  }
+});
 
 // ================================================================
 // PWA — Service Worker

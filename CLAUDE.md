@@ -294,7 +294,11 @@ Pour mettre à jour le cache PWA : incrémenter la version dans `sw.js` (`zenkai
 | Onboarding | `showOnboarding()`, `startTourGuide()`, `finishOnboarding()`, `isFirstVisit()` |
 | Sons | `playClick()`, `playSuccess()` |
 | Sidebar | `getSidebarLabel()`, `getTourTip()` |
-| Export | `doExport()`, `doImport()`, `doReset()`, `resetBilan()` |
+| Export | `doExport()`, `doImport()`, `doReset()`, `resetBilanJour()` |
+| QR Code | `generateQR()`, auto-restore via hash URL `#restore=` |
+| PDF | `exportPDF()` (html2canvas + jsPDF) |
+| Confetti | `celebrate()` — déclenché quand un cours atteint 100% |
+| Raccourcis | 1-9/0 = onglets, Échap = retour/fermer, P = présentation |
 
 ### Procédure pour ajouter un cours
 

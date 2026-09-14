@@ -97,7 +97,7 @@
       "node_kind": "heading",
       "norm_label": "fonctions cles",
       "source_file": "CLAUDE.md",
-      "source_location": "L285"
+      "source_location": "L282"
     },
     {
       "id": "claude_graphify_m\u00e9moire_structurelle",
@@ -121,7 +121,7 @@
       "node_kind": "heading",
       "norm_label": "icones",
       "source_file": "CLAUDE.md",
-      "source_location": "L314"
+      "source_location": "L311"
     },
     {
       "id": "claude_interface_cours_simplifi\u00e9_2_onglets",
@@ -157,7 +157,7 @@
       "node_kind": "heading",
       "norm_label": "mode presentation (\ud83c\udfa4)",
       "source_file": "CLAUDE.md",
-      "source_location": "L238"
+      "source_location": "L235"
     },
     {
       "id": "claude_onboarding_tuto_premi\u00e8re_visite",
@@ -193,7 +193,7 @@
       "node_kind": "heading",
       "norm_label": "page historique (\ud83d\udcdc)",
       "source_file": "CLAUDE.md",
-      "source_location": "L228"
+      "source_location": "L225"
     },
     {
       "id": "claude_persistence_localstorage_cl\u00e9_zenkai_v2",
@@ -205,7 +205,7 @@
       "node_kind": "heading",
       "norm_label": "persistence (localstorage cle `zenkai_v2`)",
       "source_file": "CLAUDE.md",
-      "source_location": "L263"
+      "source_location": "L260"
     },
     {
       "id": "claude_proc\u00e9dure_pour_ajouter_un_cours",
@@ -217,7 +217,7 @@
       "node_kind": "heading",
       "norm_label": "procedure pour ajouter un cours",
       "source_file": "CLAUDE.md",
-      "source_location": "L302"
+      "source_location": "L299"
     },
     {
       "id": "claude_profil_sensei_11_axes_de_personnalisation",
@@ -241,7 +241,7 @@
       "node_kind": "heading",
       "norm_label": "pwa & outils",
       "source_file": "CLAUDE.md",
-      "source_location": "L273"
+      "source_location": "L270"
     },
     {
       "id": "claude_skins_par_nature_de_chakra",
@@ -265,7 +265,7 @@
       "node_kind": "heading",
       "norm_label": "structure des donnees (inline dans le html)",
       "source_file": "CLAUDE.md",
-      "source_location": "L242"
+      "source_location": "L239"
     },
     {
       "id": "claude_syst\u00e8me_de_citations_encouragements_de_fin_de_cours",
@@ -1296,7 +1296,7 @@
       "node_kind": "heading",
       "norm_label": "coherence lore zenkai-rp",
       "source_file": "CLAUDE.md",
-      "source_location": "L336"
+      "source_location": "L333"
     },
     {
       "id": "claude_contexte_du_projet",
@@ -1332,7 +1332,7 @@
       "node_kind": "heading",
       "norm_label": "fichiers .docx",
       "source_file": "CLAUDE.md",
-      "source_location": "L332"
+      "source_location": "L329"
     },
     {
       "id": "claude_les_30_cours_par_module",
@@ -1356,7 +1356,7 @@
       "node_kind": "heading",
       "norm_label": "les documents sont pour le professeur, pas pour les eleves",
       "source_file": "CLAUDE.md",
-      "source_location": "L322"
+      "source_location": "L319"
     },
     {
       "id": "claude_r\u00e8gles_importantes",
@@ -1368,7 +1368,7 @@
       "node_kind": "heading",
       "norm_label": "regles importantes",
       "source_file": "CLAUDE.md",
-      "source_location": "L320"
+      "source_location": "L317"
     },
     {
       "id": "claude_structure_du_dossier",
@@ -1392,7 +1392,7 @@
       "node_kind": "heading",
       "norm_label": "style et ton",
       "source_file": "CLAUDE.md",
-      "source_location": "L327"
+      "source_location": "L324"
     },
     {
       "id": "claude_synchronisation",
@@ -1404,7 +1404,7 @@
       "node_kind": "heading",
       "norm_label": "synchronisation",
       "source_file": "CLAUDE.md",
-      "source_location": "L345"
+      "source_location": "L342"
     },
     {
       "id": "sw",
@@ -2181,7 +2181,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L228",
+      "source_location": "L225",
       "weight": 1.0
     },
     {
@@ -2192,7 +2192,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L238",
+      "source_location": "L235",
       "weight": 1.0
     },
     {
@@ -2203,7 +2203,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L242",
+      "source_location": "L239",
       "weight": 1.0
     },
     {
@@ -2214,7 +2214,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L263",
+      "source_location": "L260",
       "weight": 1.0
     },
     {
@@ -2225,7 +2225,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L273",
+      "source_location": "L270",
       "weight": 1.0
     },
     {
@@ -2236,7 +2236,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L285",
+      "source_location": "L282",
       "weight": 1.0
     },
     {
@@ -2247,7 +2247,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L302",
+      "source_location": "L299",
       "weight": 1.0
     },
     {
@@ -2258,7 +2258,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L314",
+      "source_location": "L311",
       "weight": 1.0
     },
     {
@@ -2335,7 +2335,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L320",
+      "source_location": "L317",
       "weight": 1.0
     },
     {
@@ -2368,7 +2368,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L322",
+      "source_location": "L319",
       "weight": 1.0
     },
     {
@@ -2379,7 +2379,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L327",
+      "source_location": "L324",
       "weight": 1.0
     },
     {
@@ -2390,7 +2390,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L332",
+      "source_location": "L329",
       "weight": 1.0
     },
     {
@@ -2401,7 +2401,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L336",
+      "source_location": "L333",
       "weight": 1.0
     },
     {
@@ -2412,7 +2412,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L345",
+      "source_location": "L342",
       "weight": 1.0
     },
     {
@@ -3506,5 +3506,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "a303532e66ff6971f4e80769028405e66d5e87aa"
+  "built_at_commit": "a265c9ca2727d68e6821e96e1f45804443930b81"
 }
