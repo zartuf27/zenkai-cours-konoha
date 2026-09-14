@@ -5706,11 +5706,10 @@ function renderCoursList(){
       <div class="cours-grid">`;
     fl.forEach(c=>{
       const st=coursState(c),p=coursProg(c);
-      const pOk=c.prereq.every(pid=>{const pc=cours(pid);return pc&&coursState(pc)==='maitrisee'});
       const cNat=coursNature(c.id);
       const isMyNature=cNat&&cNat===senNat;
       const natInfo=cNat?D.natures.find(n=>n.id===cNat):null;
-      h+=`<div class="card card-clickable${!pOk?' prereq-warn':''}" onclick="openCours('${c.id}')" ${isMyNature?'style="border-color:var(--skin-primary);box-shadow:0 0 12px var(--skin-glow)"':''}>
+      h+=`<div class="card card-clickable" onclick="openCours('${c.id}')" ${isMyNature?'style="border-color:var(--skin-primary);box-shadow:0 0 12px var(--skin-glow)"':''}>
         <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px">
           <div class="cours-card-title">${isMyNature?natInfo.icon+' ':''}${c.titre}</div>${stBadge(st)}
         </div>
@@ -5736,8 +5735,6 @@ function renderCoursList(){
 function renderDetail(){
   const c=cours(curCours);if(!c)return'';
   const st=coursState(c),p=coursProg(c);
-  const missing=c.prereq.filter(pid=>{const pc=cours(pid);return!pc||coursState(pc)!=='maitrisee'});
-  const met=c.prereq.filter(pid=>!missing.includes(pid));
 
   const cNat=coursNature(c.id);
   const cNatInfo=cNat?D.natures.find(n=>n.id===cNat):null;
@@ -5790,8 +5787,6 @@ function renderDetail(){
     ${givenLast?'<span style=\"font-size:0.72rem;color:var(--text-dim)\">· Dernier : '+givenLast+'</span>':''}
   </div>`;
 
-  if(missing.length)h+=`<div class="prereq-alert">⚠ <div><strong>Prérequis non remplis :</strong> ${missing.map(pid=>{const pc=cours(pid);return pc?`<span style="cursor:pointer;text-decoration:underline" onclick="openCours('${pid}')">${pc.titre}</span>`:pid}).join(', ')}</div></div>`;
-  if(met.length)h+=`<div style="font-size:0.75rem;color:var(--accent-leaf);margin-bottom:12px;padding:8px 12px;background:rgba(74,140,63,0.06);border:1px solid rgba(74,140,63,0.15);border-radius:var(--radius)">✓ Prérequis validés : ${met.map(pid=>{const pc=cours(pid);return pc?pc.titre:pid}).join(', ')}</div>`;
 
   // Interactive course
   if(INTERACTIF[c.id]){
@@ -5886,16 +5881,13 @@ function renderDetail(){
   c.techs.forEach(t=>{
     const ts=techState(t),tp=techProg(t),it=items(t);
     const hasMudras=t.mudras?.length>0;
-    const tpw=(t.prereq||[]).filter(pid=>!prereqOk(pid));
-    h+=`<div class="tech-item${tpw.length?' prereq-warn':''}">
+    h+=`<div class="tech-item">
       <div class="tech-head" onclick="this.parentElement.querySelector('.tech-body').style.display=this.parentElement.querySelector('.tech-body').style.display==='none'?'block':'none'">
         <span class="tech-name"><span class="t-icon">${tIcon(t.type)}</span>${t.nom}</span>
         <div style="display:flex;align-items:center;gap:6px"><span class="badge badge-type" style="font-size:0.6rem">${t.type}</span><span class="badge badge-rang" style="font-size:0.6rem">${t.rang}</span>${stBadge(ts)}</div>
       </div>
       <div class="tech-body">
         <div class="tech-desc">${t.desc}</div>`;
-
-    if(tpw.length)h+=`<div class="prereq-alert">⚠ Prérequis : ${tpw.map(pid=>{const f=findTech(pid);return f?f.t.nom:pid}).join(', ')}</div>`;
 
     if(it.length){
       h+=`<div class="pbar" style="margin-bottom:6px"><div class="pbar-fill${tp.p===100?' complete':''}" style="width:${tp.p}%"></div></div>
