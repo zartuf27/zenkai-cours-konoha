@@ -190,13 +190,23 @@ Flow en 2 phases :
 
 Le flag `zenkai_onboarded` dans localStorage empêche de relancer le tuto. Bouton "🎓 Relancer" dans la page Sensei.
 
-### Graphify
+### Graphify — Mémoire structurelle
 
-Le projet utilise **Graphify** pour l'analyse structurelle du code. Fichiers dans `graphify-out/` :
-- `graph.json` — graphe du projet (154 nœuds, 118 arêtes, 39 communautés)
+Le projet utilise **Graphify** comme carte contextuelle et mémoire structurelle. Fichiers dans `graphify-out/` :
+- `graph.json` — graphe du projet (155 nœuds, 119 arêtes, 39 communautés)
 - `graph.html` — visualisation interactive
-- `GRAPH_REPORT.md` — rapport d'analyse
+- `GRAPH_REPORT.md` — rapport d'analyse (hubs, communautés, gaps)
+- `converted/*.md` — sources .docx converties (contenu original des cours)
+- `manifest.json` — index des 37 fichiers sources avec hash
 - Mise à jour : `graphify update .` après chaque modification significative
+
+**Hubs principaux** (nœuds les plus connectés) :
+- Architecture du HTML (22 edges) — cœur technique
+- Les 8 Règles d'Or (9) — cours fondamental
+- CLAUDE.md (7) — documentation centrale
+- Guide de partage (7) — multi-sensei
+
+**Usage en contexte** : consulter `GRAPH_REPORT.md` avant toute modification pour identifier les communautés impactées. Comparer `converted/*.md` (sources) avec le HTML (implémentation) pour vérifier la cohérence.
 
 ### Page Fin de mois (📊) — Rapport pour le Parchemin
 
@@ -277,13 +287,14 @@ Overlay plein écran déclenché depuis la page détail d'un cours. Affiche le c
 ### Procédure pour ajouter un cours
 
 1. Ajouter dans `D.cours[]` : `{id, titre, cat, mod, rang, cible, auteur, prereq, desc, techs[]}`
-2. Ajouter dans `CONTENU[id]` : HTML du guide oral
-3. Si théorique : ajouter dans `RESUME[id]` : HTML des bullet points "À retenir"
-4. Ajouter dans `NOTES_PROF[id]` : `{copy: '...', html: '...'}`
-5. Ajouter dans `SENSEI_QUOTES[id]` : objet avec 16 clés (sage, dur, guerrier, bienveillant, mysterieux, stratege, veteran, fraternel, ironique, ermite, ombre, sensei_noble, rebelle, mentor, chasseur, tacticien)
+2. Ajouter dans `CONTENU[id]` : HTML du guide oral (onglet 🎤 Support oral)
+3. Ajouter dans `NOTES_PROF[id]` : `{copy: '...', html: '...'}` (onglet 📋 Marqueurs)
+4. Ajouter dans `SENSEI_QUOTES[id]` : objet avec 16 clés (sage, dur, guerrier, bienveillant, mysterieux, stratege, veteran, fraternel, ironique, ermite, ombre, sensei_noble, rebelle, mentor, chasseur, tacticien)
+5. Ajouter dans `COURS_FLAVOR[id]` : `{intro: {16 types}, nature: {5 natures}}` (marqueurs dynamiques)
 6. Si nature-spécifique : ajouter dans `COURS_NATURE`
-7. Mettre à jour `donnees_cours.json`
-8. `git add . && git commit -m "..." && git push`
+7. Si spéc combat : ajouter dans `COURS_SPEC` + `SPEC_FLAVOR[id]`
+8. Mettre à jour `donnees_cours.json`
+9. `graphify update .` puis `git add . && git commit -m "..." && git push`
 
 ### Icônes
 
