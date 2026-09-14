@@ -29,7 +29,7 @@ Déploiement auto en ~1 min. Chaque prof ouvre le même lien, son profil/progres
 ## Structure du dossier
 
 ```
-gestion_cours_zenkai.html  — App principale (~8100 lignes, tout-en-un)
+gestion_cours_zenkai.html  — App principale (~8130 lignes, tout-en-un)
 sw.js                      — Service Worker PWA (cache hors-ligne)
 manifest.json              — Manifest PWA (installable sur mobile)
 icon-192.svg               — Icône PWA (symbole Konoha)
@@ -65,7 +65,7 @@ Format tableau.docx        — Directive format annonces (Yamamoto Jakka)
 
 ## Architecture du HTML
 
-### Vue d'ensemble des pages (sidebar — 11 vues)
+### Vue d'ensemble des pages (sidebar — 10 vues)
 
 | Page | ID | Fonction |
 |------|----|----------|
@@ -79,7 +79,7 @@ Format tableau.docx        — Directive format annonces (Yamamoto Jakka)
 | 📢 Annonces | `annonces` | Annonces avec sélecteur de lieu (popup) + copie par module |
 | 📊 Fin de mois | `bilan` | Sélecteur jour, liste des cours avec heure |
 | 📜 Historique | `historique` | Stats sensei, graphiques, classement, journal complet |
-| 👤 Sensei | `sensei` | Profil complet (11 champs), aperçu en direct |
+| 👤 Sensei | `sensei` | Profil complet (10 champs), aperçu en direct, réglages (parchemin, QR, reset) |
 
 Navigation : `VIEWS[]` → `buildSidebar()` → `nav(viewId)` → `render()` → `renderXxx()`
 
@@ -189,7 +189,7 @@ Sur chaque page de cours détaillé :
 Flow en 2 phases :
 1. **Pop-up d'accueil** → redirige vers la page Sensei pour configurer le profil
 2. **Guide des onglets** — lancé via le bouton "✅ Profil configuré — Découvrir l'app"
-   - 6 étapes (Dashboard, Cours, Notes de cours, Annonces, Bilan, Historique)
+   - 8 étapes (Dashboard, Cours, Notes de cours, Mudras, Natures, Annonces, Bilan, Historique)
    - Descriptions **personnalisées par type** (`TOUR_TIPS_TYPED`) : 8 types ont des textes uniques
    - Mot de fin personnalisé par type + nature + prénom (`ONBOARD_FINAL`)
    - Sons : tick au clic (`playClick`), accord Do-Mi-Sol en fin (`playSuccess`)
@@ -302,7 +302,7 @@ Pour mettre à jour le cache PWA : incrémenter la version dans `sw.js` (`zenkai
 | QR Code | `generateQR()`, auto-restore via hash URL `#restore=` |
 | PDF | `exportPDF()` (html2canvas + jsPDF) |
 | Confetti | `celebrate()` — déclenché quand un cours atteint 100% |
-| Raccourcis | 1-9/0 = onglets, Échap = retour/fermer, P = présentation |
+| Raccourcis | 1-9 = onglets, Échap = retour/fermer, P = présentation |
 
 ### Procédure pour ajouter un cours
 

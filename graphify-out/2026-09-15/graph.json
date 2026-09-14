@@ -280,14 +280,14 @@
       "source_location": "L125"
     },
     {
-      "id": "claude_vue_d_ensemble_des_pages_sidebar_10_vues",
-      "label": "Vue d'ensemble des pages (sidebar \u2014 10 vues)",
+      "id": "claude_vue_d_ensemble_des_pages_sidebar_11_vues",
+      "label": "Vue d'ensemble des pages (sidebar \u2014 11 vues)",
       "_origin": "ast",
       "community": 0,
       "community_name": "Architecture du HTML",
       "file_type": "document",
       "node_kind": "heading",
-      "norm_label": "vue d'ensemble des pages (sidebar \u2014 10 vues)",
+      "norm_label": "vue d'ensemble des pages (sidebar \u2014 11 vues)",
       "source_file": "CLAUDE.md",
       "source_location": "L68"
     },
@@ -2286,7 +2286,7 @@
     },
     {
       "source": "claude_architecture_du_html",
-      "target": "claude_vue_d_ensemble_des_pages_sidebar_10_vues",
+      "target": "claude_vue_d_ensemble_des_pages_sidebar_11_vues",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -3529,5 +3529,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "0df91fff6ac7090490c81aac15a49e09dccb3182"
+  "built_at_commit": "2c5ce67bd18d6d02b90ef1de04c03ee4e5ce9f18"
 }
