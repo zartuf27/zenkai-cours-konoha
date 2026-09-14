@@ -4629,7 +4629,7 @@ function iCalcScore(cid){
 // ================================================================
 const SK='zenkai_v2';
 let S={c:{},n:{}};
-function load(){try{const r=localStorage.getItem(SK);if(r){S=JSON.parse(r)}}catch(e){}if(!S.c)S.c={};if(!S.n)S.n={};if(!S.sensei)S.sensei={prenom:'Eraku',nom:'Morikawa',signe:'cheveux brun',nature:'',type:'sage',rang:'',lieu:'RDV Devant l\'académie',signature:''};if(!S.sensei.type)S.sensei.type='sage';if(!S.sensei.lieu&&S.sensei.lieu!=='')S.sensei.lieu='RDV Devant l\'académie';if(S.sensei.signature===undefined)S.sensei.signature='';if(S.noAnim)document.documentElement.setAttribute('data-no-anim','')}
+function load(){try{const r=localStorage.getItem(SK);if(r){S=JSON.parse(r)}}catch(e){}if(!S.c)S.c={};if(!S.n)S.n={};if(!S.sensei)S.sensei={prenom:'',nom:'',signe:'',nature:'',type:'sage',rang:'',lieu:'',signature:''};if(!S.sensei.type)S.sensei.type='sage';if(S.sensei.signature===undefined)S.sensei.signature='';if(S.noAnim)document.documentElement.setAttribute('data-no-anim','')}
 function save(){localStorage.setItem(SK,JSON.stringify(S))}
 function chk(k){return!!S.c[k]}
 function tog(k){S.c[k]=!S.c[k];if(!S.c[k])delete S.c[k];save()}
@@ -6292,7 +6292,7 @@ function renderAdmin(){
 function copyModuleAnnonces(mod){
   const s=getSensei();
   const prof=senseiProf();
-  const lieu='RDV Devant l\'académie';
+  const lieu=s.lieu||'Lieu à définir';
   const lines=[];
   D.cours.filter(c=>c.mod===mod&&coursVisibleForSensei(c)).forEach(c=>{
     if(c.cat==='theorique'){
@@ -6312,8 +6312,9 @@ function copyModuleAnnonces(mod){
 }
 
 function renderAnnonces(){
+  const s=getSensei();
   const prof=senseiProf();
-  const lieu='RDV Devant l\'académie';
+  const lieu=s.lieu||'Lieu à définir';
 
   // Build announcements dynamically from D.cours (filtered by nature)
   const items=[];
@@ -6941,6 +6942,14 @@ function renderSensei(){
       oninput="setSenseiField('signe',this.value);updateSenseiPreview()">
   </div>`;
 
+  // Lieu de RDV
+  h+=`<div class="sensei-field">
+    <label>Lieu de rendez-vous</label>
+    <input type="text" id="sensei_lieu" value="${esc(s.lieu)}" placeholder="ex: Devant l'académie, Terrain d'entraînement 7..."
+      oninput="setSenseiField('lieu',this.value);updateSenseiPreview()">
+    <div style="font-size:0.72rem;color:var(--text-muted);margin-top:4px;font-style:italic">Utilisé dans toutes vos annonces de cours</div>
+  </div>`;
+
   // Rang
   h+=`<div class="sensei-field">
     <label>Rang</label>
@@ -7120,7 +7129,7 @@ function renderSensei(){
   const profStr=senseiProf();
   h+=`<div style="margin-bottom:14px">
     <div style="font-size:0.68rem;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted);margin-bottom:4px">Annonce de cours</div>
-    <div style="font-family:monospace;font-size:0.85rem;color:var(--text-bright);padding:8px 12px;background:rgba(0,0,0,0.03);border-radius:var(--radius)" id="previewAnnonce">${esc(exCours.titre)} — ${exCours.rang} — ${esc('RDV Devant l\'académie')} — ${esc(profStr)}</div>
+    <div style="font-family:monospace;font-size:0.85rem;color:var(--text-bright);padding:8px 12px;background:rgba(0,0,0,0.03);border-radius:var(--radius)" id="previewAnnonce">${esc(exCours.titre)} — ${exCours.rang} — ${esc(s.lieu||'Lieu à définir')} — ${esc(profStr)}</div>
   </div>`;
 
   // Signature preview
@@ -7179,7 +7188,7 @@ function updateSenseiPreview(){
   const sig=document.getElementById('previewSignature');
   if(el){
     const exCours=D.cours[0];
-    el.textContent=exCours.titre+' — '+exCours.rang+' — '+('RDV Devant l\'académie')+' — '+senseiProf();
+    el.textContent=exCours.titre+' — '+exCours.rang+' — '+(getSensei().lieu||'Lieu à définir')+' — '+senseiProf();
   }
   if(sig){
     const t=senseiTypeInfo();

@@ -57,20 +57,19 @@ Format tableau.docx        — Directive format annonces (Yamamoto Jakka)
 
 ## Architecture du HTML
 
-### Vue d'ensemble des pages (sidebar — 12 vues)
+### Vue d'ensemble des pages (sidebar — 11 vues)
 
 | Page | ID | Fonction |
 |------|----|----------|
 | 📊 Dashboard | `dashboard` | Carte sensei, stats globales, progression par module, cours en cours |
 | 📚 Cours | `cours` | Liste filtrable (texte, catégorie, module, rang, état) |
-| *(détail)* | `detail` | Contenu du cours, techniques, checklist, notes prof, mode présentation, compteur |
+| *(détail)* | `detail` | 2 onglets (🎤 Support oral / 📋 Marqueurs), techniques, checklist, compteur |
 | 🤞 Mudras | `mudras` | Référence des 12 mudras |
 | 🔥 Natures | `natures` | 5 natures, cycle, kekkei genkai, bannière perso |
-| 🗡️ Armes | `armes` | Catalogue des 8 armes ninja |
 | 👑 Hiérarchie | `hierarchie` | 10 rangs ninja |
 | 📋 Règlement | `admin` | Directive Yamamoto Jakka |
 | 📢 Annonces | `annonces` | Annonces copy-to-clipboard + copie par module |
-| 📊 Fin de mois | `bilan` | Sélecteur jour, message Discord prêt à copier, reset |
+| 📊 Fin de mois | `bilan` | Sélecteur jour, liste des cours avec heure |
 | 📜 Historique | `historique` | Stats sensei, graphiques, classement, journal complet |
 | 👤 Sensei | `sensei` | Profil complet (11 champs), aperçu en direct |
 
@@ -139,13 +138,11 @@ const COURS_SPEC={kenjutsu_cours:'kenjutsu',kenjutsu_double:'kenjutsu',bourrasqu
 
 Les cours Kenjutsu ne sont visibles que pour les senseis Kenjutsu. Bourrasque et Pied de l'Aube uniquement pour les senseis Taijutsu. Le filtrage utilise `coursVisibleForSensei()` qui combine nature + spécialisation.
 
-### Double mode de lecture (cours théoriques)
+### Interface cours simplifié (2 onglets)
 
-Les cours théoriques disposent de 2 onglets dans le bloc contenu :
-- **📋 À retenir** — Bullet points structurés des acquis essentiels (constante `RESUME`)
-- **🎤 Guide oral** — Texte RP à lire à haute voix avec annotations et anecdotes (constante `CONTENU`)
-
-Les cours pratiques n'affichent que le guide oral. Le mode Présentation utilise toujours le guide oral.
+Chaque cours dispose de 2 onglets :
+- **🎤 Support oral** — Guide RP à lire à haute voix (constante `CONTENU`) + bouton Mode Présentation
+- **📋 Marqueurs** — Phrase personnalité + anecdote nature + anecdote combat (dynamiques via `COURS_FLAVOR` / `SPEC_FLAVOR`) + notes copiables in-game (`NOTES_PROF`)
 
 ### Adaptation du contenu par personnalité + nature + spécialisation
 
@@ -206,15 +203,12 @@ Le projet utilise **Graphify** pour l'analyse structurelle du code. Fichiers dan
 Le **Parchemin** = le canal Discord de l'Académie où les senseis postent leur rapport.
 
 - Sélecteur de jour IRL (= mois IG) avec boutons cliquables
-- Message pré-formaté prêt à copier-coller sur le Parchemin :
+- Liste des cours uniquement (pas d'en-tête nom/rôle/date) :
   ```
-  **- Prénom Nom :** Eraku Morikawa
-  **- Rôle :** Jōnin
-  **- Date :** 12/09/2026
-  **- Cours effectué(s) (Avec l'heure) :**
   • Techniques Raiton — 14:15
-  • Les Règles d'Or — 16:00 (aucun élève présent)
+  • Les Règles d'Or — 16:00
   ```
+- Déduplique les heures (arrondi au créneau +15min si collision)
 - Bouton 🗑️ Remettre à zéro
 - Lien vers la page Historique
 
