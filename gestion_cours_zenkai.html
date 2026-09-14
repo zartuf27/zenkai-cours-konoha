@@ -3015,6 +3015,11 @@ const CONTENU={
 <p>Capsule libérant un nuage de fumée pour masquer les mouvements, fuir ou surprendre. Effet non permanent.</p>
 <h3>Parchemin explosif (10-20 cm)</h3>
 <p>Feuille avec sceau de Fuinjutsu déclenchant une explosion. Utilisable comme piège ou arme à distance.</p>
+
+<h2>📋 Catalogue complet</h2>
+<div class="cours-grid" style="margin-top:12px">
+${D.armes.map(a=>'<div class="arme-card"><div class="arme-name">🗡️ '+a.nom+'</div><div class="arme-size">'+a.taille+'</div><div class="arme-desc">'+a.desc+'</div></div>').join('')}
+</div>
 `,
 
 "kenjutsu_cours":`
@@ -5215,7 +5220,7 @@ doton_cours:{
 };
 
 function getSensei(){
-  if(!S.sensei)S.sensei={prenom:'Eraku',nom:'Morikawa',signe:'cheveux brun',nature:'',type:'sage',rang:'',lieu:'RDV Devant l\'académie',signature:''};
+  if(!S.sensei)S.sensei={prenom:'',nom:'',signe:'',nature:'',type:'sage',rang:'',lieu:'',signature:''};
   if(!S.sensei.type)S.sensei.type='sage';
   if(!S.sensei.specCombat)S.sensei.specCombat='taijutsu';
   return S.sensei;
@@ -5392,7 +5397,7 @@ function applySenseiName(html,coursId){
     }
   }
   // Replace name (escape HTML to prevent injection from localStorage)
-  if(name!=='Eraku Morikawa') out=out.replace(/Eraku Morikawa/g,esc(name));
+  out=out.replace(/Eraku Morikawa/g,esc(name)||'Sensei');
   // Replace quote text if personality is not sage and we have a courseId
   if(coursId&&type!=='sage'&&SENSEI_QUOTES[coursId]){
     const origQuote=SENSEI_QUOTES[coursId].sage;
@@ -5451,7 +5456,6 @@ const VIEWS=[
   {id:'cours',icon:'📚',label:'Cours'},
   {id:'mudras',icon:'🤞',label:'Mudras'},
   {id:'natures',icon:'🔥',label:'Natures'},
-  {id:'armes',icon:'🗡️',label:'Armes'},
   {id:'hierarchie',icon:'👑',label:'Hiérarchie'},
   {id:'admin',icon:'📋',label:'Règlement'},
   {id:'annonces',icon:'📢',label:'Annonces'},
@@ -5515,7 +5519,6 @@ function render(){
     case'detail':el.innerHTML=renderDetail();break;
     case'mudras':el.innerHTML=renderMudras();break;
     case'natures':el.innerHTML=renderNatures();break;
-    case'armes':el.innerHTML=renderArmes();break;
     case'hierarchie':el.innerHTML=renderHier();break;
     case'admin':el.innerHTML=renderAdmin();break;
     case'annonces':el.innerHTML=renderAnnonces();break;
@@ -6203,18 +6206,6 @@ function renderNatures(){
 // ================================================================
 // ARMES REF
 // ================================================================
-function renderArmes(){
-  let h=`<div class="page-header"><div class="page-title">Arsenal Ninja</div>
-    <div class="page-desc">Équipement standard du shinobi de Konoha</div></div>
-    <div class="cours-grid">`;
-  D.armes.forEach(a=>{
-    h+=`<div class="arme-card"><div class="arme-name">🗡️ ${a.nom}</div>
-      <div class="arme-size">${a.taille}</div>
-      <div class="arme-desc">${a.desc}</div></div>`;
-  });
-  h+=`</div>`;
-  return h;
-}
 
 // ================================================================
 // HIERARCHIE
@@ -6956,9 +6947,11 @@ function renderSensei(){
   // Phrase signature
   h+=`<div class="sensei-field">
     <label>Phrase signature (optionnel)</label>
-    <input type="text" value="${esc(s.signature||'')}" placeholder="Laissez vide pour utiliser les citations auto-générées"
-      oninput="setSenseiField('signature',this.value);render()">
-    <div style="font-size:0.72rem;color:var(--text-muted);margin-top:4px;font-style:italic">${s.signature?'Remplace toutes les citations générées par cette phrase unique':'Les citations sont générées selon votre type + nature'}</div>
+    <textarea id="signatureInput" rows="2" placeholder="Ex : « La flamme de Konoha ne s'éteint jamais. »"
+      style="width:100%;padding:10px 14px;background:var(--bg-input);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font-size:0.88rem;font-family:inherit;resize:vertical;outline:none;transition:var(--transition)"
+      onblur="setSenseiField('signature',this.value);render()"
+      onfocus="this.style.borderColor='var(--accent-gold)'">${esc(s.signature||'')}</textarea>
+    <div style="font-size:0.72rem;color:var(--text-muted);margin-top:4px;font-style:italic">${s.signature?'✅ Remplace toutes les citations générées par cette phrase unique':'Laissez vide pour utiliser les citations auto-générées selon votre type + nature'}</div>
   </div>`;
 
   // Type de personnalité
@@ -7517,7 +7510,6 @@ const SIDEBAR_TIPS={
   detail:{title:'Notes de cours',text:'Chaque cours dispose de <strong>notes copiables</strong> prêtes à coller en jeu. Cliquez sur 📝 Notes du prof pour les afficher, puis 📋 Copier pour les avoir dans votre presse-papier. Les notes s\'adaptent automatiquement à votre nom et votre personnalité.'},
   mudras:{title:'Mudras',text:'Référence des 12 signes de main. Cochez ceux que vous maîtrisez.'},
   natures:{title:'Natures',text:'Les 5 natures de chakra, le cycle de supériorité et les Kekkei Genkai.'},
-  armes:{title:'Armes',text:'Catalogue des 8 armes ninja standard.'},
   hierarchie:{title:'Hiérarchie',text:'Les 10 rangs ninja de Konoha.'},
   admin:{title:'Règlement',text:'La directive de Yamamoto Jakka sur le format des annonces.'},
   annonces:{title:'Annonces',text:'Annonces prêtes à copier-coller pour vos appels au tableau. Un clic = copié.'},
