@@ -5782,39 +5782,6 @@ function renderDetail(){
     ${givenLast?'<span style=\"font-size:0.72rem;color:var(--text-dim)\">· Dernier : '+givenLast+'</span>':''}
   </div>`;
 
-  // Notes du prof
-  if(NOTES_PROF[c.id]){
-    const np=NOTES_PROF[c.id];
-    const nKey='notes_open_'+c.id;
-    const nOpen=S.c[nKey];
-    h+=`<div style="margin-bottom:14px;display:flex;gap:8px;align-items:center;flex-wrap:wrap">
-      <button class="btn btn-sm" onclick="S.c['${nKey}']=!S.c['${nKey}'];save();render()" style="font-size:0.8rem;background:var(--bg-parchment);border:1px solid var(--accent-gold);color:var(--accent-gold)">
-        ${nOpen?'📝 Masquer les notes':'📝 Notes du prof'}
-      </button>`;
-    if(nOpen){
-      if(np.copy){
-        h+=`<button class="btn btn-sm" onclick="copyNotes('${c.id}',this)" style="font-size:0.8rem">📋 Copier pour in-game</button>`;
-      }
-      if(np.copies){
-        const subLabels={rai_rayon:'Rayon Instantané',rai_boule:'Boule Fulgurante',rai_ruee:'Ruée Foudroyante',rai_zone:'Zone Fulgurante',rai_bourrasque:'Bourrasque Ardente',rai_pied_aube:"Pied de l'Aube"};
-        Object.keys(np.copies).forEach(k=>{
-          const label=subLabels[k]||k;
-          h+=`<button class="btn btn-sm" onclick="copyNoteSub('${c.id}','${k}',this)" style="font-size:0.72rem">📋 ${label}</button>`;
-        });
-      }
-    }
-    h+=`<span style="font-size:0.72rem;color:var(--text-muted)">Résumé essentiel à donner aux élèves</span>
-    </div>`;
-    if(nOpen){
-      h+=`<div class="contenu-block" style="border-left:3px solid var(--accent-gold);margin-bottom:18px">${applySenseiName(np.html,c.id)}</div>`;
-    }
-  }
-  // Mode présentation
-  if(CONTENU[c.id]||NOTES_PROF[c.id]){
-    h+=`<div style="margin-bottom:14px"><button class="btn btn-sm" onclick="openPresentation('${c.id}')" style="font-size:0.8rem">🎤 Mode Présentation</button>
-    <span style="font-size:0.72rem;color:var(--text-muted);margin-left:6px">Vue plein écran pour donner le cours</span></div>`;
-  }
-
   if(missing.length)h+=`<div class="prereq-alert">⚠ <div><strong>Prérequis non remplis :</strong> ${missing.map(pid=>{const pc=cours(pid);return pc?`<span style="cursor:pointer;text-decoration:underline" onclick="openCours('${pid}')">${pc.titre}</span>`:pid}).join(', ')}</div></div>`;
   if(met.length)h+=`<div style="font-size:0.75rem;color:var(--accent-leaf);margin-bottom:12px;padding:8px 12px;background:rgba(74,140,63,0.06);border:1px solid rgba(74,140,63,0.15);border-radius:var(--radius)">✓ Prérequis validés : ${met.map(pid=>{const pc=cours(pid);return pc?pc.titre:pid}).join(', ')}</div>`;
 
@@ -5835,32 +5802,48 @@ function renderDetail(){
     h+=renderInteractif(c);return h;
   }
 
-  // Contenu théorique
-  if(CONTENU[c.id]){
-    const cKey='contenu_open_'+c.id;
-    const isOpen=S.c[cKey];
-    const hasResume=!!RESUME[c.id];
-    const tabKey='contenu_tab_'+c.id;
-    if(hasResume && !S.c[tabKey]) S.c[tabKey]='retenir';
-    const curTab=hasResume?S.c[tabKey]||'retenir':'oral';
-    h+=`<div class="contenu-toggle${isOpen?' open':''}" onclick="S.c['${cKey}']=!S.c['${cKey}'];save();render()">
-      <span class="ct-arrow">▶</span> Contenu du cours
+  // ====== 2 ONGLETS : Support oral / Marqueurs ======
+  if(CONTENU[c.id]||NOTES_PROF[c.id]){
+    const tabKey='cours_view_'+c.id;
+    if(!S.c[tabKey]) S.c[tabKey]='oral';
+    const curTab=S.c[tabKey];
+    const hasOral=!!CONTENU[c.id];
+    const np=NOTES_PROF[c.id];
+    const hasMarqueurs=!!(np||(RESUME[c.id]));
+
+    h+=`<div class="reading-tabs" style="margin-bottom:0">
+      ${hasOral?`<div class="reading-tab${curTab==='oral'?' active':''}" onclick="S.c['${tabKey}']='oral';save();render()"><span class="tab-icon">🎤</span>Support oral</div>`:''}
+      ${hasMarqueurs?`<div class="reading-tab${curTab==='marqueurs'?' active':''}" onclick="S.c['${tabKey}']='marqueurs';save();render()"><span class="tab-icon">📋</span>Marqueurs</div>`:''}
     </div>`;
-    if(isOpen){
-      if(hasResume){
-        h+=`<div class="reading-tabs">
-          <div class="reading-tab${curTab==='retenir'?' active':''}" onclick="S.c['${tabKey}']='retenir';save();render()"><span class="tab-icon">📋</span>À retenir</div>
-          <div class="reading-tab${curTab==='oral'?' active':''}" onclick="S.c['${tabKey}']='oral';save();render()"><span class="tab-icon">🎤</span>Guide oral</div>
-        </div>`;
-        if(curTab==='retenir'){
-          h+=`<div class="contenu-block tab-content">${RESUME[c.id]}</div>`;
-        } else {
-          h+=`<div class="contenu-block tab-content">${applySenseiName(CONTENU[c.id],c.id)}</div>`;
+
+    if(curTab==='oral'&&hasOral){
+      h+=`<div class="contenu-block tab-content">${applySenseiName(CONTENU[c.id],c.id)}</div>`;
+      h+=`<div style="margin-bottom:14px"><button class="btn btn-sm" onclick="openPresentation('${c.id}')" style="font-size:0.8rem">🎤 Mode Présentation</button>
+        <span style="font-size:0.72rem;color:var(--text-muted);margin-left:6px">Vue plein écran pour donner le cours</span></div>`;
+    }
+
+    if(curTab==='marqueurs'&&hasMarqueurs){
+      let mContent='';
+      if(np&&np.html) mContent+=applySenseiName(np.html,c.id);
+      if(RESUME[c.id]) mContent+=RESUME[c.id];
+      h+=`<div class="contenu-block tab-content" style="border-left:3px solid var(--accent-gold)">${mContent}</div>`;
+      if(np&&np.copy){
+        h+=`<div style="margin-bottom:14px;display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+          <button class="btn btn-sm" onclick="copyNotes('${c.id}',this)" style="font-size:0.8rem">📋 Copier pour in-game</button>`;
+        if(np.copies){
+          const subLabels={rai_rayon:'Rayon Instantané',rai_boule:'Boule Fulgurante',rai_ruee:'Ruée Foudroyante',rai_zone:'Zone Fulgurante',rai_bourrasque:'Bourrasque Ardente',rai_pied_aube:"Pied de l'Aube"};
+          Object.keys(np.copies).forEach(k=>{
+            const label=subLabels[k]||k;
+            h+=`<button class="btn btn-sm" onclick="copyNoteSub('${c.id}','${k}',this)" style="font-size:0.72rem">📋 ${label}</button>`;
+          });
         }
-      } else {
-        h+=`<div class="contenu-block">${applySenseiName(CONTENU[c.id],c.id)}</div>`;
+        h+=`</div>`;
       }
     }
+
+    // Si uniquement oral sans marqueurs, ou inversement
+    if(curTab==='oral'&&!hasOral&&hasMarqueurs) S.c[tabKey]='marqueurs';
+    if(curTab==='marqueurs'&&!hasMarqueurs&&hasOral) S.c[tabKey]='oral';
   }
 
   // Techs
