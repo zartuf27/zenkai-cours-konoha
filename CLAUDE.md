@@ -29,7 +29,7 @@ Déploiement auto en ~1 min. Chaque prof ouvre le même lien, son profil/progres
 ## Structure du dossier
 
 ```
-gestion_cours_zenkai.html  — App principale (~7700 lignes, tout-en-un)
+gestion_cours_zenkai.html  — App principale (~8800 lignes, tout-en-un)
 sw.js                      — Service Worker PWA (cache hors-ligne)
 manifest.json              — Manifest PWA (installable sur mobile)
 icon-192.svg               — Icône PWA (symbole Konoha)
@@ -45,7 +45,7 @@ Propositions de nouveaux cours.docx — Idées de nouveaux cours
 Format tableau.docx        — Directive format annonces (Yamamoto Jakka)
 ```
 
-## Les 30 cours (par module)
+## Les 45 cours (par module)
 
 | Module | Cours |
 |--------|-------|
@@ -53,7 +53,12 @@ Format tableau.docx        — Directive format annonces (Yamamoto Jakka)
 | Chakra | Décomposition du Chakra, Mudras, Nature de Chakra |
 | Combat | Théorie Taijutsu, Armes Ninja, Kenjutsu — Initiation, Kenjutsu — Lame Double (Nitōryū) |
 | Taijutsu | Bourrasque de Konoha, Pied de l'Aube |
-| Ninjutsu | Saut de Chakra, Analyse et Combat par Nature, Techniques Raiton, Techniques Katon, Techniques Futon, Techniques Suiton, Techniques Doton, Permutation |
+| Ninjutsu | Saut de Chakra, Analyse et Combat par Nature, Permutation |
+| Ninjutsu Raiton | Rayon Instantané, Boule Fulgurante, Ruée Foudroyante, Zone Fulgurante |
+| Ninjutsu Katon | Boule de Feu, Mur de Feu, Balsamine, Shurikens Pourpres |
+| Ninjutsu Futon | Spirale de Vent, Mur de Vent, Spirales Cinglantes, Onde de Choc |
+| Ninjutsu Suiton | Crystal Aqueux, Mur Aqueux, Bulles d'Eau, Prison Aqueuse |
+| Ninjutsu Doton | Mur de Roche, Expulsion Rocheuse, Terre Mouvante, Prison de Roche |
 | Spécialisation | Infiltration (théorie), Infiltration (pratique), La Traque, L'Enquête |
 | Terrain | Course d'orientation, Pays du Feu — Visite |
 | Tactique | Jeu du Roi, Capture de Drapeau, Simulation de Mission, Simulation d'Escorte |
@@ -86,7 +91,7 @@ Navigation : `VIEWS[]` → `buildSidebar()` → `nav(viewId)` → `render()` →
 | Signe distinctif | `S.sensei.signe` | Annonces ("cheveux brun") |
 | Rang | `S.sensei.rang` | Carte sensei, header, bilan Discord (de Genin Confirmé à Hokage) |
 | Phrase signature | `S.sensei.signature` | Override toutes les citations si rempli |
-| Type de Sensei | `S.sensei.type` | 480 citations, greeting, animation avatar |
+| Type de Sensei | `S.sensei.type` | 720 citations, greeting, animation avatar |
 | Nature de Chakra | `S.sensei.nature` | Skin couleurs, particules, filtrage cours, closing lines, favicon |
 | Spécialisation combat | `S.sensei.specCombat` | `taijutsu` ou `kenjutsu` |
 | Type de lame | `S.sensei.typeLame` | Si kenjutsu : `simple`, `double` ou `lourde` |
@@ -97,7 +102,7 @@ Navigation : `VIEWS[]` → `buildSidebar()` → `nav(viewId)` → `render()` →
 
 Sage 🍃, Implacable 🗡️, Guerrier 🔥, Bienveillant 🌸, Énigmatique 🌙, Stratège ♟️, Vétéran 🩸, Grand Frère 🤝, Provocateur 😏, Ermite 🐸, Ombre 🦇, Noble 👑, Rebelle 💢, Mentor spirituel 📿, Chasseur 🐺, Manipulateur 🎭
 
-Chaque type : 1 citation par cours (16 × 30 = 480) + greeting dashboard + animation avatar spécifique.
+Chaque type : 1 citation par cours (16 × 45 = 720) + greeting dashboard + animation avatar spécifique.
 
 Certains types modifient les **labels de la sidebar** (`SIDEBAR_LABELS`) :
 - Ombre : Annonces→"Transmission", Bilan→"Rapport opérationnel", Historique→"Logs"
@@ -127,10 +132,10 @@ Chaque citation combine **type de personnalité + nature de chakra** :
 ### Filtrage des cours par nature
 
 ```javascript
-const COURS_NATURE={raiton_cours:'raiton',katon_cours:'katon',futon_cours:'futon',suiton_cours:'suiton',doton_cours:'doton'};
+const COURS_NATURE={rai_rayon:'raiton',rai_boule:'raiton',rai_ruee:'raiton',rai_zone:'raiton',kat_boule:'katon',kat_mur:'katon',kat_balsamine:'katon',kat_shuriken:'katon',fut_spirale:'futon',fut_mur:'futon',fut_cinglantes:'futon',fut_onde:'futon',sui_crystal:'suiton',sui_mur:'suiton',sui_bulles:'suiton',sui_prison:'suiton',dot_mur:'doton',dot_expulsion:'doton',dot_mouvante:'doton',dot_prison:'doton'};
 ```
 
-Les cours de techniques par nature ne sont visibles que pour le sensei dont c'est la nature.
+Chaque technique de nature est un cours individuel, visible uniquement pour le sensei dont c'est la nature (20 cours, 4 par nature).
 
 ### Filtrage des cours par spécialisation combat
 
@@ -246,7 +251,7 @@ Overlay plein écran déclenché depuis la page détail d'un cours. Affiche le c
 | `const CONTENU` | Guides oraux (HTML) par cours ID |
 | `const INTERACTIF` | Blocs interactifs (Nindo uniquement) |
 | `const NOTES_PROF` | Notes copiables in-game (copy + html) par cours ID |
-| `const SENSEI_QUOTES` | Citations par cours × 16 types |
+| `const SENSEI_QUOTES` | Citations par cours × 16 types (720 entrées) |
 | `const SENSEI_TYPES` | 16 types (icône, nom, description, couleur) |
 | `const NATURE_CLOSING` | Phrases clôture par nature × module (5 × 8) |
 | `const COURS_NATURE` | Mapping cours → nature pour filtrage |

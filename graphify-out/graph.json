@@ -25,7 +25,7 @@
       "node_kind": "heading",
       "norm_label": "adaptation du contenu par personnalite + nature + specialisation",
       "source_file": "CLAUDE.md",
-      "source_location": "L149"
+      "source_location": "L154"
     },
     {
       "id": "claude_architecture_du_html",
@@ -37,7 +37,7 @@
       "node_kind": "heading",
       "norm_label": "architecture du html",
       "source_file": "CLAUDE.md",
-      "source_location": "L61"
+      "source_location": "L66"
     },
     {
       "id": "claude_compteur_cours_donn\u00e9",
@@ -49,7 +49,7 @@
       "node_kind": "heading",
       "norm_label": "compteur \"cours donne\"",
       "source_file": "CLAUDE.md",
-      "source_location": "L174"
+      "source_location": "L179"
     },
     {
       "id": "claude_cours_kenjutsu_structure_modulaire_par_type_de_lame",
@@ -61,7 +61,7 @@
       "node_kind": "heading",
       "norm_label": "cours kenjutsu (structure modulaire par type de lame)",
       "source_file": "CLAUDE.md",
-      "source_location": "L164"
+      "source_location": "L169"
     },
     {
       "id": "claude_filtrage_des_cours_par_nature",
@@ -73,7 +73,7 @@
       "node_kind": "heading",
       "norm_label": "filtrage des cours par nature",
       "source_file": "CLAUDE.md",
-      "source_location": "L127"
+      "source_location": "L132"
     },
     {
       "id": "claude_filtrage_des_cours_par_sp\u00e9cialisation_combat",
@@ -85,7 +85,7 @@
       "node_kind": "heading",
       "norm_label": "filtrage des cours par specialisation combat",
       "source_file": "CLAUDE.md",
-      "source_location": "L135"
+      "source_location": "L140"
     },
     {
       "id": "claude_fonctions_cl\u00e9s",
@@ -97,7 +97,7 @@
       "node_kind": "heading",
       "norm_label": "fonctions cles",
       "source_file": "CLAUDE.md",
-      "source_location": "L281"
+      "source_location": "L286"
     },
     {
       "id": "claude_graphify_m\u00e9moire_structurelle",
@@ -109,7 +109,7 @@
       "node_kind": "heading",
       "norm_label": "graphify \u2014 memoire structurelle",
       "source_file": "CLAUDE.md",
-      "source_location": "L195"
+      "source_location": "L200"
     },
     {
       "id": "claude_ic\u00f4nes",
@@ -121,7 +121,7 @@
       "node_kind": "heading",
       "norm_label": "icones",
       "source_file": "CLAUDE.md",
-      "source_location": "L314"
+      "source_location": "L319"
     },
     {
       "id": "claude_interface_cours_simplifi\u00e9_2_onglets",
@@ -133,7 +133,7 @@
       "node_kind": "heading",
       "norm_label": "interface cours simplifie (2 onglets)",
       "source_file": "CLAUDE.md",
-      "source_location": "L143"
+      "source_location": "L148"
     },
     {
       "id": "claude_les_16_types_de_sensei",
@@ -145,7 +145,7 @@
       "node_kind": "heading",
       "norm_label": "les 16 types de sensei",
       "source_file": "CLAUDE.md",
-      "source_location": "L96"
+      "source_location": "L101"
     },
     {
       "id": "claude_mode_pr\u00e9sentation",
@@ -157,7 +157,7 @@
       "node_kind": "heading",
       "norm_label": "mode presentation (\ud83c\udfa4)",
       "source_file": "CLAUDE.md",
-      "source_location": "L234"
+      "source_location": "L239"
     },
     {
       "id": "claude_onboarding_tuto_premi\u00e8re_visite",
@@ -169,7 +169,7 @@
       "node_kind": "heading",
       "norm_label": "onboarding (tuto premiere visite)",
       "source_file": "CLAUDE.md",
-      "source_location": "L182"
+      "source_location": "L187"
     },
     {
       "id": "claude_page_fin_de_mois_rapport_pour_le_parchemin",
@@ -181,7 +181,7 @@
       "node_kind": "heading",
       "norm_label": "page fin de mois (\ud83d\udcca) \u2014 rapport pour le parchemin",
       "source_file": "CLAUDE.md",
-      "source_location": "L213"
+      "source_location": "L218"
     },
     {
       "id": "claude_page_historique",
@@ -193,7 +193,7 @@
       "node_kind": "heading",
       "norm_label": "page historique (\ud83d\udcdc)",
       "source_file": "CLAUDE.md",
-      "source_location": "L224"
+      "source_location": "L229"
     },
     {
       "id": "claude_persistence_localstorage_cl\u00e9_zenkai_v2",
@@ -205,7 +205,7 @@
       "node_kind": "heading",
       "norm_label": "persistence (localstorage cle `zenkai_v2`)",
       "source_file": "CLAUDE.md",
-      "source_location": "L259"
+      "source_location": "L264"
     },
     {
       "id": "claude_proc\u00e9dure_pour_ajouter_un_cours",
@@ -217,7 +217,7 @@
       "node_kind": "heading",
       "norm_label": "procedure pour ajouter un cours",
       "source_file": "CLAUDE.md",
-      "source_location": "L302"
+      "source_location": "L307"
     },
     {
       "id": "claude_profil_sensei_10_axes_de_personnalisation",
@@ -229,7 +229,7 @@
       "node_kind": "heading",
       "norm_label": "profil sensei (10 axes de personnalisation)",
       "source_file": "CLAUDE.md",
-      "source_location": "L81"
+      "source_location": "L86"
     },
     {
       "id": "claude_pwa_outils",
@@ -241,7 +241,7 @@
       "node_kind": "heading",
       "norm_label": "pwa & outils",
       "source_file": "CLAUDE.md",
-      "source_location": "L269"
+      "source_location": "L274"
     },
     {
       "id": "claude_skins_par_nature_de_chakra",
@@ -253,7 +253,7 @@
       "node_kind": "heading",
       "norm_label": "skins par nature de chakra",
       "source_file": "CLAUDE.md",
-      "source_location": "L108"
+      "source_location": "L113"
     },
     {
       "id": "claude_structure_des_donn\u00e9es_inline_dans_le_html",
@@ -265,7 +265,7 @@
       "node_kind": "heading",
       "norm_label": "structure des donnees (inline dans le html)",
       "source_file": "CLAUDE.md",
-      "source_location": "L238"
+      "source_location": "L243"
     },
     {
       "id": "claude_syst\u00e8me_de_citations_encouragements_de_fin_de_cours",
@@ -277,7 +277,7 @@
       "node_kind": "heading",
       "norm_label": "systeme de citations (encouragements de fin de cours)",
       "source_file": "CLAUDE.md",
-      "source_location": "L120"
+      "source_location": "L125"
     },
     {
       "id": "claude_vue_d_ensemble_des_pages_sidebar_11_vues",
@@ -289,7 +289,7 @@
       "node_kind": "heading",
       "norm_label": "vue d'ensemble des pages (sidebar \u2014 11 vues)",
       "source_file": "CLAUDE.md",
-      "source_location": "L63"
+      "source_location": "L68"
     },
     {
       "id": "graphify_out_converted_propositions_de_nouveaux_cours_80b4a6b7",
@@ -1296,7 +1296,7 @@
       "node_kind": "heading",
       "norm_label": "coherence lore zenkai-rp",
       "source_file": "CLAUDE.md",
-      "source_location": "L336"
+      "source_location": "L341"
     },
     {
       "id": "claude_contexte_du_projet",
@@ -1332,17 +1332,17 @@
       "node_kind": "heading",
       "norm_label": "fichiers .docx",
       "source_file": "CLAUDE.md",
-      "source_location": "L332"
+      "source_location": "L337"
     },
     {
-      "id": "claude_les_30_cours_par_module",
-      "label": "Les 30 cours (par module)",
+      "id": "claude_les_45_cours_par_module",
+      "label": "Les 45 cours (par module)",
       "_origin": "ast",
       "community": 4,
       "community_name": "CLAUDE.md \u2014 Cours RP Zenkai (Konoha)",
       "file_type": "document",
       "node_kind": "heading",
-      "norm_label": "les 30 cours (par module)",
+      "norm_label": "les 45 cours (par module)",
       "source_file": "CLAUDE.md",
       "source_location": "L48"
     },
@@ -1356,7 +1356,7 @@
       "node_kind": "heading",
       "norm_label": "les documents sont pour le professeur, pas pour les eleves",
       "source_file": "CLAUDE.md",
-      "source_location": "L322"
+      "source_location": "L327"
     },
     {
       "id": "claude_r\u00e8gles_importantes",
@@ -1368,7 +1368,7 @@
       "node_kind": "heading",
       "norm_label": "regles importantes",
       "source_file": "CLAUDE.md",
-      "source_location": "L320"
+      "source_location": "L325"
     },
     {
       "id": "claude_structure_du_dossier",
@@ -1392,7 +1392,7 @@
       "node_kind": "heading",
       "norm_label": "style et ton",
       "source_file": "CLAUDE.md",
-      "source_location": "L327"
+      "source_location": "L332"
     },
     {
       "id": "claude_synchronisation",
@@ -1404,7 +1404,7 @@
       "node_kind": "heading",
       "norm_label": "synchronisation",
       "source_file": "CLAUDE.md",
-      "source_location": "L345"
+      "source_location": "L350"
     },
     {
       "id": "claude_s\u00e9curit\u00e9",
@@ -1416,7 +1416,7 @@
       "node_kind": "heading",
       "norm_label": "securite",
       "source_file": "CLAUDE.md",
-      "source_location": "L350"
+      "source_location": "L355"
     },
     {
       "id": "sw",
@@ -2066,13 +2066,24 @@
     },
     {
       "source": "claude_architecture_du_html",
+      "target": "claude_les_16_types_de_sensei",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "CLAUDE.md",
+      "source_location": "L101",
+      "weight": 1.0
+    },
+    {
+      "source": "claude_architecture_du_html",
       "target": "claude_skins_par_nature_de_chakra",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L108",
+      "source_location": "L113",
       "weight": 1.0
     },
     {
@@ -2083,7 +2094,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L120",
+      "source_location": "L125",
       "weight": 1.0
     },
     {
@@ -2094,7 +2105,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L127",
+      "source_location": "L132",
       "weight": 1.0
     },
     {
@@ -2105,7 +2116,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L135",
+      "source_location": "L140",
       "weight": 1.0
     },
     {
@@ -2116,7 +2127,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L143",
+      "source_location": "L148",
       "weight": 1.0
     },
     {
@@ -2127,7 +2138,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L149",
+      "source_location": "L154",
       "weight": 1.0
     },
     {
@@ -2138,7 +2149,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L164",
+      "source_location": "L169",
       "weight": 1.0
     },
     {
@@ -2149,7 +2160,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L174",
+      "source_location": "L179",
       "weight": 1.0
     },
     {
@@ -2160,7 +2171,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L182",
+      "source_location": "L187",
       "weight": 1.0
     },
     {
@@ -2171,7 +2182,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L195",
+      "source_location": "L200",
       "weight": 1.0
     },
     {
@@ -2182,7 +2193,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L213",
+      "source_location": "L218",
       "weight": 1.0
     },
     {
@@ -2193,7 +2204,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L224",
+      "source_location": "L229",
       "weight": 1.0
     },
     {
@@ -2204,7 +2215,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L234",
+      "source_location": "L239",
       "weight": 1.0
     },
     {
@@ -2215,7 +2226,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L238",
+      "source_location": "L243",
       "weight": 1.0
     },
     {
@@ -2226,7 +2237,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L259",
+      "source_location": "L264",
       "weight": 1.0
     },
     {
@@ -2237,7 +2248,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L269",
+      "source_location": "L274",
       "weight": 1.0
     },
     {
@@ -2248,7 +2259,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L281",
+      "source_location": "L286",
       "weight": 1.0
     },
     {
@@ -2259,7 +2270,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L302",
+      "source_location": "L307",
       "weight": 1.0
     },
     {
@@ -2270,7 +2281,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L314",
+      "source_location": "L319",
       "weight": 1.0
     },
     {
@@ -2281,7 +2292,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L63",
+      "source_location": "L68",
       "weight": 1.0
     },
     {
@@ -2292,18 +2303,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L81",
-      "weight": 1.0
-    },
-    {
-      "source": "claude_architecture_du_html",
-      "target": "claude_les_16_types_de_sensei",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "CLAUDE.md",
-      "source_location": "L96",
+      "source_location": "L86",
       "weight": 1.0
     },
     {
@@ -2347,12 +2347,12 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L320",
+      "source_location": "L325",
       "weight": 1.0
     },
     {
       "source": "claude_claude_md_cours_rp_zenkai_konoha",
-      "target": "claude_les_30_cours_par_module",
+      "target": "claude_les_45_cours_par_module",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -2369,7 +2369,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L61",
+      "source_location": "L66",
       "weight": 1.0
     },
     {
@@ -2380,7 +2380,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L322",
+      "source_location": "L327",
       "weight": 1.0
     },
     {
@@ -2391,7 +2391,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L327",
+      "source_location": "L332",
       "weight": 1.0
     },
     {
@@ -2402,7 +2402,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L332",
+      "source_location": "L337",
       "weight": 1.0
     },
     {
@@ -2413,7 +2413,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L336",
+      "source_location": "L341",
       "weight": 1.0
     },
     {
@@ -2424,7 +2424,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L345",
+      "source_location": "L350",
       "weight": 1.0
     },
     {
@@ -2435,7 +2435,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L350",
+      "source_location": "L355",
       "weight": 1.0
     },
     {
@@ -3529,5 +3529,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "f4b6bac524b51f2167b0e179881e6036fad053a6"
+  "built_at_commit": "2c5ce67bd18d6d02b90ef1de04c03ee4e5ce9f18"
 }

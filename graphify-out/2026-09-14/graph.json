@@ -25,7 +25,7 @@
       "node_kind": "heading",
       "norm_label": "adaptation du contenu par personnalite + nature + specialisation",
       "source_file": "CLAUDE.md",
-      "source_location": "L150"
+      "source_location": "L149"
     },
     {
       "id": "claude_architecture_du_html",
@@ -49,7 +49,7 @@
       "node_kind": "heading",
       "norm_label": "compteur \"cours donne\"",
       "source_file": "CLAUDE.md",
-      "source_location": "L175"
+      "source_location": "L174"
     },
     {
       "id": "claude_cours_kenjutsu_structure_modulaire_par_type_de_lame",
@@ -61,7 +61,7 @@
       "node_kind": "heading",
       "norm_label": "cours kenjutsu (structure modulaire par type de lame)",
       "source_file": "CLAUDE.md",
-      "source_location": "L165"
+      "source_location": "L164"
     },
     {
       "id": "claude_filtrage_des_cours_par_nature",
@@ -73,7 +73,7 @@
       "node_kind": "heading",
       "norm_label": "filtrage des cours par nature",
       "source_file": "CLAUDE.md",
-      "source_location": "L128"
+      "source_location": "L127"
     },
     {
       "id": "claude_filtrage_des_cours_par_sp\u00e9cialisation_combat",
@@ -85,7 +85,7 @@
       "node_kind": "heading",
       "norm_label": "filtrage des cours par specialisation combat",
       "source_file": "CLAUDE.md",
-      "source_location": "L136"
+      "source_location": "L135"
     },
     {
       "id": "claude_fonctions_cl\u00e9s",
@@ -97,7 +97,7 @@
       "node_kind": "heading",
       "norm_label": "fonctions cles",
       "source_file": "CLAUDE.md",
-      "source_location": "L282"
+      "source_location": "L281"
     },
     {
       "id": "claude_graphify_m\u00e9moire_structurelle",
@@ -109,7 +109,7 @@
       "node_kind": "heading",
       "norm_label": "graphify \u2014 memoire structurelle",
       "source_file": "CLAUDE.md",
-      "source_location": "L196"
+      "source_location": "L195"
     },
     {
       "id": "claude_ic\u00f4nes",
@@ -121,7 +121,7 @@
       "node_kind": "heading",
       "norm_label": "icones",
       "source_file": "CLAUDE.md",
-      "source_location": "L315"
+      "source_location": "L314"
     },
     {
       "id": "claude_interface_cours_simplifi\u00e9_2_onglets",
@@ -133,7 +133,7 @@
       "node_kind": "heading",
       "norm_label": "interface cours simplifie (2 onglets)",
       "source_file": "CLAUDE.md",
-      "source_location": "L144"
+      "source_location": "L143"
     },
     {
       "id": "claude_les_16_types_de_sensei",
@@ -145,7 +145,7 @@
       "node_kind": "heading",
       "norm_label": "les 16 types de sensei",
       "source_file": "CLAUDE.md",
-      "source_location": "L97"
+      "source_location": "L96"
     },
     {
       "id": "claude_mode_pr\u00e9sentation",
@@ -157,7 +157,7 @@
       "node_kind": "heading",
       "norm_label": "mode presentation (\ud83c\udfa4)",
       "source_file": "CLAUDE.md",
-      "source_location": "L235"
+      "source_location": "L234"
     },
     {
       "id": "claude_onboarding_tuto_premi\u00e8re_visite",
@@ -169,7 +169,7 @@
       "node_kind": "heading",
       "norm_label": "onboarding (tuto premiere visite)",
       "source_file": "CLAUDE.md",
-      "source_location": "L183"
+      "source_location": "L182"
     },
     {
       "id": "claude_page_fin_de_mois_rapport_pour_le_parchemin",
@@ -181,7 +181,7 @@
       "node_kind": "heading",
       "norm_label": "page fin de mois (\ud83d\udcca) \u2014 rapport pour le parchemin",
       "source_file": "CLAUDE.md",
-      "source_location": "L214"
+      "source_location": "L213"
     },
     {
       "id": "claude_page_historique",
@@ -193,7 +193,7 @@
       "node_kind": "heading",
       "norm_label": "page historique (\ud83d\udcdc)",
       "source_file": "CLAUDE.md",
-      "source_location": "L225"
+      "source_location": "L224"
     },
     {
       "id": "claude_persistence_localstorage_cl\u00e9_zenkai_v2",
@@ -205,7 +205,7 @@
       "node_kind": "heading",
       "norm_label": "persistence (localstorage cle `zenkai_v2`)",
       "source_file": "CLAUDE.md",
-      "source_location": "L260"
+      "source_location": "L259"
     },
     {
       "id": "claude_proc\u00e9dure_pour_ajouter_un_cours",
@@ -217,17 +217,17 @@
       "node_kind": "heading",
       "norm_label": "procedure pour ajouter un cours",
       "source_file": "CLAUDE.md",
-      "source_location": "L303"
+      "source_location": "L302"
     },
     {
-      "id": "claude_profil_sensei_11_axes_de_personnalisation",
-      "label": "Profil Sensei (11 axes de personnalisation)",
+      "id": "claude_profil_sensei_10_axes_de_personnalisation",
+      "label": "Profil Sensei (10 axes de personnalisation)",
       "_origin": "ast",
       "community": 0,
       "community_name": "Architecture du HTML",
       "file_type": "document",
       "node_kind": "heading",
-      "norm_label": "profil sensei (11 axes de personnalisation)",
+      "norm_label": "profil sensei (10 axes de personnalisation)",
       "source_file": "CLAUDE.md",
       "source_location": "L81"
     },
@@ -241,7 +241,7 @@
       "node_kind": "heading",
       "norm_label": "pwa & outils",
       "source_file": "CLAUDE.md",
-      "source_location": "L270"
+      "source_location": "L269"
     },
     {
       "id": "claude_skins_par_nature_de_chakra",
@@ -253,7 +253,7 @@
       "node_kind": "heading",
       "norm_label": "skins par nature de chakra",
       "source_file": "CLAUDE.md",
-      "source_location": "L109"
+      "source_location": "L108"
     },
     {
       "id": "claude_structure_des_donn\u00e9es_inline_dans_le_html",
@@ -265,7 +265,7 @@
       "node_kind": "heading",
       "norm_label": "structure des donnees (inline dans le html)",
       "source_file": "CLAUDE.md",
-      "source_location": "L239"
+      "source_location": "L238"
     },
     {
       "id": "claude_syst\u00e8me_de_citations_encouragements_de_fin_de_cours",
@@ -277,7 +277,7 @@
       "node_kind": "heading",
       "norm_label": "systeme de citations (encouragements de fin de cours)",
       "source_file": "CLAUDE.md",
-      "source_location": "L121"
+      "source_location": "L120"
     },
     {
       "id": "claude_vue_d_ensemble_des_pages_sidebar_11_vues",
@@ -615,66 +615,6 @@
       "source_location": "L1"
     },
     {
-      "id": "th\u00e9orique_histoire_du_village_1_le_clan_senju_architectes_du_village",
-      "label": "1. Le clan Senju \u2014 Architectes du village",
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "Histoire du Village de Konoha",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "1. le clan senju \u2014 architectes du village",
-      "source_file": "th\u00e9orique/histoire du village.md",
-      "source_location": "L58"
-    },
-    {
-      "id": "th\u00e9orique_histoire_du_village_2_le_clan_uchiha_pilier_du_village",
-      "label": "2. Le clan Uchiha \u2014 Pilier du village",
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "Histoire du Village de Konoha",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "2. le clan uchiha \u2014 pilier du village",
-      "source_file": "th\u00e9orique/histoire du village.md",
-      "source_location": "L66"
-    },
-    {
-      "id": "th\u00e9orique_histoire_du_village_3_le_clan_hy\u016bga_sentinelles_silencieuses",
-      "label": "3. Le clan Hy\u016bga \u2014 Sentinelles silencieuses",
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "Histoire du Village de Konoha",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "3. le clan hyuga \u2014 sentinelles silencieuses",
-      "source_file": "th\u00e9orique/histoire du village.md",
-      "source_location": "L77"
-    },
-    {
-      "id": "th\u00e9orique_histoire_du_village_4_le_clan_nara_cerveaux_et_archives",
-      "label": "4. Le clan Nara \u2014 Cerveaux et archives",
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "Histoire du Village de Konoha",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "4. le clan nara \u2014 cerveaux et archives",
-      "source_file": "th\u00e9orique/histoire du village.md",
-      "source_location": "L85"
-    },
-    {
-      "id": "th\u00e9orique_histoire_du_village_5_le_clan_akimichi_force_logistique_et_coh\u00e9sion_sociale",
-      "label": "5. Le clan Akimichi \u2014 Force logistique et coh\u00e9sion sociale",
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "Histoire du Village de Konoha",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "5. le clan akimichi \u2014 force logistique et cohesion sociale",
-      "source_file": "th\u00e9orique/histoire du village.md",
-      "source_location": "L98"
-    },
-    {
       "id": "th\u00e9orique_histoire_du_village_histoire_du_village_de_konoha",
       "label": "Histoire du Village de Konoha",
       "_origin": "ast",
@@ -709,18 +649,6 @@
       "norm_label": "ii. hashirama, madara et la fondation de konoha",
       "source_file": "th\u00e9orique/histoire du village.md",
       "source_location": "L34"
-    },
-    {
-      "id": "th\u00e9orique_histoire_du_village_iii_r\u00f4le_des_grands_clans_dans_la_naissance_de_konoha",
-      "label": "III. R\u00f4le des grands clans dans la naissance de Konoha",
-      "_origin": "ast",
-      "community": 2,
-      "community_name": "Histoire du Village de Konoha",
-      "file_type": "document",
-      "node_kind": "heading",
-      "norm_label": "iii. role des grands clans dans la naissance de konoha",
-      "source_file": "th\u00e9orique/histoire du village.md",
-      "source_location": "L56"
     },
     {
       "id": "th\u00e9orique_histoire_du_village_iv_tobirama_hokage_l_institutionnalisation_et_la_crise",
@@ -1263,6 +1191,78 @@
       "source_location": "L1"
     },
     {
+      "id": "th\u00e9orique_histoire_du_village_1_le_clan_senju_architectes_du_village",
+      "label": "1. Le clan Senju \u2014 Architectes du village",
+      "_origin": "ast",
+      "community": 39,
+      "community_name": "III. R\u00f4le des grands clans dans la naissance de Konoha",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "1. le clan senju \u2014 architectes du village",
+      "source_file": "th\u00e9orique/histoire du village.md",
+      "source_location": "L58"
+    },
+    {
+      "id": "th\u00e9orique_histoire_du_village_2_le_clan_uchiha_pilier_du_village",
+      "label": "2. Le clan Uchiha \u2014 Pilier du village",
+      "_origin": "ast",
+      "community": 39,
+      "community_name": "III. R\u00f4le des grands clans dans la naissance de Konoha",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "2. le clan uchiha \u2014 pilier du village",
+      "source_file": "th\u00e9orique/histoire du village.md",
+      "source_location": "L66"
+    },
+    {
+      "id": "th\u00e9orique_histoire_du_village_3_le_clan_hy\u016bga_sentinelles_silencieuses",
+      "label": "3. Le clan Hy\u016bga \u2014 Sentinelles silencieuses",
+      "_origin": "ast",
+      "community": 39,
+      "community_name": "III. R\u00f4le des grands clans dans la naissance de Konoha",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "3. le clan hyuga \u2014 sentinelles silencieuses",
+      "source_file": "th\u00e9orique/histoire du village.md",
+      "source_location": "L77"
+    },
+    {
+      "id": "th\u00e9orique_histoire_du_village_4_le_clan_nara_cerveaux_et_archives",
+      "label": "4. Le clan Nara \u2014 Cerveaux et archives",
+      "_origin": "ast",
+      "community": 39,
+      "community_name": "III. R\u00f4le des grands clans dans la naissance de Konoha",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "4. le clan nara \u2014 cerveaux et archives",
+      "source_file": "th\u00e9orique/histoire du village.md",
+      "source_location": "L85"
+    },
+    {
+      "id": "th\u00e9orique_histoire_du_village_5_le_clan_akimichi_force_logistique_et_coh\u00e9sion_sociale",
+      "label": "5. Le clan Akimichi \u2014 Force logistique et coh\u00e9sion sociale",
+      "_origin": "ast",
+      "community": 39,
+      "community_name": "III. R\u00f4le des grands clans dans la naissance de Konoha",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "5. le clan akimichi \u2014 force logistique et cohesion sociale",
+      "source_file": "th\u00e9orique/histoire du village.md",
+      "source_location": "L98"
+    },
+    {
+      "id": "th\u00e9orique_histoire_du_village_iii_r\u00f4le_des_grands_clans_dans_la_naissance_de_konoha",
+      "label": "III. R\u00f4le des grands clans dans la naissance de Konoha",
+      "_origin": "ast",
+      "community": 39,
+      "community_name": "III. R\u00f4le des grands clans dans la naissance de Konoha",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "iii. role des grands clans dans la naissance de konoha",
+      "source_file": "th\u00e9orique/histoire du village.md",
+      "source_location": "L56"
+    },
+    {
       "id": "claude",
       "label": "CLAUDE.md",
       "_origin": "ast",
@@ -1296,7 +1296,7 @@
       "node_kind": "heading",
       "norm_label": "coherence lore zenkai-rp",
       "source_file": "CLAUDE.md",
-      "source_location": "L337"
+      "source_location": "L336"
     },
     {
       "id": "claude_contexte_du_projet",
@@ -1332,7 +1332,7 @@
       "node_kind": "heading",
       "norm_label": "fichiers .docx",
       "source_file": "CLAUDE.md",
-      "source_location": "L333"
+      "source_location": "L332"
     },
     {
       "id": "claude_les_30_cours_par_module",
@@ -1356,7 +1356,7 @@
       "node_kind": "heading",
       "norm_label": "les documents sont pour le professeur, pas pour les eleves",
       "source_file": "CLAUDE.md",
-      "source_location": "L323"
+      "source_location": "L322"
     },
     {
       "id": "claude_r\u00e8gles_importantes",
@@ -1368,7 +1368,7 @@
       "node_kind": "heading",
       "norm_label": "regles importantes",
       "source_file": "CLAUDE.md",
-      "source_location": "L321"
+      "source_location": "L320"
     },
     {
       "id": "claude_structure_du_dossier",
@@ -1392,7 +1392,7 @@
       "node_kind": "heading",
       "norm_label": "style et ton",
       "source_file": "CLAUDE.md",
-      "source_location": "L328"
+      "source_location": "L327"
     },
     {
       "id": "claude_synchronisation",
@@ -1404,7 +1404,19 @@
       "node_kind": "heading",
       "norm_label": "synchronisation",
       "source_file": "CLAUDE.md",
-      "source_location": "L346"
+      "source_location": "L345"
+    },
+    {
+      "id": "claude_s\u00e9curit\u00e9",
+      "label": "S\u00e9curit\u00e9",
+      "_origin": "ast",
+      "community": 4,
+      "community_name": "CLAUDE.md \u2014 Cours RP Zenkai (Konoha)",
+      "file_type": "document",
+      "node_kind": "heading",
+      "norm_label": "securite",
+      "source_file": "CLAUDE.md",
+      "source_location": "L350"
     },
     {
       "id": "sw",
@@ -2060,7 +2072,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L109",
+      "source_location": "L108",
       "weight": 1.0
     },
     {
@@ -2071,7 +2083,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L121",
+      "source_location": "L120",
       "weight": 1.0
     },
     {
@@ -2082,7 +2094,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L128",
+      "source_location": "L127",
       "weight": 1.0
     },
     {
@@ -2093,7 +2105,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L136",
+      "source_location": "L135",
       "weight": 1.0
     },
     {
@@ -2104,7 +2116,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L144",
+      "source_location": "L143",
       "weight": 1.0
     },
     {
@@ -2115,7 +2127,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L150",
+      "source_location": "L149",
       "weight": 1.0
     },
     {
@@ -2126,7 +2138,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L165",
+      "source_location": "L164",
       "weight": 1.0
     },
     {
@@ -2137,7 +2149,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L175",
+      "source_location": "L174",
       "weight": 1.0
     },
     {
@@ -2148,7 +2160,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L183",
+      "source_location": "L182",
       "weight": 1.0
     },
     {
@@ -2159,7 +2171,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L196",
+      "source_location": "L195",
       "weight": 1.0
     },
     {
@@ -2170,7 +2182,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L214",
+      "source_location": "L213",
       "weight": 1.0
     },
     {
@@ -2181,7 +2193,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L225",
+      "source_location": "L224",
       "weight": 1.0
     },
     {
@@ -2192,7 +2204,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L235",
+      "source_location": "L234",
       "weight": 1.0
     },
     {
@@ -2203,7 +2215,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L239",
+      "source_location": "L238",
       "weight": 1.0
     },
     {
@@ -2214,7 +2226,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L260",
+      "source_location": "L259",
       "weight": 1.0
     },
     {
@@ -2225,7 +2237,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L270",
+      "source_location": "L269",
       "weight": 1.0
     },
     {
@@ -2236,7 +2248,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L282",
+      "source_location": "L281",
       "weight": 1.0
     },
     {
@@ -2247,7 +2259,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L303",
+      "source_location": "L302",
       "weight": 1.0
     },
     {
@@ -2258,7 +2270,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L315",
+      "source_location": "L314",
       "weight": 1.0
     },
     {
@@ -2274,7 +2286,7 @@
     },
     {
       "source": "claude_architecture_du_html",
-      "target": "claude_profil_sensei_11_axes_de_personnalisation",
+      "target": "claude_profil_sensei_10_axes_de_personnalisation",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -2291,7 +2303,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L97",
+      "source_location": "L96",
       "weight": 1.0
     },
     {
@@ -2335,7 +2347,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L321",
+      "source_location": "L320",
       "weight": 1.0
     },
     {
@@ -2368,7 +2380,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L323",
+      "source_location": "L322",
       "weight": 1.0
     },
     {
@@ -2379,7 +2391,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L328",
+      "source_location": "L327",
       "weight": 1.0
     },
     {
@@ -2390,7 +2402,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L333",
+      "source_location": "L332",
       "weight": 1.0
     },
     {
@@ -2401,7 +2413,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L337",
+      "source_location": "L336",
       "weight": 1.0
     },
     {
@@ -2412,7 +2424,18 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
-      "source_location": "L346",
+      "source_location": "L345",
+      "weight": 1.0
+    },
+    {
+      "source": "claude_r\u00e8gles_importantes",
+      "target": "claude_s\u00e9curit\u00e9",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "CLAUDE.md",
+      "source_location": "L350",
       "weight": 1.0
     },
     {
@@ -3506,5 +3529,5 @@
     }
   ],
   "hyperedges": [],
-  "built_at_commit": "fb1f2c80ab17469bde9be6996228156b338dfbaa"
+  "built_at_commit": "f4b6bac524b51f2167b0e179881e6036fad053a6"
 }

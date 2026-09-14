@@ -1,7 +1,7 @@
 # Graph Report - ZENKAI TEEEST  (2026-09-14)
 
 ## Corpus Check
-- 39 files · ~110,642 words
+- 39 files · ~128,917 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 1 file(s) not represented in the graph (top: (none) 1)
 
@@ -11,7 +11,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `f4b6bac5`
+- Built from commit: `2c5ce67b`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -67,7 +67,7 @@ Nodes (13): Apprenti ninja, Ce que le Nindo EST — une philosophie, Ce que le N
 
 ### Community 4 - "CLAUDE.md — Cours RP Zenkai (Konoha)"
 Cohesion: 0.15
-Nodes (12): CLAUDE.md — Cours RP Zenkai (Konoha), Cohérence lore Zenkai-RP, Contexte du projet, Déploiement & partage, Fichiers .docx, Les 30 cours (par module), Les documents sont pour le professeur, PAS pour les élèves, Règles importantes (+4 more)
+Nodes (12): CLAUDE.md — Cours RP Zenkai (Konoha), Cohérence lore Zenkai-RP, Contexte du projet, Déploiement & partage, Fichiers .docx, Les 45 cours (par module), Les documents sont pour le professeur, PAS pour les élèves, Règles importantes (+4 more)
 
 ### Community 5 - "TECHNIQUES NINJUTSU RAITON"
 Cohesion: 0.18
