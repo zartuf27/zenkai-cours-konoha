@@ -345,5 +345,11 @@ Pour mettre à jour le cache PWA : incrémenter la version dans `sw.js` (`zenkai
 
 ### Synchronisation
 - HTML, JSON et fichiers source doivent rester synchronisés
-- Chaque cours = 5-6 composants : `D.cours[]`, `CONTENU{}`, `RESUME{}` (si théorique), `NOTES_PROF{}`, `SENSEI_QUOTES{}` (16 types), optionnel `COURS_NATURE`
-- Après modif : `git push` pour déployer sur GitHub Pages
+- Chaque cours = 5-6 composants : `D.cours[]`, `CONTENU{}`, `NOTES_PROF{}`, `SENSEI_QUOTES{}` (16 types), `COURS_FLAVOR{}`, optionnel `COURS_NATURE`
+- Après modif : bumper `CACHE_NAME` dans `sw.js` + `git push` pour déployer sur GitHub Pages
+
+### Sécurité
+- `esc()` échappe `& < > " '` — l'utiliser pour tout contenu utilisateur dans innerHTML
+- `safeAvatar()` valide que les DataURL commencent par `data:image/`
+- `validateSaveData()` sanitize les champs sensei importés (longueur, HTML strippé)
+- CDN chargés sans SRI (à ajouter si besoin de durcissement)
