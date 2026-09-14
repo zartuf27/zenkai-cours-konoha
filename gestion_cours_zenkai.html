@@ -6621,18 +6621,27 @@ function renderBilan(){
   h+=`<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-top:8px">
     <button class="btn" onclick="nav('historique')" style="font-size:0.82rem">📜 Historique complet</button>
     <div style="display:flex;align-items:center;gap:10px">
-      <span style="font-size:0.72rem;color:var(--text-muted)">${globalTotal} cours · ${globalJours} jours</span>
-      <button class="btn btn-sm btn-danger" onclick="resetBilan()">🗑️ Reset</button>
+      ${dayTotal?`<button class="btn btn-sm btn-danger" onclick="resetBilanJour('${selDate}')">🗑️ Supprimer ce jour (${selDate})</button>`:''}
     </div>
   </div>`;
 
   return h;
 }
-function resetBilan(){
-  if(!confirm('Remettre tous les compteurs de cours à zéro ? L\'historique sera supprimé.'))return;
-  setNote('cours_history','');
-  D.cours.forEach(c=>{setNote('given_count_'+c.id,'');setNote('given_last_'+c.id,'');});
-  toast('Compteurs réinitialisés');render();
+function resetBilanJour(dateStr){
+  if(!confirm('Supprimer les cours du '+dateStr+' ?'))return;
+  const hist=getCoursHistory();
+  const kept=hist.filter(e=>e.date!==dateStr);
+  const removed=hist.filter(e=>e.date===dateStr);
+  saveCoursHistory(kept);
+  // Recalculer les compteurs par cours
+  removed.forEach(e=>{
+    const k='given_count_'+e.id;
+    const n=Math.max(0,(parseInt(getNote(k))||0)-1);
+    if(n)setNote(k,String(n));else{setNote(k,'');setNote('given_last_'+e.id,'');}
+    if(n){const rem=kept.filter(h=>h.id===e.id);if(rem.length)setNote('given_last_'+e.id,rem[rem.length-1].date);}
+  });
+  bilanDate=null;
+  toast('Jour '+dateStr+' supprimé');render();
 }
 
 // ================================================================

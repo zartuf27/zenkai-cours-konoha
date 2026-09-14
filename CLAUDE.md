@@ -215,14 +215,11 @@ Le projet utilise **Graphify** comme carte contextuelle et mémoire structurelle
 
 Le **Parchemin** = le canal Discord de l'Académie où les senseis postent leur rapport.
 
-- Sélecteur de jour IRL (= mois IG) avec boutons cliquables
-- Liste des cours uniquement (pas d'en-tête nom/rôle/date) :
-  ```
-  • Techniques Raiton — 14:15
-  • Les Règles d'Or — 16:00
-  ```
-- Déduplique les heures (arrondi au créneau +15min si collision)
-- Bouton 🗑️ Remettre à zéro
+- 3 stat cards (total global, jours actifs, cours du jour)
+- Sélecteur de jour IRL (= mois IG) avec compteur donnés/proposés
+- Timeline visuelle du jour (ligne skin, dots vert/orange, cliquable)
+- Parchemin Discord : cours + heure uniquement, déduplique les heures (+15min si collision)
+- Bouton 🗑️ Supprimer ce jour (supprime uniquement le jour sélectionné, pas l'historique global)
 - Lien vers la page Historique
 
 ### Page Historique (📜)
