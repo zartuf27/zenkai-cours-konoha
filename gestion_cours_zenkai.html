@@ -5995,6 +5995,7 @@ const VIEWS=[
   {id:'bilan',icon:'📊',label:'Fin de mois'},
   {id:'historique',icon:'📜',label:'Historique'},
   {id:'sensei',icon:'👤',label:'Sensei'},
+  {id:'brouillons',icon:'🧪',label:'En attente de validation'},
 ];
 
 let curView='dashboard', curCours=null;
@@ -6058,6 +6059,7 @@ function render(){
     case'bilan':el.innerHTML=renderBilan();break;
     case'historique':el.innerHTML=renderHistorique();break;
     case'sensei':el.innerHTML=renderSensei();break;
+    case'brouillons':el.innerHTML=renderBrouillons();break;
   }
 }
 
@@ -6251,6 +6253,54 @@ function renderCoursList(){
     });
     h+=`</div></div>`;
   }
+  return h;
+}
+
+// ================================================================
+// BROUILLONS — Cours en attente de validation
+// ================================================================
+function renderBrouillons(){
+  const drafts=D.cours.filter(c=>c.validated===false&&coursVisibleForSensei(c));
+  let h=`<div class="page-header"><div class="page-title">🧪 En attente de validation</div><div class="page-desc">Cours en phase de test — contenu susceptible d'évoluer avant validation définitive.</div></div>`;
+  if(!drafts.length){
+    h+=`<div class="card" style="text-align:center;padding:40px 20px;color:var(--text-dim)">
+      <div style="font-size:2.5rem;margin-bottom:12px">✅</div>
+      <div style="font-size:1rem;font-weight:600">Aucun cours en attente</div>
+      <div style="font-size:0.85rem;margin-top:6px">Tous les cours sont validés.</div>
+    </div>`;
+    return h;
+  }
+  h+=`<div style="background:#fff3cd;border:1px solid #ffc107;border-radius:var(--radius-lg);padding:12px 16px;margin-bottom:18px;display:flex;align-items:center;gap:10px;color:#856404;font-size:0.85rem">
+    <span style="font-size:1.3rem">⚠️</span>
+    <div><strong>${drafts.length} cours en attente</strong> — Ces cours sont jouables mais pas encore approuvés. Leur contenu, notation ou déroulement peut encore changer.</div>
+  </div>`;
+  h+=`<div class="cours-grid">`;
+  const senNat=getSensei().nature;
+  drafts.forEach(c=>{
+    const st=coursState(c),p=coursProg(c);
+    const cNat=coursNature(c.id);
+    const isMyNature=cNat&&cNat===senNat;
+    const natInfo=cNat?D.natures.find(n=>n.id===cNat):null;
+    const pOk=!c.prereq||!c.prereq.length||c.prereq.every(pid=>{const pc=D.cours.find(x=>x.id===pid);return pc&&coursProg(pc).p===100});
+    h+=`<div class="card card-clickable" onclick="openCours('${c.id}')" style="border-color:#ffc107;box-shadow:0 0 8px rgba(255,193,7,0.25)">
+      <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px">
+        <div class="cours-card-title">${isMyNature&&natInfo?natInfo.icon+' ':''}${c.titre}</div>${stBadge(st)}
+      </div>
+      <div class="cours-badges">
+        <span class="badge badge-${c.cat==='theorique'?'theo':'prat'}">${c.cat}</span>
+        <span class="badge badge-rang">${c.rang}</span>
+        <span class="badge" style="background:#fff3cd;color:#856404;border:1px solid #ffc107;font-weight:600">⚠ Non validé</span>
+        ${c.auteur?`<span class="badge" style="background:rgba(0,0,0,0.04);color:var(--text-dim)">par ${c.auteur}</span>`:''}
+      </div>
+      <div class="cours-card-desc">${c.desc}</div>
+      <div class="cours-card-footer">
+        <div class="pbar" style="flex:1;margin-right:10px"><div class="pbar-fill${p.p===100?' complete':''}" style="width:${p.p}%"></div></div>
+        <span class="pbar-text">${p.p}%</span>
+      </div>
+      ${!pOk?'<div style="font-size:0.68rem;color:var(--konoha-red-bright);margin-top:4px">⚠ Prérequis manquants</div>':''}
+    </div>`;
+  });
+  h+=`</div>`;
   return h;
 }
 
@@ -8211,22 +8261,22 @@ const SIDEBAR_TIPS={
 
 // Sidebar labels adaptés au type de sensei
 const SIDEBAR_LABELS={
-  sage:{dashboard:'Vue d\'ensemble',cours:'Enseignements',mudras:'Les Douze Sceaux',natures:'Les Cinq Voies',hierarchie:'L\'Ordre shinobi',admin:'Préceptes',annonces:'Paroles du maître',bilan:'Méditation du mois',historique:'Chroniques',sensei:'Mon chemin'},
-  dur:{dashboard:'Briefing',cours:'Programme',mudras:'Sceaux de combat',natures:'Affinités',hierarchie:'Chaîne de commandement',admin:'Protocole',annonces:'Ordres de mission',bilan:'Rapport',historique:'Dossier',sensei:'Identité'},
-  guerrier:{dashboard:'QG',cours:'Entraînement',mudras:'Arsenal mudras',natures:'Éléments',hierarchie:'Les rangs',admin:'Code du guerrier',annonces:'Appel au combat',bilan:'Victoires du mois',historique:'Palmarès',sensei:'Mon feu'},
-  bienveillant:{dashboard:'Mon espace',cours:'Nos cours',mudras:'Apprendre les mudras',natures:'Découvrir sa nature',hierarchie:'Grandir ensemble',admin:'Nos règles',annonces:'Nouvelles',bilan:'Notre mois',historique:'Nos souvenirs',sensei:'À propos de moi'},
-  mysterieux:{dashboard:'Le voile',cours:'Les arcanes',mudras:'Sceaux oubliés',natures:'L\'Essence',hierarchie:'Les cercles',admin:'Lois non-écrites',annonces:'Murmures',bilan:'Ce que la lune a vu',historique:'Échos du passé',sensei:'Qui suis-je ?'},
-  stratege:{dashboard:'Situation',cours:'Modules tactiques',mudras:'Séquences de sceaux',natures:'Variables élémentaires',hierarchie:'Organigramme',admin:'Règles d\'engagement',annonces:'Déploiements',bilan:'Analyse mensuelle',historique:'Base de données',sensei:'Profil opérateur'},
-  veteran:{dashboard:'Poste de garde',cours:'Ce qu\'on m\'a pas appris',mudras:'Les gestes qui sauvent',natures:'Forces du terrain',hierarchie:'Ceux qui commandent',admin:'Les vraies règles',annonces:'Appel',bilan:'Encore un mois debout',historique:'Cicatrices',sensei:'Qui je suis'},
-  fraternel:{dashboard:'La maison',cours:'On apprend ensemble',mudras:'Les mudras, tranquille',natures:'Ta nature à toi',hierarchie:'La famille ninja',admin:'Les règles du groupe',annonces:'Hey, venez !',bilan:'Ce qu\'on a fait ce mois',historique:'Nos aventures',sensei:'C\'est moi'},
-  ironique:{dashboard:'Le bazar',cours:'Cours (si on peut appeler ça comme ça)',mudras:'Les trucs avec les mains',natures:'Feu, eau, blabla',hierarchie:'Qui commande (en théorie)',admin:'Les "règles"',annonces:'Spam officiel',bilan:'Le bilan (si ça intéresse)',historique:'Tout ce bordel',sensei:'Le magnifique'},
-  ermite:{dashboard:'Le rocher',cours:'Les leçons de la forêt',mudras:'Signes sacrés',natures:'Les souffles du monde',hierarchie:'Rangs et tout ça',admin:'Règles... ouais',annonces:'Convocations',bilan:'Ce que j\'ai fait (à peu près)',historique:'Journal de route',sensei:'Le vagabond'},
-  ombre:{dashboard:'Central',cours:'Dossiers classifiés',mudras:'Protocoles gestuels',natures:'Vecteurs élémentaires',hierarchie:'Structure hiérarchique',admin:'Directive',annonces:'Transmission',bilan:'Rapport opérationnel',historique:'Logs',sensei:'Profil agent'},
-  sensei_noble:{dashboard:'Le pavillon',cours:'Arts de l\'Académie',mudras:'Sceaux ancestraux',natures:'Les Cinq Piliers',hierarchie:'L\'Ordre établi',admin:'Code d\'honneur',annonces:'Décrets',bilan:'Rapport solennel',historique:'Archives nobles',sensei:'Mon blason'},
-  rebelle:{dashboard:'Mon bordel organisé',cours:'Ce que je leur apprends',mudras:'Les signes, vite fait',natures:'Mon élément, ta gueule',hierarchie:'La hiérarchie (lol)',admin:'Les "règles" (mdr)',annonces:'Appels (ou pas)',bilan:'Ce que j\'ai foutu ce mois',historique:'Mon casier',sensei:'C\'est moi, deal with it'},
-  mentor:{dashboard:'Le temple',cours:'Leçons intérieures',mudras:'Gestes de l\'âme',natures:'Harmonies',hierarchie:'Les degrés de l\'éveil',admin:'Préceptes sacrés',annonces:'Invitation à la pratique',bilan:'Bilan de conscience',historique:'Le chemin parcouru',sensei:'Mon essence'},
-  chasseur:{dashboard:'Le terrier',cours:'Techniques de terrain',mudras:'Sceaux de traque',natures:'Instinct élémentaire',hierarchie:'La meute',admin:'Loi de la forêt',annonces:'Appel de la meute',bilan:'Tableau de chasse',historique:'Traces',sensei:'L\'alpha'},
-  tacticien:{dashboard:'Échiquier',cours:'Pions et stratégies',mudras:'Combinaisons',natures:'Leviers élémentaires',hierarchie:'Pièces du jeu',admin:'Règles du jeu',annonces:'Coups annoncés',bilan:'Partie du mois',historique:'Historique des coups',sensei:'Le marionnettiste'}
+  sage:{dashboard:'Vue d\'ensemble',cours:'Enseignements',mudras:'Les Douze Sceaux',natures:'Les Cinq Voies',hierarchie:'L\'Ordre shinobi',admin:'Préceptes',annonces:'Paroles du maître',bilan:'Méditation du mois',historique:'Chroniques',sensei:'Mon chemin',brouillons:'Enseignements à l\'étude'},
+  dur:{dashboard:'Briefing',cours:'Programme',mudras:'Sceaux de combat',natures:'Affinités',hierarchie:'Chaîne de commandement',admin:'Protocole',annonces:'Ordres de mission',bilan:'Rapport',historique:'Dossier',sensei:'Identité',brouillons:'En cours d\'approbation'},
+  guerrier:{dashboard:'QG',cours:'Entraînement',mudras:'Arsenal mudras',natures:'Éléments',hierarchie:'Les rangs',admin:'Code du guerrier',annonces:'Appel au combat',bilan:'Victoires du mois',historique:'Palmarès',sensei:'Mon feu',brouillons:'Techniques à l\'essai'},
+  bienveillant:{dashboard:'Mon espace',cours:'Nos cours',mudras:'Apprendre les mudras',natures:'Découvrir sa nature',hierarchie:'Grandir ensemble',admin:'Nos règles',annonces:'Nouvelles',bilan:'Notre mois',historique:'Nos souvenirs',sensei:'À propos de moi',brouillons:'Cours en préparation'},
+  mysterieux:{dashboard:'Le voile',cours:'Les arcanes',mudras:'Sceaux oubliés',natures:'L\'Essence',hierarchie:'Les cercles',admin:'Lois non-écrites',annonces:'Murmures',bilan:'Ce que la lune a vu',historique:'Échos du passé',sensei:'Qui suis-je ?',brouillons:'Savoirs non révélés'},
+  stratege:{dashboard:'Situation',cours:'Modules tactiques',mudras:'Séquences de sceaux',natures:'Variables élémentaires',hierarchie:'Organigramme',admin:'Règles d\'engagement',annonces:'Déploiements',bilan:'Analyse mensuelle',historique:'Base de données',sensei:'Profil opérateur',brouillons:'Prototypes tactiques'},
+  veteran:{dashboard:'Poste de garde',cours:'Ce qu\'on m\'a pas appris',mudras:'Les gestes qui sauvent',natures:'Forces du terrain',hierarchie:'Ceux qui commandent',admin:'Les vraies règles',annonces:'Appel',bilan:'Encore un mois debout',historique:'Cicatrices',sensei:'Qui je suis',brouillons:'Pas encore ficelé'},
+  fraternel:{dashboard:'La maison',cours:'On apprend ensemble',mudras:'Les mudras, tranquille',natures:'Ta nature à toi',hierarchie:'La famille ninja',admin:'Les règles du groupe',annonces:'Hey, venez !',bilan:'Ce qu\'on a fait ce mois',historique:'Nos aventures',sensei:'C\'est moi',brouillons:'On teste des trucs'},
+  ironique:{dashboard:'Le bazar',cours:'Cours (si on peut appeler ça comme ça)',mudras:'Les trucs avec les mains',natures:'Feu, eau, blabla',hierarchie:'Qui commande (en théorie)',admin:'Les "règles"',annonces:'Spam officiel',bilan:'Le bilan (si ça intéresse)',historique:'Tout ce bordel',sensei:'Le magnifique',brouillons:'Le labo douteux'},
+  ermite:{dashboard:'Le rocher',cours:'Les leçons de la forêt',mudras:'Signes sacrés',natures:'Les souffles du monde',hierarchie:'Rangs et tout ça',admin:'Règles... ouais',annonces:'Convocations',bilan:'Ce que j\'ai fait (à peu près)',historique:'Journal de route',sensei:'Le vagabond',brouillons:'Trucs pas finis'},
+  ombre:{dashboard:'Central',cours:'Dossiers classifiés',mudras:'Protocoles gestuels',natures:'Vecteurs élémentaires',hierarchie:'Structure hiérarchique',admin:'Directive',annonces:'Transmission',bilan:'Rapport opérationnel',historique:'Logs',sensei:'Profil agent',brouillons:'Dossiers en attente'},
+  sensei_noble:{dashboard:'Le pavillon',cours:'Arts de l\'Académie',mudras:'Sceaux ancestraux',natures:'Les Cinq Piliers',hierarchie:'L\'Ordre établi',admin:'Code d\'honneur',annonces:'Décrets',bilan:'Rapport solennel',historique:'Archives nobles',sensei:'Mon blason',brouillons:'Ébauches du pavillon'},
+  rebelle:{dashboard:'Mon bordel organisé',cours:'Ce que je leur apprends',mudras:'Les signes, vite fait',natures:'Mon élément, ta gueule',hierarchie:'La hiérarchie (lol)',admin:'Les "règles" (mdr)',annonces:'Appels (ou pas)',bilan:'Ce que j\'ai foutu ce mois',historique:'Mon casier',sensei:'C\'est moi, deal with it',brouillons:'Mes idées pas validées'},
+  mentor:{dashboard:'Le temple',cours:'Leçons intérieures',mudras:'Gestes de l\'âme',natures:'Harmonies',hierarchie:'Les degrés de l\'éveil',admin:'Préceptes sacrés',annonces:'Invitation à la pratique',bilan:'Bilan de conscience',historique:'Le chemin parcouru',sensei:'Mon essence',brouillons:'Méditations inachevées'},
+  chasseur:{dashboard:'Le terrier',cours:'Techniques de terrain',mudras:'Sceaux de traque',natures:'Instinct élémentaire',hierarchie:'La meute',admin:'Loi de la forêt',annonces:'Appel de la meute',bilan:'Tableau de chasse',historique:'Traces',sensei:'L\'alpha',brouillons:'Pistes non confirmées'},
+  tacticien:{dashboard:'Échiquier',cours:'Pions et stratégies',mudras:'Combinaisons',natures:'Leviers élémentaires',hierarchie:'Pièces du jeu',admin:'Règles du jeu',annonces:'Coups annoncés',bilan:'Partie du mois',historique:'Historique des coups',sensei:'Le marionnettiste',brouillons:'Coups en préparation'}
 };
 
 function getSidebarLabel(viewId){
