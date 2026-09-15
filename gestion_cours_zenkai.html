@@ -3607,7 +3607,7 @@ ${D.armes.map(a=>'<div class="arme-card"><div class="arme-name">🗡️ '+a.nom+
 <p style="color:var(--text-dim);font-style:italic;border-left:3px solid var(--accent-gold);padding-left:12px;margin-bottom:16px">Support professeur — 2 senseis (jouent les élèves dissipés). Salle de cours. 5 à 12 élèves.</p>
 
 <h3>Principe</h3>
-<p>Chaque élève (ou binôme) prépare et donne un <strong>mini-cours de 5 minutes</strong> sur un sujet ninja de son choix devant les autres élèves et les senseis.</p>
+<p>Chaque élève (ou binôme) prépare et donne un <strong>mini-cours de 5 minutes</strong> sur un vrai cours de l'Académie, tiré au sort ou choisi librement, devant les autres élèves et les senseis.</p>
 <p>La difficulté : les senseis jouent des <strong>élèves dissipés et insupportables</strong>. Questions hors sujet, incompréhension feinte, disputes entre eux, chuchotements bruyants — tout pour déstabiliser l'élève-sensei.</p>
 
 <h3>Tirage de sujets — 2 élèves</h3>
@@ -3632,7 +3632,7 @@ ${D.armes.map(a=>'<div class="arme-card"><div class="arme-name">🗡️ '+a.nom+
     </div>
   </div>
 </div>
-<p style="font-size:0.8rem;color:var(--text-dim)">36 sujets : 12 faciles · 12 moyens · 12 difficiles. Le sujet libre reste toujours possible.</p>
+<p style="font-size:0.8rem;color:var(--text-dim)">Sujets tirés des vrais cours de l'Académie (hors natures et taijutsu). Difficulté basée sur le rang requis. Le sujet libre reste toujours possible.</p>
 
 <h3>Comportements des senseis-élèves</h3>
 <ul>
@@ -5919,60 +5919,32 @@ function tirerSujetEloquence(diff){
 }
 
 // ================================================================
-// SUJETS ALÉATOIRES — Le Cours Inversé
+// SUJETS ALÉATOIRES — Le Cours Inversé (vrais cours, hors nature et taijutsu)
 // ================================================================
-const SUJETS_INVERSE={
-facile:[
-  'Présenter les 3 armes de lancer (kunai, shuriken, senbon)',
-  'Expliquer les 8 Règles d\'Or du ninja',
-  'Présenter les 5 natures de chakra et leur cycle',
-  'Décrire le rôle du bandeau frontal',
-  'Expliquer ce qu\'est le Nindo',
-  'Présenter les bombes fumigènes et leur utilisation',
-  'Expliquer la différence entre Ninjutsu et Taijutsu',
-  'Présenter les makibishi et les clochettes',
-  'Décrire les rangs de l\'Académie (Apprenti Genin → Genin)',
-  'Expliquer pourquoi les missions de rang D existent',
-  'Présenter le système de missions par rang',
-  'Décrire l\'équipement de base d\'un Genin en mission'
-],
-moyen:[
-  'Expliquer le fonctionnement des mudras et leur rôle dans le chakra',
-  'Présenter l\'histoire de la fondation de Konoha',
-  'Enseigner le cycle de supériorité des natures (Katon > Futon > ...)',
-  'Expliquer la Volonté du Feu et son origine',
-  'Présenter les 5 clans fondateurs et leurs rôles',
-  'Expliquer ce qu\'est un Kekkei Genkai avec des exemples',
-  'Enseigner les bases de l\'infiltration',
-  'Présenter les différences entre les voies du Kenjutsu',
-  'Expliquer comment fonctionne le réseau de chakra et les Tenketsu',
-  'Présenter les techniques de base du Suiton (ou Katon, ou Doton...)',
-  'Expliquer le principe de la Compensation (Sosaï)',
-  'Enseigner les formations défensives en mission d\'escorte'
-],
-difficile:[
-  'Enseigner la stratégie du Jeu du Roi (protection de cible)',
-  'Comparer les philosophies de combat : Taijutsu vs Ninjutsu vs Genjutsu',
-  'Expliquer pourquoi la maîtrise de soi est la règle la plus difficile',
-  'Présenter le Bushidō et ses 8 vertus appliquées au monde ninja',
-  'Défendre que la diplomatie est plus efficace que le combat',
-  'Enseigner comment analyser les forces et faiblesses d\'un adversaire par sa nature',
-  'Expliquer le dilemme "mission vs protection du village"',
-  'Présenter les institutions créées par Tobirama et leur impact',
-  'Enseigner la gestion du stress en situation de combat',
-  'Comparer le rôle des ANBU et celui des Jōnin dans la défense du village',
-  'Expliquer pourquoi l\'enseignement est une compétence ninja',
-  'Présenter une stratégie complète pour une mission d\'infiltration'
-]
-};
+function _getCoursInverse(){
+  const exclude=new Set(Object.keys(COURS_NATURE));
+  Object.keys(COURS_SPEC).forEach(k=>exclude.add(k));
+  const pool=D.cours.filter(c=>!exclude.has(c.id)&&c.validated!==false);
+  const facile=[],moyen=[],difficile=[];
+  pool.forEach(c=>{
+    const r=c.rang;
+    if(r==='Apprenti Genin'||r==='Tous grades')facile.push(c.titre);
+    else if(r==='Genin')moyen.push(c.titre);
+    else difficile.push(c.titre);
+  });
+  return{facile,moyen,difficile};
+}
 function tirerSujetInverse(diff){
-  const all=[...SUJETS_INVERSE.facile,...SUJETS_INVERSE.moyen,...SUJETS_INVERSE.difficile];
-  const pool=diff?SUJETS_INVERSE[diff]:all;
+  const sujets=_getCoursInverse();
+  const all=[...sujets.facile,...sujets.moyen,...sujets.difficile];
+  const pool=diff?sujets[diff]:all;
+  if(pool.length<2)return;
   const s1=_pickSujet(pool);
   let s2=_pickSujet(pool);
   let guard=0;
   while(s2===s1&&guard++<50)s2=_pickSujet(pool);
-  const d1=_diffOf2(s1),d2=_diffOf2(s2);
+  const d1=sujets.facile.includes(s1)?'facile':sujets.moyen.includes(s1)?'moyen':'difficile';
+  const d2=sujets.facile.includes(s2)?'facile':sujets.moyen.includes(s2)?'moyen':'difficile';
   const e1=document.getElementById('sujet-inv-1');
   const e2=document.getElementById('sujet-inv-2');
   const zone=document.getElementById('sujets-inverse-zone');
@@ -5984,11 +5956,6 @@ function tirerSujetInverse(diff){
   e2.innerHTML=`<span style="font-size:0.75rem;font-weight:600;display:block;margin-bottom:4px">${_diffLabels[d2]}</span>« ${s2} »`;
   e1.classList.add('sujet-reveal');e2.classList.add('sujet-reveal');
   playClick();
-}
-function _diffOf2(s){
-  if(SUJETS_INVERSE.facile.includes(s))return'facile';
-  if(SUJETS_INVERSE.moyen.includes(s))return'moyen';
-  return'difficile';
 }
 
 function getSensei(){
