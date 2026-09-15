@@ -11,6 +11,11 @@ Hishiba/*.webp
 COURS NATURE PRATIQUE.docx
 Kenjustu.docx
 Capture_decran_*.png
+Hishiba/
+
+# Graphify cache et backups (seul le graph courant compte)
+graphify-out/cache/
+graphify-out/2026-*/
 
 # Fichiers système
 .DS_Store

@@ -37,7 +37,7 @@ donnees_cours.json         — Données structurées (synchronisé avec le HTML)
 img_cycle_natures.png      — Schéma cycle des 5 natures (utilisé dans les cours)
 img_kekkei_genkai.png      — Diagramme des Kekkei Genkai (utilisé dans les cours)
 CLAUDE.md                  — Ce fichier (instructions pour Claude)
-.gitignore                 — Exclut images lourdes, .docx sources, .claude/
+.gitignore                 — Exclut images lourdes, .docx sources, .claude/, cache graphify
 théorique/                 — Cours théoriques (.docx, .md) + images
 Pratique/                  — 13 cours pratiques (.docx)
 Cours du sensei renard/    — Cours d'un autre sensei (7 .md + HTML + script)
@@ -200,15 +200,16 @@ Le flag `zenkai_onboarded` dans localStorage empêche de relancer le tuto. Bouto
 ### Graphify — Mémoire structurelle
 
 Le projet utilise **Graphify** comme carte contextuelle et mémoire structurelle. Fichiers dans `graphify-out/` :
-- `graph.json` — graphe du projet (171 nœuds, 133 arêtes, 40 communautés)
+- `graph.json` — graphe du projet (172 nœuds, 134 arêtes, 41 communautés)
 - `graph.html` — visualisation interactive
 - `GRAPH_REPORT.md` — rapport d'analyse (hubs, communautés, gaps)
 - `converted/*.md` — sources .docx converties (contenu original des cours)
-- `manifest.json` — index des 37 fichiers sources avec hash
+- `manifest.json` — index des fichiers sources avec hash
+- `cache/` et `2026-*/` — exclus du repo (.gitignore)
 - Mise à jour : `graphify update .` après chaque modification significative
 
 **Hubs principaux** (nœuds les plus connectés) :
-- Architecture du HTML (22 edges) — cœur technique
+- Architecture du HTML (23 edges) — cœur technique
 - Les 8 Règles d'Or (9) — cours fondamental
 - CLAUDE.md (7) — documentation centrale
 - Guide de partage (7) — multi-sensei
@@ -281,7 +282,7 @@ Overlay plein écran déclenché depuis la page détail d'un cours. Affiche le c
 | Export PDF | CDN `html2canvas` + `jsPDF` | Export Historique et cours en PDF |
 | Auto-restore | Hash URL `#restore=...` | Scan QR → profil restauré automatiquement |
 
-Pour mettre à jour le cache PWA : incrémenter la version dans `sw.js` (`zenkai-v1` → `zenkai-v2`).
+Pour mettre à jour le cache PWA : incrémenter la version dans `sw.js` (ex: `zenkai-v7` → `zenkai-v8`).
 
 ### Fonctions clés
 
