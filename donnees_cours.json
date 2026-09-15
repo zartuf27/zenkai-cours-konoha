@@ -2435,6 +2435,50 @@
           "prereq": []
         }
       ]
+    },
+    {
+      "id": "chasse_sensei",
+      "titre": "La Chasse au Sensei",
+      "cat": "pratique",
+      "mod": "Tactique",
+      "rang": "Apprenti Genin",
+      "cible": "Apprentis Genin / Genin / Genin Confirmé",
+      "auteur": null,
+      "prereq": [
+        "regles_or"
+      ],
+      "validated": false,
+      "desc": "Un sensei se cache dans le village, ment et se déplace. Les élèves ont 30 minutes pour le traquer et l'identifier.",
+      "techs": [
+        {
+          "id": "cs_traque",
+          "nom": "Traque et localisation",
+          "desc": "Retrouver une cible mobile dans une zone définie en exploitant les indices.",
+          "type": "tactique",
+          "etapes": [
+            "Analyser l'indice de départ",
+            "Quadriller la zone en équipe",
+            "Recouper les informations collectées"
+          ],
+          "mudras": [],
+          "rang": "Apprenti Genin",
+          "prereq": []
+        },
+        {
+          "id": "cs_desinformation",
+          "nom": "Esprit critique et désinformation",
+          "desc": "Identifier les fausses pistes et distinguer les informations fiables.",
+          "type": "tactique",
+          "etapes": [
+            "Interroger les témoins avec méthode",
+            "Détecter les contradictions et les mensonges",
+            "Confirmer l'identité de la cible (objet distinctif + phrase convenue)"
+          ],
+          "mudras": [],
+          "rang": "Apprenti Genin",
+          "prereq": []
+        }
+      ]
     }
   ],
   "admin": {

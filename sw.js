@@ -1,4 +1,4 @@
-const CACHE_NAME='zenkai-v10';
+const CACHE_NAME='zenkai-v11';
 const CORE_ASSETS=[
   './gestion_cours_zenkai.html',
   './',
