@@ -63,7 +63,7 @@ En ~1 minute, GitHub met à jour le site. Tous les senseis qui rafraîchissent l
 
 | Partagé (tu le mets à jour, tout le monde le voit) | Personnel (chaque prof dans son navigateur) |
 |-----------------------------------------------------|---------------------------------------------|
-| Les 24 cours et leur contenu | Nom, prénom, signe distinctif |
+| Les 45 cours et leur contenu | Nom, prénom, signe distinctif |
 | Les techniques et étapes | Nature de chakra (skin visuel) |
 | Les notes du prof (résumés copiables) | Type de sensei (personnalité) |
 | Les annonces | Rang |
@@ -77,7 +77,7 @@ En ~1 minute, GitHub met à jour le site. Tous les senseis qui rafraîchissent l
 ## FAQ
 
 **Q : Un prof perd ses données s'il change de navigateur ?**
-Oui. Les données sont dans le navigateur (localStorage). S'il change de navigateur ou vide ses données, il devra reconfigurer son profil. Il peut exporter sa progression (bouton "Exporter" en haut à droite) et la réimporter plus tard.
+Pas forcément. Dans la page **👤 Sensei** (section Réglages en bas), il peut générer un **Parchemin de Transfert** (code à copier) ou un **QR Code** pour transférer tout son profil sur un autre appareil. Sans ça, oui, les données sont dans le navigateur (localStorage).
 
 **Q : Un prof peut casser l'app des autres ?**
 Non. Chaque prof travaille dans son propre navigateur. Impossible d'affecter les autres.
