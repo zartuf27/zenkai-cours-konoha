@@ -104,11 +104,23 @@ Sage 🍃, Implacable 🗡️, Guerrier 🔥, Bienveillant 🌸, Énigmatique �
 
 Chaque type : 1 citation par cours (16 × 45 = 720) + greeting dashboard + animation avatar spécifique.
 
-Certains types modifient les **labels de la sidebar** (`SIDEBAR_LABELS`) :
-- Ombre : Annonces→"Transmission", Bilan→"Rapport opérationnel", Historique→"Logs"
-- Rebelle : Bilan→"Ce que j'ai foutu ce mois", Admin→"Les règles"
-- Chasseur : Annonces→"Appel de la meute", Bilan→"Tableau de chasse"
-- etc.
+Les **16 types** personnalisent les **10 onglets** de la sidebar (`SIDEBAR_LABELS`). Chaque type a un vocabulaire complet adapté à sa personnalité (HRP assumé) :
+- Sage : "Enseignements", "Méditation du mois", "Chroniques"
+- Implacable : "Briefing", "Programme", "Chaîne de commandement"
+- Guerrier : "QG", "Entraînement", "Victoires du mois"
+- Bienveillant : "Nos cours", "Grandir ensemble", "Nos souvenirs"
+- Énigmatique : "Les arcanes", "Murmures", "Échos du passé"
+- Stratège : "Modules tactiques", "Variables élémentaires", "Base de données"
+- Vétéran : "Ce qu'on m'a pas appris", "Encore un mois debout", "Cicatrices"
+- Grand Frère : "La maison", "Hey, venez !", "Nos aventures"
+- Provocateur : "Le bazar", "Les trucs avec les mains", "Tout ce bordel"
+- Ermite : "Le rocher", "Règles... ouais", "Le vagabond"
+- Ombre : "Central", "Dossiers classifiés", "Logs"
+- Noble : "Le pavillon", "Arts de l'Académie", "Mon blason"
+- Rebelle : "Mon bordel organisé", "La hiérarchie (lol)", "Mon casier"
+- Mentor : "Le temple", "Gestes de l'âme", "Le chemin parcouru"
+- Chasseur : "Le terrier", "Appel de la meute", "L'alpha"
+- Manipulateur : "Échiquier", "Pions et stratégies", "Le marionnettiste"
 
 ### Skins par nature de chakra
 
@@ -260,7 +272,7 @@ Overlay plein écran déclenché depuis la page détail d'un cours. Affiche le c
 | `const ONBOARD_FINAL` | Mots de fin du tuto par type (16 entrées) |
 | `const TOUR_TIPS_TYPED` | Descriptions d'onglets par type (8 types × 4 onglets) |
 | `const SIDEBAR_TIPS` | Descriptions d'onglets génériques (11 vues) |
-| `const SIDEBAR_LABELS` | Labels sidebar personnalisés par type (9 types) |
+| `const SIDEBAR_LABELS` | Labels sidebar personnalisés par type (16 types × 10 onglets) |
 
 ### Persistence (localStorage clé `zenkai_v2`)
 

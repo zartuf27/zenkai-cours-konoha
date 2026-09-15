@@ -1,7 +1,7 @@
 # Graph Report - ZENKAI TEEEST  (2026-09-15)
 
 ## Corpus Check
-- 39 files · ~114,279 words
+- 39 files · ~114,644 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 1 file(s) not represented in the graph (top: (none) 1)
 
@@ -11,7 +11,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `e72ee123`
+- Built from commit: `98fe0d1b`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
