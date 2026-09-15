@@ -3632,7 +3632,7 @@ ${D.armes.map(a=>'<div class="arme-card"><div class="arme-name">🗡️ '+a.nom+
     </div>
   </div>
 </div>
-<p style="font-size:0.8rem;color:var(--text-dim)">Sujets tirés des vrais cours de l'Académie (hors natures et taijutsu). Difficulté basée sur le rang requis. Le sujet libre reste toujours possible.</p>
+<p style="font-size:0.8rem;color:var(--text-dim)">Sujets tirés des cours théoriques généraux de l'Académie (Apprenti Genin → Genin Confirmé). Le sujet libre reste possible.</p>
 
 <h3>Comportements des senseis-élèves</h3>
 <ul>
@@ -5922,9 +5922,8 @@ function tirerSujetEloquence(diff){
 // SUJETS ALÉATOIRES — Le Cours Inversé (vrais cours, hors nature et taijutsu)
 // ================================================================
 function _getCoursInverse(){
-  const exclude=new Set(Object.keys(COURS_NATURE));
-  Object.keys(COURS_SPEC).forEach(k=>exclude.add(k));
-  const pool=D.cours.filter(c=>!exclude.has(c.id)&&c.validated!==false);
+  const rangsOk=new Set(['Apprenti Genin','Tous grades','Genin','Genin Confirmé']);
+  const pool=D.cours.filter(c=>c.cat==='theorique'&&c.validated!==false&&rangsOk.has(c.rang));
   const facile=[],moyen=[],difficile=[];
   pool.forEach(c=>{
     const r=c.rang;
