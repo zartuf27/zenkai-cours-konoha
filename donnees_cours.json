@@ -2347,6 +2347,50 @@
           "prereq": []
         }
       ]
+    },
+    {
+      "id": "eloquence_absurde",
+      "titre": "L'Éloquence Absurde",
+      "cat": "pratique",
+      "mod": "Tactique",
+      "rang": "Apprenti Genin",
+      "cible": "Apprentis Genin / Genin / Genin Confirmé",
+      "auteur": null,
+      "prereq": [
+        "regles_or"
+      ],
+      "validated": false,
+      "desc": "Exercice d'éloquence : défendre un sujet absurde avec conviction devant un jury de senseis.",
+      "techs": [
+        {
+          "id": "ea_discours",
+          "nom": "Discours sous pression",
+          "desc": "Défendre un sujet absurde avec sérieux pendant 2 minutes.",
+          "type": "tactique",
+          "etapes": [
+            "Tirer un sujet au sort",
+            "Construire un argumentaire en temps limité",
+            "Présenter avec conviction sans rire"
+          ],
+          "mudras": [],
+          "rang": "Apprenti Genin",
+          "prereq": []
+        },
+        {
+          "id": "ea_persuasion",
+          "nom": "Persuasion et répartie",
+          "desc": "Convaincre le public et résister aux questions déstabilisantes.",
+          "type": "tactique",
+          "etapes": [
+            "Structurer : introduction, arguments, conclusion",
+            "Répondre à la question du public",
+            "Maintenir son aplomb face au ridicule"
+          ],
+          "mudras": [],
+          "rang": "Apprenti Genin",
+          "prereq": []
+        }
+      ]
     }
   ],
   "admin": {
