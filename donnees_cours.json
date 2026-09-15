@@ -2391,6 +2391,50 @@
           "prereq": []
         }
       ]
+    },
+    {
+      "id": "cours_inverse",
+      "titre": "Le Cours Inversé",
+      "cat": "pratique",
+      "mod": "Tactique",
+      "rang": "Genin",
+      "cible": "Genin / Genin Confirmé",
+      "auteur": null,
+      "prereq": [
+        "regles_or"
+      ],
+      "validated": false,
+      "desc": "Les élèves deviennent senseis : préparer et donner un mini-cours face à des senseis jouant les élèves dissipés.",
+      "techs": [
+        {
+          "id": "ci_preparation",
+          "nom": "Préparation et transmission",
+          "desc": "Préparer un mini-cours de 5 minutes sur un sujet ninja et le transmettre clairement.",
+          "type": "tactique",
+          "etapes": [
+            "Choisir un sujet ninja pertinent",
+            "Structurer le cours (intro, contenu, conclusion)",
+            "Transmettre avec clarté et assurance"
+          ],
+          "mudras": [],
+          "rang": "Genin",
+          "prereq": []
+        },
+        {
+          "id": "ci_gestion",
+          "nom": "Gestion de classe",
+          "desc": "Garder le contrôle face à un public dissipé et répondre aux interruptions.",
+          "type": "tactique",
+          "etapes": [
+            "Maintenir l'attention du groupe",
+            "Répondre aux questions absurdes avec patience",
+            "Recadrer sans perdre le fil du cours"
+          ],
+          "mudras": [],
+          "rang": "Genin",
+          "prereq": []
+        }
+      ]
     }
   ],
   "admin": {
