@@ -71,7 +71,7 @@ Format tableau.docx        — Directive format annonces (Yamamoto Jakka)
 |------|----|----------|
 | 📊 Dashboard | `dashboard` | Carte sensei, stats globales, progression par module, cours en cours |
 | 📚 Cours | `cours` | Liste filtrable (texte, catégorie, module, rang, état) |
-| *(détail)* | `detail` | 2 onglets (🎤 Support oral / 📋 Marqueurs), techniques, checklist, compteur |
+| *(détail)* | `detail` | Bouton « 📋 Copier pour les élèves » en haut, 2 onglets (🎤 Support oral / 📋 Marqueurs), techniques, checklist, compteur |
 | 🤞 Mudras | `mudras` | Référence des 12 mudras |
 | 🔥 Natures | `natures` | 5 natures, cycle, kekkei genkai, bannière perso |
 | 👑 Hiérarchie | `hierarchie` | 10 rangs ninja |
@@ -161,7 +161,9 @@ Les cours Kenjutsu ne sont visibles que pour les senseis Kenjutsu. Bourrasque et
 
 Chaque cours dispose de 2 onglets :
 - **🎤 Support oral** — Guide RP à lire à haute voix (constante `CONTENU`) + bouton Mode Présentation
-- **📋 Marqueurs** — Phrase personnalité + anecdote nature + anecdote combat (dynamiques via `COURS_FLAVOR` / `SPEC_FLAVOR`) + notes copiables in-game (`NOTES_PROF`)
+- **📋 Marqueurs** — Phrase personnalité + anecdote nature + anecdote combat (dynamiques via `COURS_FLAVOR` / `SPEC_FLAVOR`) + contenu des notes élèves (`NOTES_PROF`)
+
+Le bouton **📋 Copier pour les élèves** est positionné en haut du cours (après les boutons « Cours donné » / « Proposé »). Il copie `NOTES_PROF[id].copy` dans le presse-papier pour coller directement en jeu.
 
 ### Adaptation du contenu par personnalité + nature + spécialisation
 
@@ -251,7 +253,7 @@ Le **Parchemin** = le canal Discord de l'Académie où les senseis postent leur 
 
 ### Mode Présentation (🎤)
 
-Overlay plein écran déclenché depuis la page détail d'un cours. Affiche le contenu + notes prof en grand format pour enseigner en jeu.
+Overlay plein écran déclenché depuis la page détail d'un cours. Affiche le contenu + notes pour les élèves en grand format pour enseigner en jeu.
 
 ### Structure des données (inline dans le HTML)
 
@@ -263,7 +265,7 @@ Overlay plein écran déclenché depuis la page détail d'un cours. Affiche le c
 | `const RESUME` | Bullet points "À retenir" par cours théorique (11 entrées) |
 | `const CONTENU` | Guides oraux (HTML) par cours ID |
 | `const INTERACTIF` | Blocs interactifs (Nindo uniquement) |
-| `const NOTES_PROF` | Notes copiables in-game (copy + html) par cours ID |
+| `const NOTES_PROF` | Notes pour les élèves (copy + html) — bouton « Copier pour les élèves » |
 | `const SENSEI_QUOTES` | Citations par cours × 16 types (720 entrées) |
 | `const SENSEI_TYPES` | 16 types (icône, nom, description, couleur) |
 | `const NATURE_CLOSING` | Phrases clôture par nature × module (5 × 8) |
@@ -321,7 +323,7 @@ Pour mettre à jour le cache PWA : incrémenter la version dans `sw.js` (ex: `ze
 
 1. Ajouter dans `D.cours[]` : `{id, titre, cat, mod, rang, cible, auteur, prereq, desc, techs[]}`
 2. Ajouter dans `CONTENU[id]` : HTML du guide oral (onglet 🎤 Support oral)
-3. Ajouter dans `NOTES_PROF[id]` : `{copy: '...', html: '...'}` (onglet 📋 Marqueurs)
+3. Ajouter dans `NOTES_PROF[id]` : `{copy: '...', html: '...'}` (bouton « Copier pour les élèves » + onglet 📋 Marqueurs)
 4. Ajouter dans `SENSEI_QUOTES[id]` : objet avec 16 clés (sage, dur, guerrier, bienveillant, mysterieux, stratege, veteran, fraternel, ironique, ermite, ombre, sensei_noble, rebelle, mentor, chasseur, tacticien)
 5. Ajouter dans `COURS_FLAVOR[id]` : `{intro: {16 types}, nature: {5 natures}}` (marqueurs dynamiques)
 6. Si nature-spécifique : ajouter dans `COURS_NATURE`
