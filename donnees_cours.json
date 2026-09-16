@@ -1081,8 +1081,8 @@
       "titre": "Le Pied de l'Aube",
       "cat": "pratique",
       "mod": "Taijutsu",
-      "rang": "Genin",
-      "cible": "Genin+",
+      "rang": "Genin Confirmé",
+      "cible": "Genin Confirmé+",
       "auteur": null,
       "prereq": [
         "taijutsu_theorie"
@@ -1101,7 +1101,7 @@
             "Sprint"
           ],
           "mudras": [],
-          "rang": "Genin",
+          "rang": "Genin Confirmé",
           "prereq": []
         },
         {
@@ -1115,7 +1115,7 @@
             "Alternance"
           ],
           "mudras": [],
-          "rang": "Genin",
+          "rang": "Genin Confirmé",
           "prereq": []
         },
         {
@@ -1129,7 +1129,7 @@
             "Application offensive surprise"
           ],
           "mudras": [],
-          "rang": "Genin",
+          "rang": "Genin Confirmé",
           "prereq": []
         }
       ]
