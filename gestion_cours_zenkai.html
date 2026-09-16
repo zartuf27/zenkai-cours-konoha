@@ -4064,7 +4064,7 @@ ${D.armes.map(a=>'<div class="arme-card"><div class="arme-name">🗡️ '+a.nom+
 };
 
 // ================================================================
-// NOTES DU PROF — résumé essentiel à donner aux élèves (copiable in-game)
+// NOTES POUR LES ÉLÈVES — résumé essentiel à copier et donner en jeu
 // ================================================================
 const NOTES_PROF={
 
@@ -6577,6 +6577,14 @@ function renderDetail(){
     ${givenLast?'<span style=\"font-size:0.72rem;color:var(--text-dim)\">· Dernier : '+givenLast+'</span>':''}
   </div>`;
 
+  // Bouton "Copier pour les élèves" en haut du cours
+  const npTop=NOTES_PROF[c.id];
+  if(npTop&&npTop.copy){
+    h+=`<div style="margin-bottom:14px">
+      <button class="btn btn-sm" onclick="copyNotes('${c.id}',this)" style="font-size:0.8rem">📋 Copier pour les élèves</button>
+    </div>`;
+  }
+
 
   // Interactive course
   if(INTERACTIF[c.id]){
@@ -6613,7 +6621,6 @@ function renderDetail(){
       h+=`<div class="contenu-block tab-content">${applySenseiName(CONTENU[c.id],c.id)}</div>`;
       h+=`<div style="margin-bottom:14px;display:flex;gap:8px;align-items:center;flex-wrap:wrap"><button class="btn btn-sm" onclick="openPresentation('${c.id}')" style="font-size:0.8rem">🎤 Mode Présentation</button>
         <button class="btn btn-sm" onclick="exportPDF(null,'zenkai_${c.id}')" style="font-size:0.75rem">📄 PDF</button>
-        ${np&&np.copy?`<button class="btn btn-sm" onclick="copyNotes('${c.id}',this)" style="font-size:0.8rem">📋 Copier pour in-game</button>`:''}
         <span style="font-size:0.72rem;color:var(--text-muted)">Vue plein écran · Export</span></div>`;
     }
 
@@ -6645,16 +6652,10 @@ function renderDetail(){
           mContent+=`<div class="flavor-nature" data-icon="${specIcon}" style="margin-bottom:14px">${specText}</div>`;
         }
       }
-      // 4. Notes copiables (items essentiels)
+      // 4. Contenu des notes pour les élèves (affiché dans l'onglet marqueurs)
       if(np&&np.html) mContent+=applySenseiName(np.html,c.id);
 
       h+=`<div class="contenu-block tab-content" style="border-left:3px solid var(--accent-gold)">${mContent}</div>`;
-      if(np&&np.copy){
-        h+=`<div style="margin-bottom:14px;display:flex;gap:8px;align-items:center;flex-wrap:wrap">
-          <button class="btn btn-sm" onclick="copyNotes('${c.id}',this)" style="font-size:0.8rem">📋 Copier pour in-game</button>`;
-
-        h+=`</div>`;
-      }
     }
 
     // Si uniquement oral sans marqueurs, ou inversement
@@ -7229,7 +7230,7 @@ function clipPopup(txt,label){
 function copyNotes(coursId,btn){
   const note=NOTES_PROF[coursId];
   if(!note||!note.copy)return;
-  clipCopy(applySenseiName(note.copy,coursId),'Notes',btn);
+  clipCopy(applySenseiName(note.copy,coursId),'Notes élèves',btn);
 }
 
 function copyNoteSub(coursId,subKey,btn){
@@ -8297,56 +8298,56 @@ const ONBOARD_FINAL={
 const TOUR_TIPS_TYPED={
   dur:{
     cours:'Vos cours. Pas de place pour l\'improvisation. Chaque étape est là pour être cochée.',
-    detail:'Les notes sont là pour être copiées et collées en jeu. Pas d\'interprétation, pas de variante — le texte exact. Cliquez, copiez, enseignez.',
+    detail:'Le bouton "Copier pour les élèves" est en haut. Un clic, c\'est dans le presse-papier. Pas d\'interprétation — le texte exact.',
     annonces:'Vos ordres de mission. Un clic, c\'est copié. Pas de bavardage.',
     bilan:'Votre rapport pour le Parchemin. Cliquez "Copier", collez sur Discord. Les chiffres parlent.',
     historique:'Votre dossier. Chaque cours donné est enregistré. Pas de triche possible.'
   },
   guerrier:{
     cours:'Vos champs de bataille ! Chaque cours est un combat à mener avec passion !',
-    detail:'Vos notes de combat ! Chaque fiche est une arme prête à l\'emploi — copiez-la et lancez-vous dans l\'arène !',
+    detail:'Le bouton "Copier pour les élèves" est en haut — une arme prête à l\'emploi ! Un clic et lancez-vous dans l\'arène !',
     annonces:'L\'appel au combat ! Copiez et lancez le cri de guerre !',
     bilan:'Votre rapport pour le Parchemin ! Chaque cours donné est une flamme de plus dans votre bilan !',
     historique:'Votre tableau d\'honneur ! Regardez le chemin parcouru !'
   },
   bienveillant:{
     cours:'Vos cours, préparés avec soin. Chaque élève mérite le meilleur de vous.',
-    detail:'Les notes vous aident à transmettre l\'essentiel à vos élèves. Un clic pour copier, et vous pouvez les partager en jeu avec sérénité.',
+    detail:'Le bouton "Copier pour les élèves" est en haut. Un clic, et vous pouvez partager l\'essentiel en jeu avec sérénité.',
     annonces:'Vos annonces. Un simple clic pour inviter vos élèves avec bienveillance.',
     bilan:'Votre rapport pour le Parchemin. Chaque cours donné est une graine plantée. Un clic pour le partager.',
     historique:'Votre parcours. Regardez tout ce que vous avez transmis.'
   },
   ermite:{
     cours:'Les cours ! Bon, c\'est pas le plus fun, mais c\'est là que la magie opère.',
-    detail:'Les notes ! Copiez-les en un clic et collez-les en jeu. Même pas besoin de les retaper. La technologie, c\'est beau.',
+    detail:'Le bouton "Copier pour les élèves" est en haut ! Un clic, hop, dans le presse-papier. Même pas besoin de retaper. La technologie, c\'est beau.',
     annonces:'Les convocations ! Un clic, hop, copié. Même moi j\'y arrive.',
     bilan:'Le rapport pour le Parchemin ! Un clic, copié, collé. Même pas besoin de réfléchir !',
     historique:'L\'historique ! Impressionnant hein ? Ou pas. On verra.'
   },
   ombre:{
     cours:'Dossiers de formation. Consultez, exécutez, passez au suivant.',
-    detail:'Notes opérationnelles. Copie en un clic. Collez en jeu sans laisser de trace de préparation. Efficacité maximale.',
+    detail:'Bouton "Copier pour les élèves" en haut. Un clic. Collez en jeu sans laisser de trace de préparation. Efficacité maximale.',
     annonces:'Canal de transmission. Copie sécurisée en un clic.',
     bilan:'Rapport opérationnel pour le Parchemin. Données pré-formatées. Copier, coller, terminé.',
     historique:'Logs d\'activité. Chaque opération d\'enseignement est tracée.'
   },
   ironique:{
     cours:'Vos cours. Oui, il faut vraiment les donner, pas juste les regarder.',
-    detail:'Les notes de cours. Copiez, collez en jeu, et vos élèves croiront que vous avez tout retenu de tête. Notre petit secret.',
+    detail:'Le bouton "Copier pour les élèves" est en haut. Un clic, collez en jeu, et vos élèves croiront que vous avez tout retenu de tête. Notre petit secret.',
     annonces:'Le spam officiel. Mais au moins celui-là est utile.',
     bilan:'Le rapport pour le Parchemin. Un clic au lieu de 10 minutes de rédaction. De rien.',
     historique:'La preuve que vous faites vraiment quelque chose. Utile pour les sceptiques.'
   },
   chasseur:{
     cours:'Votre territoire de chasse. Chaque cours est une piste à suivre.',
-    detail:'Les notes sont vos appâts — prêts à l\'emploi, adaptés à votre style. Un clic, et la leçon est dans votre presse-papier.',
+    detail:'Le bouton "Copier pour les élèves" est en haut — votre appât, prêt à l\'emploi. Un clic, et la leçon est dans votre presse-papier.',
     annonces:'L\'appel de la meute. Un cri, et les élèves rappliquent.',
     bilan:'Votre tableau de chasse pour le Parchemin. Un clic, et la meute sait ce que vous avez fait.',
     historique:'Vos traces dans la forêt. Chaque pas compte.'
   },
   rebelle:{
     cours:'Les cours. Ouais, même les rebelles enseignent. Surprenant, hein ?',
-    detail:'Les notes. Un clic pour copier, un clic pour coller en jeu. Pas besoin de perdre du temps à les écrire vous-même.',
+    detail:'Le bouton "Copier pour les élèves" est en haut. Un clic pour copier, un clic pour coller en jeu. Pas besoin de perdre du temps.',
     annonces:'Les appels. Ou pas. C\'est vous qui décidez comment vous les faites.',
     bilan:'Votre rapport pour le Parchemin. Un clic. Même les rebelles doivent rendre des comptes.',
     historique:'La preuve que le système peut pas vous ignorer.'
@@ -8405,7 +8406,7 @@ function startTourGuide(){
           <div class="onboard-title">C'est prêt, ${esc(s.prenom)} !</div>
           <div class="onboard-text">
             <div style="font-style:italic;color:${t.couleur};font-size:0.95rem;margin-bottom:16px;line-height:1.7">« ${finalMsg} »</div>
-            <div style="font-size:0.82rem;color:var(--text-dim)"><strong>Astuce :</strong> Cliquez sur "✅ Cours donné +1" quand vous donnez un cours.</div>
+            <div style="font-size:0.82rem;color:var(--text-dim)"><strong>Astuce :</strong> Dans chaque cours, <strong>📋 Copier pour les élèves</strong> copie les notes à donner en jeu, et <strong>✅ Cours donné +1</strong> enregistre votre activité.</div>
           </div>
           <div class="onboard-steps">${tourViews.map((_,i)=>'<div class="onboard-dot done"></div>').join('')}<div class="onboard-dot active"></div></div>
           <div class="onboard-btns">
@@ -8459,7 +8460,7 @@ function closeTourStep(){
 const SIDEBAR_TIPS={
   dashboard:{title:'Tableau de bord',text:'Vue d\'ensemble de votre progression. Votre carte sensei et vos stats.'},
   cours:{title:'Cours',text:'Tous vos cours classés par module. Cliquez pour voir le contenu, cocher les étapes et marquer "cours donné".'},
-  detail:{title:'Notes de cours',text:'Deux onglets : 🎤 Support oral pour enseigner, 📋 Marqueurs pour les notes copiables. Bouton "+1 Cours donné" ou "Proposé (0 élève)" pour l\'historique.'},
+  detail:{title:'Notes de cours',text:'<div style="background:var(--skin-bg-tint,rgba(100,100,100,0.08));border:1px solid var(--skin-primary,#888);border-radius:8px;padding:10px 12px;margin-bottom:10px;font-size:0.88rem"><strong>📋 Copier pour les élèves</strong> — en haut de chaque cours. Un clic = notes prêtes à coller en jeu.</div>Deux onglets : 🎤 <strong>Support oral</strong> (votre guide pour enseigner) et 📋 <strong>Marqueurs</strong> (vos repères personnels).<br>Boutons <strong>+1 Cours donné</strong> ou <strong>Proposé (0 élève)</strong> pour l\'historique.'},
   mudras:{title:'Mudras',text:'Référence des 12 signes de main. Cochez ceux que vous maîtrisez.'},
   natures:{title:'Natures',text:'Les 5 natures de chakra, le cycle de supériorité et les Kekkei Genkai.'},
   hierarchie:{title:'Hiérarchie',text:'Les 10 rangs ninja de Konoha.'},
