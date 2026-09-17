@@ -7,7 +7,7 @@ Ce dossier contient les cours RP Naruto du serveur **Zenkai**, village de **Kono
 - **Repo GitHub** : https://github.com/zartuf27/zenkai-cours-konoha (public)
 - **App en ligne (GitHub Pages)** : https://zartuf27.github.io/zenkai-cours-konoha/gestion_cours_zenkai.html
 - **Lore serveur** : dossier frère `C:\Users\ludov\Desktop\Zenkai-RP` (Vault Obsidian, candidatures, règles)
-- **Temporalité** : 1 semaine IRL = 1 an RP / 1 jour IRL = 1 mois IG
+- **Temporalité** : 1 semaine IRL = 1 an RP / 1 session (18h→4h) = 1 mois IG
 
 ## Déploiement & partage
 
@@ -29,7 +29,7 @@ Déploiement auto en ~1 min. Chaque prof ouvre le même lien, son profil/progres
 ## Structure du dossier
 
 ```
-gestion_cours_zenkai.html  — App principale (~8130 lignes, tout-en-un)
+gestion_cours_zenkai.html  — App principale (~8930 lignes, tout-en-un)
 sw.js                      — Service Worker PWA (cache hors-ligne)
 manifest.json              — Manifest PWA (installable sur mobile)
 icon-192.svg               — Icône PWA (symbole Konoha)
@@ -45,11 +45,11 @@ Propositions de nouveaux cours.docx — Idées de nouveaux cours
 Format tableau.docx        — Directive format annonces (Yamamoto Jakka)
 ```
 
-## Les 45 cours (par module)
+## Les 46 cours (par module)
 
 | Module | Cours |
 |--------|-------|
-| Fondamentaux | Règles d'Or, Nindo, Volonté du Feu, Histoire de Konoha |
+| Fondamentaux | Règles d'Or, Nindo, Volonté du Feu, Histoire de Konoha, Règlement Intérieur |
 | Chakra | Décomposition du Chakra, Mudras, Nature de Chakra |
 | Combat | Théorie Taijutsu, Armes Ninja, Kenjutsu — Initiation, Kenjutsu — Lame Double (Nitōryū) |
 | Taijutsu | Bourrasque de Konoha, Pied de l'Aube |
