@@ -7276,7 +7276,7 @@ function removeCoursGiven(coursId){
   }else{setNote(k,'');setNote('given_last_'+coursId,'');}
 }
 
-// 1 jour IRL = 1 mois IG. Bilan par jour IRL avec historique navigable.
+// 1 session (18h→4h) = 1 mois IG. Bilan par session avec historique navigable.
 let bilanDate=null; // null = aujourd'hui
 function bilanSetDate(dateStr){bilanDate=dateStr||null;render();}
 
@@ -7284,6 +7284,8 @@ function renderBilan(){
   const s=getSensei();
   const hist=getCoursHistory();
   const now=new Date();
+  const nat=s.nature?D.natures.find(n=>n.id===s.nature):null;
+  const typeInfo=senseiTypeInfo();
 
   // Collecter tous les jours IRL qui ont des cours
   const allDays={};
@@ -7293,18 +7295,22 @@ function renderBilan(){
     return new Date(pb[2],pb[1]-1,pb[0])-new Date(pa[2],pa[1]-1,pa[0]);
   });
 
-  // Date sélectionnée
-  const todayStr=now.toLocaleDateString('fr-FR');
+  // Date de session (18h→4h = même mois IG) : avant 5h → veille
+  const sessionNow=new Date(now);
+  if(sessionNow.getHours()<5)sessionNow.setDate(sessionNow.getDate()-1);
+  const todayStr=sessionNow.toLocaleDateString('fr-FR');
   const selDate=bilanDate||todayStr;
   const selHist=allDays[selDate]||[];
+
+  // Tri session : 18→23 puis 0→4
+  const sessionSort=(a,b)=>{const ha=parseInt(a.heure),hb=parseInt(b.heure);const sa=ha<5?ha+24:ha,sb=hb<5?hb+24:hb;return sa===sb?a.heure.localeCompare(b.heure):sa-sb};
 
   // Message Discord pour la date sélectionnée — cours uniquement, sans en-tête
   let discord='';
   if(selHist.length===0){
     discord+=`Aucun cours ce jour.\n`;
   }else{
-    // Trier par heure, puis dédupliquer : si même créneau, décaler de +15 min
-    const sorted=[...selHist].sort((a,b)=>a.heure.localeCompare(b.heure));
+    const sorted=[...selHist].sort(sessionSort);
     const usedTimes=new Set();
     sorted.forEach(e=>{
       let [hh,mm]=e.heure.split(':').map(Number);
@@ -7326,22 +7332,47 @@ function renderBilan(){
   const globalDonnes=hist.filter(e=>!e.noEleve).length;
   const globalJours=dayKeys.length;
 
+  // Modules du jour
+  const dayModules={};
+  selHist.forEach(e=>{const c=cours(e.id);if(c){if(!dayModules[c.mod])dayModules[c.mod]=0;dayModules[c.mod]++}});
+  const dayModList=Object.entries(dayModules).sort((a,b)=>b[1]-a[1]);
+
+  // Heures du jour
+  const dayHeures=selHist.map(e=>e.heure).sort();
+  const premiereHeure=dayHeures.length?dayHeures[0]:'—';
+  const derniereHeure=dayHeures.length>1?dayHeures[dayHeures.length-1]:'';
+
   let h=`<div class="page-header"><div class="page-title">${getSidebarLabel('bilan')}</div>
     <div class="page-desc">Rapport pour le Parchemin — sélectionnez un jour, copiez, collez sur Discord.</div></div>`;
 
   // ====== Stats globales rapides ======
-  h+=`<div class="stats-grid" style="margin-bottom:16px">
-    <div class="stat-card"><div class="stat-value">${globalTotal}</div><div class="stat-label">Cours total</div>
-      <div class="stat-sub">${globalDonnes} donnés · ${globalTotal-globalDonnes} proposés</div></div>
-    <div class="stat-card accent-fire"><div class="stat-value">${globalJours}</div><div class="stat-label">Jours actifs</div>
-      <div class="stat-sub">${globalJours?Math.round(globalTotal/globalJours*10)/10:0} cours/jour</div></div>
-    <div class="stat-card accent-leaf"><div class="stat-value">${dayTotal}</div><div class="stat-label">Aujourd'hui</div>
-      <div class="stat-sub">${dayDonnes} donnés${dayProposes?' · '+dayProposes+' proposés':''}</div></div>
+  h+=`<div class="stats-grid" style="margin-bottom:20px">
+    <div class="stat-card">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px">
+        <div style="width:36px;height:36px;border-radius:50%;background:var(--skin-bg-tint);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0">📚</div>
+        <div><div class="stat-value">${globalTotal}</div><div class="stat-label">Cours total</div></div>
+      </div>
+      <div class="stat-sub">${globalDonnes} donnés · ${globalTotal-globalDonnes} proposés</div>
+    </div>
+    <div class="stat-card accent-fire">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px">
+        <div style="width:36px;height:36px;border-radius:50%;background:rgba(217,122,30,0.1);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0">📅</div>
+        <div><div class="stat-value">${globalJours}</div><div class="stat-label">Jours actifs</div></div>
+      </div>
+      <div class="stat-sub">Moy. ${globalJours?Math.round(globalTotal/globalJours*10)/10:0} cours/jour</div>
+    </div>
+    <div class="stat-card accent-leaf">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px">
+        <div style="width:36px;height:36px;border-radius:50%;background:rgba(88,166,92,0.1);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0">${dayTotal?'✅':'🌙'}</div>
+        <div><div class="stat-value">${dayTotal}</div><div class="stat-label">${selDate===todayStr?'Aujourd\'hui':'Le '+selDate}</div></div>
+      </div>
+      <div class="stat-sub">${dayTotal?dayDonnes+' donnés'+(dayProposes?' · '+dayProposes+' proposés':''):'Aucun cours'}</div>
+    </div>
   </div>`;
 
   // ====== Sélecteur de jour ======
-  h+=`<div class="card" style="margin-bottom:16px;padding:14px">
-    <div style="font-size:0.72rem;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted);margin-bottom:8px">Jour (= mois IG)</div>
+  h+=`<div class="scroll-card" style="margin-bottom:20px">
+    <div class="scroll-title"><span class="scroll-brush">📅</span> Session <span class="scroll-subtitle">(18h → 4h = 1 mois IG)</span></div>
     <div style="display:flex;flex-wrap:wrap;gap:6px">
       <div class="nature-opt ${selDate===todayStr&&!bilanDate?'selected':''}" onclick="bilanSetDate(null)" style="min-width:auto;flex:0 0 auto;padding:6px 14px">
         <div class="no-check">✓</div>
@@ -7361,30 +7392,61 @@ function renderBilan(){
   });
   h+=`</div></div>`;
 
+  // ====== Résumé du jour (nouveau) ======
+  if(dayTotal>0){
+    h+=`<div class="scroll-card" style="margin-bottom:16px">
+      <div class="scroll-stamp">${nat?nat.icon:'📊'}</div>
+      <div class="scroll-title"><span class="scroll-brush">📊</span> Résumé — ${selDate}${selDate===todayStr?' (aujourd\'hui)':''}</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:10px;margin-bottom:14px">
+        <div style="text-align:center;padding:10px;background:var(--bg-input);border-radius:var(--radius);border:1px solid var(--border)">
+          <div style="font-size:1.3rem;font-weight:700;color:var(--accent-leaf)">${dayDonnes}</div>
+          <div style="font-size:0.65rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px">Donnés</div>
+        </div>
+        ${dayProposes?`<div style="text-align:center;padding:10px;background:var(--bg-input);border-radius:var(--radius);border:1px solid var(--border)">
+          <div style="font-size:1.3rem;font-weight:700;color:var(--accent-orange)">${dayProposes}</div>
+          <div style="font-size:0.65rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px">Proposés</div>
+        </div>`:''}
+        <div style="text-align:center;padding:10px;background:var(--bg-input);border-radius:var(--radius);border:1px solid var(--border)">
+          <div style="font-size:1.3rem;font-weight:700;color:var(--skin-primary)">${premiereHeure}</div>
+          <div style="font-size:0.65rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px">${derniereHeure?'Début':'Heure'}</div>
+        </div>
+        ${derniereHeure?`<div style="text-align:center;padding:10px;background:var(--bg-input);border-radius:var(--radius);border:1px solid var(--border)">
+          <div style="font-size:1.3rem;font-weight:700;color:var(--skin-primary)">${derniereHeure}</div>
+          <div style="font-size:0.65rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.5px">Fin</div>
+        </div>`:''}
+      </div>
+      ${dayModList.length?`<div style="display:flex;flex-wrap:wrap;gap:6px">${dayModList.map(([mod,cnt])=>`<span style="font-size:0.72rem;padding:3px 10px;background:var(--skin-bg-tint);border:1px solid var(--skin-primary);border-radius:12px;color:var(--skin-primary)">${modIcons[mod]||'📚'} ${mod} ×${cnt}</span>`).join('')}</div>`:''}
+    </div>`;
+  }
+
   // ====== Timeline du jour ======
   h+=`<div class="scroll-card" style="margin-bottom:16px">
-    <div class="scroll-title"><span class="scroll-brush">📅</span> ${selDate}${selDate===todayStr?' — Aujourd\'hui':''}</div>`;
+    <div class="scroll-stamp">⏱️</div>
+    <div class="scroll-title"><span class="scroll-brush">⏱️</span> Timeline${selDate===todayStr?' — aujourd\'hui':' — '+selDate}</div>`;
   if(dayTotal===0){
-    h+=`<div style="text-align:center;color:var(--text-muted);font-style:italic;padding:20px 0">Aucun cours enregistré ce jour.</div>`;
+    h+=`<div style="text-align:center;padding:30px 0">
+      <div style="font-size:2rem;margin-bottom:8px;opacity:0.4">🌙</div>
+      <div style="color:var(--text-muted);font-style:italic;font-size:0.85rem">Aucun cours enregistré ce jour.</div>
+    </div>`;
   }else{
-    const sorted=[...selHist].sort((a,b)=>a.heure.localeCompare(b.heure));
-    h+=`<div style="position:relative;padding-left:28px">`;
-    h+=`<div style="position:absolute;left:10px;top:4px;bottom:4px;width:2px;background:var(--skin-gradient);border-radius:1px;opacity:0.4"></div>`;
+    const sorted=[...selHist].sort(sessionSort);
+    h+=`<div style="position:relative;padding-left:32px">`;
+    h+=`<div style="position:absolute;left:12px;top:4px;bottom:4px;width:2px;background:var(--skin-gradient);border-radius:1px;opacity:0.4"></div>`;
     sorted.forEach((e,i)=>{
       const isNoEleve=e.noEleve;
       const dotColor=isNoEleve?'var(--accent-orange)':'var(--accent-leaf)';
       const c=cours(e.id);
       const catBadge=c?(c.cat==='theorique'?'📖':'⚔️'):'📚';
-      h+=`<div style="position:relative;margin-bottom:${i<sorted.length-1?'14px':'0'};padding:10px 14px;background:var(--bg-input);border:1px solid ${isNoEleve?'rgba(217,122,30,0.3)':'var(--border)'};border-radius:var(--radius-lg);cursor:pointer;transition:var(--transition)" onclick="openCours('${e.id}')" onmouseover="this.style.borderColor='var(--accent-gold)'" onmouseout="this.style.borderColor='${isNoEleve?'rgba(217,122,30,0.3)':'var(--border)'}'" >
-        <div style="position:absolute;left:-23px;top:14px;width:10px;height:10px;border-radius:50%;background:${dotColor};border:2px solid var(--bg-card)"></div>
+      h+=`<div style="position:relative;margin-bottom:${i<sorted.length-1?'14px':'0'};padding:12px 16px;background:var(--bg-input);border:1px solid ${isNoEleve?'rgba(217,122,30,0.25)':'var(--border)'};border-radius:var(--radius-lg);cursor:pointer;transition:var(--transition)" onclick="openCours('${e.id}')" onmouseover="this.style.borderColor='var(--skin-primary)';this.style.boxShadow='0 2px 8px rgba(0,0,0,0.06)'" onmouseout="this.style.borderColor='${isNoEleve?'rgba(217,122,30,0.25)':'var(--border)'}';this.style.boxShadow='none'">
+        <div style="position:absolute;left:-25px;top:16px;width:10px;height:10px;border-radius:50%;background:${dotColor};border:2px solid var(--bg-card);box-shadow:0 0 0 2px ${dotColor}30"></div>
         <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap">
-          <div>
+          <div style="display:flex;align-items:center;gap:8px">
+            <span style="font-size:0.82rem;font-weight:700;color:var(--skin-primary);font-family:monospace;background:var(--skin-bg-tint);padding:2px 8px;border-radius:4px;letter-spacing:0.5px">${e.heure}</span>
             <span style="font-weight:600;color:var(--text-bright);font-size:0.88rem">${catBadge} ${e.titre}</span>
-            ${isNoEleve?'<span style="font-size:0.68rem;color:var(--accent-orange);margin-left:6px;font-weight:600">aucun élève</span>':''}
           </div>
-          <span style="font-size:0.82rem;font-weight:700;color:var(--skin-primary);font-family:monospace">${e.heure}</span>
+          ${isNoEleve?'<span style="font-size:0.68rem;color:var(--accent-orange);font-weight:600;background:rgba(217,122,30,0.1);padding:2px 8px;border-radius:8px">📭 aucun élève</span>':''}
         </div>
-        ${c?`<div style="font-size:0.68rem;color:var(--text-muted);margin-top:4px">${c.mod} · ${c.rang}</div>`:''}
+        ${c?`<div style="font-size:0.68rem;color:var(--text-muted);margin-top:5px">${modIcons[c.mod]||''} ${c.mod} · ${c.rang}</div>`:''}
       </div>`;
     });
     h+=`</div>`;
@@ -7392,12 +7454,11 @@ function renderBilan(){
   h+=`</div>`;
 
   // ====== Message Discord à copier ======
-  h+=`<div class="card" style="margin-bottom:16px">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
-      <div style="font-weight:600;color:var(--text-bright)">📜 Parchemin — prêt à copier</div>
-      <div style="display:flex;gap:6px">
-        <button class="btn btn-sm btn-primary" onclick="clipCopy(document.getElementById('bilanText').getAttribute('data-raw'),'Bilan')">📋 Copier</button>
-      </div>
+  h+=`<div class="scroll-card" style="margin-bottom:16px">
+    <div class="scroll-stamp">📜</div>
+    <div class="scroll-title"><span class="scroll-brush">📜</span> Parchemin — prêt à copier</div>
+    <div style="margin-bottom:10px">
+      <button class="btn btn-sm btn-primary" onclick="clipCopy(document.getElementById('bilanText').getAttribute('data-raw'),'Bilan')">📋 Copier</button>
     </div>
     <pre id="bilanText" data-raw="${esc(discord)}" style="background:var(--bg-input);border:1px solid var(--border);border-radius:var(--radius);padding:14px;font-family:'Noto Sans JP',monospace;font-size:0.85rem;color:var(--text);white-space:pre-wrap;line-height:1.8;margin:0">${esc(discord)}</pre>
   </div>`;
@@ -7468,12 +7529,13 @@ function renderHistorique(){
   const typeInfo=senseiTypeInfo();
 
   if(allHist.length===0){
-    return`<div class="page-header"><div class="page-title">📜 Registre du Sensei</div>
+    return`<div class="page-header"><div class="page-title">${getSidebarLabel('historique')}</div>
       <div class="page-desc">Statistiques et parcours d'enseignement</div></div>
-      <div class="card" style="text-align:center;padding:60px 20px">
-        <div style="font-size:2.5rem;margin-bottom:12px">${nat?nat.icon:typeInfo.icon}</div>
-        <div style="font-size:1rem;color:var(--text-bright);font-weight:600;margin-bottom:6px">Aucun cours enregistré</div>
-        <div style="font-size:0.82rem;color:var(--text-dim)">Utilisez le bouton "✅ Cours donné +1" sur vos cours pour commencer à construire votre historique.</div>
+      <div class="scroll-card" style="text-align:center;padding:60px 20px">
+        <div style="font-size:3rem;margin-bottom:16px;opacity:0.5">${nat?nat.icon:typeInfo.icon}</div>
+        <div style="font-size:1.1rem;color:var(--text-bright);font-weight:600;margin-bottom:8px">Aucun cours enregistré</div>
+        <div style="font-size:0.85rem;color:var(--text-dim);max-width:400px;margin:0 auto">Utilisez le bouton <strong>✅ Cours donné +1</strong> sur vos cours pour commencer à construire votre historique.</div>
+        <button class="btn btn-primary" onclick="nav('cours')" style="margin-top:20px">📚 Voir les cours</button>
       </div>`;
   }
 
@@ -7520,18 +7582,38 @@ function renderHistorique(){
   const premier=new Date(dates[0]).toLocaleDateString('fr-FR');
   const dernier=new Date(dates[dates.length-1]).toLocaleDateString('fr-FR');
 
+  // ====== CALCULS AVANCÉS (faits marquants) ======
+  // Cours unique enseigné
+  const uniqueIds=new Set(hist.map(e=>e.id));
+  const nbUniques=uniqueIds.size;
+  // Cours visibles pour ce sensei
+  const visibleCours=D.cours.filter(c=>coursVisibleForSensei(c));
+  const nbVisible=visibleCours.length;
+  const couverture=nbVisible?Math.round(nbUniques/nbVisible*100):0;
+  // Cours jamais enseignés
+  const nonEnseignes=visibleCours.filter(c=>!uniqueIds.has(c.id));
+  // Heure préférée
+  const heureEntries=Object.entries(parHeure).sort((a,b)=>b[1]-a[1]);
+  const heurePref=heureEntries.length?heureEntries[0][0]+'h':'—';
+  // Jour le plus actif
+  const jourEntries=Object.entries(parJour).sort((a,b)=>b[1].length-a[1].length);
+  const jourMax=jourEntries.length?{date:jourEntries[0][0],count:jourEntries[0][1].length}:{date:'—',count:0};
+  // Module préféré
+  const modPref=modEntries.length?modEntries[0][0]:'—';
+  const modPrefIcon=modEntries.length?modIcons[modPref]||'📚':'';
+
   // Couleurs pour camemberts
   const pieColors=['var(--skin-primary)','var(--skin-secondary)','var(--accent-leaf)','var(--accent-orange)','var(--konoha-red)','var(--suiton)','var(--futon)','var(--doton)'];
   const getPC=(i)=>pieColors[i%pieColors.length];
 
   // ====== RENDU ======
-  let h=`<div class="page-header"><div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px"><div class="page-title">📜 Registre du Sensei</div>
+  let h=`<div class="page-header"><div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px"><div class="page-title">${getSidebarLabel('historique')}</div>
     <button class="btn btn-sm" onclick="exportPDF(null,'zenkai_historique')" style="font-size:0.75rem">📄 Exporter en PDF</button></div>
     <div class="page-desc">Parcours d'enseignement de ${esc(senseiFullName())} — ${filterLabel}</div></div>`;
 
   // ====== SÉLECTEUR GLOBAL / JOUR ======
-  h+=`<div class="card" style="margin-bottom:20px;padding:14px">
-    <div style="font-size:0.72rem;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted);margin-bottom:8px">Période</div>
+  h+=`<div class="scroll-card" style="margin-bottom:20px">
+    <div class="scroll-title"><span class="scroll-brush">📅</span> Période</div>
     <div style="display:flex;flex-wrap:wrap;gap:6px">
       <div class="nature-opt ${isGlobal?'selected':''}" onclick="setHistoFilter(null)" style="min-width:auto;flex:0 0 auto;padding:6px 14px">
         <div class="no-check">✓</div>
@@ -7540,10 +7622,12 @@ function renderHistorique(){
       </div>`;
   dayKeys.forEach(d=>{
     const sel=histoFilter===d?'selected':'';
+    const dCount=allDays[d].length;
+    const dDonnes=allDays[d].filter(e=>!e.noEleve).length;
     h+=`<div class="nature-opt ${sel}" onclick="setHistoFilter('${d}')" style="min-width:auto;flex:0 0 auto;padding:6px 14px">
       <div class="no-check">✓</div>
       <div class="no-name" style="font-size:0.78rem">${d}</div>
-      <div class="no-element">${allDays[d].length} cours</div>
+      <div class="no-element">${dCount} cours${dDonnes<dCount?' · '+dDonnes+' ✓':''}</div>
     </div>`;
   });
   h+=`</div></div>`;
@@ -7562,15 +7646,101 @@ function renderHistorique(){
 
   // ====== STATS ======
   h+=`<div class="stats-grid" style="margin-bottom:24px">
-    <div class="stat-card"><div class="stat-value">${totalCours}</div><div class="stat-label">Cours${isGlobal?' total':''}</div>
-      <div class="stat-sub">${totalDonnes} donnés · ${totalProposes} proposés</div></div>
-    ${isGlobal?`<div class="stat-card accent-fire"><div class="stat-value">${nbJours}</div><div class="stat-label">Jours d'activité</div>
-      <div class="stat-sub">Moyenne ${moyParJour} cours/jour</div></div>`:''}
-    <div class="stat-card accent-leaf"><div class="stat-value">${tauxPresence}%</div><div class="stat-label">Taux de présence</div>
-      <div class="pbar pbar-lg" style="margin-top:8px"><div class="pbar-fill${tauxPresence===100?' complete':''}" style="width:${tauxPresence}%"></div></div></div>
-    <div class="stat-card accent-orange"><div class="stat-value">${nbTheo}<span style="font-size:0.9rem;color:var(--text-dim)">/${nbPrat}</span></div><div class="stat-label">Théo / Prat</div>
-      <div class="stat-sub">${totalCours?Math.round(nbTheo/totalCours*100):0}% · ${totalCours?Math.round(nbPrat/totalCours*100):0}%</div></div>
+    <div class="stat-card">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px">
+        <div style="width:36px;height:36px;border-radius:50%;background:var(--skin-bg-tint);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0">📚</div>
+        <div><div class="stat-value">${totalCours}</div><div class="stat-label">Cours${isGlobal?' total':''}</div></div>
+      </div>
+      <div class="stat-sub">${totalDonnes} donnés · ${totalProposes} proposés</div>
+    </div>
+    ${isGlobal?`<div class="stat-card accent-fire">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px">
+        <div style="width:36px;height:36px;border-radius:50%;background:rgba(217,122,30,0.1);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0">📅</div>
+        <div><div class="stat-value">${nbJours}</div><div class="stat-label">Jours d'activité</div></div>
+      </div>
+      <div class="stat-sub">Moyenne ${moyParJour} cours/jour</div>
+    </div>`:''}
+    <div class="stat-card accent-leaf">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px">
+        <div style="width:36px;height:36px;border-radius:50%;background:rgba(88,166,92,0.1);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0">✅</div>
+        <div><div class="stat-value">${tauxPresence}%</div><div class="stat-label">Taux de présence</div></div>
+      </div>
+      <div class="pbar pbar-lg" style="margin-top:4px"><div class="pbar-fill${tauxPresence===100?' complete':''}" style="width:${tauxPresence}%"></div></div>
+    </div>
+    <div class="stat-card accent-orange">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:4px">
+        <div style="width:36px;height:36px;border-radius:50%;background:rgba(217,122,30,0.1);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0">📖</div>
+        <div><div class="stat-value">${nbTheo}<span style="font-size:0.9rem;color:var(--text-dim)">/${nbPrat}</span></div><div class="stat-label">Théo / Prat</div></div>
+      </div>
+      <div class="stat-sub">${totalCours?Math.round(nbTheo/totalCours*100):0}% théorique · ${totalCours?Math.round(nbPrat/totalCours*100):0}% pratique</div>
+    </div>
   </div>`;
+
+  // ====== FAITS MARQUANTS (nouveau) ======
+  h+=`<div class="scroll-card" style="margin-bottom:20px">
+    <div class="scroll-stamp">${typeInfo.icon}</div>
+    <div class="scroll-title"><span class="scroll-brush">⭐</span> Faits marquants</div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px">
+      <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--bg-input);border-radius:var(--radius);border:1px solid var(--border)">
+        <span style="font-size:1.3rem">🏆</span>
+        <div>
+          <div style="font-size:0.82rem;font-weight:600;color:var(--text-bright)">${coursEntries.length?coursEntries[0][1].titre:'—'}</div>
+          <div style="font-size:0.65rem;color:var(--text-muted)">Cours le + enseigné${coursEntries.length?' (×'+coursEntries[0][1].count+')':''}</div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--bg-input);border-radius:var(--radius);border:1px solid var(--border)">
+        <span style="font-size:1.3rem">⏰</span>
+        <div>
+          <div style="font-size:0.82rem;font-weight:600;color:var(--text-bright)">${heurePref}</div>
+          <div style="font-size:0.65rem;color:var(--text-muted)">Créneau préféré${heureEntries.length?' ('+heureEntries[0][1]+' cours)':''}</div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--bg-input);border-radius:var(--radius);border:1px solid var(--border)">
+        <span style="font-size:1.3rem">🔥</span>
+        <div>
+          <div style="font-size:0.82rem;font-weight:600;color:var(--text-bright)">${jourMax.date}</div>
+          <div style="font-size:0.65rem;color:var(--text-muted)">Jour le + actif (${jourMax.count} cours)</div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--bg-input);border-radius:var(--radius);border:1px solid var(--border)">
+        <span style="font-size:1.3rem">${modPrefIcon||'📚'}</span>
+        <div>
+          <div style="font-size:0.82rem;font-weight:600;color:var(--text-bright)">${modPref}</div>
+          <div style="font-size:0.65rem;color:var(--text-muted)">Module préféré${modEntries.length?' ('+modEntries[0][1]+' cours)':''}</div>
+        </div>
+      </div>
+    </div>
+  </div>`;
+
+  // ====== COUVERTURE DES COURS (nouveau) ======
+  if(isGlobal){
+    h+=`<div class="scroll-card" style="margin-bottom:20px">
+      <div class="scroll-stamp">🗺️</div>
+      <div class="scroll-title"><span class="scroll-brush">🗺️</span> Couverture des cours <span class="scroll-subtitle">${nbUniques}/${nbVisible} cours enseignés au moins 1 fois</span></div>
+      <div class="pbar pbar-lg" style="margin-bottom:14px"><div class="pbar-fill${couverture===100?' complete':''}" style="width:${couverture}%"></div></div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+        <span style="font-size:0.78rem;color:var(--text);font-weight:600">${couverture}% de couverture</span>
+        <span style="font-size:0.72rem;color:var(--text-dim)">${nonEnseignes.length} cours restant${nonEnseignes.length>1?'s':''}</span>
+      </div>`;
+    if(nonEnseignes.length>0&&nonEnseignes.length<=20){
+      h+=`<div style="display:flex;flex-wrap:wrap;gap:6px">`;
+      nonEnseignes.forEach(c=>{
+        const icon=modIcons[c.mod]||'📚';
+        h+=`<span style="font-size:0.7rem;padding:3px 10px;background:var(--bg-input);border:1px dashed var(--border);border-radius:8px;color:var(--text-muted);cursor:pointer;transition:var(--transition)" onclick="openCours('${c.id}')" onmouseover="this.style.borderColor='var(--skin-primary)';this.style.color='var(--text)'" onmouseout="this.style.borderColor='var(--border)';this.style.color='var(--text-muted)'">${icon} ${c.titre}</span>`;
+      });
+      h+=`</div>`;
+    }else if(nonEnseignes.length>20){
+      const first12=nonEnseignes.slice(0,12);
+      h+=`<div style="display:flex;flex-wrap:wrap;gap:6px">`;
+      first12.forEach(c=>{
+        const icon=modIcons[c.mod]||'📚';
+        h+=`<span style="font-size:0.7rem;padding:3px 10px;background:var(--bg-input);border:1px dashed var(--border);border-radius:8px;color:var(--text-muted)">${icon} ${c.titre}</span>`;
+      });
+      h+=`<span style="font-size:0.7rem;padding:3px 10px;color:var(--text-dim);font-style:italic">+ ${nonEnseignes.length-12} autres…</span>`;
+      h+=`</div>`;
+    }
+    h+=`</div>`;
+  }
 
   // ====== CAMEMBERTS ======
   h+=`<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px;margin-bottom:20px">`;
@@ -7613,7 +7783,7 @@ function renderHistorique(){
   if(isGlobal&&jourKeys2.length>1){
     h+=`<div class="scroll-card">
       <div class="scroll-stamp">📅</div>
-      <div class="scroll-title"><span class="scroll-brush">📅</span> Activité par jour <span class="scroll-subtitle">(1 jour IRL = 1 mois IG)</span></div>`;
+      <div class="scroll-title"><span class="scroll-brush">📅</span> Activité par session <span class="scroll-subtitle">(18h → 4h = 1 mois IG)</span></div>`;
     const joursSorted=jourKeys2.sort((a,b)=>{const pa=a.split('/'),pb=b.split('/');return new Date(pa[2],pa[1]-1,pa[0])-new Date(pb[2],pb[1]-1,pb[0])});
     const maxJour=Math.max(...joursSorted.map(d=>parJour[d].length));
     joursSorted.forEach(d=>{
@@ -7654,14 +7824,16 @@ function renderHistorique(){
     <div class="scroll-stamp">⏰</div>
     <div class="scroll-title"><span class="scroll-brush">⏰</span> Heures d'enseignement</div>
     <div style="display:flex;align-items:flex-end;gap:3px;height:120px;padding:0 4px">`;
-  for(let hr=7;hr<=23;hr++){
+  const heureRange=[18,19,20,21,22,23,0,1,2,3,4];
+  for(const hr of heureRange){
     const k=String(hr).padStart(2,'0');
     const val=parHeure[k]||0;
     const pct=maxHeure?Math.round(val/maxHeure*100):0;
+    const isMax=heureEntries.length&&heureEntries[0][0]===k;
     h+=`<div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:2px;height:100%;justify-content:flex-end" title="${k}h : ${val} cours">
-      <span style="font-size:0.58rem;color:var(--text-dim);font-weight:600">${val||''}</span>
-      <div style="width:100%;height:${pct}%;min-height:${val?2:0}px;background:${val?'var(--skin-gradient)':'transparent'};border-radius:3px 3px 0 0;transition:height 0.3s"></div>
-      <span style="font-size:0.55rem;color:var(--text-muted)">${k}h</span>
+      <span style="font-size:0.58rem;color:${isMax?'var(--skin-primary)':'var(--text-dim)'};font-weight:${isMax?'700':'600'}">${val||''}</span>
+      <div style="width:100%;height:${pct}%;min-height:${val?2:0}px;background:${val?'var(--skin-gradient)':'transparent'};border-radius:3px 3px 0 0;transition:height 0.3s;${isMax?'box-shadow:0 0 8px var(--skin-primary)30':''}"></div>
+      <span style="font-size:0.55rem;color:${isMax?'var(--skin-primary)':'var(--text-muted)'};font-weight:${isMax?'600':'400'}">${k}h</span>
     </div>`;
   }
   h+=`</div></div>`;
@@ -7669,13 +7841,13 @@ function renderHistorique(){
   // ====== CLASSEMENT ======
   h+=`<div class="scroll-card">
     <div class="scroll-stamp">🏆</div>
-    <div class="scroll-title"><span class="scroll-brush">🏆</span> Classement des cours</div>`;
+    <div class="scroll-title"><span class="scroll-brush">🏆</span> Classement des cours <span class="scroll-subtitle">${coursEntries.length} cours différents</span></div>`;
   coursEntries.forEach(([id,data],i)=>{
     const c=cours(id);
     const pct=maxCours?Math.round(data.count/maxCours*100):0;
     const icon=c?modIcons[c.mod]||'📚':'📚';
     const medal=i===0?'🥇':i===1?'🥈':i===2?'🥉':'';
-    h+=`<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;cursor:pointer" onclick="openCours('${id}')">
+    h+=`<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;cursor:pointer;padding:4px 6px;border-radius:var(--radius);transition:var(--transition)" onclick="openCours('${id}')" onmouseover="this.style.background='var(--bg-input)'" onmouseout="this.style.background='transparent'">
       <span style="font-size:0.85rem;width:24px;text-align:center">${medal||`<span style="font-size:0.7rem;color:var(--text-muted)">${i+1}</span>`}</span>
       <span style="font-size:0.78rem;flex-shrink:0;width:16px">${icon}</span>
       <span style="font-size:0.8rem;color:var(--text);flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${data.titre}</span>
@@ -7691,7 +7863,8 @@ function renderHistorique(){
   // ====== JOURNAL ======
   h+=`<div class="scroll-card">
     <div class="scroll-stamp">📋</div>
-    <div class="scroll-title"><span class="scroll-brush">📋</span> Journal${isGlobal?' complet':' — '+histoFilter}</div>
+    <div class="scroll-title"><span class="scroll-brush">📋</span> Journal${isGlobal?' complet':' — '+histoFilter} <span class="scroll-subtitle">${hist.length} entrées</span></div>
+    <div style="overflow-x:auto">
     <table style="width:100%;border-collapse:collapse;font-size:0.78rem">
       <tr style="border-bottom:2px solid var(--border);color:var(--text-muted);font-size:0.65rem;text-transform:uppercase;letter-spacing:1px">
         ${isGlobal?'<td style="padding:8px 6px">Date</td>':''}<td style="padding:8px 6px">Heure</td><td style="padding:8px 6px">Cours</td><td style="padding:8px 6px">Module</td><td style="padding:8px 6px;text-align:center">Statut</td></tr>`;
@@ -7699,15 +7872,15 @@ function renderHistorique(){
     const c=cours(e.id);
     const mod=c?c.mod:'—';
     const icon=c?modIcons[mod]||'':'';
-    h+=`<tr style="border-bottom:1px solid var(--border);${i%2?'background:var(--bg-card-alt)':''}">
-      ${isGlobal?`<td style="padding:6px;color:var(--text-dim)">${e.date}</td>`:''}
-      <td style="padding:6px;color:var(--text)">${e.heure}</td>
-      <td style="padding:6px;color:var(--text-bright);cursor:pointer" onclick="openCours('${e.id}')">${e.titre}</td>
-      <td style="padding:6px;color:var(--text-dim)">${icon} ${mod}</td>
+    h+=`<tr style="border-bottom:1px solid var(--border);transition:background 0.15s;cursor:pointer" onclick="openCours('${e.id}')" onmouseover="this.style.background='var(--bg-input)'" onmouseout="this.style.background='transparent'">
+      ${isGlobal?`<td style="padding:6px;color:var(--text-dim);white-space:nowrap">${e.date}</td>`:''}
+      <td style="padding:6px;color:var(--text);font-family:monospace;font-size:0.75rem">${e.heure}</td>
+      <td style="padding:6px;color:var(--text-bright);font-weight:500">${e.titre}</td>
+      <td style="padding:6px;color:var(--text-dim);white-space:nowrap">${icon} ${mod}</td>
       <td style="padding:6px;text-align:center">${e.noEleve?'<span style="color:var(--accent-orange);font-size:0.7rem">📭 0 élève</span>':'<span style="color:var(--accent-leaf);font-size:0.7rem">✅ Donné</span>'}</td>
     </tr>`;
   });
-  h+=`</table></div>`;
+  h+=`</table></div></div>`;
 
   return h;
 }
