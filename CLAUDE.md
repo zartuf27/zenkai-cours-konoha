@@ -238,9 +238,21 @@ Le **Parchemin** = le canal Discord de l'Académie où les senseis postent leur 
 - 3 stat cards (total global, jours actifs, cours du jour)
 - Sélecteur de jour IRL (= mois IG) avec compteur donnés/proposés
 - Timeline visuelle du jour (ligne skin, dots vert/orange, cliquable)
-- Parchemin Discord : cours + heure uniquement, déduplique les heures (+15min si collision)
+- Parchemin Discord — 2 modes (toggle `bilanMode`) :
+  - **V1 — Résumé** : `• Titre — HH:MM`, déduplique les heures (+15min si collision)
+  - **V2 — Compte rendu** : formulaire par cours avec champs éditables (Organisateur pré-rempli, Intervenant, Nb d'élèves). Numérotation séquentielle globale, type de cours auto (titre + nature/spec/module). Bouton « Copier le compte rendu » génère le format Discord officiel :
+    ```
+    Cours 13
+    Organisateur du cours : NomSensei
+    Intervenant : @pseudo1 @pseudo2
+    Type de cours : Rayon Instantané - Raiton
+    nombre d'élève : 3
+    ```
 - Bouton 🗑️ Supprimer ce jour (supprime uniquement le jour sélectionné, pas l'historique global)
 - Lien vers la page Historique
+
+Variables : `bilanDate` (jour sélectionné), `bilanMode` ('v1'/'v2'), `bilanV2Data` (champs saisis par ts).
+Fonctions : `bilanSetMode()`, `bilanV2Set()`, `buildDiscordV2()`, `copyBilanV2()`, `getCoursCategoryLabel()`.
 
 ### Page Historique (📜)
 
