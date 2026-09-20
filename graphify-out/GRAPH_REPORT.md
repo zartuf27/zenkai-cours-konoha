@@ -1,44 +1,39 @@
 # Graph Report - ZENKAI TEEEST  (2026-09-20)
 
 ## Corpus Check
-- 44 files · ~161,707 words
+- 57 files · ~164,867 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 1 file(s) not represented in the graph (top: (none) 1)
 
 ## Summary
 - 531 nodes · 801 edges · 24 communities (21 shown, 2 thin omitted)
 - Extraction: 84% EXTRACTED · 16% INFERRED · 0% AMBIGUOUS · INFERRED: 127 edges (avg confidence: 0.86)
-- Token cost: 0 input · 0 output
-
-## Graph Freshness
-- Built from commit: `740c885a`
-- Run `git rev-parse HEAD` and compare to check if the graph is stale.
-- Run `graphify update .` after code changes (no API cost).
+- Token cost: 391,000 input · 32,000 output
 
 ## Community Hubs (Navigation)
-- Moteur de rendu et personnalisation
-- Voie de la Lame Simple
-- Cours — Information & Communication en mission
-- Cours du Sensei Renard
-- Propositions de nouveaux cours
 - Vérificateur de l'app
+- Propositions de nouveaux cours
+- Les Règles d'Or du Ninja
+- Cours La Traque
+- Cours du Sensei Renard
+- Histoire du Village de Konoha
+- Données des cours et personnalisation
+- Manifest PWA
+- Guide multi-sensei et déploiement
+- Architecture du HTML
+- Skill projet — ajouter un cours
+- Catalogue des armes ninja
+- Service Worker PWA
 - Techniques Raiton et Mudras
 - package.json
 - Documentation du projet
-- Histoire du Village de Konoha
-- Manifest PWA
-- Données des cours et personnalisation
-- Guide multi-sensei et déploiement
-- Architecture du HTML
-- Les Règles d'Or du Ninja
-- Skill projet — ajouter un cours
-- Catalogue des armes ninja
-- Logs de sessions Discord
-- Techniques Taijutsu
 - Cours de terrain et enquête
+- Logs de sessions Discord
 - Directive Yamamoto Jakka
-- Cours La Traque
-- Service Worker PWA
+- Voie de la Lame Simple
+- Cours en attente de validation
+- Moteur de rendu et personnalisation
+- Techniques Taijutsu
 
 ## God Nodes (most connected - your core abstractions)
 1. `Architecture du HTML` - 23 edges
@@ -87,65 +82,41 @@
 
 ## Communities (24 total, 2 thin omitted)
 
-### Community 0 - "Moteur de rendu et personnalisation"
-Cohesion: 0.06
-Nodes (67): addCoursGiven(), applySenseiName(), applySkin(), bilanSetMode(), bilanV2Set(), Filtrage par voie de la lame (typeLame), buildDiscordV2(), buildSidebar() (+59 more)
-
-### Community 1 - "Voie de la Lame Simple"
-Cohesion: 0.06
-Nodes (54): Académie Militaire de Konoha, Bokken, Le Bushidō, Chūgi — La Loyauté, Cible : bambou ou mannequin, Continuité du mouvement (ne jamais interrompre son attaque), Critères de sélection pour les recommandations forgerons, Cycle Zanshin → Kimi (+46 more)
-
-### Community 2 - "Cours — Information & Communication en mission"
-Cohesion: 0.07
-Nodes (54): Module Tactique, Badge ⚠ Non validé, Bandeau d'avertissement en page détail, Cours — La Bourrasque Ardente (Taijutsu), Bruit vs signal — éviter de noyer l'essentiel, Cours — La Chasse au Sensei, Communiquer sous pression, Confirmer la réception — une info non reçue n'a pas été transmise (+46 more)
-
-### Community 3 - "Cours du Sensei Renard"
-Cohesion: 0.09
-Nodes (26): 12 Mudras (Hand Signs), 5 Clans Fondateurs (Senju, Uchiha, Hyuga, Nara, Akimichi), 8 Armes Ninja (Kunai, Shuriken, Katana, Senbon, Makibishi, Clochettes, Bombe fumigène, Parchemin explosif), 5 Chakra Natures (Katon, Suiton, Raiton, Doton, Futon), Crise de Succession (post-Tobirama), Cycle des 5 Natures (Katon > Futon > Raiton > Doton > Suiton), Fondation de Konoha (Hashirama & Madara), Jinton – Kekkei Tota (Katon + Futon + Doton) (+18 more)
-
-### Community 4 - "Propositions de nouveaux cours"
-Cohesion: 0.14
-Nodes (25): Compléments aux cours existants, Cours décalés, Cours originaux, Genjutsu, Infiltration (cours existant), La Traque (cours existant), La chasse au sensei, Le conseil de guerre — Simulation stratégique (+17 more)
-
 ### Community 5 - "Vérificateur de l'app"
 Cohesion: 0.11
 Nodes (14): externes, HOOK, HRP, HTML, JSONF, NATURES, NO_SMOKE, notes (+6 more)
 
-### Community 6 - "Techniques Raiton et Mudras"
-Cohesion: 0.11
-Nodes (15): Bourrasque Ardente — Technique taijutsu (coup de pied rotatif 360), Mudras — 12 signes de main pour modeler le chakra, Raiton — Nature de chakra Foudre (4 techniques ninjutsu), Yumi Amano — Coordinatrice cours, OP des posts Discord, Aide pour construire les cours — Mécaniques pédagogiques (Yumi Amano), 1. Rayon Instantané, 2. Boule Fulgurante, 3. Ruée Foudroyante (+7 more)
+### Community 4 - "Propositions de nouveaux cours"
+Cohesion: 0.14
+Nodes (25): Cours Infiltration et récolte d'information — Exercice pratique (Akio Fukuro), Course d'orientation et analyse du terrain (Akio Fukuro), Infiltration (cours existant), La chasse au sensei, Le conseil de guerre — Simulation stratégique, Contre-espionnage — Protéger les secrets du village, Le déguisement ultime — Infiltration en civil absurde, Formations d'équipe et rôles tactiques (+17 more)
 
-### Community 7 - "package.json"
-Cohesion: 0.22
-Nodes (8): description, devDependencies, jsdom, name, private, scripts, check, jsdom
+### Community 17 - "Les Règles d'Or du Ninja"
+Cohesion: 0.07
+Nodes (28): 1. Loyauté envers le village, 2. Respect de la hiérarchie, 3. Priorité à la mission, 4. Protection des habitants, 5. Secret et discrétion, 6. Respect entre shinobi, 7. Maîtrise de soi, 8. Honneur et responsabilité (+20 more)
 
-### Community 8 - "Documentation du projet"
-Cohesion: 0.15
-Nodes (12): CLAUDE.md — Cours RP Zenkai (Konoha), Cohérence lore Zenkai-RP, Contexte du projet, Déploiement & partage, Fichiers .docx, Les 45 cours (par module), Les documents sont pour le professeur, PAS pour les élèves, Règles importantes (+4 more)
+### Community 3 - "Cours du Sensei Renard"
+Cohesion: 0.09
+Nodes (26): Natures de Chakra – Analyse et Combat, Armes Ninja Renard (HTML), Histoire de Konoha Renard (HTML), Volonté du Feu Renard (HTML), Les Mudras Renard (HTML), Nature de Chakra Renard (HTML), Traité Diplomatique Renard (HTML), Sensei Renard Teaching Style (Forest Metaphors) (+18 more)
 
 ### Community 9 - "Histoire du Village de Konoha"
 Cohesion: 0.07
-Nodes (33): Les 8 Règles d'Or du Ninja, Clan Akimichi, Clan Hyuga, Clan Nara, Clan Senju, Clan Uchiha, Hashirama Senju (Premier Hokage), Madara Uchiha (+25 more)
+Nodes (33): 1. Le clan Senju — Architectes du village, 2. Le clan Uchiha — Pilier du village, 3. Le clan Hyūga — Sentinelles silencieuses, 4. Le clan Nara — Cerveaux et archives, 5. Le clan Akimichi — Force logistique et cohésion sociale, Histoire du Village de Konoha, I. Avant Konoha : un Pays du Feu en guerre, II. Hashirama, Madara et la fondation de Konoha (+25 more)
+
+### Community 11 - "Données des cours et personnalisation"
+Cohesion: 0.06
+Nodes (49): Compteur « Cours donné » (+1 / Proposé / −1), Mode Présentation (overlay plein écran), Kenjutsu — Lame Simple (Zanshin / Kimi), const CONTENU — guides oraux par cours, const COURS_FLAVOR — intros personnalité + anecdotes nature, const COURS_LAME — mapping cours → voie de la lame, const COURS_NATURE — mapping cours → nature, const COURS_SPEC — mapping cours → spécialisation combat (+41 more)
 
 ### Community 10 - "Manifest PWA"
 Cohesion: 0.15
 Nodes (12): background_color, categories, description, display, icons, lang, name, orientation (+4 more)
 
-### Community 11 - "Données des cours et personnalisation"
-Cohesion: 0.06
-Nodes (49): Bouton « Copier pour les élèves », Compteur « Cours donné » (+1 / Proposé / −1), const CONTENU — guides oraux par cours, const COURS_FLAVOR — intros personnalité + anecdotes nature, const COURS_LAME — mapping cours → voie de la lame, const COURS_NATURE — mapping cours → nature, const COURS_SPEC — mapping cours → spécialisation combat, const D — objet de données principal (+41 more)
-
 ### Community 12 - "Guide multi-sensei et déploiement"
 Cohesion: 0.17
-Nodes (11): Déploiement GitHub Pages — git push auto-deploy, Ce que chaque sensei doit faire (1 seule fois), Ce qui est partagé vs ce qui est personnel, Comment mettre à jour chez tout le monde, FAQ, Guide de partage — Support de cours Zenkai, Le lien à partager, Résumé en 3 lignes (+3 more)
+Nodes (11): Ce que chaque sensei doit faire (1 seule fois), Ce qui est partagé vs ce qui est personnel, Comment mettre à jour chez tout le monde, FAQ, Guide de partage — Support de cours Zenkai, Le lien à partager, Résumé en 3 lignes, Étape 1 — Modifie le fichier sur ton PC (+3 more)
 
 ### Community 14 - "Architecture du HTML"
 Cohesion: 0.05
-Nodes (51): Adaptation du contenu par personnalité + nature + spécialisation, Architecture du HTML, Clé S.c — checkboxes de progression, Clé S.sensei — champs du profil sensei, const ONBOARD_FINAL — mots de fin du tuto par type, const SENSEI_TYPES — 16 types (icône, nom, couleur), const SIDEBAR_LABELS — labels sidebar par type (16 × 10), const TOUR_TIPS_TYPED — descriptions d'onglets par type (+43 more)
-
-### Community 17 - "Les Règles d'Or du Ninja"
-Cohesion: 0.07
-Nodes (28): Dilemme moral — Mission vs protection du village, Hiérarchie Ninja de Konoha (10 rangs), Nindo — Le chemin du ninja, philosophie personnelle, Eraku Morikawa — Sensei auteur des propositions de cours, Gromlof — Sensei auteur simulation de mission, Hishiba Zakuto — Mentor d'Eraku Morikawa (décédé), 1. Loyauté envers le village, 2. Respect de la hiérarchie (+20 more)
+Nodes (51): Adaptation du contenu par personnalité + nature + spécialisation, Architecture du HTML, Cours Kenjutsu (structure modulaire par type de lame), Filtrage des cours par nature, Filtrage des cours par spécialisation combat, Fonctions clés, Graphify — Mémoire structurelle, Icônes (+43 more)
 
 ### Community 18 - "Skill projet — ajouter un cours"
 Cohesion: 0.20
@@ -155,28 +126,52 @@ Nodes (9): 1. Lire la source et décider du cadrage, 2. Les composants à écrir
 Cohesion: 0.25
 Nodes (7): BOMBE FUMIGÈNE, CLOCHETTES, KUNAI, MAKIBISHI, PARCHEMIN EXPLOSIF, SENBON, SHURIKEN
 
+### Community 6 - "Techniques Raiton et Mudras"
+Cohesion: 0.11
+Nodes (15): 1. Rayon Instantané, 2. Boule Fulgurante, 3. Ruée Foudroyante, 4. Zone Fulgurante, 5. Bourrasque Ardente, 6. Pied de l'Aube, ANNEXES — Captures du jeu, RÉCAPITULATIF — TOUTES LES TECHNIQUES (+7 more)
+
+### Community 7 - "package.json"
+Cohesion: 0.22
+Nodes (8): description, devDependencies, jsdom, name, private, scripts, check, jsdom
+
+### Community 8 - "Documentation du projet"
+Cohesion: 0.15
+Nodes (12): CLAUDE.md — Cours RP Zenkai (Konoha), Cohérence lore Zenkai-RP, Contexte du projet, Déploiement & partage, Fichiers .docx, Les 45 cours (par module), Les documents sont pour le professeur, PAS pour les élèves, Règles importantes (+4 more)
+
+### Community 26 - "Cours de terrain et enquête"
+Cohesion: 0.60
+Nodes (5): Cours L'Enquête, Pays du Feu – Orientation et Visite, Simulation d'Escorte, Pays du Feu (géographie), Simulation Capture de Drapeau
+
 ### Community 22 - "Logs de sessions Discord"
 Cohesion: 0.48
-Nodes (7): Discord — Format de log de cours, Évaluation pour passer Professeur Confirmé, Discord — Session de cours Shin Tobira (cours 30-37), Discord — Session de cours Yuki ORITO (cours 13-18), Keisuke Kuronami, Shin Tobira, Yuki ORITO
+Nodes (7): Discord — Session de cours Shin Tobira (cours 30-37), Discord — Session de cours Yuki ORITO (cours 13-18), Discord — Format de log de cours, Évaluation pour passer Professeur Confirmé, Keisuke Kuronami, Shin Tobira, Yuki ORITO
+
+### Community 30 - "Directive Yamamoto Jakka"
+Cohesion: 0.67
+Nodes (3): Format tableau - Directive Yamamoto Jakka, Announcement Format Directive, Yamamoto Jakka - Responsable Professeur
+
+### Community 1 - "Voie de la Lame Simple"
+Cohesion: 0.06
+Nodes (54): Voie de la Lame Simple, Partie 1 — Initiation au Kenjutsu à la Lame Simple, Partie 2 — Cours pratique : Lame Pénétrante [Rang D], Partie 3 — Cours pratique : Ruée Acérée [Rang C], Académie Militaire de Konoha, Bokken, Chūgi — La Loyauté, Cible : bambou ou mannequin (+46 more)
+
+### Community 2 - "Cours en attente de validation"
+Cohesion: 0.07
+Nodes (54): Cours — Information & Communication en mission, Badge ⚠ Non validé, Bandeau d'avertissement en page détail, CONTENU — guides oraux HTML par cours, COURS_FLAVOR — intros par type + anecdotes nature, COURS_LAME — mapping cours → voie de la lame, COURS_SPEC — mapping cours → spécialisation combat, coursSpec() (+46 more)
+
+### Community 0 - "Moteur de rendu et personnalisation"
+Cohesion: 0.06
+Nodes (67): addCoursGiven(), applySenseiName(), applySkin(), bilanSetMode(), bilanV2Set(), buildDiscordV2(), buildSidebar(), celebrate() (+59 more)
 
 ### Community 24 - "Techniques Taijutsu"
 Cohesion: 0.47
 Nodes (6): Pied de l'Aube (technique taijutsu), Saut de Chakra (technique), Taijutsu – Techniques du Corps, Cours Pied de l'Aube, Cours Saut de Chakra, Théorie Taijutsu
-
-### Community 26 - "Cours de terrain et enquête"
-Cohesion: 0.60
-Nodes (5): Pays du Feu (géographie), Cours L'Enquête, Pays du Feu – Orientation et Visite, Simulation Capture de Drapeau, Simulation d'Escorte
-
-### Community 30 - "Directive Yamamoto Jakka"
-Cohesion: 0.67
-Nodes (3): Announcement Format Directive, Yamamoto Jakka - Responsable Professeur, Format tableau - Directive Yamamoto Jakka
 
 ## Ambiguous Edges - Review These
 - `Académie Militaire de Konoha` → `Le Bushidō`  [AMBIGUOUS]
   Pratique/Kenjutsu - Voie de la Lame Simple (source).md · relation: conceptually_related_to
 
 ## Knowledge Gaps
-- **179 isolated node(s):** `name`, `short_name`, `description`, `start_url`, `scope` (+174 more)
+- **179 isolated node(s):** `background_color`, `categories`, `description`, `display`, `icons` (+174 more)
   These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 202 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
 - **2 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
@@ -185,15 +180,15 @@ _Questions this graph is uniquely positioned to answer:_
 
 - **What is the exact relationship between `Académie Militaire de Konoha` and `Le Bushidō`?**
   _Edge tagged AMBIGUOUS (relation: conceptually_related_to) - confidence is low._
-- **Why does `const D — objet de données principal` connect `Données des cours et personnalisation` to `Cours — Information & Communication en mission`?**
+- **Why does `const D — objet de données principal` connect `Données des cours et personnalisation` to `Cours en attente de validation`?**
   _High betweenness centrality (0.104) - this node is a cross-community bridge._
-- **Why does `Module Tactique` connect `Cours — Information & Communication en mission` to `Données des cours et personnalisation`?**
+- **Why does `Module Tactique` connect `Cours en attente de validation` to `Données des cours et personnalisation`?**
   _High betweenness centrality (0.099) - this node is a cross-community bridge._
 - **Are the 2 inferred relationships involving `Cours — Information & Communication en mission` (e.g. with `Cours — La Chasse au Sensei` and `Communiquer sous pression`) actually correct?**
   _`Cours — Information & Communication en mission` has 2 INFERRED edges - model-reasoned connections that need verification._
-- **Are the 2 inferred relationships involving `applySenseiName()` (e.g. with `getQuote()` and `renderDetail()`) actually correct?**
+- **Are the 2 inferred relationships involving `applySenseiName()` (e.g. with `renderDetail()` and `getQuote()`) actually correct?**
   _`applySenseiName()` has 2 INFERRED edges - model-reasoned connections that need verification._
-- **What connects `name`, `short_name`, `description` to the rest of the system?**
+- **What connects `background_color`, `categories`, `description` to the rest of the system?**
   _179 weakly-connected nodes found - possible documentation gaps or missing edges._
-- **Should `Moteur de rendu et personnalisation` be split into smaller, more focused modules?**
-  _Cohesion score 0.05548654244306418 - nodes in this community are weakly interconnected._
+- **Should `Vérificateur de l'app` be split into smaller, more focused modules?**
+  _Cohesion score 0.1111111111111111 - nodes in this community are weakly interconnected._
