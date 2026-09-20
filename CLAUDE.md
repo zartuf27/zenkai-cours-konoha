@@ -263,7 +263,7 @@ Le flag `zenkai_onboarded` dans localStorage empêche de relancer le tuto. Bouto
 ### Graphify — Mémoire structurelle
 
 Le projet utilise **Graphify** comme carte contextuelle et mémoire structurelle. Fichiers dans `graphify-out/` :
-- `graph.json` — graphe du projet (509 nœuds, 763 arêtes, 56 communautés nommées)
+- `graph.json` — graphe du projet (504 nœuds, 776 arêtes, 37 communautés nommées, 0 nœud orphelin)
 - `graph.html` — visualisation interactive
 - `GRAPH_REPORT.md` — rapport d'analyse (hubs, communautés, gaps)
 - `converted/*.md` — sources .docx converties (contenu original des cours)
@@ -277,6 +277,16 @@ Le projet utilise **Graphify** comme carte contextuelle et mémoire structurelle
 - Histoire du Village de Konoha (17) — lore fondamental
 - `render()` (15) et `applySenseiName()` (14) — cœur du rendu et de la personnalisation
 - gestion_cours_zenkai.html (14) — l'app elle-même
+
+**Noms de communautés** — `.graphify_labels.json` porte les noms lisibles, `.graphify_labels.json.sig` un hash des membres de chaque communauté. Au rebuild, graphify **garde** le nom d'une communauté dont le hash n'a pas bougé et **renomme par son hub** celles dont le membership a changé. Après avoir renommé des communautés à la main, régénérer la signature, sinon les noms sont perdus au prochain `graphify update` :
+
+```python
+from graphify.cluster import community_member_sigs
+sigs = community_member_sigs(communities)   # {cid: hash}
+# écrire dans graphify-out/.graphify_labels.json.sig
+```
+
+**Doublons de nœuds** — les agents d'extraction normalisent parfois un même id différemment (`graphify_out_converted_volonté_du_feu_x` vs `graphify-out_converted_volonte_du_feu_x`, accents, abréviations). Ces jumeaux restent isolés (degré 0) et gonflent le nombre de communautés. Deux nœuds `*_converted_*` finissant par le même hash de 8 caractères sont le même fichier : les fusionner en gardant le plus connecté. Attention aux faux positifs : `coursNature()` (fonction) et `COURS_NATURE` (constante) ne sont **pas** des doublons.
 
 **Extraction** : le code est extrait sans LLM (AST). Les `.md` / `.html` / `.docx` passent par l'extraction sémantique (skill `graphify --update`, sous-agents) — un `graphify update .` seul ne met à jour que la partie code et l'annonce explicitement.
 
