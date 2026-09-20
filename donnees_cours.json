@@ -842,6 +842,108 @@
       ]
     },
     {
+      "id": "genjutsu_theorie",
+      "titre": "Le Genjutsu — Théorie et sensibilisation",
+      "cat": "theorique",
+      "mod": "Combat",
+      "rang": "Apprenti Genin",
+      "cible": "Apprentis Genin / Genin / Genin Confirmé",
+      "auteur": null,
+      "prereq": [
+        "decomposition_chakra"
+      ],
+      "validated": false,
+      "desc": "Le troisième pilier du combat shinobi : comment une illusion se construit, à quoi on la reconnaît, et les trois façons de s'en libérer.",
+      "techs": [
+        {
+          "id": "gen_pilier",
+          "nom": "Le troisième pilier",
+          "desc": "Ninjutsu, Taijutsu, Genjutsu. Le seul des trois qui ne frappe ni le corps ni le terrain, mais la perception.",
+          "type": "connaissance",
+          "etapes": [
+            "Situer le genjutsu face au ninjutsu et au taijutsu",
+            "Comprendre qu'il ne blesse pas : il trompe",
+            "Admettre qu'on peut en être victime sans le savoir"
+          ],
+          "mudras": [],
+          "rang": "Apprenti Genin",
+          "prereq": []
+        },
+        {
+          "id": "gen_mecanisme",
+          "nom": "Le mécanisme",
+          "desc": "Le genjutsu perturbe le flux de chakra qui monte au cerveau et altère les sens. Rien n'est modifié au dehors : tout l'est au dedans.",
+          "type": "chakra",
+          "etapes": [
+            "Comprendre la perturbation du flux de chakra vers le cerveau",
+            "Distinguer ce qui est réel de ce qui est perçu",
+            "Comprendre pourquoi le corps réagit à une illusion"
+          ],
+          "mudras": [],
+          "rang": "Apprenti Genin",
+          "prereq": []
+        },
+        {
+          "id": "gen_danger",
+          "nom": "Pourquoi c'est si dangereux",
+          "desc": "La victime ignore qu'elle est piégée. Elle ne cherche donc pas à se libérer, et agit selon ce qu'elle croit voir.",
+          "type": "connaissance",
+          "etapes": [
+            "Comprendre que l'ignorance du piège est le piège",
+            "Mesurer ce qu'un shinobi trompé peut faire subir à son équipe",
+            "Accepter le doute comme un réflexe de survie"
+          ],
+          "mudras": [],
+          "rang": "Apprenti Genin",
+          "prereq": []
+        },
+        {
+          "id": "gen_signes",
+          "nom": "Les signes qui alertent",
+          "desc": "Incohérences visuelles, sons qui ne collent pas au décor, sensation de déjà-vu anormale.",
+          "type": "connaissance",
+          "etapes": [
+            "Repérer une incohérence visuelle",
+            "Écouter ce qui ne correspond pas au lieu",
+            "Reconnaître la boucle et le déjà-vu anormal",
+            "Se fier à la sensation de décalage plutôt qu'à l'œil"
+          ],
+          "mudras": [],
+          "rang": "Apprenti Genin",
+          "prereq": []
+        },
+        {
+          "id": "gen_liberation",
+          "nom": "Les trois libérations",
+          "desc": "La douleur auto-infligée, la dissipation par le chakra, l'intervention d'un coéquipier.",
+          "type": "chakra",
+          "etapes": [
+            "La douleur : perturber son propre flux par une vive sensation",
+            "La dissipation : concentrer son chakra puis le relâcher d'un coup",
+            "Le coéquipier : recevoir un chakra extérieur qui brise l'illusion",
+            "Choisir la méthode adaptée à son profil"
+          ],
+          "mudras": [],
+          "rang": "Apprenti Genin",
+          "prereq": []
+        },
+        {
+          "id": "gen_equipe",
+          "nom": "Seul, on tombe",
+          "desc": "Un shinobi isolé face à un genjutsu ne dispose que de ses propres sens — ceux-là mêmes qui sont trompés.",
+          "type": "connaissance",
+          "etapes": [
+            "Comprendre pourquoi l'isolement favorise l'illusion",
+            "Surveiller le comportement de ses camarades",
+            "Oser intervenir sur un camarade qui décroche"
+          ],
+          "mudras": [],
+          "rang": "Apprenti Genin",
+          "prereq": []
+        }
+      ]
+    },
+    {
       "id": "armes_cours",
       "titre": "Les Armes Ninja",
       "cat": "theorique",

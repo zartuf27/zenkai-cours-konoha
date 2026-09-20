@@ -49,7 +49,7 @@ graphify-out/              — Graphe contextuel Graphify (graph.json, rapport, 
 .claude/skills/            — Skills projet versionnées (zenkai-cours : procédure d'ajout d'un cours)
 ```
 
-## Les 54 cours (par module)
+## Les 55 cours (par module)
 
 | Module | Cours |
 |--------|-------|
@@ -66,7 +66,7 @@ graphify-out/              — Graphe contextuel Graphify (graph.json, rapport, 
 | Spécialisation | Infiltration (théorie), Infiltration (pratique), La Traque, L'Enquête |
 | Terrain | Course d'orientation, Pays du Feu — Visite |
 | Tactique | Jeu du Roi, Capture de Drapeau, Simulation de Mission, Simulation d'Escorte |
-| 🧪 En attente de validation | L'Éloquence Absurde, Le Cours Inversé, La Chasse au Sensei, Information & Communication en mission |
+| 🧪 En attente de validation | L'Éloquence Absurde, Le Cours Inversé, La Chasse au Sensei, Information & Communication en mission, Le Genjutsu — Théorie |
 
 ## Architecture du HTML
 
@@ -234,6 +234,7 @@ Un cours peut porter `validated: false` dans `D.cours[]`. Il reste **jouable** m
 
 | Cours | Module | Rang | Source |
 |-------|--------|------|--------|
+| Le Genjutsu — Théorie et sensibilisation | Combat | Apprenti Genin | propositions Eraku Morikawa |
 | L'Éloquence Absurde | Tactique | Apprenti Genin | interne (tirage de sujets intégré) |
 | Le Cours Inversé | Tactique | Genin | interne |
 | La Chasse au Sensei | Tactique | Apprenti Genin | interne |
