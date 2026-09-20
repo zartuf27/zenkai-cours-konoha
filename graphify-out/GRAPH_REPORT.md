@@ -11,7 +11,7 @@
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `188edafc`
+- Built from commit: `740c885a`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -21,13 +21,13 @@
 - Cours — Information & Communication en mission
 - Cours du Sensei Renard
 - Propositions de nouveaux cours
-- verifier.mjs
+- Vérificateur de l'app
 - Techniques Raiton et Mudras
 - package.json
-- Documentation CLAUDE.md
+- Documentation du projet
 - Histoire du Village de Konoha
 - Manifest PWA
-- const D — objet de données principal
+- Données des cours et personnalisation
 - Guide multi-sensei et déploiement
 - Architecture du HTML
 - Les Règles d'Or du Ninja
@@ -107,7 +107,7 @@ Nodes (26): 12 Mudras (Hand Signs), 5 Clans Fondateurs (Senju, Uchiha, Hyuga, Na
 Cohesion: 0.14
 Nodes (25): Compléments aux cours existants, Cours décalés, Cours originaux, Genjutsu, Infiltration (cours existant), La Traque (cours existant), La chasse au sensei, Le conseil de guerre — Simulation stratégique (+17 more)
 
-### Community 5 - "verifier.mjs"
+### Community 5 - "Vérificateur de l'app"
 Cohesion: 0.11
 Nodes (14): externes, HOOK, HRP, HTML, JSONF, NATURES, NO_SMOKE, notes (+6 more)
 
@@ -119,7 +119,7 @@ Nodes (15): Bourrasque Ardente — Technique taijutsu (coup de pied rotatif 360)
 Cohesion: 0.22
 Nodes (8): description, devDependencies, jsdom, name, private, scripts, check, jsdom
 
-### Community 8 - "Documentation CLAUDE.md"
+### Community 8 - "Documentation du projet"
 Cohesion: 0.15
 Nodes (12): CLAUDE.md — Cours RP Zenkai (Konoha), Cohérence lore Zenkai-RP, Contexte du projet, Déploiement & partage, Fichiers .docx, Les 45 cours (par module), Les documents sont pour le professeur, PAS pour les élèves, Règles importantes (+4 more)
 
@@ -131,7 +131,7 @@ Nodes (33): Les 8 Règles d'Or du Ninja, Clan Akimichi, Clan Hyuga, Clan Nara, C
 Cohesion: 0.15
 Nodes (12): background_color, categories, description, display, icons, lang, name, orientation (+4 more)
 
-### Community 11 - "const D — objet de données principal"
+### Community 11 - "Données des cours et personnalisation"
 Cohesion: 0.06
 Nodes (49): Bouton « Copier pour les élèves », Compteur « Cours donné » (+1 / Proposé / −1), const CONTENU — guides oraux par cours, const COURS_FLAVOR — intros personnalité + anecdotes nature, const COURS_LAME — mapping cours → voie de la lame, const COURS_NATURE — mapping cours → nature, const COURS_SPEC — mapping cours → spécialisation combat, const D — objet de données principal (+41 more)
 
@@ -185,9 +185,9 @@ _Questions this graph is uniquely positioned to answer:_
 
 - **What is the exact relationship between `Académie Militaire de Konoha` and `Le Bushidō`?**
   _Edge tagged AMBIGUOUS (relation: conceptually_related_to) - confidence is low._
-- **Why does `const D — objet de données principal` connect `const D — objet de données principal` to `Cours — Information & Communication en mission`?**
+- **Why does `const D — objet de données principal` connect `Données des cours et personnalisation` to `Cours — Information & Communication en mission`?**
   _High betweenness centrality (0.104) - this node is a cross-community bridge._
-- **Why does `Module Tactique` connect `Cours — Information & Communication en mission` to `const D — objet de données principal`?**
+- **Why does `Module Tactique` connect `Cours — Information & Communication en mission` to `Données des cours et personnalisation`?**
   _High betweenness centrality (0.099) - this node is a cross-community bridge._
 - **Are the 2 inferred relationships involving `Cours — Information & Communication en mission` (e.g. with `Cours — La Chasse au Sensei` and `Communiquer sous pression`) actually correct?**
   _`Cours — Information & Communication en mission` has 2 INFERRED edges - model-reasoned connections that need verification._
