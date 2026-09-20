@@ -527,6 +527,110 @@
       ]
     },
     {
+      "id": "reglement_interieur",
+      "titre": "Règlement Intérieur de l'Académie",
+      "cat": "theorique",
+      "mod": "Fondamentaux",
+      "rang": "Apprenti Genin",
+      "cible": "Tous",
+      "auteur": "Yumi Amano",
+      "prereq": [],
+      "desc": "Les 7 articles du règlement intérieur : comportement, prise de parole, déplacements, chakra, autorité, respect du corps professoral, terrains d'entraînement.",
+      "techs": [
+        {
+          "id": "ri_comportement",
+          "nom": "Art. 1 — Comportement",
+          "desc": "Attitude sérieuse, respectueuse et disciplinée en toutes circonstances.",
+          "type": "connaissance",
+          "etapes": [
+            "Comprendre les attentes comportementales",
+            "Identifier les attitudes proscrites"
+          ],
+          "mudras": [],
+          "rang": "Apprenti Genin",
+          "prereq": []
+        },
+        {
+          "id": "ri_parole",
+          "nom": "Art. 2 — Prise de parole",
+          "desc": "Interdiction de parler sans autorisation durant cours, examens et cérémonies.",
+          "type": "connaissance",
+          "etapes": [
+            "Respecter le silence en cours",
+            "Demander la parole correctement"
+          ],
+          "mudras": [],
+          "rang": "Apprenti Genin",
+          "prereq": []
+        },
+        {
+          "id": "ri_deplacements",
+          "nom": "Art. 3 — Déplacements",
+          "desc": "Calme et ordre dans les déplacements, interdiction de courir et de monter sur les toits.",
+          "type": "connaissance",
+          "etapes": [
+            "Se déplacer dans le calme",
+            "Se ranger en ordre avant un cours"
+          ],
+          "mudras": [],
+          "rang": "Apprenti Genin",
+          "prereq": []
+        },
+        {
+          "id": "ri_chakra",
+          "nom": "Art. 4 — Utilisation du chakra",
+          "desc": "Chakra interdit hors des zones d'entraînement sauf autorisation.",
+          "type": "connaissance",
+          "etapes": [
+            "Connaître les zones autorisées",
+            "Demander l'autorisation si nécessaire"
+          ],
+          "mudras": [],
+          "rang": "Apprenti Genin",
+          "prereq": []
+        },
+        {
+          "id": "ri_autorite",
+          "nom": "Art. 5 — Autorité et discipline",
+          "desc": "Le Code pénal et la hiérarchie militaire s'appliquent à l'Académie.",
+          "type": "connaissance",
+          "etapes": [
+            "Comprendre le cadre légal",
+            "Accepter les sanctions"
+          ],
+          "mudras": [],
+          "rang": "Apprenti Genin",
+          "prereq": []
+        },
+        {
+          "id": "ri_respect",
+          "nom": "Art. 6 — Respect du corps professoral",
+          "desc": "Salutations obligatoires et respect constant envers les professeurs.",
+          "type": "connaissance",
+          "etapes": [
+            "Saluer les professeurs",
+            "Maintenir le respect en toutes circonstances"
+          ],
+          "mudras": [],
+          "rang": "Apprenti Genin",
+          "prereq": []
+        },
+        {
+          "id": "ri_terrains",
+          "nom": "Art. 7 — Terrains d'entraînement",
+          "desc": "Réservés aux élèves Genin confirmé max et aux activités de l'Académie.",
+          "type": "connaissance",
+          "etapes": [
+            "Connaître les règles d'accès",
+            "Respecter les restrictions"
+          ],
+          "mudras": [],
+          "rang": "Apprenti Genin",
+          "prereq": []
+        }
+      ]
+    },
+    {
       "id": "decomposition_chakra",
       "titre": "Décomposition du Chakra",
       "cat": "theorique",
@@ -963,13 +1067,13 @@
         },
         {
           "id": "simple_forgeron",
-          "nom": "Engagement et respect du forgeron",
-          "desc": "Une lame confiée engage celui qui la reçoit. Le forgeron ne façonne pas du métal : il donne à la lame la possibilité d'exister.",
+          "nom": "La lame confiée et le forgeron",
+          "desc": "Une lame confiée peut être reprise sans justification valable. Le forgeron ne façonne pas du métal : il donne à la lame la possibilité d'exister.",
           "type": "connaissance",
           "etapes": [
-            "Assumer l'engagement lié à une voie de la lame",
+            "Comprendre qu'une lame confiée peut être reprise",
             "Écouter le forgeron et entretenir son arme",
-            "Comprendre qu'une lame peut être reprise en cas d'abandon"
+            "Revenir vers lui si la lame est endommagée"
           ],
           "mudras": [],
           "rang": "Genin",
@@ -1001,6 +1105,173 @@
           ],
           "mudras": [],
           "rang": "Genin",
+          "prereq": []
+        }
+      ]
+    },
+    {
+      "id": "kenj_penetrante",
+      "titre": "Lame Pénétrante",
+      "cat": "pratique",
+      "mod": "Combat",
+      "rang": "Genin",
+      "cible": "Genin+",
+      "auteur": "Yaïko Okira & Kazuma Sosochi",
+      "prereq": [
+        "kenjutsu_simple"
+      ],
+      "desc": "Technique de rang D de la voie simple : deux mouvements tournoyants enchaînés sans rupture — Zanshin → Kimi → Zanshin → Kimi.",
+      "techs": [
+        {
+          "id": "pen_echauffement",
+          "nom": "Échauffement et salutation",
+          "desc": "Préparer épaules, poignets, jambes et hanches. Bokken ou dos de lame. Saluer son partenaire avant tout exercice.",
+          "type": "taijutsu",
+          "etapes": [
+            "Rotations poignets, épaules, hanches, genoux",
+            "Déplacements et étirements",
+            "Récupérer son bokken ou retourner sa lame",
+            "Saluer son partenaire"
+          ],
+          "mudras": [],
+          "rang": "Genin",
+          "prereq": []
+        },
+        {
+          "id": "pen_parades",
+          "nom": "Premier exercice — Les parades",
+          "desc": "Avant d'apprendre à porter un coup, apprendre à en recevoir un. Dévier sans répondre, au sol puis en aérien.",
+          "type": "taijutsu",
+          "etapes": [
+            "En binôme : l'un attaque simplement, l'autre dévie",
+            "Comprendre le trajet et l'angle de la lame adverse",
+            "Accompagner la lame plutôt que d'opposer sa force",
+            "Reprendre l'exercice avec des attaques aériennes"
+          ],
+          "mudras": [],
+          "rang": "Genin",
+          "prereq": []
+        },
+        {
+          "id": "pen_enchainements",
+          "nom": "Deuxième exercice — Les enchaînements",
+          "desc": "Une succession de coups simples sans jamais interrompre le mouvement. Ni puissance ni vitesse : continuité.",
+          "type": "taijutsu",
+          "etapes": [
+            "Enchaîner trois coups sans rupture",
+            "Laisser chaque rotation préparer la suivante",
+            "Conserver un mouvement fluide",
+            "Reproduire l'exercice en aérien"
+          ],
+          "mudras": [],
+          "rang": "Genin",
+          "prereq": []
+        },
+        {
+          "id": "pen_technique",
+          "nom": "La Lame Pénétrante",
+          "desc": "Deux mouvements tournoyants successifs en parfaite continuité : Zanshin → Kimi → Zanshin → Kimi.",
+          "type": "taijutsu",
+          "etapes": [
+            "Zanshin : le corps pivote, l'épée amorce",
+            "Kimi : premier impact, sans arrêter la rotation",
+            "Zanshin : la rotation crée directement la seconde amorce",
+            "Kimi : second impact qui conclut la technique",
+            "Travailler seul, puis sur bambou, puis en binôme"
+          ],
+          "mudras": [],
+          "rang": "Genin",
+          "prereq": []
+        }
+      ]
+    },
+    {
+      "id": "kenj_ruee",
+      "titre": "Ruée Acérée",
+      "cat": "pratique",
+      "mod": "Combat",
+      "rang": "Genin Confirmé",
+      "cible": "Genin Confirmé+",
+      "auteur": "Yaïko Okira",
+      "prereq": [
+        "kenjutsu_simple",
+        "kenj_penetrante"
+      ],
+      "desc": "Technique de rang C de la voie simple : se projeter vers sa cible et enchaîner des frappes rapides sans jamais rompre sa progression.",
+      "techs": [
+        {
+          "id": "ruee_echauffement",
+          "nom": "Échauffement spécifique à la ruée",
+          "desc": "Même protocole qu'à la Lame Pénétrante, plus deux ajouts : accélérations courtes et travail du regard en mouvement.",
+          "type": "taijutsu",
+          "etapes": [
+            "Reprendre le protocole de la Lame Pénétrante",
+            "Courtes accélérations et changements de direction",
+            "Coordonner course, trajectoire de l'épée et point fixé"
+          ],
+          "mudras": [],
+          "rang": "Genin Confirmé",
+          "prereq": []
+        },
+        {
+          "id": "ruee_trajectoire",
+          "nom": "Premier exercice — La trajectoire",
+          "desc": "Partir d'un point et s'arrêter exactement devant la cible, sans la dépasser ni perdre l'équilibre.",
+          "type": "taijutsu",
+          "etapes": [
+            "Fixer un repère précis : mannequin, bambou ou marque au sol",
+            "Garder le regard sur le point choisi",
+            "Contrôler sa vitesse jusqu'au dernier instant",
+            "Ajouter des repères pour travailler les changements de direction"
+          ],
+          "mudras": [],
+          "rang": "Genin Confirmé",
+          "prereq": []
+        },
+        {
+          "id": "ruee_frappes",
+          "nom": "Deuxième exercice — Les frappes successives",
+          "desc": "Toucher plusieurs repères alignés dans l'ordre, sans revenir en garde complète entre chaque frappe.",
+          "type": "taijutsu",
+          "etapes": [
+            "Aligner plusieurs repères sur un mannequin ou des cibles",
+            "Toucher chaque point dans l'ordre",
+            "Laisser chaque frappe préparer la suivante",
+            "Avancer lentement, puis accélérer progressivement"
+          ],
+          "mudras": [],
+          "rang": "Genin Confirmé",
+          "prereq": []
+        },
+        {
+          "id": "ruee_synchro",
+          "nom": "Troisième exercice — La synchronisation",
+          "desc": "Se déplacer d'une cible à l'autre en frappant sans interrompre sa progression. Jambes, regard et lame dans une seule intention.",
+          "type": "taijutsu",
+          "etapes": [
+            "Placer plusieurs cibles le long d'un trajet",
+            "Frapper chaque cible sans s'arrêter",
+            "Éviter que les pieds aillent plus vite que les bras",
+            "Faire avancer corps, regard et lame ensemble"
+          ],
+          "mudras": [],
+          "rang": "Genin Confirmé",
+          "prereq": []
+        },
+        {
+          "id": "ruee_technique",
+          "nom": "La Ruée Acérée",
+          "desc": "Zanshin → Kimi pour engager, une succession de Zanshi → Kimi pour entretenir la ruée, un dernier Zanshi → Kimi pour conclure.",
+          "type": "taijutsu",
+          "etapes": [
+            "Premier Zanshin : fixer la cible et prendre son impulsion",
+            "Premier Kimi : engager la technique",
+            "Enchaîner les Zanshi → Kimi intermédiaires sans ralentir",
+            "Dernier Zanshi → Kimi : conclure avec précision",
+            "Travailler seul, puis sur une ligne de cibles, puis avec un repère mobile"
+          ],
+          "mudras": [],
+          "rang": "Genin Confirmé",
           "prereq": []
         }
       ]
@@ -2468,6 +2739,137 @@
             "Détecter la menace",
             "Protéger la cible",
             "Communiquer en temps réel"
+          ],
+          "mudras": [],
+          "rang": "Genin",
+          "prereq": []
+        }
+      ]
+    },
+    {
+      "id": "info_communication",
+      "titre": "Information & Communication en mission",
+      "cat": "theorique",
+      "mod": "Tactique",
+      "rang": "Genin",
+      "cible": "Apprentis Genin / Genin / Genin Confirmé",
+      "auteur": "Yaïko Okira",
+      "prereq": [
+        "regles_or"
+      ],
+      "validated": false,
+      "desc": "Séparer le fait de la supposition, transmettre l'urgence avant le détail, et s'assurer qu'une information a été reçue. La méthode C.L.A.I.R.",
+      "techs": [
+        {
+          "id": "ic_fait",
+          "nom": "Un fait n'est pas une interprétation",
+          "desc": "Un fait est ce qui a été constaté. Une supposition est l'explication qu'on lui donne. Le danger commence quand la supposition devient certitude.",
+          "type": "tactique",
+          "etapes": [
+            "Distinguer ce qui a été vu de ce qui a été déduit",
+            "Annoncer clairement quand on suppose",
+            "Comprendre comment une rumeur se fabrique"
+          ],
+          "mudras": [],
+          "rang": "Genin",
+          "prereq": []
+        },
+        {
+          "id": "ic_temoin",
+          "nom": "Même un témoin peut se tromper",
+          "desc": "Le fait n'est pas « il a été attaqué par trois shinobis » mais « cet homme affirme avoir été attaqué par trois shinobis ».",
+          "type": "tactique",
+          "etapes": [
+            "Reformuler un témoignage comme une affirmation",
+            "Chercher à recouper avant de conclure",
+            "Ne jamais ignorer un témoignage pour autant"
+          ],
+          "mudras": [],
+          "rang": "Genin",
+          "prereq": []
+        },
+        {
+          "id": "ic_urgence",
+          "nom": "L'urgence avant le détail",
+          "desc": "Une bonne information n'est pas une longue information. Savoir ce que l'équipe doit savoir maintenant.",
+          "type": "tactique",
+          "etapes": [
+            "Aller à l'essentiel sous pression",
+            "Distinguer l'important de l'urgent",
+            "Choisir quelle information annoncer en premier"
+          ],
+          "mudras": [],
+          "rang": "Genin",
+          "prereq": []
+        },
+        {
+          "id": "ic_clair",
+          "nom": "La méthode C.L.A.I.R.",
+          "desc": "Constat, Localisation, Acteurs, Importance, Réponse. Une logique à garder en tête, pas une formule à réciter.",
+          "type": "tactique",
+          "etapes": [
+            "C — Constat : ce qui a réellement été vu",
+            "L — Localisation : où, à quelle distance",
+            "A — Acteurs : qui, combien",
+            "I — Importance : pourquoi maintenant",
+            "R — Réponse : ce qu'on attend de l'équipe"
+          ],
+          "mudras": [],
+          "rang": "Genin",
+          "prereq": []
+        },
+        {
+          "id": "ic_exo_fait",
+          "nom": "Exercice — Fait ou supposition ?",
+          "desc": "Six situations à trancher à l'oral, de la plus simple à la plus piégeuse.",
+          "type": "tactique",
+          "etapes": [
+            "Faire trancher chaque situation par le groupe",
+            "Corriger sans humilier",
+            "Terminer par le cas du témoignage rapporté"
+          ],
+          "mudras": [],
+          "rang": "Genin",
+          "prereq": []
+        },
+        {
+          "id": "ic_exo_chaine",
+          "nom": "Exercice — La chaîne d'information",
+          "desc": "Un message transmis d'élève en élève, une seule fois, sans répétition ni question. Comparer l'arrivée au départ.",
+          "type": "tactique",
+          "etapes": [
+            "Aligner les volontaires",
+            "Transmettre le message au premier, discrètement",
+            "Comparer le message final à l'original",
+            "Faire remonter la source d'un renseignement"
+          ],
+          "mudras": [],
+          "rang": "Genin",
+          "prereq": []
+        },
+        {
+          "id": "ic_recue",
+          "nom": "Une information doit être reçue",
+          "desc": "Une information capitale que personne n'a entendue n'a jamais été transmise. Parler ne suffit pas : il faut être compris.",
+          "type": "tactique",
+          "etapes": [
+            "Obtenir une confirmation sur l'information critique",
+            "Identifier ce qui relève du critique : repli, piège, civil, blessé",
+            "Éviter le bruit qui noie l'essentiel"
+          ],
+          "mudras": [],
+          "rang": "Genin",
+          "prereq": []
+        },
+        {
+          "id": "ic_ecoute",
+          "nom": "Écouter, et lire les silences",
+          "desc": "Une équipe où chacun ne fait que transmettre produit des monologues simultanés. L'absence inhabituelle d'information est elle-même une information.",
+          "type": "tactique",
+          "etapes": [
+            "Écouter autant que transmettre",
+            "Répartir la surveillance entre coéquipiers",
+            "Remarquer ce qui devrait être présent et ne l'est pas"
           ],
           "mudras": [],
           "rang": "Genin",

@@ -4,8 +4,10 @@ théorique/regle d or/*.png
 Hishiba/*.png
 Hishiba/*.webp
 
-# Claude Code
-.claude/
+# Claude Code (on versionne les skills projet, pas les réglages locaux)
+.claude/*
+!.claude/skills/
+.claude/settings.local.json
 
 # Sources (déjà intégrées dans le HTML)
 COURS NATURE PRATIQUE.docx
@@ -16,6 +18,8 @@ Hishiba/
 # Graphify cache et backups (seul le graph courant compte)
 graphify-out/cache/
 graphify-out/2026-*/
+graphify-out/.graphify_python
+graphify-out/.graphify_old.json
 
 # Fichiers système
 .DS_Store

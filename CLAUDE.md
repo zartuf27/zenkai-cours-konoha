@@ -44,15 +44,16 @@ Pratique/                  — 15 cours pratiques (.docx) dont nature pratique e
 Cours du sensei renard/    — Cours d'un autre sensei (7 .md + HTML + script)
 Hishiba/                   — Assets visuels (images de référence)
 graphify-out/              — Graphe contextuel Graphify (graph.json, rapport, converted/)
+.claude/skills/            — Skills projet versionnées (zenkai-cours : procédure d'ajout d'un cours)
 ```
 
-## Les 47 cours (par module)
+## Les 54 cours (par module)
 
 | Module | Cours |
 |--------|-------|
 | Fondamentaux | Règles d'Or, Nindo, Volonté du Feu, Histoire de Konoha, Règlement Intérieur |
 | Chakra | Décomposition du Chakra, Mudras, Nature de Chakra |
-| Combat | Théorie Taijutsu, Armes Ninja, Kenjutsu — Initiation, Kenjutsu — Lame Simple, Kenjutsu — Lame Double (Nitōryū) |
+| Combat | Théorie Taijutsu, Armes Ninja, Kenjutsu — Initiation, Kenjutsu — Lame Simple, Lame Pénétrante, Ruée Acérée, Kenjutsu — Lame Double (Nitōryū) |
 | Taijutsu | Bourrasque de Konoha, Pied de l'Aube |
 | Ninjutsu | Saut de Chakra, Analyse et Combat par Nature, Permutation |
 | Ninjutsu Raiton | Rayon Instantané, Boule Fulgurante, Ruée Foudroyante, Zone Fulgurante |
@@ -63,10 +64,11 @@ graphify-out/              — Graphe contextuel Graphify (graph.json, rapport, 
 | Spécialisation | Infiltration (théorie), Infiltration (pratique), La Traque, L'Enquête |
 | Terrain | Course d'orientation, Pays du Feu — Visite |
 | Tactique | Jeu du Roi, Capture de Drapeau, Simulation de Mission, Simulation d'Escorte |
+| 🧪 En attente de validation | L'Éloquence Absurde, Le Cours Inversé, La Chasse au Sensei, Information & Communication en mission |
 
 ## Architecture du HTML
 
-### Vue d'ensemble des pages (sidebar — 10 vues)
+### Vue d'ensemble des pages (sidebar — 11 vues)
 
 | Page | ID | Fonction |
 |------|----|----------|
@@ -81,6 +83,7 @@ graphify-out/              — Graphe contextuel Graphify (graph.json, rapport, 
 | 📊 Fin de mois | `bilan` | Sélecteur jour, liste des cours avec heure |
 | 📜 Historique | `historique` | Stats sensei, graphiques, classement, journal complet |
 | 👤 Sensei | `sensei` | Profil complet (10 champs), aperçu en direct, réglages (parchemin, QR, reset) |
+| 🧪 En attente | `brouillons` | Cours non validés (`validated:false`) — jouables mais susceptibles d'évoluer |
 
 Navigation : `VIEWS[]` → `buildSidebar()` → `nav(viewId)` → `render()` → `renderXxx()`
 
@@ -150,13 +153,24 @@ const COURS_NATURE={rai_rayon:'raiton',rai_boule:'raiton',rai_ruee:'raiton',rai_
 
 Chaque technique de nature est un cours individuel, visible uniquement pour le sensei dont c'est la nature (20 cours, 4 par nature).
 
+**Fallback par nature** : les 20 cours de nature n'ont pas d'entrée propre dans `SENSEI_QUOTES` / `COURS_FLAVOR`. Le code retombe sur une entrée partagée préfixée par `_` :
+
+```javascript
+SENSEI_QUOTES[coursId] || (COURS_NATURE[coursId] ? SENSEI_QUOTES['_'+COURS_NATURE[coursId]] : null)
+```
+
+Il existe donc `_katon`, `_futon`, `_raiton`, `_doton`, `_suiton` dans `SENSEI_QUOTES` **et** dans `COURS_FLAVOR` : une seule citation et un seul jeu de marqueurs pour les 4 techniques d'une même nature. Pour donner un texte propre à une technique, ajouter une entrée à son `id` — elle prend le pas sur le fallback.
+
 ### Filtrage des cours par spécialisation combat
 
 ```javascript
-const COURS_SPEC={kenjutsu_cours:'kenjutsu',kenjutsu_simple:'kenjutsu',kenjutsu_double:'kenjutsu',bourrasque:'taijutsu',pied_aube:'taijutsu'};
+const COURS_SPEC={kenjutsu_cours:'kenjutsu',kenjutsu_simple:'kenjutsu',kenj_penetrante:'kenjutsu',kenj_ruee:'kenjutsu',kenjutsu_double:'kenjutsu',bourrasque:'taijutsu',pied_aube:'taijutsu'};
+const COURS_LAME={kenjutsu_simple:'simple',kenj_penetrante:'simple',kenj_ruee:'simple',kenjutsu_double:'double'};
 ```
 
-Les cours Kenjutsu ne sont visibles que pour les senseis Kenjutsu. Bourrasque et Pied de l'Aube uniquement pour les senseis Taijutsu. Le filtrage utilise `coursVisibleForSensei()` qui combine nature + spécialisation.
+Les cours Kenjutsu ne sont visibles que pour les senseis Kenjutsu. Bourrasque et Pied de l'Aube uniquement pour les senseis Taijutsu. Le filtrage utilise `coursVisibleForSensei()` qui combine nature + spécialisation + voie de la lame.
+
+**Filtrage par voie de la lame** (`COURS_LAME`) : un sensei Kenjutsu qui a renseigné son type de lame ne voit que les cours de sa propre voie. Tant que `typeLame` est vide, il voit toutes les voies. L'Initiation reste visible pour tous les senseis Kenjutsu.
 
 ### Interface cours simplifié (2 onglets)
 
@@ -181,6 +195,8 @@ Logique de sélection `SPEC_FLAVOR` :
 
 Affichage : blocs CSS `.flavor-intro` (bordure skin, italique) et `.flavor-nature` (fond teinté, icône nature/spec).
 
+**Couverture** : les 54 cours ont des marqueurs personnalisés — soit une entrée propre dans `COURS_FLAVOR` (39 entrées), soit le fallback `_<nature>` pour les 20 techniques de nature. Tout nouveau cours doit maintenir cette couverture : 16 intros + 5 natures, sans exception.
+
 ### Cours Kenjutsu (structure modulaire par type de lame)
 
 Le Kenjutsu est structuré en cours séparés par voie de la lame :
@@ -189,9 +205,39 @@ Le Kenjutsu est structuré en cours séparés par voie de la lame :
 - **Kenjutsu — Lame Double (Nitōryū)** : gardes spécifiques double lame, origines, démonstration
 - *(à venir)* Kenjutsu — Lame Lourde
 
-Techniques de la voie simple encore à créer comme cours à part : **Lame Pénétrante** (rang D, Zanshin→Kimi→Zanshin→Kimi) et **Ruée Acérée** (rang C, ruée + frappes successives).
+Techniques de combat par voie (cours pratiques séparés, comme les techniques de nature) :
+
+| Cours | Rang | Voie | Prérequis | Structure |
+|-------|------|------|-----------|-----------|
+| Lame Pénétrante | D (Genin) | simple | `kenjutsu_simple` | Zanshin → Kimi → Zanshin → Kimi |
+| Ruée Acérée | C (Genin Confirmé) | simple | `kenj_penetrante` | Zanshin → Kimi / Zanshi → Kimi / … / Zanshi → Kimi |
+
+**Non documenté à ce jour** (aucune source disponible) : les techniques de rang **B** et **A** de la voie simple, et les « enchaînements classiques » cités dans la démonstration finale de l'Initiation. Le cours Lame Simple le signale explicitement au sensei.
+
+**Anti-redite** : les 8 vertus du Bushidō et l'engagement à vie sont traités dans `kenjutsu_cours` uniquement ; `kenjutsu_simple` y renvoie au lieu de les redérouler, et `kenj_ruee` renvoie à `kenj_penetrante` pour l'échauffement commun. Garder cette règle en ajoutant les voies Lame Lourde et rangs B/A.
 
 Chaque cours de voie a `kenjutsu_cours` comme prérequis.
+
+### Rangs hors échelle
+
+`nindo` porte le rang **« Tous grades »**, qui ne figure pas dans `D.rangs`. C'est volontaire : `_getCoursInverse()` l'accepte explicitement et le classe en difficulté « facile ». Le filtre Rang de la page Cours laisse passer ce rang quel que soit le filtre choisi (`c.rang!=='Tous grades'`), sinon le Nindo disparaîtrait de toutes les vues filtrées.
+
+### Cours en attente de validation (`validated: false`)
+
+Un cours peut porter `validated: false` dans `D.cours[]`. Il reste **jouable** mais :
+- il apparaît dans la page 🧪 **En attente de validation** (`renderBrouillons()`), pas seulement dans la liste des cours ;
+- il porte un badge ⚠ **Non validé** dans la liste et un bandeau d'avertissement sur sa page détail ;
+- il est **exclu du tirage aléatoire** de cours (`D.cours.filter(c=>...&&c.validated!==false)`) ;
+- le filtre d'état `non-valide` de la page Cours permet de les isoler.
+
+| Cours | Module | Rang | Source |
+|-------|--------|------|--------|
+| L'Éloquence Absurde | Tactique | Apprenti Genin | interne (tirage de sujets intégré) |
+| Le Cours Inversé | Tactique | Genin | interne |
+| La Chasse au Sensei | Tactique | Apprenti Genin | interne |
+| Information & Communication en mission | Tactique | Genin | Yaïko Okira |
+
+Ces cours reçoivent **la personnalisation complète** au même titre que les cours validés : `COURS_FLAVOR` (16 intros + 5 natures), `SENSEI_QUOTES` (16 types), `CONTENU`, `NOTES_PROF`. Pour valider un cours, retirer la clé `validated` (ou la passer à `true`) dans le HTML **et** dans `donnees_cours.json`.
 
 ### Compteur "Cours donné"
 
@@ -217,7 +263,7 @@ Le flag `zenkai_onboarded` dans localStorage empêche de relancer le tuto. Bouto
 ### Graphify — Mémoire structurelle
 
 Le projet utilise **Graphify** comme carte contextuelle et mémoire structurelle. Fichiers dans `graphify-out/` :
-- `graph.json` — graphe du projet (172 nœuds, 134 arêtes, 41 communautés)
+- `graph.json` — graphe du projet (509 nœuds, 763 arêtes, 56 communautés nommées)
 - `graph.html` — visualisation interactive
 - `GRAPH_REPORT.md` — rapport d'analyse (hubs, communautés, gaps)
 - `converted/*.md` — sources .docx converties (contenu original des cours)
@@ -227,9 +273,12 @@ Le projet utilise **Graphify** comme carte contextuelle et mémoire structurelle
 
 **Hubs principaux** (nœuds les plus connectés) :
 - Architecture du HTML (23 edges) — cœur technique
-- Les 8 Règles d'Or (9) — cours fondamental
-- CLAUDE.md (7) — documentation centrale
-- Guide de partage (7) — multi-sensei
+- Information & Communication en mission (20) — le cours le plus relié du corpus
+- Histoire du Village de Konoha (17) — lore fondamental
+- `render()` (15) et `applySenseiName()` (14) — cœur du rendu et de la personnalisation
+- gestion_cours_zenkai.html (14) — l'app elle-même
+
+**Extraction** : le code est extrait sans LLM (AST). Les `.md` / `.html` / `.docx` passent par l'extraction sémantique (skill `graphify --update`, sous-agents) — un `graphify update .` seul ne met à jour que la partie code et l'annonce explicitement.
 
 **Usage en contexte** : consulter `GRAPH_REPORT.md` avant toute modification pour identifier les communautés impactées. Comparer `converted/*.md` (sources) avec le HTML (implémentation) pour vérifier la cohérence.
 
@@ -285,6 +334,7 @@ Overlay plein écran déclenché depuis la page détail d'un cours. Affiche le c
 | `const SENSEI_TYPES` | 16 types (icône, nom, description, couleur) |
 | `const NATURE_CLOSING` | Phrases clôture par nature × module (5 × 8) |
 | `const COURS_NATURE` | Mapping cours → nature pour filtrage |
+| `const COURS_LAME` | Mapping cours → voie de la lame (simple/double) pour filtrage |
 | `const NATURE_PARTICLES` | Emojis par nature pour particules |
 | `const ONBOARD_FINAL` | Mots de fin du tuto par type (16 entrées) |
 | `const TOUR_TIPS_TYPED` | Descriptions d'onglets par type (8 types × 4 onglets) |
@@ -342,7 +392,7 @@ Pour mettre à jour le cache PWA : incrémenter la version dans `sw.js` (ex: `ze
 4. Ajouter dans `SENSEI_QUOTES[id]` : objet avec 16 clés (sage, dur, guerrier, bienveillant, mysterieux, stratege, veteran, fraternel, ironique, ermite, ombre, sensei_noble, rebelle, mentor, chasseur, tacticien)
 5. Ajouter dans `COURS_FLAVOR[id]` : `{intro: {16 types}, nature: {5 natures}}` (marqueurs dynamiques)
 6. Si nature-spécifique : ajouter dans `COURS_NATURE`
-7. Si spéc combat : ajouter dans `COURS_SPEC` + `SPEC_FLAVOR[id]`
+7. Si spéc combat : ajouter dans `COURS_SPEC` + `SPEC_FLAVOR[id]` ; si voie de la lame : ajouter dans `COURS_LAME`
 8. Mettre à jour `donnees_cours.json`
 9. `graphify update .` puis `git add . && git commit -m "..." && git push`
 
