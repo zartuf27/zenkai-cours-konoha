@@ -7514,19 +7514,18 @@ function getCoursCategoryLabel(coursId){
   return c?c.mod:'';
 }
 function buildDiscordV2(entries,allHist){
-  const allSorted=[...allHist].sort((a,b)=>a.ts-b.ts);
   let txt='';
   entries.forEach((e,i)=>{
-    const globalIdx=allSorted.findIndex(h=>h.ts===e.ts)+1;
     const c=cours(e.id);
     const catLabel=getCoursCategoryLabel(e.id);
     const typeStr=c?(c.titre+(catLabel?' - '+catLabel:'')):e.titre;
     const d=bilanV2Data[e.ts]||{};
+    const num=d.numCours||'';
     const org=d.organisateur||'';
     const inter=d.intervenant||'';
     const nb=d.nbEleves||'';
     if(i>0)txt+='\n';
-    txt+=`Cours ${globalIdx}\n`;
+    txt+=`Cours ${num}\n`;
     txt+=`Organisateur du cours : ${org}\n`;
     txt+=`Intervenant : ${inter}\n`;
     txt+=`Type de cours : ${typeStr}\n`;
@@ -7737,23 +7736,25 @@ function renderBilan(){
     <pre id="bilanText" data-raw="${esc(discord)}" style="background:var(--bg-input);border:1px solid var(--border);border-radius:var(--radius);padding:14px;font-family:'Noto Sans JP',monospace;font-size:0.85rem;color:var(--text);white-space:pre-wrap;line-height:1.8;margin:0">${esc(discord)}</pre>`;
   }else{
     // V2 — Formulaire par cours avec champs éditables
-    const allSorted=[...hist].sort((a,b)=>a.ts-b.ts);
     if(dayTotal===0){
       h+=`<div style="text-align:center;padding:20px;color:var(--text-muted);font-style:italic">Aucun cours ce jour.</div>`;
     }else{
       const sorted=[...selHist].sort(sessionSort);
       h+=`<div style="font-size:0.72rem;color:var(--text-muted);margin-bottom:12px;font-style:italic">Remplissez les champs puis cliquez sur Copier.</div>`;
       sorted.forEach((e,i)=>{
-        const globalIdx=allSorted.findIndex(h=>h.ts===e.ts)+1;
         const c=cours(e.id);
         const catLabel=getCoursCategoryLabel(e.id);
         const typeStr=c?(c.titre+(catLabel?' - '+catLabel:'')):e.titre;
         const d=bilanV2Data[e.ts]||{};
+        const numVal=d.numCours||'';
         const orgVal=d.organisateur!==undefined?d.organisateur:senseiFullName();
         const interVal=d.intervenant||'';
         const nbVal=d.nbEleves!==undefined?d.nbEleves:(e.noEleve?'0':'');
         h+=`<div style="background:var(--bg-input);border:1px solid var(--border);border-radius:var(--radius-lg);padding:14px 16px;margin-bottom:${i<sorted.length-1?'10px':'0'}">
-          <div style="font-weight:700;font-size:0.95rem;color:var(--skin-primary);margin-bottom:10px">Cours ${globalIdx}</div>
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+            <span style="font-weight:700;font-size:0.95rem;color:var(--skin-primary)">Cours</span>
+            <input type="text" value="${esc(numVal)}" onchange="bilanV2Set(${e.ts},'numCours',this.value)" placeholder="n°" style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:4px 8px;font-size:0.95rem;font-weight:700;color:var(--skin-primary);font-family:inherit;width:50px;box-sizing:border-box;text-align:center">
+          </div>
           <div style="display:grid;grid-template-columns:110px 1fr;gap:6px 10px;align-items:center;font-size:0.82rem">
             <span style="color:var(--text-muted)">Type de cours</span>
             <span style="font-weight:600;color:var(--text-bright)">${esc(typeStr)}</span>
