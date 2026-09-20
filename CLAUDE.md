@@ -46,13 +46,13 @@ Hishiba/                   — Assets visuels (images de référence)
 graphify-out/              — Graphe contextuel Graphify (graph.json, rapport, converted/)
 ```
 
-## Les 46 cours (par module)
+## Les 47 cours (par module)
 
 | Module | Cours |
 |--------|-------|
 | Fondamentaux | Règles d'Or, Nindo, Volonté du Feu, Histoire de Konoha, Règlement Intérieur |
 | Chakra | Décomposition du Chakra, Mudras, Nature de Chakra |
-| Combat | Théorie Taijutsu, Armes Ninja, Kenjutsu — Initiation, Kenjutsu — Lame Double (Nitōryū) |
+| Combat | Théorie Taijutsu, Armes Ninja, Kenjutsu — Initiation, Kenjutsu — Lame Simple, Kenjutsu — Lame Double (Nitōryū) |
 | Taijutsu | Bourrasque de Konoha, Pied de l'Aube |
 | Ninjutsu | Saut de Chakra, Analyse et Combat par Nature, Permutation |
 | Ninjutsu Raiton | Rayon Instantané, Boule Fulgurante, Ruée Foudroyante, Zone Fulgurante |
@@ -153,7 +153,7 @@ Chaque technique de nature est un cours individuel, visible uniquement pour le s
 ### Filtrage des cours par spécialisation combat
 
 ```javascript
-const COURS_SPEC={kenjutsu_cours:'kenjutsu',kenjutsu_double:'kenjutsu',bourrasque:'taijutsu',pied_aube:'taijutsu'};
+const COURS_SPEC={kenjutsu_cours:'kenjutsu',kenjutsu_simple:'kenjutsu',kenjutsu_double:'kenjutsu',bourrasque:'taijutsu',pied_aube:'taijutsu'};
 ```
 
 Les cours Kenjutsu ne sont visibles que pour les senseis Kenjutsu. Bourrasque et Pied de l'Aube uniquement pour les senseis Taijutsu. Le filtrage utilise `coursVisibleForSensei()` qui combine nature + spécialisation.
@@ -185,9 +185,11 @@ Affichage : blocs CSS `.flavor-intro` (bordure skin, italique) et `.flavor-natur
 
 Le Kenjutsu est structuré en cours séparés par voie de la lame :
 - **Kenjutsu — Initiation** : base commune (Bushidō, Kokyu, Metsuke, Maai, Engagement)
+- **Kenjutsu — Lame Simple** : Zanshin (amorce) / Kimi (impact), la lame extension de l'âme, 3 salutations, respect du forgeron, exercices Shintai / Seishin — source Yaïko Okira & Kazuma Sosochi
 - **Kenjutsu — Lame Double (Nitōryū)** : gardes spécifiques double lame, origines, démonstration
-- *(à venir)* Kenjutsu — Lame Simple
 - *(à venir)* Kenjutsu — Lame Lourde
+
+Techniques de la voie simple encore à créer comme cours à part : **Lame Pénétrante** (rang D, Zanshin→Kimi→Zanshin→Kimi) et **Ruée Acérée** (rang C, ruée + frappes successives).
 
 Chaque cours de voie a `kenjutsu_cours` comme prérequis.
 
@@ -364,7 +366,7 @@ Pour mettre à jour le cache PWA : incrémenter la version dans `sw.js` (ex: `ze
 
 ### Fichiers .docx
 - Certains proviennent de copier-coller Discord (nettoyer emojis Discord, timestamps, réactions)
-- Senseis auteurs : Akio Fukurō, Jihon Ichirin, Inoshi Baikutai, Gaoh Uragiri, Yumi Amano, Gromlof, Yamamoto Jakka, Tetsuya Fubetsu, Nagi Kinzetsu
+- Senseis auteurs : Akio Fukurō, Jihon Ichirin, Inoshi Baikutai, Gaoh Uragiri, Yumi Amano, Gromlof, Yamamoto Jakka, Tetsuya Fubetsu, Nagi Kinzetsu, Yaïko Okira, Kazuma Sosochi
 
 ### Cohérence lore Zenkai-RP
 - 5 clans fondateurs : Senju, Uchiha, Hyūga, Nara, Akimichi

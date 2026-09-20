@@ -879,6 +879,133 @@
       ]
     },
     {
+      "id": "kenjutsu_simple",
+      "titre": "Kenjutsu — Lame Simple",
+      "cat": "theorique",
+      "mod": "Combat",
+      "rang": "Genin",
+      "cible": "Genin+",
+      "auteur": "Yaïko Okira & Kazuma Sosochi",
+      "prereq": [
+        "kenjutsu_cours"
+      ],
+      "desc": "La voie de la lame simple : Zanshin et Kimi, la lame comme extension de l'âme, les trois salutations et l'engagement envers le forgeron.",
+      "techs": [
+        {
+          "id": "simple_voie",
+          "nom": "La voie de la lame simple",
+          "desc": "L'art de combattre avec une seule lame : un mouvement clair vaut mieux qu'une succession de gestes désordonnés.",
+          "type": "connaissance",
+          "etapes": [
+            "Comprendre que la simplicité n'est pas la facilité",
+            "Maîtriser posture, mouvement, respiration et calme",
+            "Agir seulement lorsque le moment est juste"
+          ],
+          "mudras": [],
+          "rang": "Genin",
+          "prereq": []
+        },
+        {
+          "id": "simple_ame",
+          "nom": "La lame, extension de l'âme",
+          "desc": "Sans le « L » de « Lame », il ne reste que « Âme ». Le sabreur apprend le poids, l'équilibre et la longueur de son arme.",
+          "type": "connaissance",
+          "etapes": [
+            "Connaître le poids, l'équilibre et la garde de sa lame",
+            "Laisser le corps construire ses repères",
+            "Ne pas changer de voie sans raison sérieuse"
+          ],
+          "mudras": [],
+          "rang": "Genin",
+          "prereq": []
+        },
+        {
+          "id": "simple_zanshin",
+          "nom": "Zanshin (Zanshi) — L'amorce",
+          "desc": "Le début du mouvement, l'intention qui précède l'action. Rien n'est visible, tout est déjà décidé.",
+          "type": "connaissance",
+          "etapes": [
+            "Précision du geste dès son commencement",
+            "Fluidité du mouvement et vitesse contrôlée",
+            "Impulsion mentale avant l'impulsion physique"
+          ],
+          "mudras": [],
+          "rang": "Genin",
+          "prereq": []
+        },
+        {
+          "id": "simple_kimi",
+          "nom": "Kimi — L'impact",
+          "desc": "L'instant où toute l'énergie accumulée durant le Zanshin est libérée. Aucune hésitation possible.",
+          "type": "connaissance",
+          "etapes": [
+            "Transmettre la puissance totale du geste",
+            "Engager complètement le corps et l'esprit",
+            "Finaliser l'action sans hésitation"
+          ],
+          "mudras": [],
+          "rang": "Genin",
+          "prereq": []
+        },
+        {
+          "id": "simple_salutations",
+          "nom": "Les trois salutations",
+          "desc": "Le respect commence avant que la lame ne soit levée : inclinée accompagnée des mains, inclinée, au sol.",
+          "type": "connaissance",
+          "etapes": [
+            "Inclinée avec les mains : saluer, remercier, engager un entraînement",
+            "Inclinée : faute importante ou excuses sérieuses",
+            "Au sol : erreur très grave ou profond déshonneur"
+          ],
+          "mudras": [],
+          "rang": "Genin",
+          "prereq": []
+        },
+        {
+          "id": "simple_forgeron",
+          "nom": "Engagement et respect du forgeron",
+          "desc": "Une lame confiée engage celui qui la reçoit. Le forgeron ne façonne pas du métal : il donne à la lame la possibilité d'exister.",
+          "type": "connaissance",
+          "etapes": [
+            "Assumer l'engagement lié à une voie de la lame",
+            "Écouter le forgeron et entretenir son arme",
+            "Comprendre qu'une lame peut être reprise en cas d'abandon"
+          ],
+          "mudras": [],
+          "rang": "Genin",
+          "prereq": []
+        },
+        {
+          "id": "simple_shintai",
+          "nom": "Shintai — L'exercice du corps",
+          "desc": "Chaque élève choisit une branche et cherche le geste juste sur un bambou : posture stable, amorce claire, coup contrôlé.",
+          "type": "taijutsu",
+          "etapes": [
+            "Choisir une branche solide et la tenir comme une lame",
+            "Frapper un point précis du bambou sans forcer",
+            "Observer équilibre, précision et contrôle de la force"
+          ],
+          "mudras": [],
+          "rang": "Genin",
+          "prereq": []
+        },
+        {
+          "id": "simple_seishin",
+          "nom": "Seishin — L'exercice de l'esprit",
+          "desc": "Arme déposée, les élèves se concentrent sur leur respiration et sur ce qu'ils ressentent à l'idée de tenir une lame.",
+          "type": "connaissance",
+          "etapes": [
+            "Déposer l'arme et calmer la respiration",
+            "Identifier son ressenti : confiance, peur, impatience, colère",
+            "Partager ce ressenti avec le groupe"
+          ],
+          "mudras": [],
+          "rang": "Genin",
+          "prereq": []
+        }
+      ]
+    },
+    {
       "id": "kenjutsu_double",
       "titre": "Kenjutsu — Lame Double (Nitōryū)",
       "cat": "theorique",
