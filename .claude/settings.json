@@ -1,0 +1,17 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node tools/verifier.mjs --hook",
+            "timeout": 90,
+            "statusMessage": "Vérification de l'app Zenkai..."
+          }
+        ]
+      }
+    ]
+  }
+}

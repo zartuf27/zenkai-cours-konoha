@@ -78,20 +78,20 @@ Object.entries(ph).filter(([k,v])=>new Set(v).size>1).forEach(([k,v])=>console.l
 
 ## 5. Vérifier avant de committer
 
-Toujours, dans cet ordre :
+Une seule commande couvre tout :
 
 ```bash
-# 1. syntaxe JS de la page entière
-python -c "import io,re;s=io.open('gestion_cours_zenkai.html',encoding='utf-8').read();
-open('/tmp/_c.js','w',encoding='utf-8').write('\n'.join(re.findall(r'<script>(.*?)</script>',s,re.S)))"
-node --check /tmp/_c.js
-
-# 2. les données se chargent et le cours est complet (16 types, 5 natures)
-# 3. HTML et donnees_cours.json strictement synchronisés (même ordre, mêmes objets)
+node tools/verifier.mjs
 ```
 
-Le troisième point se rate facilement : comparer `D.cours` du HTML et `cours` du JSON
-objet par objet, pas seulement les longueurs.
+Syntaxe JS, ids et prérequis, les 16 types et les 5 natures, couverture, clés
+orphelines, vocabulaire hors-RP dans le copiable, redites entre supports,
+synchronisation HTML ↔ JSON, chargement des bibliothèques, et un test de rendu dans
+un DOM simulé (11 vues et tous les cours visibles). Environ 1,4 s.
+
+Un hook `PostToolUse` le lance déjà à chaque édition de `gestion_cours_zenkai.html`
+ou `donnees_cours.json` et bloque si quelque chose casse — inutile de l'appeler après
+chaque modification, mais le relancer avant un commit reste une bonne habitude.
 
 ## 6. Écriture du HTML : passer par un script Python
 

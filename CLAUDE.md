@@ -29,7 +29,9 @@ Déploiement auto en ~1 min. Chaque prof ouvre le même lien, son profil/progres
 ## Structure du dossier
 
 ```
-gestion_cours_zenkai.html  — App principale (~8930 lignes, tout-en-un)
+gestion_cours_zenkai.html  — App principale (~10200 lignes, tout-en-un)
+tools/verifier.mjs         — Vérificateur (syntaxe, cohérence, HRP, sync, test navigateur)
+package.json               — Dépendances des outils uniquement (jsdom) — l'app n'en a aucune
 sw.js                      — Service Worker PWA (cache hors-ligne)
 manifest.json              — Manifest PWA (installable sur mobile)
 icon-192.svg               — Icône PWA (symbole Konoha)
@@ -442,8 +444,34 @@ Pour mettre à jour le cache PWA : incrémenter la version dans `sw.js` (ex: `ze
 - Chaque cours = 5-6 composants : `D.cours[]`, `CONTENU{}`, `NOTES_PROF{}`, `SENSEI_QUOTES{}` (16 types), `COURS_FLAVOR{}`, optionnel `COURS_NATURE`
 - Après modif : bumper `CACHE_NAME` dans `sw.js` + `git push` pour déployer sur GitHub Pages
 
+### Vérification automatique
+
+```bash
+npm install          # une seule fois : installe jsdom pour le test navigateur
+node tools/verifier.mjs
+```
+
+`tools/verifier.mjs` contrôle en un seul passage :
+
+| Contrôle | Ce qu'il attrape |
+|----------|------------------|
+| Syntaxe JS | une accolade ou un backtick manquant dans les 731 Ko de script |
+| Cours | ids en double, prérequis inconnus, rangs hors échelle, techniques en double |
+| Personnalisation | les 16 types de `SENSEI_QUOTES`, les 16 intros et 5 natures de `COURS_FLAVOR`, les 5 variantes de `SPEC_FLAVOR`, `NATURE_CLOSING` par module |
+| Couverture | un cours sans `CONTENU`, sans `NOTES_PROF` ou sans marqueurs |
+| Clés orphelines | une entrée qui ne correspond à aucun cours |
+| Hors-RP | vocabulaire de jeu vidéo ou HTML brut dans `NOTES_PROF[].copy` |
+| Redites | une phrase longue partagée par deux supports oraux (hors fallback de nature) |
+| Synchronisation | HTML et `donnees_cours.json` : nombre, ordre et contenu |
+| Chargement | un script externe revenu dans le `<head>`, une empreinte SRI manquante, un `@import` CSS |
+| Test navigateur | l'app chargée dans un DOM simulé : 11 vues et tous les cours visibles rendus sans erreur |
+
+**Le hook le déclenche tout seul.** `.claude/settings.json` déclare un `PostToolUse` sur `Edit|Write` qui lance `node tools/verifier.mjs --hook` : le vérificateur lit le JSON de l'appel sur stdin, ne fait rien si le fichier touché n'est ni l'app ni ses données, et sort en code 2 si quelque chose casse — l'erreur remonte alors immédiatement. Silencieux quand tout va bien. Environ 1,4 s.
+
 ### Sécurité
 - `esc()` échappe `& < > " '` — l'utiliser pour tout contenu utilisateur dans innerHTML
 - `safeAvatar()` valide que les DataURL commencent par `data:image/`
 - `validateSaveData()` sanitize les champs sensei importés (longueur, HTML strippé)
-- CDN chargés sans SRI (à ajouter si besoin de durcissement)
+- Les 4 bibliothèques CDN (QR, PDF, confettis) ne sont plus dans le `<head>` : `loadLib()` les charge au premier clic, avec `integrity` en sha384 et `crossorigin`. Gain : 596 Ko hors du chemin critique, et plus aucune requête vouée à échouer au démarrage hors-ligne.
+- Pour changer de version de bibliothèque, recalculer l'empreinte :
+  `curl -sSL <url> | openssl dgst -sha384 -binary | openssl base64 -A`

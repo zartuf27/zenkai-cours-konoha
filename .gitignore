@@ -7,6 +7,7 @@ Hishiba/*.webp
 # Claude Code (on versionne les skills projet, pas les réglages locaux)
 .claude/*
 !.claude/skills/
+!.claude/settings.json
 .claude/settings.local.json
 
 # Sources (déjà intégrées dans le HTML)
@@ -25,3 +26,7 @@ graphify-out/.graphify_old.json
 .DS_Store
 Thumbs.db
 desktop.ini
+
+# Dépendances des outils de vérification (npm i pour les installer)
+node_modules/
+package-lock.json

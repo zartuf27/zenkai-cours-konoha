@@ -1,0 +1,11 @@
+{
+  "name": "zenkai-cours-konoha",
+  "private": true,
+  "description": "Outils de vérification de l'app de cours RP Zenkai. L'app elle-même est un unique fichier HTML sans dépendance.",
+  "scripts": {
+    "check": "node tools/verifier.mjs"
+  },
+  "devDependencies": {
+    "jsdom": "^26.0.0"
+  }
+}

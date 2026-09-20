@@ -9,12 +9,12 @@
 <link rel="manifest" href="manifest.json">
 <link rel="apple-touch-icon" href="icon-192.svg">
 <title>Zenkai - Académie Ninja de Konoha</title>
-<script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Cinzel:wght@700;900&display=swap">
+<!-- QR, PDF et confettis (596 Ko) : charges a la demande par loadLib(), jamais au demarrage -->
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700;900&family=Cinzel:wght@700;900&display=swap');
 
 :root {
   /* Skin accent — overridden by [data-skin] */
@@ -433,6 +433,19 @@
   transition: none !important;
 }
 [data-no-anim] #nature-particles { display:none !important; }
+
+/* Réglage système du sensei (OS / navigateur). Ne s'applique que si le sensei
+   n'a pas explicitement demandé les animations via data-anim-force. */
+@media (prefers-reduced-motion: reduce) {
+  html:not([data-anim-force]) *,
+  html:not([data-anim-force]) *::before,
+  html:not([data-anim-force]) *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+  html:not([data-anim-force]) #nature-particles { display:none !important; }
+}
 
 * { margin:0; padding:0; box-sizing:border-box; }
 
@@ -1411,12 +1424,12 @@ body {
 </div>
 
 <!-- ====== MOBILE NAV ====== -->
-<div class="mobile-nav" id="mobileNav"></div>
+<div class="mobile-nav" id="mobileNav" role="navigation" aria-label="Navigation (mobile)"></div>
 
 <!-- ====== LAYOUT ====== -->
 <div class="layout">
-  <div class="sidebar" id="sidebar"></div>
-  <div class="content" id="content"></div>
+  <nav class="sidebar" id="sidebar" aria-label="Navigation principale"></nav>
+  <main class="content" id="content" tabindex="-1"></main>
 </div>
 
 <!-- ====== MODAL ====== -->
@@ -5224,13 +5237,13 @@ Pour rappel, un règlement intérieur est en vigueur au sein de l'Académie. Il 
 Attitude sérieuse, respectueuse et disciplinée. Tout comportement perturbateur ou irrespectueux est strictement interdit.
 
 📌 Article 2 — Prise de parole
-Interdite durant les cours, examens et cérémonies, sauf autorisation expresse du professeur.
+Interdite durant les cours, examens et cérémonies, sauf autorisation expresse du sensei.
 
 📌 Article 3 — Déplacements
 Dans le calme et le respect de l'ordre. Interdit de courir, d'utiliser la course de chakra à l'intérieur, ou d'être sur les toits. Se ranger en ordre avant tout cours ou cérémonie.
 
 📌 Article 4 — Utilisation du chakra
-Strictement interdite hors des zones d'entraînement, sauf autorisation exceptionnelle d'un professeur ou de la direction.
+Strictement interdite hors des zones d'entraînement, sauf autorisation exceptionnelle d'un sensei ou de la direction.
 
 📌 Article 5 — Autorité et discipline
 Le Code pénal du village et la hiérarchie militaire s'appliquent pleinement. Toute désobéissance pourra faire l'objet de sanctions.
@@ -7351,6 +7364,7 @@ function spawnParticles(nature){
   const container=document.getElementById('nature-particles');
   if(!container)return;
   container.innerHTML='';
+  if(prefersReducedMotion())return;
   if(!nature||!NATURE_PARTICLES[nature])return;
   const chars=NATURE_PARTICLES[nature];
   const count=nature==='raiton'?14:20;
@@ -7386,8 +7400,8 @@ function applyThemeOnLoad(){
 }
 function toggleAnimations(){
   const root=document.documentElement;
-  if(S.noAnim){delete S.noAnim;root.removeAttribute('data-no-anim');applySkin();}
-  else{S.noAnim=true;root.setAttribute('data-no-anim','');document.getElementById('nature-particles').innerHTML='';}
+  if(S.noAnim){delete S.noAnim;root.removeAttribute('data-no-anim');root.setAttribute('data-anim-force','');applySkin();}
+  else{S.noAnim=true;root.removeAttribute('data-anim-force');root.setAttribute('data-no-anim','');document.getElementById('nature-particles').innerHTML='';}
   save();
 }
 function senseiTypeInfo(){const s=getSensei();return SENSEI_TYPES.find(t=>t.id===s.type)||SENSEI_TYPES[0];}
@@ -7577,8 +7591,9 @@ function buildSidebar(){
   VIEWS.forEach(v=>{
     const a=curView===v.id&&!curCours?'active':'';
     const lbl=getSidebarLabel(v.id);
-    shtml+=`<div class="sidebar-item ${a}" onclick="nav('${v.id}')"><span class="si-icon">${v.icon}</span>${lbl}</div>`;
-    mhtml+=`<div class="mobile-nav-item ${a}" onclick="nav('${v.id}')">${v.icon} ${lbl}</div>`;
+    const cur=a?' aria-current="page"':'';
+    shtml+=`<div class="sidebar-item ${a}" role="link" tabindex="0"${cur} onclick="nav('${v.id}')"><span class="si-icon" aria-hidden="true">${v.icon}</span>${lbl}</div>`;
+    mhtml+=`<div class="mobile-nav-item ${a}" role="link" tabindex="0"${cur} onclick="nav('${v.id}')"><span aria-hidden="true">${v.icon}</span> ${lbl}</div>`;
   });
   shtml+=`</div>`;
 
@@ -7981,9 +7996,9 @@ function renderDetail(){
     const np=NOTES_PROF[c.id];
     const hasMarqueurs=!!(np||COURS_FLAVOR[c.id]||(COURS_NATURE[c.id]&&COURS_FLAVOR['_'+COURS_NATURE[c.id]]));
 
-    h+=`<div class="reading-tabs" style="margin-bottom:0">
-      ${hasOral?`<div class="reading-tab${curTab==='oral'?' active':''}" onclick="S.c['${tabKey}']='oral';save();render()"><span class="tab-icon">🎤</span>Support oral</div>`:''}
-      ${hasMarqueurs?`<div class="reading-tab${curTab==='marqueurs'?' active':''}" onclick="S.c['${tabKey}']='marqueurs';save();render()"><span class="tab-icon">📋</span>Marqueurs</div>`:''}
+    h+=`<div class="reading-tabs" role="tablist" aria-label="Affichage du cours" style="margin-bottom:0">
+      ${hasOral?`<div class="reading-tab${curTab==='oral'?' active':''}" role="tab" tabindex="0" aria-selected="${curTab==='oral'}" onclick="S.c['${tabKey}']='oral';save();render()"><span class="tab-icon" aria-hidden="true">🎤</span>Support oral</div>`:''}
+      ${hasMarqueurs?`<div class="reading-tab${curTab==='marqueurs'?' active':''}" role="tab" tabindex="0" aria-selected="${curTab==='marqueurs'}" onclick="S.c['${tabKey}']='marqueurs';save();render()"><span class="tab-icon" aria-hidden="true">📋</span>Marqueurs</div>`:''}
     </div>`;
 
     if(curTab==='oral'&&hasOral){
@@ -9819,8 +9834,67 @@ function doReset(){if(confirm('Réinitialiser toute la progression ?')){const se
 // ================================================================
 // QR CODE — transfert par lien
 // ================================================================
-function generateQR(){
-  if(typeof qrcode==='undefined'){toast('QR non disponible (hors-ligne)');return;}
+// ================================================================
+// CHARGEMENT À LA DEMANDE — QR, PDF, confettis
+// Ces 4 bibliothèques pèsent ~596 Ko. Les charger dans le <head> bloquait
+// le premier affichage et, PWA installée hors-ligne, faisait attendre
+// 4 requêtes vouées à échouer. Elles ne sont plus chargées qu'au clic.
+// integrity : si le CDN est compromis, le navigateur refuse le script.
+// ================================================================
+const LIBS={
+  qrcode:{url:'https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js',
+    integrity:'sha384-lQXOAyZwHXE55JFyrOMB7nY2Wv+m5ZWNtJcHrd1rceRQXAYNLak8ukN5TjBTcIwz',
+    ready:()=>typeof qrcode!=='undefined'},
+  html2canvas:{url:'https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js',
+    integrity:'sha384-ZZ1pncU3bQe8y31yfZdMFdSpttDoPmOZg2wguVK9almUodir1PghgT0eY7Mrty8H',
+    ready:()=>typeof html2canvas!=='undefined'},
+  jspdf:{url:'https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js',
+    integrity:'sha384-en/ztfPSRkGfME4KIm05joYXynqzUgbsG5nMrj/xEFAHXkeZfO3yMK8QQ+mP7p1/',
+    ready:()=>!!(window.jspdf&&window.jspdf.jsPDF)},
+  confetti:{url:'https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js',
+    integrity:'sha384-sPwMflxqfAN+Q5mvlkLmHiX3PORGbZSXHiSGPTXT9VHCD/AB+b+r+vJWsqprv+7k',
+    ready:()=>typeof confetti!=='undefined'}
+};
+// Entrée / Espace activent les éléments cliquables rendus focusables (role link/tab).
+// Délégation unique : rien à répéter sur chaque élément généré.
+document.addEventListener('keydown',e=>{
+  if(e.key!=='Enter'&&e.key!==' ')return;
+  const t=e.target;
+  if(!t||!t.getAttribute)return;
+  const r=t.getAttribute('role');
+  if((r==='link'||r==='tab'||r==='button')&&t.hasAttribute('onclick')){
+    e.preventDefault();
+    t.click();
+  }
+});
+
+// Le sensei a-t-il demandé moins d'animations, ici ou au niveau de son système ?
+function prefersReducedMotion(){
+  try{return window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches&&!document.documentElement.hasAttribute('data-anim-force')}
+  catch(e){return false}
+}
+
+const _libLoading={};
+function loadLib(key){
+  const lib=LIBS[key];
+  if(!lib)return Promise.reject(new Error('bibliothèque inconnue : '+key));
+  if(lib.ready())return Promise.resolve(true);
+  if(_libLoading[key])return _libLoading[key];
+  _libLoading[key]=new Promise((resolve,reject)=>{
+    const sc=document.createElement('script');
+    sc.src=lib.url;
+    sc.integrity=lib.integrity;
+    sc.crossOrigin='anonymous';
+    sc.referrerPolicy='no-referrer';
+    sc.onload=()=>lib.ready()?resolve(true):reject(new Error('chargée mais inutilisable : '+key));
+    sc.onerror=()=>{delete _libLoading[key];reject(new Error('chargement impossible : '+key))};
+    document.head.appendChild(sc);
+  });
+  return _libLoading[key];
+}
+
+async function generateQR(){
+  try{await loadLib('qrcode')}catch(e){toast('QR non disponible (hors-ligne)');return;}
   const container=document.getElementById('qrCodeContainer');
   if(!container)return;
   const code=generateSaveCode();
@@ -9860,10 +9934,12 @@ function generateQR(){
 // ================================================================
 // EXPORT PDF — historique et cours
 // ================================================================
-function exportPDF(elementId,filename){
+async function exportPDF(elementId,filename){
   const el=document.getElementById(elementId)||document.querySelector('.content');
-  if(!el||typeof html2canvas==='undefined'){toast('Export non disponible');return;}
+  if(!el){toast('Export non disponible');return;}
   toast('Génération du PDF...');
+  try{await loadLib('html2canvas');await loadLib('jspdf')}
+  catch(e){toast('Export PDF non disponible (hors-ligne)');return;}
   html2canvas(el,{scale:2,useCORS:true,backgroundColor:getComputedStyle(document.documentElement).getPropertyValue('--bg-base').trim()||'#f5f0e8'}).then(canvas=>{
     const {jsPDF}=window.jspdf;
     const pdf=new jsPDF('p','mm','a4');
@@ -10166,10 +10242,13 @@ save=function(){_origSave();updateHeaderSensei()};
 // CONFETTI — célébration à 100%
 // ================================================================
 function celebrate(){
-  if(typeof confetti==='undefined'||S.noAnim)return;
+  if(S.noAnim||prefersReducedMotion())return;
   const s=getSensei();const nat=D.natures.find(n=>n.id===s.nature);
   const colors=nat?{katon:['#d43a1a','#d97a1e','#ff6b35'],futon:['#2e8b57','#3cb371','#90ee90'],raiton:['#c8a84e','#daa520','#ffd700'],doton:['#8b6914','#a0522d','#cd853f'],suiton:['#1e6aa0','#4a90d9','#87ceeb']}[s.nature]||['#c8a84e','#d97a1e']:['#c8a84e','#d97a1e','#2e8b57'];
-  confetti({particleCount:80,spread:70,origin:{y:0.7},colors});
+  const fire=()=>confetti({particleCount:80,spread:70,origin:{y:0.7},colors});
+  if(typeof confetti!=='undefined'){fire();return;}
+  // hors-ligne : pas de confettis, et surtout pas d'erreur dans la console
+  loadLib('confetti').then(fire).catch(()=>{});
 }
 // Hook into tog() to detect 100% completion
 const _origTog=tog;
