@@ -7500,7 +7500,51 @@ function removeCoursGiven(coursId){
 
 // 1 session (18h→4h) = 1 mois IG. Bilan par session avec historique navigable.
 let bilanDate=null; // null = aujourd'hui
+let bilanMode='v1'; // 'v1' = simple, 'v2' = compte rendu détaillé
+let bilanV2Data={}; // {ts: {organisateur, intervenant, nbEleves}} — champs V2 par cours
 function bilanSetDate(dateStr){bilanDate=dateStr||null;render();}
+function bilanSetMode(m){bilanMode=m;render();}
+function bilanV2Set(ts,field,val){if(!bilanV2Data[ts])bilanV2Data[ts]={};bilanV2Data[ts][field]=val;}
+function getCoursCategoryLabel(coursId){
+  const nat=COURS_NATURE[coursId];
+  if(nat)return nat.charAt(0).toUpperCase()+nat.slice(1);
+  const spec=COURS_SPEC[coursId];
+  if(spec)return spec.charAt(0).toUpperCase()+spec.slice(1);
+  const c=cours(coursId);
+  return c?c.mod:'';
+}
+function buildDiscordV2(entries,allHist){
+  const allSorted=[...allHist].sort((a,b)=>a.ts-b.ts);
+  let txt='';
+  entries.forEach((e,i)=>{
+    const globalIdx=allSorted.findIndex(h=>h.ts===e.ts)+1;
+    const c=cours(e.id);
+    const catLabel=getCoursCategoryLabel(e.id);
+    const typeStr=c?(c.titre+(catLabel?' - '+catLabel:'')):e.titre;
+    const d=bilanV2Data[e.ts]||{};
+    const org=d.organisateur||'';
+    const inter=d.intervenant||'';
+    const nb=d.nbEleves||'';
+    if(i>0)txt+='\n';
+    txt+=`Cours ${globalIdx}\n`;
+    txt+=`Organisateur du cours : ${org}\n`;
+    txt+=`Intervenant : ${inter}\n`;
+    txt+=`Type de cours : ${typeStr}\n`;
+    txt+=`nombre d'élève : ${nb}\n`;
+  });
+  return txt||'Aucun cours ce jour.\n';
+}
+function copyBilanV2(){
+  const hist=getCoursHistory();
+  const sessionNow=new Date();if(sessionNow.getHours()<5)sessionNow.setDate(sessionNow.getDate()-1);
+  const todayStr=sessionNow.toLocaleDateString('fr-FR');
+  const selDate=bilanDate||todayStr;
+  const allDays={};hist.forEach(e=>{if(!allDays[e.date])allDays[e.date]=[];allDays[e.date].push(e)});
+  const selHist=allDays[selDate]||[];
+  const sessionSort=(a,b)=>{const ha=parseInt(a.heure),hb=parseInt(b.heure);const sa=ha<5?ha+24:ha,sb=hb<5?hb+24:hb;return sa===sb?a.heure.localeCompare(b.heure):sa-sb};
+  const sorted=[...selHist].sort(sessionSort);
+  clipCopy(buildDiscordV2(sorted,hist),'Compte rendu');
+}
 
 function renderBilan(){
   const s=getSensei();
@@ -7676,14 +7720,58 @@ function renderBilan(){
   h+=`</div>`;
 
   // ====== Message Discord à copier ======
+  const activeMode=bilanMode||'v1';
+
   h+=`<div class="scroll-card" style="margin-bottom:16px">
     <div class="scroll-stamp">📜</div>
     <div class="scroll-title"><span class="scroll-brush">📜</span> Parchemin — prêt à copier</div>
-    <div style="margin-bottom:10px">
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;flex-wrap:wrap">
+      <button class="btn btn-sm ${activeMode==='v1'?'btn-primary':''}" onclick="bilanSetMode('v1')" style="font-size:0.75rem">V1 — Résumé</button>
+      <button class="btn btn-sm ${activeMode==='v2'?'btn-primary':''}" onclick="bilanSetMode('v2')" style="font-size:0.75rem">V2 — Compte rendu</button>
+    </div>`;
+
+  if(activeMode==='v1'){
+    h+=`<div style="margin-bottom:10px">
       <button class="btn btn-sm btn-primary" onclick="clipCopy(document.getElementById('bilanText').getAttribute('data-raw'),'Bilan')">📋 Copier</button>
     </div>
-    <pre id="bilanText" data-raw="${esc(discord)}" style="background:var(--bg-input);border:1px solid var(--border);border-radius:var(--radius);padding:14px;font-family:'Noto Sans JP',monospace;font-size:0.85rem;color:var(--text);white-space:pre-wrap;line-height:1.8;margin:0">${esc(discord)}</pre>
-  </div>`;
+    <pre id="bilanText" data-raw="${esc(discord)}" style="background:var(--bg-input);border:1px solid var(--border);border-radius:var(--radius);padding:14px;font-family:'Noto Sans JP',monospace;font-size:0.85rem;color:var(--text);white-space:pre-wrap;line-height:1.8;margin:0">${esc(discord)}</pre>`;
+  }else{
+    // V2 — Formulaire par cours avec champs éditables
+    const allSorted=[...hist].sort((a,b)=>a.ts-b.ts);
+    if(dayTotal===0){
+      h+=`<div style="text-align:center;padding:20px;color:var(--text-muted);font-style:italic">Aucun cours ce jour.</div>`;
+    }else{
+      const sorted=[...selHist].sort(sessionSort);
+      h+=`<div style="font-size:0.72rem;color:var(--text-muted);margin-bottom:12px;font-style:italic">Remplissez les champs puis cliquez sur Copier.</div>`;
+      sorted.forEach((e,i)=>{
+        const globalIdx=allSorted.findIndex(h=>h.ts===e.ts)+1;
+        const c=cours(e.id);
+        const catLabel=getCoursCategoryLabel(e.id);
+        const typeStr=c?(c.titre+(catLabel?' - '+catLabel:'')):e.titre;
+        const d=bilanV2Data[e.ts]||{};
+        const orgVal=d.organisateur!==undefined?d.organisateur:senseiFullName();
+        const interVal=d.intervenant||'';
+        const nbVal=d.nbEleves!==undefined?d.nbEleves:(e.noEleve?'0':'');
+        h+=`<div style="background:var(--bg-input);border:1px solid var(--border);border-radius:var(--radius-lg);padding:14px 16px;margin-bottom:${i<sorted.length-1?'10px':'0'}">
+          <div style="font-weight:700;font-size:0.95rem;color:var(--skin-primary);margin-bottom:10px">Cours ${globalIdx}</div>
+          <div style="display:grid;grid-template-columns:110px 1fr;gap:6px 10px;align-items:center;font-size:0.82rem">
+            <span style="color:var(--text-muted)">Type de cours</span>
+            <span style="font-weight:600;color:var(--text-bright)">${esc(typeStr)}</span>
+            <span style="color:var(--text-muted)">Organisateur</span>
+            <input type="text" value="${esc(orgVal)}" onchange="bilanV2Set(${e.ts},'organisateur',this.value)" placeholder="@pseudo" style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:4px 8px;font-size:0.82rem;color:var(--text);font-family:inherit;width:100%;box-sizing:border-box">
+            <span style="color:var(--text-muted)">Intervenant</span>
+            <input type="text" value="${esc(interVal)}" onchange="bilanV2Set(${e.ts},'intervenant',this.value)" placeholder="@pseudo1 @pseudo2" style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:4px 8px;font-size:0.82rem;color:var(--text);font-family:inherit;width:100%;box-sizing:border-box">
+            <span style="color:var(--text-muted)">Nb d'élèves</span>
+            <input type="text" value="${esc(nbVal)}" onchange="bilanV2Set(${e.ts},'nbEleves',this.value)" placeholder="3" style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:4px 8px;font-size:0.82rem;color:var(--text);font-family:inherit;width:60px;box-sizing:border-box">
+          </div>
+        </div>`;
+      });
+      h+=`<div style="margin-top:12px">
+        <button class="btn btn-sm btn-primary" onclick="copyBilanV2()">📋 Copier le compte rendu</button>
+      </div>`;
+    }
+  }
+  h+=`</div>`;
 
   // ====== Actions ======
   h+=`<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-top:8px">

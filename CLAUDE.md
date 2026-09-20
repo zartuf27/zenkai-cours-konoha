@@ -37,12 +37,13 @@ donnees_cours.json         — Données structurées (synchronisé avec le HTML)
 img_cycle_natures.png      — Schéma cycle des 5 natures (utilisé dans les cours)
 img_kekkei_genkai.png      — Diagramme des Kekkei Genkai (utilisé dans les cours)
 CLAUDE.md                  — Ce fichier (instructions pour Claude)
+GUIDE-PARTAGE.md           — Guide multi-sensei (déploiement, profil, progression)
 .gitignore                 — Exclut images lourdes, .docx sources, .claude/, cache graphify
-théorique/                 — Cours théoriques (.docx, .md) + images
-Pratique/                  — 13 cours pratiques (.docx)
+théorique/                 — Cours théoriques (.docx, .md) + images + directive format + propositions
+Pratique/                  — 15 cours pratiques (.docx) dont nature pratique et kenjutsu
 Cours du sensei renard/    — Cours d'un autre sensei (7 .md + HTML + script)
-Propositions de nouveaux cours.docx — Idées de nouveaux cours
-Format tableau.docx        — Directive format annonces (Yamamoto Jakka)
+Hishiba/                   — Assets visuels (images de référence)
+graphify-out/              — Graphe contextuel Graphify (graph.json, rapport, converted/)
 ```
 
 ## Les 46 cours (par module)
