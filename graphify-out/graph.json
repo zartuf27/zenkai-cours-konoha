@@ -8085,28 +8085,6 @@
       "weight": 1.0
     },
     {
-      "source": "claude_skills_zenkai_cours_skill_1_lire_la_source_et_d\u00e9cider_du_cadrage",
-      "target": "claude_skills_zenkai_cours_skill_ajouter_un_cours_\u00e0_l_app_zenkai",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".claude/skills/zenkai-cours/SKILL.md",
-      "source_location": "L12",
-      "weight": 1.0
-    },
-    {
-      "source": "claude_skills_zenkai_cours_skill_2_les_composants_\u00e0_\u00e9crire",
-      "target": "claude_skills_zenkai_cours_skill_ajouter_un_cours_\u00e0_l_app_zenkai",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".claude/skills/zenkai-cours/SKILL.md",
-      "source_location": "L28",
-      "weight": 1.0
-    },
-    {
       "source": "claude_skills_zenkai_cours_skill_2_les_composants_\u00e0_\u00e9crire",
       "target": "claude_skills_zenkai_cours_skill_fallback_par_nature",
       "relation": "contains",
@@ -8118,52 +8096,8 @@
       "weight": 1.0
     },
     {
-      "source": "claude_skills_zenkai_cours_skill_3_les_deux_r\u00e8gles_de_contenu_\u00e0_ne_jamais_enfreindre",
-      "target": "claude_skills_zenkai_cours_skill_ajouter_un_cours_\u00e0_l_app_zenkai",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".claude/skills/zenkai-cours/SKILL.md",
-      "source_location": "L51",
-      "weight": 1.0
-    },
-    {
-      "source": "claude_skills_zenkai_cours_skill_4_\u00e9viter_les_redites",
-      "target": "claude_skills_zenkai_cours_skill_ajouter_un_cours_\u00e0_l_app_zenkai",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".claude/skills/zenkai-cours/SKILL.md",
-      "source_location": "L61",
-      "weight": 1.0
-    },
-    {
-      "source": "claude_skills_zenkai_cours_skill_5_v\u00e9rifier_avant_de_committer",
-      "target": "claude_skills_zenkai_cours_skill_ajouter_un_cours_\u00e0_l_app_zenkai",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".claude/skills/zenkai-cours/SKILL.md",
-      "source_location": "L79",
-      "weight": 1.0
-    },
-    {
-      "source": "claude_skills_zenkai_cours_skill_6_\u00e9criture_du_html_passer_par_un_script_python",
-      "target": "claude_skills_zenkai_cours_skill_ajouter_un_cours_\u00e0_l_app_zenkai",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": ".claude/skills/zenkai-cours/SKILL.md",
-      "source_location": "L96",
-      "weight": 1.0
-    },
-    {
-      "source": "claude_skills_zenkai_cours_skill_7_terminer_le_save_complet",
-      "target": "claude_skills_zenkai_cours_skill_ajouter_un_cours_\u00e0_l_app_zenkai",
+      "source": "claude_skills_zenkai_cours_skill_ajouter_un_cours_\u00e0_l_app_zenkai",
+      "target": "claude_skills_zenkai_cours_skill_7_terminer_le_save_complet",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -8173,8 +8107,74 @@
       "weight": 1.0
     },
     {
-      "source": "cours_du_sensei_renard_convert_to_html_md_to_html",
-      "target": "cours_du_sensei_renard_convert_to_html",
+      "source": "claude_skills_zenkai_cours_skill_ajouter_un_cours_\u00e0_l_app_zenkai",
+      "target": "claude_skills_zenkai_cours_skill_1_lire_la_source_et_d\u00e9cider_du_cadrage",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/zenkai-cours/SKILL.md",
+      "source_location": "L12",
+      "weight": 1.0
+    },
+    {
+      "source": "claude_skills_zenkai_cours_skill_ajouter_un_cours_\u00e0_l_app_zenkai",
+      "target": "claude_skills_zenkai_cours_skill_2_les_composants_\u00e0_\u00e9crire",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/zenkai-cours/SKILL.md",
+      "source_location": "L28",
+      "weight": 1.0
+    },
+    {
+      "source": "claude_skills_zenkai_cours_skill_ajouter_un_cours_\u00e0_l_app_zenkai",
+      "target": "claude_skills_zenkai_cours_skill_3_les_deux_r\u00e8gles_de_contenu_\u00e0_ne_jamais_enfreindre",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/zenkai-cours/SKILL.md",
+      "source_location": "L51",
+      "weight": 1.0
+    },
+    {
+      "source": "claude_skills_zenkai_cours_skill_ajouter_un_cours_\u00e0_l_app_zenkai",
+      "target": "claude_skills_zenkai_cours_skill_4_\u00e9viter_les_redites",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/zenkai-cours/SKILL.md",
+      "source_location": "L61",
+      "weight": 1.0
+    },
+    {
+      "source": "claude_skills_zenkai_cours_skill_ajouter_un_cours_\u00e0_l_app_zenkai",
+      "target": "claude_skills_zenkai_cours_skill_5_v\u00e9rifier_avant_de_committer",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/zenkai-cours/SKILL.md",
+      "source_location": "L79",
+      "weight": 1.0
+    },
+    {
+      "source": "claude_skills_zenkai_cours_skill_ajouter_un_cours_\u00e0_l_app_zenkai",
+      "target": "claude_skills_zenkai_cours_skill_6_\u00e9criture_du_html_passer_par_un_script_python",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": ".claude/skills/zenkai-cours/SKILL.md",
+      "source_location": "L96",
+      "weight": 1.0
+    },
+    {
+      "source": "cours_du_sensei_renard_convert_to_html",
+      "target": "cours_du_sensei_renard_convert_to_html_md_to_html",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -9263,6 +9263,28 @@
     },
     {
       "source": "tools_verifier",
+      "target": "tools_verifier_fail",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "tools/verifier.mjs",
+      "source_location": "L46",
+      "weight": 1.0
+    },
+    {
+      "source": "tools_verifier",
+      "target": "tools_verifier_note",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "tools/verifier.mjs",
+      "source_location": "L47",
+      "weight": 1.0
+    },
+    {
+      "source": "tools_verifier",
       "target": "tools_verifier_types",
       "relation": "contains",
       "_origin": "ast",
@@ -9328,30 +9350,8 @@
       "weight": 1.0
     },
     {
-      "source": "tools_verifier_fail",
-      "target": "tools_verifier",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "tools/verifier.mjs",
-      "source_location": "L46",
-      "weight": 1.0
-    },
-    {
-      "source": "tools_verifier_note",
-      "target": "tools_verifier",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "tools/verifier.mjs",
-      "source_location": "L47",
-      "weight": 1.0
-    },
-    {
-      "source": "jsdom",
-      "target": "tools_verifier",
+      "source": "tools_verifier",
+      "target": "jsdom",
       "relation": "dynamic_import",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -16726,5 +16726,5 @@
       "source_file": "graphify-out/converted/Propositions de nouveaux cours_8663fe44.md"
     }
   ],
-  "built_at_commit": "717885f4f94af47da5b2ca419992c13fd9d106f8"
+  "built_at_commit": "72452f6fcd7558f20ae0780872778bdd66a24106"
 }
