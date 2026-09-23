@@ -2101,18 +2101,19 @@
         "mudras_cours",
         "nature_theorie"
       ],
-      "desc": "Spirale de vent expulsée depuis les poumons en direction de la cible. Repousse à l'impact.",
+      "desc": "Boule de vent comprimé formée depuis les poumons puis projetée sur la cible. Repousse à l'impact.",
       "techs": [
         {
           "id": "fut_spirale",
           "nom": "Spirale de Vent",
-          "desc": "Spirale de vent expulsée depuis les poumons en direction de la cible. Repousse à l'impact.",
+          "desc": "Boule de vent comprimé formée depuis les poumons puis projetée sur la cible. Repousse à l'impact.",
           "type": "ninjutsu",
           "etapes": [
             "Composer les mudras",
-            "Concentrer le chakra dans les poumons",
-            "Expulser la spirale de vent",
-            "Viser la cible"
+            "Accumuler le chakra Futon dans les poumons",
+            "Canaliser le chakra avec précision",
+            "Former la boule de vent comprimé",
+            "Projeter la spirale vers la cible"
           ],
           "mudras": [
             "coq",
@@ -2135,18 +2136,19 @@
         "mudras_cours",
         "nature_theorie"
       ],
-      "desc": "Mur de vent érigé face au shinobi. Bloque les approches frontales.",
+      "desc": "Barrière de courant d'air dressée face au shinobi. Protège des jutsu, ralentit ou repousse les attaques frontales.",
       "techs": [
         {
           "id": "fut_mur",
           "nom": "Mur de Vent",
-          "desc": "Mur de vent érigé face au shinobi. Bloque les approches frontales.",
+          "desc": "Barrière de courant d'air dressée face au shinobi. Protège des jutsu, ralentit ou repousse les attaques frontales.",
           "type": "ninjutsu",
           "etapes": [
             "Composer les mudras",
-            "Concentrer le chakra",
-            "Créer le mur de vent",
-            "Maintenir la barrière"
+            "Accumuler le chakra Futon dans les poumons",
+            "Canaliser le chakra",
+            "Visualiser le mur (position, largeur, hauteur)",
+            "Projeter et maintenir le mur"
           ],
           "mudras": [
             "lievre",
@@ -2167,20 +2169,23 @@
       "auteur": null,
       "prereq": [
         "mudras_cours",
-        "nature_theorie"
+        "nature_theorie",
+        "fut_spirale"
       ],
-      "desc": "Trois spirales de vent projetées simultanément. Version avancée de la Spirale de Vent.",
+      "desc": "Trois petites boules de vent comprimé projetées simultanément. Version avancée de la Spirale de Vent.",
       "techs": [
         {
           "id": "fut_cinglantes",
           "nom": "Spirales Cinglantes",
-          "desc": "Trois spirales de vent projetées simultanément. Version avancée de la Spirale de Vent.",
+          "desc": "Trois petites boules de vent comprimé projetées simultanément. Version avancée de la Spirale de Vent.",
           "type": "ninjutsu",
           "etapes": [
             "Composer les mudras",
-            "Concentrer le chakra dans les poumons",
-            "Expulser trois spirales",
-            "Viser la zone cible"
+            "Accumuler le chakra Futon dans les poumons",
+            "Diviser le chakra en trois concentrations",
+            "Former les trois boules de vent",
+            "Stabiliser les trois sphères",
+            "Les expulser simultanément vers la cible"
           ],
           "mudras": [
             "coq",
@@ -2202,20 +2207,23 @@
       "auteur": null,
       "prereq": [
         "mudras_cours",
-        "nature_theorie"
+        "nature_theorie",
+        "fut_spirale"
       ],
-      "desc": "Sphère de futon projetée qui crée une onde de choc à l'impact.",
+      "desc": "Grande sphère de vent comprimé projetée vers l'avant. Son onde de choc repousse la cible et crée la distance.",
       "techs": [
         {
           "id": "fut_onde",
           "nom": "Onde de Choc",
-          "desc": "Sphère de futon projetée qui crée une onde de choc à l'impact.",
+          "desc": "Grande sphère de vent comprimé projetée vers l'avant. Son onde de choc repousse la cible et crée la distance.",
           "type": "ninjutsu",
           "etapes": [
             "Composer les mudras",
-            "Projeter la sphère de futon",
-            "L'onde de choc se déclenche au contact",
-            "Repousser la cible"
+            "Accumuler une grande quantité de chakra Futon",
+            "Canaliser le chakra",
+            "Former la grande sphère de vent",
+            "Projeter la sphère",
+            "L'onde de choc repousse la cible à l'impact"
           ],
           "mudras": [
             "sanglier",

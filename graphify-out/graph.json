@@ -724,6 +724,18 @@
       "source_location": "L55"
     },
     {
+      "id": "futon_l_onde_de_choc_futo",
+      "label": "l'onde de Choc Futo.md",
+      "_origin": "ast",
+      "community": 13,
+      "community_name": "l'onde de Choc Futo.md",
+      "file_type": "document",
+      "node_kind": "page",
+      "norm_label": "l'onde de choc futo.md",
+      "source_file": "FUTON/l'onde de Choc Futo.md",
+      "source_location": "L1"
+    },
+    {
       "id": "claude_adaptation_du_contenu_par_personnalit\u00e9_nature_sp\u00e9cialisation",
       "label": "Adaptation du contenu par personnalit\u00e9 + nature + sp\u00e9cialisation",
       "_origin": "ast",
@@ -974,6 +986,18 @@
       "norm_label": "vue d'ensemble des pages (sidebar \u2014 10 vues)",
       "source_file": "CLAUDE.md",
       "source_location": "L68"
+    },
+    {
+      "id": "futon_les_spirales_cinglante",
+      "label": "les Spirales Cinglante.md",
+      "_origin": "ast",
+      "community": 15,
+      "community_name": "les Spirales Cinglante.md",
+      "file_type": "document",
+      "node_kind": "page",
+      "norm_label": "les spirales cinglante.md",
+      "source_file": "FUTON/les Spirales Cinglante.md",
+      "source_location": "L1"
     },
     {
       "id": "graphify_out_converted_nindo_898d1d8a",
@@ -16726,5 +16750,5 @@
       "source_file": "graphify-out/converted/Propositions de nouveaux cours_8663fe44.md"
     }
   ],
-  "built_at_commit": "72452f6fcd7558f20ae0780872778bdd66a24106"
+  "built_at_commit": "31c5336fc20307e00bedba29adc34fd55ffe293e"
 }

@@ -1,17 +1,17 @@
-# Graph Report - ZENKAI TEEEST  (2026-09-20)
+# Graph Report - ZENKAI TEEEST  (2026-09-23)
 
 ## Corpus Check
-- 44 files · ~164,779 words
+- 46 files · ~170,292 words
 - Verdict: corpus is large enough that graph structure adds value.
 - Unclassified: 1 file(s) not represented in the graph (top: (none) 1)
 
 ## Summary
-- 531 nodes · 801 edges · 24 communities (21 shown, 2 thin omitted)
+- 533 nodes · 801 edges · 26 communities (21 shown, 2 thin omitted)
 - Extraction: 84% EXTRACTED · 16% INFERRED · 0% AMBIGUOUS · INFERRED: 127 edges (avg confidence: 0.86)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `72452f6f`
+- Built from commit: `31c5336f`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -85,7 +85,7 @@
 - **Cours infiltration/espionnage proposés** — cours_contre_espionnage, cours_deguisement_ultime, cours_chasse_au_sensei, concept_infiltration, concept_traque [INFERRED 0.85]
 - **Cours tactiques proposés** — cours_formations_equipe_roles_tactiques, cours_conseil_de_guerre, cours_psychologie_ennemi [INFERRED 0.85]
 
-## Communities (24 total, 2 thin omitted)
+## Communities (26 total, 2 thin omitted)
 
 ### Community 0 - "Moteur de rendu et personnalisation"
 Cohesion: 0.06
@@ -177,7 +177,7 @@ Nodes (3): Announcement Format Directive, Yamamoto Jakka - Responsable Professeu
 
 ## Knowledge Gaps
 - **179 isolated node(s):** `name`, `short_name`, `description`, `start_url`, `scope` (+174 more)
-  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 202 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
+  These have ≤1 connection - possible missing edges or undocumented components. (Counts symbols only; 204 node(s) total have ≤1 connection when file, concept and rationale nodes are included.)
 - **2 thin communities (<3 nodes) omitted from report** — run `graphify query` to explore isolated nodes.
 
 ## Suggested Questions

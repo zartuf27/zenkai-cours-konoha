@@ -155,13 +155,15 @@ const COURS_NATURE={rai_rayon:'raiton',rai_boule:'raiton',rai_ruee:'raiton',rai_
 
 Chaque technique de nature est un cours individuel, visible uniquement pour le sensei dont c'est la nature (20 cours, 4 par nature).
 
-**Fallback par nature** : les 20 cours de nature n'ont pas d'entrée propre dans `SENSEI_QUOTES` / `COURS_FLAVOR`. Le code retombe sur une entrée partagée préfixée par `_` :
+**Fallback par nature** : les cours de nature n'ont en principe pas d'entrée propre dans `SENSEI_QUOTES` / `COURS_FLAVOR`. Le code retombe sur une entrée partagée préfixée par `_` :
 
 ```javascript
 SENSEI_QUOTES[coursId] || (COURS_NATURE[coursId] ? SENSEI_QUOTES['_'+COURS_NATURE[coursId]] : null)
 ```
 
 Il existe donc `_katon`, `_futon`, `_raiton`, `_doton`, `_suiton` dans `SENSEI_QUOTES` **et** dans `COURS_FLAVOR` : une seule citation et un seul jeu de marqueurs pour les 4 techniques d'une même nature. Pour donner un texte propre à une technique, ajouter une entrée à son `id` — elle prend le pas sur le fallback.
+
+**Exception Futon** : les 4 techniques Futon (`fut_spirale`, `fut_mur`, `fut_cinglantes`, `fut_onde`) ont leurs propres entrées `SENSEI_QUOTES` et `COURS_FLAVOR` (16 types + 5 natures chacune), et un support oral détaillé (Principe, Étapes de réalisation, Points à marteler) issu du dossier `FUTON/`. La citation « sage » de chaque entrée est aussi la phrase de clôture du `CONTENU` et de `NOTES_PROF` : c'est ce qui permet à `applySenseiName()` de la remplacer par celle du type du sensei. `_futon` reste en place comme fallback. Les Spirales Cinglantes et l'Onde de Choc ont `fut_spirale` en prérequis.
 
 ### Filtrage des cours par spécialisation combat
 
@@ -197,7 +199,7 @@ Logique de sélection `SPEC_FLAVOR` :
 
 Affichage : blocs CSS `.flavor-intro` (bordure skin, italique) et `.flavor-nature` (fond teinté, icône nature/spec).
 
-**Couverture** : les 54 cours ont des marqueurs personnalisés — soit une entrée propre dans `COURS_FLAVOR` (39 entrées), soit le fallback `_<nature>` pour les 20 techniques de nature. Tout nouveau cours doit maintenir cette couverture : 16 intros + 5 natures, sans exception.
+**Couverture** : les 54 cours ont des marqueurs personnalisés — soit une entrée propre dans `COURS_FLAVOR` (43 entrées, dont les 4 techniques Futon), soit le fallback `_<nature>` pour les 16 autres techniques de nature. Tout nouveau cours doit maintenir cette couverture : 16 intros + 5 natures, sans exception.
 
 ### Cours Kenjutsu (structure modulaire par type de lame)
 
