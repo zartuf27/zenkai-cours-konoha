@@ -1326,7 +1326,7 @@
       "node_kind": "heading",
       "norm_label": "2. les composants a ecrire",
       "source_file": ".claude/skills/zenkai-cours/SKILL.md",
-      "source_location": "L28"
+      "source_location": "L27"
     },
     {
       "id": "claude_skills_zenkai_cours_skill_3_les_deux_r\u00e8gles_de_contenu_\u00e0_ne_jamais_enfreindre",
@@ -1338,7 +1338,7 @@
       "node_kind": "heading",
       "norm_label": "3. les deux regles de contenu a ne jamais enfreindre",
       "source_file": ".claude/skills/zenkai-cours/SKILL.md",
-      "source_location": "L51"
+      "source_location": "L50"
     },
     {
       "id": "claude_skills_zenkai_cours_skill_4_\u00e9viter_les_redites",
@@ -1350,7 +1350,7 @@
       "node_kind": "heading",
       "norm_label": "4. eviter les redites",
       "source_file": ".claude/skills/zenkai-cours/SKILL.md",
-      "source_location": "L61"
+      "source_location": "L60"
     },
     {
       "id": "claude_skills_zenkai_cours_skill_5_v\u00e9rifier_avant_de_committer",
@@ -1362,7 +1362,7 @@
       "node_kind": "heading",
       "norm_label": "5. verifier avant de committer",
       "source_file": ".claude/skills/zenkai-cours/SKILL.md",
-      "source_location": "L79"
+      "source_location": "L78"
     },
     {
       "id": "claude_skills_zenkai_cours_skill_6_\u00e9criture_du_html_passer_par_un_script_python",
@@ -1374,7 +1374,7 @@
       "node_kind": "heading",
       "norm_label": "6. ecriture du html : passer par un script python",
       "source_file": ".claude/skills/zenkai-cours/SKILL.md",
-      "source_location": "L96"
+      "source_location": "L95"
     },
     {
       "id": "claude_skills_zenkai_cours_skill_7_terminer_le_save_complet",
@@ -1386,7 +1386,7 @@
       "node_kind": "heading",
       "norm_label": "7. terminer : le \u00ab save complet \u00bb",
       "source_file": ".claude/skills/zenkai-cours/SKILL.md",
-      "source_location": "L104"
+      "source_location": "L103"
     },
     {
       "id": "claude_skills_zenkai_cours_skill_ajouter_un_cours_\u00e0_l_app_zenkai",
@@ -1410,7 +1410,7 @@
       "node_kind": "heading",
       "norm_label": "fallback par nature",
       "source_file": ".claude/skills/zenkai-cours/SKILL.md",
-      "source_location": "L47"
+      "source_location": "L46"
     },
     {
       "id": "graphify_out_converted_arme_ninja_45a6fc66",
@@ -1572,7 +1572,7 @@
       "file_type": "code",
       "norm_label": "externes",
       "source_file": "tools/verifier.mjs",
-      "source_location": "L191"
+      "source_location": "L190"
     },
     {
       "id": "tools_verifier_hook",
@@ -8116,7 +8116,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".claude/skills/zenkai-cours/SKILL.md",
-      "source_location": "L47",
+      "source_location": "L46",
       "weight": 1.0
     },
     {
@@ -8127,7 +8127,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".claude/skills/zenkai-cours/SKILL.md",
-      "source_location": "L104",
+      "source_location": "L103",
       "weight": 1.0
     },
     {
@@ -8149,7 +8149,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".claude/skills/zenkai-cours/SKILL.md",
-      "source_location": "L28",
+      "source_location": "L27",
       "weight": 1.0
     },
     {
@@ -8160,7 +8160,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".claude/skills/zenkai-cours/SKILL.md",
-      "source_location": "L51",
+      "source_location": "L50",
       "weight": 1.0
     },
     {
@@ -8171,7 +8171,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".claude/skills/zenkai-cours/SKILL.md",
-      "source_location": "L61",
+      "source_location": "L60",
       "weight": 1.0
     },
     {
@@ -8182,7 +8182,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".claude/skills/zenkai-cours/SKILL.md",
-      "source_location": "L79",
+      "source_location": "L78",
       "weight": 1.0
     },
     {
@@ -8193,7 +8193,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": ".claude/skills/zenkai-cours/SKILL.md",
-      "source_location": "L96",
+      "source_location": "L95",
       "weight": 1.0
     },
     {
@@ -9205,7 +9205,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "tools/verifier.mjs",
-      "source_location": "L191",
+      "source_location": "L190",
       "weight": 1.0
     },
     {
@@ -16750,5 +16750,5 @@
       "source_file": "graphify-out/converted/Propositions de nouveaux cours_8663fe44.md"
     }
   ],
-  "built_at_commit": "31c5336fc20307e00bedba29adc34fd55ffe293e"
+  "built_at_commit": "0af2f2b028875bd86fc04f0b12128b7ec3d732e8"
 }

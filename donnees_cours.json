@@ -258,7 +258,6 @@
       "rang": "Apprenti Genin",
       "cible": "Tous",
       "auteur": null,
-      "prereq": [],
       "desc": "Les 8 règles fondamentales : loyauté, hiérarchie, mission, protection, secret, respect, maîtrise de soi, honneur.",
       "techs": [
         {
@@ -271,8 +270,7 @@
             "Savoir l'appliquer en situation"
           ],
           "mudras": [],
-          "rang": "Apprenti Genin",
-          "prereq": []
+          "rang": "Apprenti Genin"
         },
         {
           "id": "regle_hierarchie",
@@ -284,8 +282,7 @@
             "Appliquer les ordres avec discipline"
           ],
           "mudras": [],
-          "rang": "Apprenti Genin",
-          "prereq": []
+          "rang": "Apprenti Genin"
         },
         {
           "id": "regle_mission",
@@ -297,8 +294,7 @@
             "Gérer les dilemmes mission vs personnel"
           ],
           "mudras": [],
-          "rang": "Apprenti Genin",
-          "prereq": []
+          "rang": "Apprenti Genin"
         },
         {
           "id": "regle_protection",
@@ -310,8 +306,7 @@
             "Identifier les civils à protéger"
           ],
           "mudras": [],
-          "rang": "Apprenti Genin",
-          "prereq": []
+          "rang": "Apprenti Genin"
         },
         {
           "id": "regle_secret",
@@ -323,8 +318,7 @@
             "Savoir ce qui est confidentiel"
           ],
           "mudras": [],
-          "rang": "Apprenti Genin",
-          "prereq": []
+          "rang": "Apprenti Genin"
         },
         {
           "id": "regle_respect",
@@ -336,8 +330,7 @@
             "Préserver la cohésion d'équipe"
           ],
           "mudras": [],
-          "rang": "Apprenti Genin",
-          "prereq": []
+          "rang": "Apprenti Genin"
         },
         {
           "id": "regle_maitrise",
@@ -349,8 +342,7 @@
             "Éviter la violence inutile"
           ],
           "mudras": [],
-          "rang": "Apprenti Genin",
-          "prereq": []
+          "rang": "Apprenti Genin"
         },
         {
           "id": "regle_honneur",
@@ -362,8 +354,7 @@
             "Agir en représentant du village"
           ],
           "mudras": [],
-          "rang": "Apprenti Genin",
-          "prereq": []
+          "rang": "Apprenti Genin"
         }
       ]
     },
@@ -375,9 +366,6 @@
       "rang": "Tous grades",
       "cible": "Tous",
       "auteur": null,
-      "prereq": [
-        "regles_or"
-      ],
       "desc": "Le chemin du ninja : philosophie de vie personnelle de chaque shinobi, forgée dans l'adversité.",
       "techs": [
         {
@@ -391,8 +379,7 @@
             "Identifier ses propres valeurs"
           ],
           "mudras": [],
-          "rang": "Apprenti Genin",
-          "prereq": []
+          "rang": "Apprenti Genin"
         },
         {
           "id": "nindo_forger",
@@ -405,10 +392,7 @@
             "Le tester face aux dilemmes"
           ],
           "mudras": [],
-          "rang": "Genin",
-          "prereq": [
-            "nindo_comprendre"
-          ]
+          "rang": "Genin"
         }
       ]
     },
@@ -420,9 +404,6 @@
       "rang": "Apprenti Genin",
       "cible": "Tous",
       "auteur": null,
-      "prereq": [
-        "nindo"
-      ],
       "desc": "Doctrine fondatrice : protéger Konoha à tout prix, transmettre les rêves entre générations.",
       "techs": [
         {
@@ -436,8 +417,7 @@
             "Appliquer en situation de crise"
           ],
           "mudras": [],
-          "rang": "Apprenti Genin",
-          "prereq": []
+          "rang": "Apprenti Genin"
         },
         {
           "id": "volonte_d2",
@@ -450,8 +430,7 @@
             "Identifier les rêves hérités"
           ],
           "mudras": [],
-          "rang": "Apprenti Genin",
-          "prereq": []
+          "rang": "Apprenti Genin"
         }
       ]
     },
@@ -463,9 +442,6 @@
       "rang": "Apprenti Genin",
       "cible": "Tous",
       "auteur": null,
-      "prereq": [
-        "volonte_feu"
-      ],
       "desc": "Des clans en guerre à la fondation, le rôle des grands clans, l'institutionnalisation par Tobirama.",
       "techs": [
         {
@@ -478,8 +454,7 @@
             "Identifier les 5 grands clans"
           ],
           "mudras": [],
-          "rang": "Apprenti Genin",
-          "prereq": []
+          "rang": "Apprenti Genin"
         },
         {
           "id": "hist_2",
@@ -492,8 +467,7 @@
             "Lier la fondation à la Volonté du Feu"
           ],
           "mudras": [],
-          "rang": "Apprenti Genin",
-          "prereq": []
+          "rang": "Apprenti Genin"
         },
         {
           "id": "hist_3",
@@ -508,8 +482,7 @@
             "Rôle du clan Akimichi"
           ],
           "mudras": [],
-          "rang": "Apprenti Genin",
-          "prereq": []
+          "rang": "Apprenti Genin"
         },
         {
           "id": "hist_4",
@@ -521,8 +494,7 @@
             "La crise de succession"
           ],
           "mudras": [],
-          "rang": "Apprenti Genin",
-          "prereq": []
+          "rang": "Apprenti Genin"
         }
       ]
     },
@@ -534,7 +506,6 @@
       "rang": "Apprenti Genin",
       "cible": "Tous",
       "auteur": "Yumi Amano",
-      "prereq": [],
       "desc": "Les 7 articles du règlement intérieur : comportement, prise de parole, déplacements, chakra, autorité, respect du corps professoral, terrains d'entraînement.",
       "techs": [
         {
@@ -547,8 +518,7 @@
             "Identifier les attitudes proscrites"
           ],
           "mudras": [],
-          "rang": "Apprenti Genin",
-          "prereq": []
+          "rang": "Apprenti Genin"
         },
         {
           "id": "ri_parole",
@@ -560,8 +530,7 @@
             "Demander la parole correctement"
           ],
           "mudras": [],
-          "rang": "Apprenti Genin",
-          "prereq": []
+          "rang": "Apprenti Genin"
         },
         {
           "id": "ri_deplacements",
@@ -573,8 +542,7 @@
             "Se ranger en ordre avant un cours"
           ],
           "mudras": [],
-          "rang": "Apprenti Genin",
-          "prereq": []
+          "rang": "Apprenti Genin"
         },
         {
           "id": "ri_chakra",
@@ -586,8 +554,7 @@
             "Demander l'autorisation si nécessaire"
           ],
           "mudras": [],
-          "rang": "Apprenti Genin",
-          "prereq": []
+          "rang": "Apprenti Genin"
         },
         {
           "id": "ri_autorite",
@@ -599,8 +566,7 @@
             "Accepter les sanctions"
           ],
           "mudras": [],
-          "rang": "Apprenti Genin",
-          "prereq": []
+          "rang": "Apprenti Genin"
         },
         {
           "id": "ri_respect",
@@ -612,8 +578,7 @@
             "Maintenir le respect en toutes circonstances"
           ],
           "mudras": [],
-          "rang": "Apprenti Genin",
-          "prereq": []
+          "rang": "Apprenti Genin"
         },
         {
           "id": "ri_terrains",
@@ -625,8 +590,7 @@
             "Respecter les restrictions"
           ],
           "mudras": [],
-          "rang": "Apprenti Genin",
-          "prereq": []
+          "rang": "Apprenti Genin"
         }
       ]
     },
@@ -638,7 +602,6 @@
       "rang": "Apprenti Genin",
       "cible": "Tous",
       "auteur": null,
-      "prereq": [],
       "desc": "De quoi le chakra est-il fait : énergies, réseau, Tenketsu et Compensation.",
       "techs": [
         {
@@ -653,8 +616,7 @@
             "Comprendre que le déséquilibre épuise le chakra"
           ],
           "mudras": [],
-          "rang": "Apprenti Genin",
-          "prereq": []
+          "rang": "Apprenti Genin"
         },
         {
           "id": "dc_reseau",
@@ -667,10 +629,7 @@
             "Comprendre la séparation en flux (pieds, mains, technique)"
           ],
           "mudras": [],
-          "rang": "Apprenti Genin",
-          "prereq": [
-            "dc_composantes"
-          ]
+          "rang": "Apprenti Genin"
         },
         {
           "id": "dc_tenketsu",
@@ -683,10 +642,7 @@
             "Comprendre le blocage d'un Tenketsu chez l'adversaire"
           ],
           "mudras": [],
-          "rang": "Apprenti Genin",
-          "prereq": [
-            "dc_reseau"
-          ]
+          "rang": "Apprenti Genin"
         },
         {
           "id": "dc_compensation",
@@ -699,10 +655,7 @@
             "Distinguer Compensation, supériorité de niveau et cycle des natures"
           ],
           "mudras": [],
-          "rang": "Apprenti Genin",
-          "prereq": [
-            "dc_tenketsu"
-          ]
+          "rang": "Apprenti Genin"
         }
       ]
     },
@@ -714,7 +667,6 @@
       "rang": "Apprenti Genin",
       "cible": "Tous",
       "auteur": null,
-      "prereq": [],
       "desc": "Les 12 signes de main : langage du chakra. Sans mudras, le chakra est instable et les jutsu ratent.",
       "techs": [
         {
@@ -728,8 +680,7 @@
             "Comprendre l'importance de l'ordre"
           ],
           "mudras": [],
-          "rang": "Apprenti Genin",
-          "prereq": []
+          "rang": "Apprenti Genin"
         },
         {
           "id": "mudras_maitrise",
@@ -751,10 +702,7 @@
             "chien",
             "sanglier"
           ],
-          "rang": "Apprenti Genin",
-          "prereq": [
-            "mudras_theorie"
-          ]
+          "rang": "Apprenti Genin"
         }
       ]
     },
@@ -766,9 +714,6 @@
       "rang": "Apprenti Genin",
       "cible": "Tous",
       "auteur": null,
-      "prereq": [
-        "mudras_cours"
-      ],
       "desc": "Hiérarchie des 5 natures, test de la feuille, Kekkei Genkai.",
       "techs": [
         {
@@ -782,8 +727,7 @@
             "Identifier sa nature (test de la feuille)"
           ],
           "mudras": [],
-          "rang": "Apprenti Genin",
-          "prereq": []
+          "rang": "Apprenti Genin"
         },
         {
           "id": "nat_test",
@@ -795,8 +739,7 @@
             "Interpréter le résultat"
           ],
           "mudras": [],
-          "rang": "Apprenti Genin",
-          "prereq": []
+          "rang": "Apprenti Genin"
         },
         {
           "id": "nat_kekkei",
@@ -809,8 +752,7 @@
             "Kekkei Genkai spéciaux (Shoton, Meiton...)"
           ],
           "mudras": [],
-          "rang": "Genin",
-          "prereq": []
+          "rang": "Genin"
         }
       ]
     },
@@ -822,7 +764,6 @@
       "rang": "Apprenti Genin",
       "cible": "Tous",
       "auteur": null,
-      "prereq": [],
       "desc": "Combat à mains nues et maniement d'armes. Force physique et mentale, sans chakra ni mudras.",
       "techs": [
         {
@@ -836,8 +777,7 @@
             "Avantage : rapidité d'exécution (pas de mudras)"
           ],
           "mudras": [],
-          "rang": "Apprenti Genin",
-          "prereq": []
+          "rang": "Apprenti Genin"
         }
       ]
     },
@@ -849,9 +789,6 @@
       "rang": "Apprenti Genin",
       "cible": "Apprentis Genin / Genin / Genin Confirmé",
       "auteur": null,
-      "prereq": [
-        "decomposition_chakra"
-      ],
       "validated": false,
       "desc": "Le troisième pilier du combat shinobi : comment une illusion se construit, à quoi on la reconnaît, et les trois façons de s'en libérer.",
       "techs": [
@@ -866,8 +803,7 @@
             "Admettre qu'on peut en être victime sans le savoir"
           ],
           "mudras": [],
-          "rang": "Apprenti Genin",
-          "prereq": []
+          "rang": "Apprenti Genin"
         },
         {
           "id": "gen_mecanisme",
@@ -880,8 +816,7 @@
             "Comprendre pourquoi le corps réagit à une illusion"
           ],
           "mudras": [],
-          "rang": "Apprenti Genin",
-          "prereq": []
+          "rang": "Apprenti Genin"
         },
         {
           "id": "gen_danger",
@@ -894,8 +829,7 @@
             "Accepter le doute comme un réflexe de survie"
           ],
           "mudras": [],
-          "rang": "Apprenti Genin",
-          "prereq": []
+          "rang": "Apprenti Genin"
         },
         {
           "id": "gen_signes",
@@ -909,8 +843,7 @@
             "Se fier à la sensation de décalage plutôt qu'à l'œil"
           ],
           "mudras": [],
-          "rang": "Apprenti Genin",
-          "prereq": []
+          "rang": "Apprenti Genin"
         },
         {
           "id": "gen_liberation",
@@ -924,8 +857,7 @@
             "Choisir la méthode adaptée à son profil"
           ],
           "mudras": [],
-          "rang": "Apprenti Genin",
-          "prereq": []
+          "rang": "Apprenti Genin"
         },
         {
           "id": "gen_equipe",
@@ -938,8 +870,7 @@
             "Oser intervenir sur un camarade qui décroche"
           ],
           "mudras": [],
-          "rang": "Apprenti Genin",
-          "prereq": []
+          "rang": "Apprenti Genin"
         }
       ]
     },
@@ -951,7 +882,6 @@
       "rang": "Apprenti Genin",
       "cible": "Tous",
       "auteur": null,
-      "prereq": [],
       "desc": "Catalogue des armes : caractéristiques, tailles et utilisations tactiques.",
       "techs": [
         {
@@ -965,8 +895,7 @@
             "Le Senbon"
           ],
           "mudras": [],
-          "rang": "Apprenti Genin",
-          "prereq": []
+          "rang": "Apprenti Genin"
         },
         {
           "id": "armes_melee",
@@ -978,8 +907,7 @@
             "Infusion de chakra dans une arme"
           ],
           "mudras": [],
-          "rang": "Apprenti Genin",
-          "prereq": []
+          "rang": "Apprenti Genin"
         },
         {
           "id": "armes_tact",
@@ -993,8 +921,7 @@
             "Parchemin explosif (Fuinjutsu)"
           ],
           "mudras": [],
-          "rang": "Apprenti Genin",
-          "prereq": []
+          "rang": "Apprenti Genin"
         }
       ]
     },
@@ -1006,10 +933,6 @@
       "rang": "Genin",
       "cible": "Genin+",
       "auteur": "Tetsuya Fubetsu & Nagi Kinzetsu",
-      "prereq": [
-        "taijutsu_theorie",
-        "armes_cours"
-      ],
       "desc": "Initiation au Kenjutsu : le Bushidō, les 3 principes communs à toutes les voies (Kokyu, Metsuke, Maai) et l'engagement du sabreur.",
       "techs": [
         {
@@ -1023,8 +946,7 @@
             "Appliquer le code du sabreur"
           ],
           "mudras": [],
-          "rang": "Genin",
-          "prereq": []
+          "rang": "Genin"
         },
         {
           "id": "kenj_kokyu",
@@ -1037,8 +959,7 @@
             "Alterner selon la situation de combat"
           ],
           "mudras": [],
-          "rang": "Genin",
-          "prereq": []
+          "rang": "Genin"
         },
         {
           "id": "kenj_metsuke",
@@ -1051,8 +972,7 @@
             "Anticiper l'attaque avant le mouvement de la lame"
           ],
           "mudras": [],
-          "rang": "Genin",
-          "prereq": []
+          "rang": "Genin"
         },
         {
           "id": "kenj_maai",
@@ -1065,8 +985,7 @@
             "Chikama : courte distance, combat rapide et dangereux"
           ],
           "mudras": [],
-          "rang": "Genin",
-          "prereq": []
+          "rang": "Genin"
         },
         {
           "id": "kenj_engagement",
@@ -1079,8 +998,7 @@
             "Accepter la discipline permanente"
           ],
           "mudras": [],
-          "rang": "Genin",
-          "prereq": []
+          "rang": "Genin"
         }
       ]
     },
@@ -1092,9 +1010,6 @@
       "rang": "Genin",
       "cible": "Genin+",
       "auteur": "Yaïko Okira & Kazuma Sosochi",
-      "prereq": [
-        "kenjutsu_cours"
-      ],
       "desc": "La voie de la lame simple : Zanshin et Kimi, la lame comme extension de l'âme, les trois salutations et l'engagement envers le forgeron.",
       "techs": [
         {
@@ -1108,8 +1023,7 @@
             "Agir seulement lorsque le moment est juste"
           ],
           "mudras": [],
-          "rang": "Genin",
-          "prereq": []
+          "rang": "Genin"
         },
         {
           "id": "simple_ame",
@@ -1122,8 +1036,7 @@
             "Ne pas changer de voie sans raison sérieuse"
           ],
           "mudras": [],
-          "rang": "Genin",
-          "prereq": []
+          "rang": "Genin"
         },
         {
           "id": "simple_zanshin",
@@ -1136,8 +1049,7 @@
             "Impulsion mentale avant l'impulsion physique"
           ],
           "mudras": [],
-          "rang": "Genin",
-          "prereq": []
+          "rang": "Genin"
         },
         {
           "id": "simple_kimi",
@@ -1150,8 +1062,7 @@
             "Finaliser l'action sans hésitation"
           ],
           "mudras": [],
-          "rang": "Genin",
-          "prereq": []
+          "rang": "Genin"
         },
         {
           "id": "simple_salutations",
@@ -1164,8 +1075,7 @@
             "Au sol : erreur très grave ou profond déshonneur"
           ],
           "mudras": [],
-          "rang": "Genin",
-          "prereq": []
+          "rang": "Genin"
         },
         {
           "id": "simple_forgeron",
@@ -1178,8 +1088,7 @@
             "Revenir vers lui si la lame est endommagée"
           ],
           "mudras": [],
-          "rang": "Genin",
-          "prereq": []
+          "rang": "Genin"
         },
         {
           "id": "simple_shintai",
@@ -1192,8 +1101,7 @@
             "Observer équilibre, précision et contrôle de la force"
           ],
           "mudras": [],
-          "rang": "Genin",
-          "prereq": []
+          "rang": "Genin"
         },
         {
           "id": "simple_seishin",
@@ -1206,8 +1114,7 @@
             "Partager ce ressenti avec le groupe"
           ],
           "mudras": [],
-          "rang": "Genin",
-          "prereq": []
+          "rang": "Genin"
         }
       ]
     },
@@ -1219,9 +1126,6 @@
       "rang": "Genin",
       "cible": "Genin+",
       "auteur": "Yaïko Okira & Kazuma Sosochi",
-      "prereq": [
-        "kenjutsu_simple"
-      ],
       "desc": "Technique de rang D de la voie simple : deux mouvements tournoyants enchaînés sans rupture — Zanshin → Kimi → Zanshin → Kimi.",
       "techs": [
         {
@@ -1236,8 +1140,7 @@
             "Saluer son partenaire"
           ],
           "mudras": [],
-          "rang": "Genin",
-          "prereq": []
+          "rang": "Genin"
         },
         {
           "id": "pen_parades",
@@ -1251,8 +1154,7 @@
             "Reprendre l'exercice avec des attaques aériennes"
           ],
           "mudras": [],
-          "rang": "Genin",
-          "prereq": []
+          "rang": "Genin"
         },
         {
           "id": "pen_enchainements",
@@ -1266,8 +1168,7 @@
             "Reproduire l'exercice en aérien"
           ],
           "mudras": [],
-          "rang": "Genin",
-          "prereq": []
+          "rang": "Genin"
         },
         {
           "id": "pen_technique",
@@ -1282,8 +1183,7 @@
             "Travailler seul, puis sur bambou, puis en binôme"
           ],
           "mudras": [],
-          "rang": "Genin",
-          "prereq": []
+          "rang": "Genin"
         }
       ]
     },
@@ -1295,10 +1195,6 @@
       "rang": "Genin Confirmé",
       "cible": "Genin Confirmé+",
       "auteur": "Yaïko Okira",
-      "prereq": [
-        "kenjutsu_simple",
-        "kenj_penetrante"
-      ],
       "desc": "Technique de rang C de la voie simple : se projeter vers sa cible et enchaîner des frappes rapides sans jamais rompre sa progression.",
       "techs": [
         {
@@ -1312,8 +1208,7 @@
             "Coordonner course, trajectoire de l'épée et point fixé"
           ],
           "mudras": [],
-          "rang": "Genin Confirmé",
-          "prereq": []
+          "rang": "Genin Confirmé"
         },
         {
           "id": "ruee_trajectoire",
@@ -1327,8 +1222,7 @@
             "Ajouter des repères pour travailler les changements de direction"
           ],
           "mudras": [],
-          "rang": "Genin Confirmé",
-          "prereq": []
+          "rang": "Genin Confirmé"
         },
         {
           "id": "ruee_frappes",
@@ -1342,8 +1236,7 @@
             "Avancer lentement, puis accélérer progressivement"
           ],
           "mudras": [],
-          "rang": "Genin Confirmé",
-          "prereq": []
+          "rang": "Genin Confirmé"
         },
         {
           "id": "ruee_synchro",
@@ -1357,8 +1250,7 @@
             "Faire avancer corps, regard et lame ensemble"
           ],
           "mudras": [],
-          "rang": "Genin Confirmé",
-          "prereq": []
+          "rang": "Genin Confirmé"
         },
         {
           "id": "ruee_technique",
@@ -1373,8 +1265,7 @@
             "Travailler seul, puis sur une ligne de cibles, puis avec un repère mobile"
           ],
           "mudras": [],
-          "rang": "Genin Confirmé",
-          "prereq": []
+          "rang": "Genin Confirmé"
         }
       ]
     },
@@ -1386,9 +1277,6 @@
       "rang": "Genin",
       "cible": "Genin+",
       "auteur": "Tetsuya Fubetsu & Nagi Kinzetsu",
-      "prereq": [
-        "kenjutsu_cours"
-      ],
       "desc": "Le Nitōryū : combat à deux épées. Origine, les 4 gardes spécifiques à la double lame et démonstration.",
       "techs": [
         {
@@ -1402,8 +1290,7 @@
             "Différencier puissance et discipline"
           ],
           "mudras": [],
-          "rang": "Genin",
-          "prereq": []
+          "rang": "Genin"
         },
         {
           "id": "nito_chudan",
@@ -1416,8 +1303,7 @@
             "Alterner attaque et défense avec peu de mouvements"
           ],
           "mudras": [],
-          "rang": "Genin",
-          "prereq": []
+          "rang": "Genin"
         },
         {
           "id": "nito_jodan",
@@ -1430,8 +1316,7 @@
             "Comprendre le risque d'ouverture si l'attaque rate"
           ],
           "mudras": [],
-          "rang": "Genin",
-          "prereq": []
+          "rang": "Genin"
         },
         {
           "id": "nito_gedan",
@@ -1444,8 +1329,7 @@
             "Remonter l'attaque par surprise"
           ],
           "mudras": [],
-          "rang": "Genin",
-          "prereq": []
+          "rang": "Genin"
         },
         {
           "id": "nito_hasso",
@@ -1458,8 +1342,7 @@
             "Maîtriser la coordination des deux lames"
           ],
           "mudras": [],
-          "rang": "Genin",
-          "prereq": []
+          "rang": "Genin"
         }
       ]
     },
@@ -1471,9 +1354,6 @@
       "rang": "Apprenti Genin",
       "cible": "Apprentis Genin / Genin",
       "auteur": "Akio Fukurō",
-      "prereq": [
-        "regles_or"
-      ],
       "desc": "Bases de l'infiltration : discrétion, changement de tenue, d'attitude, d'apparence, mensonge.",
       "techs": [
         {
@@ -1486,8 +1366,7 @@
             "Couverture vestimentaire crédible"
           ],
           "mudras": [],
-          "rang": "Apprenti Genin",
-          "prereq": []
+          "rang": "Apprenti Genin"
         },
         {
           "id": "infil_attitude",
@@ -1499,8 +1378,7 @@
             "Contrôler ses réactions naturelles"
           ],
           "mudras": [],
-          "rang": "Apprenti Genin",
-          "prereq": []
+          "rang": "Apprenti Genin"
         },
         {
           "id": "infil_apparence",
@@ -1512,8 +1390,7 @@
             "Préparation psychologique"
           ],
           "mudras": [],
-          "rang": "Genin",
-          "prereq": []
+          "rang": "Genin"
         },
         {
           "id": "infil_mensonge",
@@ -1526,8 +1403,7 @@
             "S'adapter aux imprévus"
           ],
           "mudras": [],
-          "rang": "Genin",
-          "prereq": []
+          "rang": "Genin"
         }
       ]
     },
@@ -1539,9 +1415,6 @@
       "rang": "Genin",
       "cible": "Genin+",
       "auteur": null,
-      "prereq": [
-        "taijutsu_theorie"
-      ],
       "desc": "Coup de pied rotatif 360°. Souplesse des hanches, jambe comme un fouet.",
       "techs": [
         {
@@ -1555,8 +1428,7 @@
             "Low kick rotatif sur surface rigide (×10)"
           ],
           "mudras": [],
-          "rang": "Genin",
-          "prereq": []
+          "rang": "Genin"
         },
         {
           "id": "bour_rot",
@@ -1569,10 +1441,7 @@
             "Au sol : vitesse, épaules/hanches, jambe tendue"
           ],
           "mudras": [],
-          "rang": "Genin",
-          "prereq": [
-            "bour_kick"
-          ]
+          "rang": "Genin"
         }
       ]
     },
@@ -1584,9 +1453,6 @@
       "rang": "Genin Confirmé",
       "cible": "Genin Confirmé+",
       "auteur": null,
-      "prereq": [
-        "taijutsu_theorie"
-      ],
       "desc": "Technique de saut offensif. Puissance de saut via fessiers.",
       "techs": [
         {
@@ -1601,8 +1467,7 @@
             "Sprint"
           ],
           "mudras": [],
-          "rang": "Genin Confirmé",
-          "prereq": []
+          "rang": "Genin Confirmé"
         },
         {
           "id": "pa_squat",
@@ -1615,8 +1480,7 @@
             "Alternance"
           ],
           "mudras": [],
-          "rang": "Genin Confirmé",
-          "prereq": []
+          "rang": "Genin Confirmé"
         },
         {
           "id": "pa_tech",
@@ -1629,8 +1493,7 @@
             "Application offensive surprise"
           ],
           "mudras": [],
-          "rang": "Genin Confirmé",
-          "prereq": []
+          "rang": "Genin Confirmé"
         }
       ]
     },
@@ -1642,9 +1505,6 @@
       "rang": "Genin",
       "cible": "Genin+",
       "auteur": null,
-      "prereq": [
-        "decomposition_chakra"
-      ],
       "desc": "Concentrer le chakra dans les pieds. Précision, pas force brute. Mobilité = survie.",
       "techs": [
         {
@@ -1658,8 +1518,7 @@
             "Angles : haut, avant, côté, arrière"
           ],
           "mudras": [],
-          "rang": "Genin",
-          "prereq": []
+          "rang": "Genin"
         },
         {
           "id": "sc_exec",
@@ -1673,10 +1532,7 @@
             "Rejoindre le toit de l'Académie"
           ],
           "mudras": [],
-          "rang": "Genin",
-          "prereq": [
-            "sc_principe"
-          ]
+          "rang": "Genin"
         }
       ]
     },
@@ -1688,9 +1544,6 @@
       "rang": "Genin Confirmé",
       "cible": "Genins confirmés",
       "auteur": "Jihon Ichirin",
-      "prereq": [
-        "nature_theorie"
-      ],
       "desc": "Analyser un combat, adapter ses techniques. Observer, réfléchir, agir.",
       "techs": [
         {
@@ -1704,8 +1557,7 @@
             "Exposer les conclusions"
           ],
           "mudras": [],
-          "rang": "Genin Confirmé",
-          "prereq": []
+          "rang": "Genin Confirmé"
         },
         {
           "id": "nc_combat",
@@ -1719,8 +1571,7 @@
             "Le vainqueur affronte les Chūnins"
           ],
           "mudras": [],
-          "rang": "Genin Confirmé",
-          "prereq": []
+          "rang": "Genin Confirmé"
         }
       ]
     },
@@ -1732,10 +1583,6 @@
       "rang": "Genin",
       "cible": "Genin+",
       "auteur": "Yumi Amano",
-      "prereq": [
-        "taijutsu_theorie",
-        "regles_or"
-      ],
       "desc": "Protection de cible (Roi = professeur). Si le Roi est blessé, tout le monde échoue.",
       "techs": [
         {
@@ -1749,8 +1596,7 @@
             "Protéger sans blesser le Roi"
           ],
           "mudras": [],
-          "rang": "Genin",
-          "prereq": []
+          "rang": "Genin"
         },
         {
           "id": "jr_att",
@@ -1763,8 +1609,7 @@
             "Capturer sans blesser"
           ],
           "mudras": [],
-          "rang": "Genin",
-          "prereq": []
+          "rang": "Genin"
         }
       ]
     },
@@ -1776,10 +1621,6 @@
       "rang": "Genin",
       "cible": "Genin+",
       "auteur": null,
-      "prereq": [
-        "taijutsu_theorie",
-        "regles_or"
-      ],
       "desc": "1-3 manches : diplomatie (7 min) + combat (5 min). Adaptation entre manches.",
       "techs": [
         {
@@ -1793,8 +1634,7 @@
             "Adapter selon le résultat"
           ],
           "mudras": [],
-          "rang": "Genin",
-          "prereq": []
+          "rang": "Genin"
         },
         {
           "id": "cd_combat",
@@ -1808,8 +1648,7 @@
             "Débriefing entre manches"
           ],
           "mudras": [],
-          "rang": "Genin",
-          "prereq": []
+          "rang": "Genin"
         }
       ]
     },
@@ -1821,10 +1660,6 @@
       "rang": "Genin",
       "cible": "Genin+",
       "auteur": null,
-      "prereq": [
-        "mudras_cours",
-        "nature_theorie"
-      ],
       "desc": "Rayon d'éclair canalisé depuis la paume. Plus la canalisation est longue, plus il dure.",
       "techs": [
         {
@@ -1842,8 +1677,7 @@
             "serpent",
             "lievre"
           ],
-          "rang": "Genin",
-          "prereq": []
+          "rang": "Genin"
         }
       ]
     },
@@ -1855,10 +1689,6 @@
       "rang": "Genin",
       "cible": "Genin+",
       "auteur": null,
-      "prereq": [
-        "mudras_cours",
-        "nature_theorie"
-      ],
       "desc": "Boule de foudre projetée en ligne droite depuis les deux paumes. Puissante au corps à corps.",
       "techs": [
         {
@@ -1876,8 +1706,7 @@
             "dragon",
             "serpent"
           ],
-          "rang": "Genin",
-          "prereq": []
+          "rang": "Genin"
         }
       ]
     },
@@ -1889,10 +1718,6 @@
       "rang": "Genin Confirmé",
       "cible": "Genin+",
       "auteur": null,
-      "prereq": [
-        "mudras_cours",
-        "nature_theorie"
-      ],
       "desc": "Ruée de foudre libérée au sol. La ligne persiste et foudroie quiconque la traverse.",
       "techs": [
         {
@@ -1911,8 +1736,7 @@
             "cheval",
             "serpent"
           ],
-          "rang": "Genin Confirmé",
-          "prereq": []
+          "rang": "Genin Confirmé"
         }
       ]
     },
@@ -1924,10 +1748,6 @@
       "rang": "Genin Confirmé",
       "cible": "Genin+",
       "auteur": null,
-      "prereq": [
-        "mudras_cours",
-        "nature_theorie"
-      ],
       "desc": "Champ électrique circulaire libéré au sol tout autour du shinobi.",
       "techs": [
         {
@@ -1946,8 +1766,7 @@
             "rat",
             "chien"
           ],
-          "rang": "Genin Confirmé",
-          "prereq": []
+          "rang": "Genin Confirmé"
         }
       ]
     },
@@ -1959,10 +1778,6 @@
       "rang": "Genin",
       "cible": "Genin+",
       "auteur": null,
-      "prereq": [
-        "mudras_cours",
-        "nature_theorie"
-      ],
       "desc": "Concentrer le chakra dans les poumons et l'expulser sous forme d'une boule de feu incandescente.",
       "techs": [
         {
@@ -1980,8 +1795,7 @@
             "tigre",
             "serpent"
           ],
-          "rang": "Genin",
-          "prereq": []
+          "rang": "Genin"
         }
       ]
     },
@@ -1993,10 +1807,6 @@
       "rang": "Genin",
       "cible": "Genin+",
       "auteur": null,
-      "prereq": [
-        "mudras_cours",
-        "nature_theorie"
-      ],
       "desc": "Ligne droite de flamme érigée devant le shinobi pour barrer le passage.",
       "techs": [
         {
@@ -2014,8 +1824,7 @@
             "rat",
             "tigre"
           ],
-          "rang": "Genin",
-          "prereq": []
+          "rang": "Genin"
         }
       ]
     },
@@ -2027,10 +1836,6 @@
       "rang": "Genin Confirmé",
       "cible": "Genin+",
       "auteur": null,
-      "prereq": [
-        "mudras_cours",
-        "nature_theorie"
-      ],
       "desc": "Trois boules de feu emmagasinées, à cracher à volonté dans un laps de temps.",
       "techs": [
         {
@@ -2049,8 +1854,7 @@
             "belier",
             "singe"
           ],
-          "rang": "Genin Confirmé",
-          "prereq": []
+          "rang": "Genin Confirmé"
         }
       ]
     },
@@ -2062,10 +1866,6 @@
       "rang": "Genin Confirmé",
       "cible": "Genin+",
       "auteur": null,
-      "prereq": [
-        "mudras_cours",
-        "nature_theorie"
-      ],
       "desc": "Boule de feu combinée à un lancé de shurikens pour créer une pluie ardente.",
       "techs": [
         {
@@ -2084,8 +1884,7 @@
             "rat",
             "tigre"
           ],
-          "rang": "Genin Confirmé",
-          "prereq": []
+          "rang": "Genin Confirmé"
         }
       ]
     },
@@ -2097,10 +1896,6 @@
       "rang": "Genin",
       "cible": "Genin+",
       "auteur": null,
-      "prereq": [
-        "mudras_cours",
-        "nature_theorie"
-      ],
       "desc": "Boule de vent comprimé formée depuis les poumons puis projetée sur la cible. Repousse à l'impact.",
       "techs": [
         {
@@ -2119,8 +1914,7 @@
             "coq",
             "singe"
           ],
-          "rang": "Genin",
-          "prereq": []
+          "rang": "Genin"
         }
       ]
     },
@@ -2132,10 +1926,6 @@
       "rang": "Genin",
       "cible": "Genin+",
       "auteur": null,
-      "prereq": [
-        "mudras_cours",
-        "nature_theorie"
-      ],
       "desc": "Barrière de courant d'air dressée face au shinobi. Protège des jutsu, ralentit ou repousse les attaques frontales.",
       "techs": [
         {
@@ -2154,8 +1944,7 @@
             "lievre",
             "coq"
           ],
-          "rang": "Genin",
-          "prereq": []
+          "rang": "Genin"
         }
       ]
     },
@@ -2167,11 +1956,6 @@
       "rang": "Genin Confirmé",
       "cible": "Genin+",
       "auteur": null,
-      "prereq": [
-        "mudras_cours",
-        "nature_theorie",
-        "fut_spirale"
-      ],
       "desc": "Trois petites boules de vent comprimé projetées simultanément. Version avancée de la Spirale de Vent.",
       "techs": [
         {
@@ -2192,8 +1976,7 @@
             "rat",
             "belier"
           ],
-          "rang": "Genin Confirmé",
-          "prereq": []
+          "rang": "Genin Confirmé"
         }
       ]
     },
@@ -2205,11 +1988,6 @@
       "rang": "Genin Confirmé",
       "cible": "Genin+",
       "auteur": null,
-      "prereq": [
-        "mudras_cours",
-        "nature_theorie",
-        "fut_spirale"
-      ],
       "desc": "Grande sphère de vent comprimé projetée vers l'avant. Son onde de choc repousse la cible et crée la distance.",
       "techs": [
         {
@@ -2230,8 +2008,7 @@
             "coq",
             "dragon"
           ],
-          "rang": "Genin Confirmé",
-          "prereq": []
+          "rang": "Genin Confirmé"
         }
       ]
     },
@@ -2243,10 +2020,6 @@
       "rang": "Genin",
       "cible": "Genin+",
       "auteur": null,
-      "prereq": [
-        "mudras_cours",
-        "nature_theorie"
-      ],
       "desc": "Lame d'eau tranchante projetée depuis la main. Précise et rapide.",
       "techs": [
         {
@@ -2264,8 +2037,7 @@
             "chien",
             "rat"
           ],
-          "rang": "Genin",
-          "prereq": []
+          "rang": "Genin"
         }
       ]
     },
@@ -2277,10 +2049,6 @@
       "rang": "Genin",
       "cible": "Genin+",
       "auteur": null,
-      "prereq": [
-        "mudras_cours",
-        "nature_theorie"
-      ],
       "desc": "Rempart d'eau surgi devant le shinobi, bloquant les jutsu adverses.",
       "techs": [
         {
@@ -2298,8 +2066,7 @@
             "singe",
             "chien"
           ],
-          "rang": "Genin",
-          "prereq": []
+          "rang": "Genin"
         }
       ]
     },
@@ -2311,10 +2078,6 @@
       "rang": "Genin Confirmé",
       "cible": "Genin+",
       "auteur": null,
-      "prereq": [
-        "mudras_cours",
-        "nature_theorie"
-      ],
       "desc": "Bulles d'eau expulsées depuis la bouche. Explosent à l'impact sur la cible.",
       "techs": [
         {
@@ -2333,8 +2096,7 @@
             "dragon",
             "sanglier"
           ],
-          "rang": "Genin Confirmé",
-          "prereq": []
+          "rang": "Genin Confirmé"
         }
       ]
     },
@@ -2346,10 +2108,6 @@
       "rang": "Genin Confirmé",
       "cible": "Genin+",
       "auteur": null,
-      "prereq": [
-        "mudras_cours",
-        "nature_theorie"
-      ],
       "desc": "Prison d'eau enfermant la cible dans une sphère aqueuse. Le shinobi doit maintenir la technique.",
       "techs": [
         {
@@ -2368,8 +2126,7 @@
             "chien",
             "lievre"
           ],
-          "rang": "Genin Confirmé",
-          "prereq": []
+          "rang": "Genin Confirmé"
         }
       ]
     },
@@ -2381,10 +2138,6 @@
       "rang": "Genin",
       "cible": "Genin+",
       "auteur": null,
-      "prereq": [
-        "mudras_cours",
-        "nature_theorie"
-      ],
       "desc": "Mur de roche surgi de la terre en unifiant le chakra avec le sol.",
       "techs": [
         {
@@ -2402,8 +2155,7 @@
             "serpent",
             "belier"
           ],
-          "rang": "Genin",
-          "prereq": []
+          "rang": "Genin"
         }
       ]
     },
@@ -2415,10 +2167,6 @@
       "rang": "Genin",
       "cible": "Genin+",
       "auteur": null,
-      "prereq": [
-        "mudras_cours",
-        "nature_theorie"
-      ],
       "desc": "Fragments de roche formés par les mudras et projetés depuis la bouche.",
       "techs": [
         {
@@ -2436,8 +2184,7 @@
             "rat",
             "serpent"
           ],
-          "rang": "Genin",
-          "prereq": []
+          "rang": "Genin"
         }
       ]
     },
@@ -2449,10 +2196,6 @@
       "rang": "Genin Confirmé",
       "cible": "Genin+",
       "auteur": null,
-      "prereq": [
-        "mudras_cours",
-        "nature_theorie"
-      ],
       "desc": "Le sol devient mouvant et instable sous les pieds de l'adversaire, le déséquilibrant.",
       "techs": [
         {
@@ -2471,8 +2214,7 @@
             "sanglier",
             "chien"
           ],
-          "rang": "Genin Confirmé",
-          "prereq": []
+          "rang": "Genin Confirmé"
         }
       ]
     },
@@ -2484,10 +2226,6 @@
       "rang": "Genin Confirmé",
       "cible": "Genin+",
       "auteur": null,
-      "prereq": [
-        "mudras_cours",
-        "nature_theorie"
-      ],
       "desc": "Prison de roche jaillissant autour de la cible. Le shinobi doit maintenir la technique.",
       "techs": [
         {
@@ -2507,8 +2245,7 @@
             "rat",
             "serpent"
           ],
-          "rang": "Genin Confirmé",
-          "prereq": []
+          "rang": "Genin Confirmé"
         }
       ]
     },
@@ -2520,9 +2257,6 @@
       "rang": "Genin Confirmé",
       "cible": "Genin Confirmé+",
       "auteur": null,
-      "prereq": [
-        "mudras_cours"
-      ],
       "desc": "Technique de substitution : remplacer son corps par un objet pour esquiver une attaque.",
       "techs": [
         {
@@ -2536,8 +2270,7 @@
             "Choisir le bon timing"
           ],
           "mudras": [],
-          "rang": "Genin Confirmé",
-          "prereq": []
+          "rang": "Genin Confirmé"
         },
         {
           "id": "perm_exec",
@@ -2550,10 +2283,7 @@
             "Se repositionner après la permutation"
           ],
           "mudras": [],
-          "rang": "Genin Confirmé",
-          "prereq": [
-            "perm_principe"
-          ]
+          "rang": "Genin Confirmé"
         }
       ]
     },
@@ -2565,9 +2295,6 @@
       "rang": "Apprenti Genin",
       "cible": "Apprentis Genin / Genins / Genins Confirmés",
       "auteur": "Akio Fukurō",
-      "prereq": [
-        "infiltration"
-      ],
       "desc": "Exercice de terrain au Hameau des rizières. Infiltration parmi des senseis jouant des bandits, récolte d'informations.",
       "techs": [
         {
@@ -2581,8 +2308,7 @@
             "Éviter les comportements suspects"
           ],
           "mudras": [],
-          "rang": "Apprenti Genin",
-          "prereq": []
+          "rang": "Apprenti Genin"
         },
         {
           "id": "infil_p_recolte",
@@ -2595,8 +2321,7 @@
             "Transmettre l'info via radio"
           ],
           "mudras": [],
-          "rang": "Apprenti Genin",
-          "prereq": []
+          "rang": "Apprenti Genin"
         }
       ]
     },
@@ -2608,9 +2333,6 @@
       "rang": "Genin",
       "cible": "Genin+",
       "auteur": "Inoshi Baikutai & Gaoh Uragiri",
-      "prereq": [
-        "regles_or"
-      ],
       "desc": "Localiser et interpeller une personne recherchée parmi des leurres.",
       "techs": [
         {
@@ -2624,8 +2346,7 @@
             "Distinguer cible et leurres"
           ],
           "mudras": [],
-          "rang": "Genin",
-          "prereq": []
+          "rang": "Genin"
         },
         {
           "id": "traq_interpellation",
@@ -2638,8 +2359,7 @@
             "Débriefing collectif"
           ],
           "mudras": [],
-          "rang": "Genin",
-          "prereq": []
+          "rang": "Genin"
         }
       ]
     },
@@ -2651,9 +2371,6 @@
       "rang": "Genin",
       "cible": "Genin+",
       "auteur": "Inoshi Baikutai",
-      "prereq": [
-        "regles_or"
-      ],
       "desc": "Scénario d'enquête : interroger les témoins, recueillir les indices, fournir un rapport.",
       "techs": [
         {
@@ -2667,8 +2384,7 @@
             "Recouper les témoignages"
           ],
           "mudras": [],
-          "rang": "Genin",
-          "prereq": []
+          "rang": "Genin"
         },
         {
           "id": "enq_rapport",
@@ -2681,8 +2397,7 @@
             "Rendre un rapport fiable"
           ],
           "mudras": [],
-          "rang": "Genin",
-          "prereq": []
+          "rang": "Genin"
         }
       ]
     },
@@ -2694,7 +2409,6 @@
       "rang": "Apprenti Genin",
       "cible": "Apprentis Genin / Genin",
       "auteur": "Akio Fukurō",
-      "prereq": [],
       "desc": "Course d'orientation par énigmes à travers le Pays du Feu. 4 lieux à trouver.",
       "techs": [
         {
@@ -2708,8 +2422,7 @@
             "S'orienter vers la destination"
           ],
           "mudras": [],
-          "rang": "Apprenti Genin",
-          "prereq": []
+          "rang": "Apprenti Genin"
         },
         {
           "id": "orient_analyse",
@@ -2722,8 +2435,7 @@
             "Transmettre par radio"
           ],
           "mudras": [],
-          "rang": "Apprenti Genin",
-          "prereq": []
+          "rang": "Apprenti Genin"
         }
       ]
     },
@@ -2735,7 +2447,6 @@
       "rang": "Apprenti Genin",
       "cible": "Tous",
       "auteur": "Jihon Ichirin",
-      "prereq": [],
       "desc": "Visite guidée du Pays du Feu : géographie, zones dangereuses, frontières.",
       "techs": [
         {
@@ -2749,8 +2460,7 @@
             "Zones sûres vs dangereuses"
           ],
           "mudras": [],
-          "rang": "Apprenti Genin",
-          "prereq": []
+          "rang": "Apprenti Genin"
         },
         {
           "id": "pf_front",
@@ -2763,8 +2473,7 @@
             "Enjeux diplomatiques"
           ],
           "mudras": [],
-          "rang": "Apprenti Genin",
-          "prereq": []
+          "rang": "Apprenti Genin"
         }
       ]
     },
@@ -2776,10 +2485,6 @@
       "rang": "Genin",
       "cible": "Genin+",
       "auteur": "Gromlof",
-      "prereq": [
-        "regles_or",
-        "volonte_feu"
-      ],
       "desc": "Mission simulée avec dilemmes moraux : obéir ou protéger le village.",
       "techs": [
         {
@@ -2793,8 +2498,7 @@
             "Décider : mission ou village"
           ],
           "mudras": [],
-          "rang": "Genin",
-          "prereq": []
+          "rang": "Genin"
         },
         {
           "id": "sim_dilemme2",
@@ -2807,8 +2511,7 @@
             "Assumer les conséquences"
           ],
           "mudras": [],
-          "rang": "Genin",
-          "prereq": []
+          "rang": "Genin"
         }
       ]
     },
@@ -2820,10 +2523,6 @@
       "rang": "Genin",
       "cible": "Genin+",
       "auteur": "Yumi Amano",
-      "prereq": [
-        "regles_or",
-        "taijutsu_theorie"
-      ],
       "desc": "Mission d'escorte simulée avec imprévus en terrain ouvert.",
       "techs": [
         {
@@ -2837,8 +2536,7 @@
             "Adapter au terrain"
           ],
           "mudras": [],
-          "rang": "Genin",
-          "prereq": []
+          "rang": "Genin"
         },
         {
           "id": "esc_imprevu",
@@ -2851,8 +2549,7 @@
             "Communiquer en temps réel"
           ],
           "mudras": [],
-          "rang": "Genin",
-          "prereq": []
+          "rang": "Genin"
         }
       ]
     },
@@ -2864,9 +2561,6 @@
       "rang": "Genin",
       "cible": "Apprentis Genin / Genin / Genin Confirmé",
       "auteur": "Yaïko Okira",
-      "prereq": [
-        "regles_or"
-      ],
       "validated": false,
       "desc": "Séparer le fait de la supposition, transmettre l'urgence avant le détail, et s'assurer qu'une information a été reçue. La méthode C.L.A.I.R.",
       "techs": [
@@ -2881,8 +2575,7 @@
             "Comprendre comment une rumeur se fabrique"
           ],
           "mudras": [],
-          "rang": "Genin",
-          "prereq": []
+          "rang": "Genin"
         },
         {
           "id": "ic_temoin",
@@ -2895,8 +2588,7 @@
             "Ne jamais ignorer un témoignage pour autant"
           ],
           "mudras": [],
-          "rang": "Genin",
-          "prereq": []
+          "rang": "Genin"
         },
         {
           "id": "ic_urgence",
@@ -2909,8 +2601,7 @@
             "Choisir quelle information annoncer en premier"
           ],
           "mudras": [],
-          "rang": "Genin",
-          "prereq": []
+          "rang": "Genin"
         },
         {
           "id": "ic_clair",
@@ -2925,8 +2616,7 @@
             "R — Réponse : ce qu'on attend de l'équipe"
           ],
           "mudras": [],
-          "rang": "Genin",
-          "prereq": []
+          "rang": "Genin"
         },
         {
           "id": "ic_exo_fait",
@@ -2939,8 +2629,7 @@
             "Terminer par le cas du témoignage rapporté"
           ],
           "mudras": [],
-          "rang": "Genin",
-          "prereq": []
+          "rang": "Genin"
         },
         {
           "id": "ic_exo_chaine",
@@ -2954,8 +2643,7 @@
             "Faire remonter la source d'un renseignement"
           ],
           "mudras": [],
-          "rang": "Genin",
-          "prereq": []
+          "rang": "Genin"
         },
         {
           "id": "ic_recue",
@@ -2968,8 +2656,7 @@
             "Éviter le bruit qui noie l'essentiel"
           ],
           "mudras": [],
-          "rang": "Genin",
-          "prereq": []
+          "rang": "Genin"
         },
         {
           "id": "ic_ecoute",
@@ -2982,8 +2669,7 @@
             "Remarquer ce qui devrait être présent et ne l'est pas"
           ],
           "mudras": [],
-          "rang": "Genin",
-          "prereq": []
+          "rang": "Genin"
         }
       ]
     },
@@ -2995,9 +2681,6 @@
       "rang": "Apprenti Genin",
       "cible": "Apprentis Genin / Genin / Genin Confirmé",
       "auteur": null,
-      "prereq": [
-        "regles_or"
-      ],
       "validated": false,
       "desc": "Exercice d'éloquence : défendre un sujet absurde avec conviction devant un jury de senseis.",
       "techs": [
@@ -3012,8 +2695,7 @@
             "Présenter avec conviction sans rire"
           ],
           "mudras": [],
-          "rang": "Apprenti Genin",
-          "prereq": []
+          "rang": "Apprenti Genin"
         },
         {
           "id": "ea_persuasion",
@@ -3026,8 +2708,7 @@
             "Maintenir son aplomb face au ridicule"
           ],
           "mudras": [],
-          "rang": "Apprenti Genin",
-          "prereq": []
+          "rang": "Apprenti Genin"
         }
       ]
     },
@@ -3039,9 +2720,6 @@
       "rang": "Genin",
       "cible": "Genin / Genin Confirmé",
       "auteur": null,
-      "prereq": [
-        "regles_or"
-      ],
       "validated": false,
       "desc": "Les élèves deviennent senseis : préparer et donner un mini-cours face à des senseis jouant les élèves dissipés.",
       "techs": [
@@ -3056,8 +2734,7 @@
             "Transmettre avec clarté et assurance"
           ],
           "mudras": [],
-          "rang": "Genin",
-          "prereq": []
+          "rang": "Genin"
         },
         {
           "id": "ci_gestion",
@@ -3070,8 +2747,7 @@
             "Recadrer sans perdre le fil du cours"
           ],
           "mudras": [],
-          "rang": "Genin",
-          "prereq": []
+          "rang": "Genin"
         }
       ]
     },
@@ -3083,9 +2759,6 @@
       "rang": "Apprenti Genin",
       "cible": "Apprentis Genin / Genin / Genin Confirmé",
       "auteur": null,
-      "prereq": [
-        "regles_or"
-      ],
       "validated": false,
       "desc": "Un sensei se cache dans le village, ment et se déplace. Les élèves ont 30 minutes pour le traquer et l'identifier.",
       "techs": [
@@ -3100,8 +2773,7 @@
             "Recouper les informations collectées"
           ],
           "mudras": [],
-          "rang": "Apprenti Genin",
-          "prereq": []
+          "rang": "Apprenti Genin"
         },
         {
           "id": "cs_desinformation",
@@ -3114,8 +2786,7 @@
             "Confirmer l'identité de la cible (objet distinctif + phrase convenue)"
           ],
           "mudras": [],
-          "rang": "Apprenti Genin",
-          "prereq": []
+          "rang": "Apprenti Genin"
         }
       ]
     }

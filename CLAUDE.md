@@ -163,7 +163,7 @@ SENSEI_QUOTES[coursId] || (COURS_NATURE[coursId] ? SENSEI_QUOTES['_'+COURS_NATUR
 
 Il existe donc `_katon`, `_futon`, `_raiton`, `_doton`, `_suiton` dans `SENSEI_QUOTES` **et** dans `COURS_FLAVOR` : une seule citation et un seul jeu de marqueurs pour les 4 techniques d'une même nature. Pour donner un texte propre à une technique, ajouter une entrée à son `id` — elle prend le pas sur le fallback.
 
-**Exception Futon** : les 4 techniques Futon (`fut_spirale`, `fut_mur`, `fut_cinglantes`, `fut_onde`) ont leurs propres entrées `SENSEI_QUOTES` et `COURS_FLAVOR` (16 types + 5 natures chacune), et un support oral détaillé (Principe, Étapes de réalisation, Points à marteler) issu du dossier `FUTON/`. La citation « sage » de chaque entrée est aussi la phrase de clôture du `CONTENU` et de `NOTES_PROF` : c'est ce qui permet à `applySenseiName()` de la remplacer par celle du type du sensei. `_futon` reste en place comme fallback. Les Spirales Cinglantes et l'Onde de Choc ont `fut_spirale` en prérequis.
+**Exception Futon** : les 4 techniques Futon (`fut_spirale`, `fut_mur`, `fut_cinglantes`, `fut_onde`) ont leurs propres entrées `SENSEI_QUOTES` et `COURS_FLAVOR` (16 types + 5 natures chacune), et un support oral détaillé (Principe, Étapes de réalisation, Points à marteler) issu du dossier `FUTON/`. La citation « sage » de chaque entrée est aussi la phrase de clôture du `CONTENU` et de `NOTES_PROF` : c'est ce qui permet à `applySenseiName()` de la remplacer par celle du type du sensei. `_futon` reste en place comme fallback.
 
 ### Filtrage des cours par spécialisation combat
 
@@ -220,7 +220,7 @@ Techniques de combat par voie (cours pratiques séparés, comme les techniques d
 
 **Anti-redite** : les 8 vertus du Bushidō et l'engagement à vie sont traités dans `kenjutsu_cours` uniquement ; `kenjutsu_simple` y renvoie au lieu de les redérouler, et `kenj_ruee` renvoie à `kenj_penetrante` pour l'échauffement commun. Garder cette règle en ajoutant les voies Lame Lourde et rangs B/A.
 
-Chaque cours de voie a `kenjutsu_cours` comme prérequis.
+**Pas de prérequis** : l'outil n'en gère plus aucun (ni clé `prereq` dans les données, ni alerte « Prérequis manquants »). L'enchaînement des cours se lit dans les renvois des supports oraux.
 
 ### Rangs hors échelle
 
@@ -401,7 +401,7 @@ Pour mettre à jour le cache PWA : incrémenter la version dans `sw.js` (ex: `ze
 
 ### Procédure pour ajouter un cours
 
-1. Ajouter dans `D.cours[]` : `{id, titre, cat, mod, rang, cible, auteur, prereq, desc, techs[]}`
+1. Ajouter dans `D.cours[]` : `{id, titre, cat, mod, rang, cible, auteur, desc, techs[]}` — pas de clé `prereq`
 2. Ajouter dans `CONTENU[id]` : HTML du guide oral (onglet 🎤 Support oral)
 3. Ajouter dans `NOTES_PROF[id]` : `{copy: '...', html: '...'}` (bouton « Copier pour les élèves » + onglet 📋 Marqueurs)
 4. Ajouter dans `SENSEI_QUOTES[id]` : objet avec 16 clés (sage, dur, guerrier, bienveillant, mysterieux, stratege, veteran, fraternel, ironique, ermite, ombre, sensei_noble, rebelle, mentor, chasseur, tacticien)
@@ -459,7 +459,7 @@ node tools/verifier.mjs
 | Contrôle | Ce qu'il attrape |
 |----------|------------------|
 | Syntaxe JS | une accolade ou un backtick manquant dans les 731 Ko de script |
-| Cours | ids en double, prérequis inconnus, rangs hors échelle, techniques en double |
+| Cours | ids en double, rangs hors échelle, techniques en double |
 | Personnalisation | les 16 types de `SENSEI_QUOTES`, les 16 intros et 5 natures de `COURS_FLAVOR`, les 5 variantes de `SPEC_FLAVOR`, `NATURE_CLOSING` par module |
 | Couverture | un cours sans `CONTENU`, sans `NOTES_PROF` ou sans marqueurs |
 | Clés orphelines | une entrée qui ne correspond à aucun cours |

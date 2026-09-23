@@ -18,7 +18,6 @@ Avant d'écrire quoi que ce soit, déterminer :
 | `cat` | `theorique` ou `pratique` |
 | `mod` | Fondamentaux, Chakra, Combat, Taijutsu, Ninjutsu, Tactique, Spécialisation, Terrain |
 | `rang` | Apprenti Genin, Genin, Genin Confirmé, Chūnin, Konin, Tokubetsu Jōnin, Jōnin, Commandant Jōnin, Sanin, Hokage |
-| `prereq` | ids d'autres cours |
 | `auteur` | le sensei qui a écrit le support, ou `null` |
 | `validated` | `false` si le cours n'est pas encore approuvé — sinon, ne pas mettre la clé |
 
@@ -31,7 +30,7 @@ Insérer dans cet ordre, en se calant sur le cours modèle :
 
 1. **`D.cours[]`** — l'objet JSON inline (ligne `const D={`, une seule ligne géante).
    Placer le cours à sa place logique dans l'ordre pédagogique, pas à la fin.
-   Chaque `techs[]` = une case à cocher pour le sensei : `{id, nom, desc, type, etapes[], mudras[], rang, prereq[]}`.
+   Chaque `techs[]` = une case à cocher pour le sensei : `{id, nom, desc, type, etapes[], mudras[], rang}` (pas de `prereq` : l'outil n'en gère plus).
    `type` ∈ connaissance 📖, mudras 🤞, taijutsu 🥋, chakra 🔥, tactique 🎯, ninjutsu ⚡.
 2. **`CONTENU[id]`** — le guide oral (onglet 🎤 Support oral). HTML dans un template literal.
    Structure habituelle : `<h2>` titre, encadré source, OUVERTURE, PARTIE 1..n, FERMETURE.
@@ -60,7 +59,7 @@ Les 20 techniques de nature n'ont pas d'entrée propre : elles retombent sur
 
 ## 4. Éviter les redites
 
-Avant d'écrire une partie, vérifier qu'elle n'est pas déjà traitée par un cours prérequis :
+Avant d'écrire une partie, vérifier qu'elle n'est pas déjà traitée par un cours précédent :
 les 8 vertus du Bushidō sont dans `kenjutsu_cours`, l'engagement à vie aussi, l'échauffement
 de la voie simple est dans `kenj_penetrante`. Dans le cours qui suit, **renvoyer** au cours
 précédent en une ligne grise plutôt que de redérouler.
@@ -84,7 +83,7 @@ Une seule commande couvre tout :
 node tools/verifier.mjs
 ```
 
-Syntaxe JS, ids et prérequis, les 16 types et les 5 natures, couverture, clés
+Syntaxe JS, ids, les 16 types et les 5 natures, couverture, clés
 orphelines, vocabulaire hors-RP dans le copiable, redites entre supports,
 synchronisation HTML ↔ JSON, chargement des bibliothèques, et un test de rendu dans
 un DOM simulé (11 vues et tous les cours visibles). Environ 1,4 s.

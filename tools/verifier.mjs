@@ -91,7 +91,6 @@ if (M) {
   for (const c of D.cours) {
     if (seen.has(c.id)) fail(`cours en double : ${c.id}`);
     seen.add(c.id);
-    for (const p of c.prereq || []) if (!ids.has(p)) fail(`prérequis inconnu : ${c.id} → ${p}`);
   }
   const rangs = new Set([...D.rangs, 'Tous grades']);
   const techIds = new Map();
