@@ -42,6 +42,7 @@ CLAUDE.md                  — Ce fichier (instructions pour Claude)
 GUIDE-PARTAGE.md           — Guide multi-sensei (déploiement, profil, progression)
 .gitignore                 — Exclut images lourdes, .docx sources, .claude/, cache graphify
 théorique/                 — Cours théoriques (.docx, .md) + images + directive format + propositions
+FUTON/                     — Supports Futon (.md/.txt) intégrés dans les 4 techniques Futon
 Pratique/                  — 15 cours pratiques (.docx) dont nature pratique et kenjutsu
 Cours du sensei renard/    — Cours d'un autre sensei (7 .md + HTML + script)
 Hishiba/                   — Assets visuels (images de référence)
@@ -146,6 +147,12 @@ Chaque citation combine **type de personnalité + nature de chakra** :
 1. `SENSEI_QUOTES[coursId][type]` — phrase de personnalité (480 entrées)
 2. `NATURE_CLOSING[nature][module]` — closing line nature (5 × 8 = 40 entrées)
 3. Si `S.sensei.signature` est rempli → override tout par cette phrase unique
+
+**Comment elles s'affichent dans un cours** (`applySenseiName()`) :
+- **Personnalité** : la phrase de clôture du cours (dans `CONTENU` et/ou `NOTES_PROF`) est remplacée par `SENSEI_QUOTES[id][type]` **seulement si elle est identique au texte de `SENSEI_QUOTES[id].sage`** (apostrophes comprises). Sinon, le texte écrit reste tel quel.
+- **Nature** : `NATURE_CLOSING[nature][module]` est ajoutée à la fin du **dernier bloc parchemin** (`bg-parchment`), avant la signature du sensei. Un support sans bloc parchemin n'en reçoit pas. Le texte « Copier pour les élèves » n'en reçoit jamais.
+
+**Règle : personnalisation au cas par cas.** Ne pas généraliser mécaniquement citations et phrases de nature à tous les cours : chaque cours se personnalise à la main, avec ses propres textes (modèle : les 4 techniques Futon). Un cours dont la citation de personnalité ne s'affiche pas n'est pas un bug à « combler » par un patch global.
 
 ### Filtrage des cours par nature
 
@@ -268,7 +275,7 @@ Le flag `zenkai_onboarded` dans localStorage empêche de relancer le tuto. Bouto
 ### Graphify — Mémoire structurelle
 
 Le projet utilise **Graphify** comme carte contextuelle et mémoire structurelle. Fichiers dans `graphify-out/` :
-- `graph.json` — graphe du projet (531 nœuds, 801 arêtes, 24 communautés nommées, 0 nœud orphelin)
+- `graph.json` — graphe du projet (558 nœuds, 906 arêtes, 37 communautés nommées, 0 nœud orphelin)
 - `graph.html` — visualisation interactive
 - `GRAPH_REPORT.md` — rapport d'analyse (hubs, communautés, gaps)
 - `converted/*.md` — sources .docx converties (contenu original des cours)
