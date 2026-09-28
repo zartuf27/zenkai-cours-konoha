@@ -1,4 +1,4 @@
-const CACHE_NAME='zenkai-v32';
+const CACHE_NAME='zenkai-v33';
 // Pas de './' : GitHub Pages n'a pas d'index.html (404), et addAll() échoue en bloc au moindre fichier manquant
 // cache:'reload' : ignore le cache HTTP (max-age=600) pour ne pas figer une ancienne version sous le nouveau CACHE_NAME
 const CORE_ASSETS=[

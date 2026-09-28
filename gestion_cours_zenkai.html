@@ -9125,9 +9125,8 @@ function renderBilanV3(selHist,selDate){
   const nat=s.nature?D.natures.find(n=>n.id===s.nature):null;
   const typeInfo=senseiTypeInfo();
   const fullName=(s.prenom+' '+s.nom).trim();
-  // Les séances « Proposé (0 élève) » ne comptent pas dans les cases
+  // Un cours sans élève ne compte pas dans les quotas : les séances « Proposé (0 élève) » sont ignorées
   const given=selHist.filter(e=>!e.noEleve);
-  const proposes=selHist.length-given.length;
   const groups={theorique:[],pratique:[],nature:[]};
   given.forEach(e=>{
     const c=cours(e.id);
@@ -9157,7 +9156,6 @@ function renderBilanV3(selHist,selDate){
     ${card('Cours Pratique','🥋',groups.pratique,'')}
     ${card('Cours de Nature',nat?nat.icon:'🌀',groups.nature,nat?esc(V3_NATURE_LINES[nat.id]||nat.nom):'Jutsu de nature uniquement')}
   </div>`;
-  if(proposes)h+=`<div style="font-size:0.72rem;color:var(--accent-orange);margin-top:10px">📭 ${proposes} cours proposé${proposes>1?'s':''} sans élève — non compté${proposes>1?'s':''} ci-dessus.</div>`;
   return h;
 }
 function getCoursCategoryLabel(coursId){
