@@ -29,7 +29,7 @@ Déploiement auto en ~1 min. Chaque prof ouvre le même lien, son profil/progres
 ## Structure du dossier
 
 ```
-gestion_cours_zenkai.html  — App principale (~10200 lignes, tout-en-un)
+gestion_cours_zenkai.html  — App principale (~10800 lignes, tout-en-un)
 tools/verifier.mjs         — Vérificateur (syntaxe, cohérence, HRP, sync, test navigateur)
 package.json               — Dépendances des outils uniquement (jsdom) — l'app n'en a aucune
 sw.js                      — Service Worker PWA (cache hors-ligne)
@@ -52,12 +52,14 @@ graphify-out/              — Graphe contextuel Graphify (graph.json, rapport, 
 
 ## Les 55 cours (par module)
 
+Regroupement d'affichage : dans `D.cours[]`, il n'y a que **8 modules** (voir Icônes). Les 20 techniques de nature sont toutes dans `Ninjutsu`, le Genjutsu dans `Combat`, et les 4 autres cours en attente dans `Tactique`.
+
 | Module | Cours |
 |--------|-------|
 | Fondamentaux | Règles d'Or, Nindo, Volonté du Feu, Histoire de Konoha, Règlement Intérieur |
 | Chakra | Décomposition du Chakra, Mudras, Nature de Chakra |
 | Combat | Théorie Taijutsu, Armes Ninja, Kenjutsu — Initiation, Kenjutsu — Lame Simple, Lame Pénétrante, Ruée Acérée, Kenjutsu — Lame Double (Nitōryū) |
-| Taijutsu | Bourrasque de Konoha, Pied de l'Aube |
+| Taijutsu | La Bourrasque Ardente, Pied de l'Aube |
 | Ninjutsu | Saut de Chakra, Analyse et Combat par Nature, Permutation |
 | Ninjutsu Raiton | Rayon Instantané, Boule Fulgurante, Ruée Foudroyante, Zone Fulgurante |
 | Ninjutsu Katon | Boule de Feu, Mur de Feu, Balsamine, Shurikens Pourpres |
@@ -98,7 +100,7 @@ Navigation : `VIEWS[]` → `buildSidebar()` → `nav(viewId)` → `render()` →
 | Signe distinctif | `S.sensei.signe` | Annonces ("cheveux brun") |
 | Rang | `S.sensei.rang` | Carte sensei, header, bilan Discord (de Genin Confirmé à Hokage) |
 | Phrase signature | `S.sensei.signature` | Override toutes les citations si rempli |
-| Type de Sensei | `S.sensei.type` | 720 citations, greeting, animation avatar |
+| Type de Sensei | `S.sensei.type` | 704 citations, greeting, animation avatar |
 | Nature de Chakra | `S.sensei.nature` | Skin couleurs, particules, filtrage cours, closing lines, favicon |
 | Spécialisation combat | `S.sensei.specCombat` | `taijutsu` ou `kenjutsu` |
 | Type de lame | `S.sensei.typeLame` | Si kenjutsu : `simple`, `double` ou `lourde` |
@@ -109,9 +111,9 @@ Navigation : `VIEWS[]` → `buildSidebar()` → `nav(viewId)` → `render()` →
 
 Sage 🍃, Implacable 🗡️, Guerrier 🔥, Bienveillant 🌸, Énigmatique 🌙, Stratège ♟️, Vétéran 🩸, Grand Frère 🤝, Provocateur 😏, Ermite 🐸, Ombre 🦇, Noble 👑, Rebelle 💢, Mentor spirituel 📿, Chasseur 🐺, Manipulateur 🎭
 
-Chaque type : 1 citation par cours (16 × 45 = 720) + greeting dashboard + animation avatar spécifique.
+Chaque type : 1 citation par entrée de `SENSEI_QUOTES` (44 entrées : 39 cours + 5 fallbacks `_<nature>`, soit 16 × 44 = 704) + greeting dashboard + animation avatar spécifique.
 
-Les **16 types** personnalisent les **10 onglets** de la sidebar (`SIDEBAR_LABELS`). Chaque type a un vocabulaire complet adapté à sa personnalité (HRP assumé) :
+Les **16 types** personnalisent les **11 onglets** de la sidebar (`SIDEBAR_LABELS`). Chaque type a un vocabulaire complet adapté à sa personnalité (HRP assumé) :
 - Sage : "Enseignements", "Méditation du mois", "Chroniques"
 - Implacable : "Briefing", "Programme", "Chaîne de commandement"
 - Guerrier : "QG", "Entraînement", "Victoires du mois"
@@ -144,7 +146,7 @@ Affecte : header, SVG, sidebar, progress bars, boutons, badges, stat cards, fond
 ### Système de citations (encouragements de fin de cours)
 
 Chaque citation combine **type de personnalité + nature de chakra** :
-1. `SENSEI_QUOTES[coursId][type]` — phrase de personnalité (480 entrées)
+1. `SENSEI_QUOTES[coursId][type]` — phrase de personnalité (44 entrées × 16 types = 704)
 2. `NATURE_CLOSING[nature][module]` — closing line nature (5 × 8 = 40 entrées)
 3. Si `S.sensei.signature` est rempli → override tout par cette phrase unique
 
@@ -195,8 +197,8 @@ Le bouton **📋 Copier pour les élèves** est positionné en haut du cours (ap
 
 Le contenu des cours s'adapte dynamiquement sur 3 axes, injectés après le titre via `applySenseiName()` :
 
-1. **`COURS_FLAVOR[coursId].intro[type]`** — Intro personnalisée par type de sensei (16 variantes × 18 cours = 288 textes). Ton, vocabulaire, métaphores adaptés à la personnalité.
-2. **`COURS_FLAVOR[coursId].nature[nature]`** — Anecdote/métaphore reliant le thème du cours à l'élément du sensei (5 variantes × 18 cours = 90 textes).
+1. **`COURS_FLAVOR[coursId].intro[type]`** — Intro personnalisée par type de sensei (16 variantes × 44 entrées = 704 textes). Ton, vocabulaire, métaphores adaptés à la personnalité.
+2. **`COURS_FLAVOR[coursId].nature[nature]`** — Anecdote/métaphore reliant le thème du cours à l'élément du sensei (5 variantes × 44 entrées = 220 textes).
 3. **`SPEC_FLAVOR[coursId][spec/lame]`** — Touche combat adaptée à la spécialisation Taijutsu ou Kenjutsu + type de lame (5 variantes × 9 cours = 45 textes).
 
 Logique de sélection `SPEC_FLAVOR` :
@@ -206,7 +208,7 @@ Logique de sélection `SPEC_FLAVOR` :
 
 Affichage : blocs CSS `.flavor-intro` (bordure skin, italique) et `.flavor-nature` (fond teinté, icône nature/spec).
 
-**Couverture** : les 54 cours ont des marqueurs personnalisés — soit une entrée propre dans `COURS_FLAVOR` (43 entrées, dont les 4 techniques Futon), soit le fallback `_<nature>` pour les 16 autres techniques de nature. Tout nouveau cours doit maintenir cette couverture : 16 intros + 5 natures, sans exception.
+**Couverture** : les 55 cours ont des marqueurs personnalisés — soit une entrée propre dans `COURS_FLAVOR` (39 entrées, dont les 4 techniques Futon, + 5 fallbacks `_<nature>`), soit le fallback `_<nature>` pour les 16 autres techniques de nature. Tout nouveau cours doit maintenir cette couverture : 16 intros + 5 natures, sans exception.
 
 ### Cours Kenjutsu (structure modulaire par type de lame)
 
@@ -275,20 +277,23 @@ Le flag `zenkai_onboarded` dans localStorage empêche de relancer le tuto. Bouto
 ### Graphify — Mémoire structurelle
 
 Le projet utilise **Graphify** comme carte contextuelle et mémoire structurelle. Fichiers dans `graphify-out/` :
-- `graph.json` — graphe du projet (558 nœuds, 906 arêtes, 37 communautés nommées, 0 nœud orphelin)
+- `graph.json` — graphe du projet (564 nœuds, 922 arêtes, 36 communautés nommées, 0 nœud orphelin)
 - `graph.html` — visualisation interactive
 - `GRAPH_REPORT.md` — rapport d'analyse (hubs, communautés, gaps)
 - `converted/*.md` — sources .docx converties (contenu original des cours)
 - `manifest.json` — index des fichiers sources avec hash
 - `cache/` et `2026-*/` — exclus du repo (.gitignore)
-- Mise à jour : `graphify update .` après chaque modification significative
+- Mise à jour : `graphify update .` après chaque modification significative — **mais vérifier le nombre de nœuds avant/après** (voir « Piège de la reconstruction code seule » ci-dessous)
 
 **Hubs principaux** (nœuds les plus connectés) :
 - Architecture du HTML (23 edges) — cœur technique
 - Information & Communication en mission (20) — le cours le plus relié du corpus
+- `const D` (18) — objet de données principal
 - Histoire du Village de Konoha (17) — lore fondamental
-- `render()` (15) et `applySenseiName()` (14) — cœur du rendu et de la personnalisation
-- gestion_cours_zenkai.html (14) — l'app elle-même
+- `applySenseiName()` (16) et `render()` (15) — cœur de la personnalisation et du rendu
+- `CONTENU`, `SENSEI_QUOTES` (15), `COURS_FLAVOR`, `NOTES_PROF` (14) — les données de chaque cours
+
+**Piège de la reconstruction code seule** — `graphify update .` élague les nœuds sémantiques des documents modifiés depuis leur dernière extraction (ex. le 28/09 : 7 nœuds de `.claude/skills/zenkai-cours/SKILL.md` perdus). Une réextraction `--update` complète remplacerait les ~130 nœuds du HTML et ~120 de CLAUDE.md par une extraction neuve d'un fichier de 790 Ko. Méthode sûre, utilisée le 28/09 : restaurer le graphe commité (`git checkout -- graphify-out/`), retirer les nœuds des fichiers supprimés, **ajouter à la main** les nœuds/arêtes des changements (même schéma que les nœuds existants, `_origin: semantic`), puis `graphify cluster-only .`, renommer les communautés et régénérer la signature, enfin tamponner le manifest (`save_manifest`).
 
 **Noms de communautés** — `.graphify_labels.json` porte les noms lisibles, `.graphify_labels.json.sig` un hash des membres de chaque communauté. Au rebuild, graphify **garde** le nom d'une communauté dont le hash n'a pas bougé et **renomme par son hub** celles dont le membership a changé. Après avoir renommé des communautés à la main, régénérer la signature, sinon les noms sont perdus au prochain `graphify update` :
 
@@ -311,7 +316,7 @@ Le **Parchemin** = le canal Discord de l'Académie où les senseis postent leur 
 - 3 stat cards (total global, jours actifs, cours du jour)
 - Sélecteur de jour IRL (= mois IG) avec compteur donnés/proposés
 - Timeline visuelle du jour (ligne skin, dots vert/orange, cliquable)
-- Parchemin Discord — 2 modes (toggle `bilanMode`) :
+- Parchemin Discord — 3 modes (toggle `bilanMode`) :
   - **V1 — Résumé** : `• Titre — HH:MM`, déduplique les heures (+15min si collision)
   - **V2 — Compte rendu** : formulaire par cours avec champs éditables (Organisateur pré-rempli, Intervenant, Nb d'élèves). Numérotation séquentielle globale, type de cours auto (titre + nature/spec/module). Bouton « Copier le compte rendu » génère le format Discord officiel :
     ```
@@ -321,11 +326,12 @@ Le **Parchemin** = le canal Discord de l'Académie où les senseis postent leur 
     Type de cours : Rayon Instantané - Raiton
     nombre d'élève : 3
     ```
+  - **V3 — Formulaire de primes** : ne produit aucun texte. Compte les cours du jour pour remplir le Google Form « Académie Militaire de Konoha — Compte Rendu » (Pôle Professoral). Bouton mis en avant par une pulsation de zoom (`.btn-v3-pulse`, coupée par `data-no-anim`). Rappel en haut : Prénom & Nom RP exacts, orthographe à vérifier deux fois. 3 grandes cartes : **Théorique** (`cat:'theorique'`), **Pratique** (le reste), **Nature** (uniquement les jutsu de `COURS_NATURE`), avec la liste des cours comptés. Les séances « Proposé (0 élève) » ne sont pas comptées, mais signalées à part. La ligne « Cours de Formation » du formulaire n'est pas encore gérée. Ton personnalisé : `V3_TYPE_LINES` (16 types), `V3_NATURE_LINES` (5 natures).
 - Bouton 🗑️ Supprimer ce jour (supprime uniquement le jour sélectionné, pas l'historique global)
 - Lien vers la page Historique
 
-Variables : `bilanDate` (jour sélectionné), `bilanMode` ('v1'/'v2'), `bilanV2Data` (champs saisis par ts).
-Fonctions : `bilanSetMode()`, `bilanV2Set()`, `buildDiscordV2()`, `copyBilanV2()`, `getCoursCategoryLabel()`.
+Variables : `bilanDate` (jour sélectionné), `bilanMode` ('v1'/'v2'/'v3'), `bilanV2Data` (champs saisis par ts).
+Fonctions : `bilanSetMode()`, `bilanV2Set()`, `buildDiscordV2()`, `copyBilanV2()`, `getCoursCategoryLabel()`, `renderBilanV3()`.
 
 ### Page Historique (📜)
 
@@ -346,22 +352,22 @@ Overlay plein écran déclenché depuis la page détail d'un cours. Affiche le c
 | Constante | Contenu |
 |-----------|---------|
 | `const D` | Objet principal : meta, rangs, mudras, natures, kekkei, armes, cours[] |
-| `const COURS_FLAVOR` | Intros personnalité + anecdotes nature par cours (18 cours × 21 variantes) |
+| `const COURS_FLAVOR` | Intros personnalité + anecdotes nature par cours (44 entrées × 21 variantes) |
 | `const SPEC_FLAVOR` | Anecdotes spécialisation combat par cours (9 cours × 5 variantes) |
-| `const RESUME` | Bullet points "À retenir" par cours théorique (11 entrées) |
+| `const RESUME` | Bullet points "À retenir" par cours théorique (16 entrées) |
 | `const CONTENU` | Guides oraux (HTML) par cours ID |
 | `const INTERACTIF` | Blocs interactifs (Nindo uniquement) |
 | `const NOTES_PROF` | Notes pour les élèves (copy + html) — bouton « Copier pour les élèves » |
-| `const SENSEI_QUOTES` | Citations par cours × 16 types (720 entrées) |
+| `const SENSEI_QUOTES` | Citations par cours × 16 types (44 entrées × 16 = 704) |
 | `const SENSEI_TYPES` | 16 types (icône, nom, description, couleur) |
 | `const NATURE_CLOSING` | Phrases clôture par nature × module (5 × 8) |
 | `const COURS_NATURE` | Mapping cours → nature pour filtrage |
 | `const COURS_LAME` | Mapping cours → voie de la lame (simple/double) pour filtrage |
 | `const NATURE_PARTICLES` | Emojis par nature pour particules |
 | `const ONBOARD_FINAL` | Mots de fin du tuto par type (16 entrées) |
-| `const TOUR_TIPS_TYPED` | Descriptions d'onglets par type (8 types × 4 onglets) |
+| `const TOUR_TIPS_TYPED` | Descriptions d'onglets par type (8 types × 5 onglets) |
 | `const SIDEBAR_TIPS` | Descriptions d'onglets génériques (11 vues) |
-| `const SIDEBAR_LABELS` | Labels sidebar personnalisés par type (16 types × 10 onglets) |
+| `const SIDEBAR_LABELS` | Labels sidebar personnalisés par type (16 types × 11 onglets) |
 
 ### Persistence (localStorage clé `zenkai_v2`)
 
@@ -383,7 +389,9 @@ Overlay plein écran déclenché depuis la page détail d'un cours. Affiche le c
 | Export PDF | CDN `html2canvas` + `jsPDF` | Export Historique et cours en PDF |
 | Auto-restore | Hash URL `#restore=...` | Scan QR → profil restauré automatiquement |
 
-Pour mettre à jour le cache PWA : incrémenter la version dans `sw.js` (ex: `zenkai-v7` → `zenkai-v8`).
+Pour mettre à jour le cache PWA : incrémenter la version dans `sw.js` (ex: `zenkai-v32` → `zenkai-v33`).
+
+`CORE_ASSETS` ne doit lister **que des fichiers existants** : `cache.addAll()` échoue en bloc au moindre 404, et le service worker ne s'installe alors jamais. Jamais de `'./'` (GitHub Pages n'a pas d'`index.html`). Les fichiers sont précachés avec `cache:'reload'` pour contourner le cache HTTP de GitHub Pages (`max-age=600`). La navigation sert toujours le HTML en cache : les profs ne reçoivent une nouvelle version que si `CACHE_NAME` change.
 
 ### Fonctions clés
 
@@ -465,7 +473,7 @@ node tools/verifier.mjs
 
 | Contrôle | Ce qu'il attrape |
 |----------|------------------|
-| Syntaxe JS | une accolade ou un backtick manquant dans les 731 Ko de script |
+| Syntaxe JS | une accolade ou un backtick manquant dans les ~790 Ko de script |
 | Cours | ids en double, rangs hors échelle, techniques en double |
 | Personnalisation | les 16 types de `SENSEI_QUOTES`, les 16 intros et 5 natures de `COURS_FLAVOR`, les 5 variantes de `SPEC_FLAVOR`, `NATURE_CLOSING` par module |
 | Couverture | un cours sans `CONTENU`, sans `NOTES_PROF` ou sans marqueurs |
@@ -480,8 +488,13 @@ node tools/verifier.mjs
 
 ### Sécurité
 - `esc()` échappe `& < > " '` — l'utiliser pour tout contenu utilisateur dans innerHTML
-- `safeAvatar()` valide que les DataURL commencent par `data:image/`
-- `validateSaveData()` sanitize les champs sensei importés (longueur, HTML strippé)
+- `safeAvatar()` n'accepte qu'une DataURL `data:image/(png|jpeg|gif|webp);base64,…` stricte (un guillemet ne peut pas sortir de l'attribut `src`)
+- `validateSaveData()` sanitize les champs sensei importés (longueur, HTML strippé), ramène `type` / `nature` / `specCombat` / `typeLame` inconnus au défaut, et ne garde de `cours_history` importé que les entrées au format d'`addCoursGiven()` (id `[\w-]+`, date `jj/mm/aaaa`, heure `hh:mm`)
+- Le titre d'un cours de l'historique passe par `esc()` à l'affichage (Historique, timeline Fin de mois)
+- L'auto-restore `#restore=` s'exécute sur l'événement `load`, pas pendant le chargement du script : avant, `S` était vide et `save()` écrasait l'historique local du prof
+- `save()` est protégé par try/catch (stockage plein ou bloqué → toast au lieu d'un crash)
+- Raccourcis clavier : ignorés dans un champ et quand Ctrl / Cmd / Alt est enfoncé (Ctrl+P n'ouvre plus la présentation)
 - Les 4 bibliothèques CDN (QR, PDF, confettis) ne sont plus dans le `<head>` : `loadLib()` les charge au premier clic, avec `integrity` en sha384 et `crossorigin`. Gain : 596 Ko hors du chemin critique, et plus aucune requête vouée à échouer au démarrage hors-ligne.
+- Les URLs CDN pointent vers des **fichiers statiques** du paquet. Jamais de `.min.js` généré à la volée par jsDelivr (son en-tête dit « Do NOT use SRI with dynamically generated files ») : QR sur cdnjs (`qrcode-generator/1.4.4`), confettis en `canvas-confetti@1.9.4/dist/confetti.browser.js`. jsPDF reste en 2.5.2 (les majeures 3 et 4 changent l'API) ; ses CVE connues touchent `addImage` avec des données externes, l'app ne lui passe que son propre canvas.
 - Pour changer de version de bibliothèque, recalculer l'empreinte :
   `curl -sSL <url> | openssl dgst -sha384 -binary | openssl base64 -A`

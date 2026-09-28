@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#9a7b2e">
+<meta name="description" content="Support de cours des senseis de l'Académie Ninja de Konoha — serveur RP Zenkai">
+<meta name="apple-mobile-web-app-title" content="Zenkai">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="manifest" href="manifest.json">
@@ -295,6 +297,21 @@
 [data-theme="dark"] .kekkei-card { background:var(--bg-card); border-color:var(--border); }
 [data-theme="dark"] .sidebar { background:var(--bg-surface); border-right-color:var(--border); }
 [data-theme="dark"] .mobile-nav { background:var(--bg-surface); border-bottom-color:var(--border); }
+
+/* Focus clavier visible (la souris n'est pas concernée) */
+:focus-visible { outline:2px solid var(--accent-gold); outline-offset:2px; }
+
+/* ====== FIN DE MOIS — V3 (aide au formulaire) ====== */
+@keyframes v3-zoom { 0%,100% { transform:scale(1); } 50% { transform:scale(1.14); } }
+.btn-v3-pulse { animation:v3-zoom 1.6s ease-in-out infinite; transform-origin:center; box-shadow:0 0 12px var(--skin-glow); }
+.v3-remind { border:2px dashed var(--accent-orange); border-radius:var(--radius-lg); padding:12px 16px; margin-bottom:14px; background:var(--bg-input); }
+.v3-remind-name { font-size:1.25rem; font-weight:800; color:var(--skin-primary); letter-spacing:0.02em; margin:6px 0; user-select:all; }
+.v3-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(170px,1fr)); gap:12px; }
+.v3-card { background:var(--bg-input); border:1px solid var(--border); border-top:4px solid var(--skin-primary); border-radius:var(--radius-lg); padding:16px 14px; text-align:center; }
+.v3-card-label { font-size:0.8rem; font-weight:700; text-transform:uppercase; letter-spacing:0.06em; color:var(--text-muted); }
+.v3-card-num { font-size:3.4rem; font-weight:800; line-height:1.1; margin:6px 0; background:var(--skin-gradient); -webkit-background-clip:text; background-clip:text; color:transparent; }
+.v3-card-num.zero { background:none; color:var(--text-muted); opacity:0.5; }
+.v3-card-list { font-size:0.7rem; color:var(--text-muted); line-height:1.5; text-align:left; margin-top:6px; }
 
 /* ====== STYLE PARCHEMIN (historique) ====== */
 .scroll-card {
@@ -1409,8 +1426,8 @@ body {
   </div>
   <div class="header-right">
     <span id="headerSensei" style="font-size:0.75rem;color:var(--text-dim);cursor:pointer;margin-right:6px" onclick="nav('sensei')"></span>
-    <button class="btn btn-sm" id="themeToggle" onclick="toggleTheme()" title="Mode sombre / clair">🌙</button>
-    <button class="btn btn-sm" onclick="nav('sensei')" title="Profil & Réglages">⚙️</button>
+    <button class="btn btn-sm" id="themeToggle" onclick="toggleTheme()" title="Mode sombre / clair" aria-label="Mode sombre / clair">🌙</button>
+    <button class="btn btn-sm" onclick="nav('sensei')" title="Profil & Réglages" aria-label="Profil et réglages">⚙️</button>
   </div>
 </div>
 
@@ -6795,7 +6812,7 @@ function iCalcScore(cid){
 const SK='zenkai_v2';
 let S={c:{},n:{}};
 function load(){try{const r=localStorage.getItem(SK);if(r){S=JSON.parse(r)}}catch(e){}if(!S.c)S.c={};if(!S.n)S.n={};if(!S.sensei)S.sensei={prenom:'',nom:'',signe:'',nature:'',type:'sage',rang:'',signature:''};if(!S.sensei.type)S.sensei.type='sage';if(S.sensei.signature===undefined)S.sensei.signature='';if(S.noAnim)document.documentElement.setAttribute('data-no-anim','')}
-function save(){localStorage.setItem(SK,JSON.stringify(S))}
+function save(){try{localStorage.setItem(SK,JSON.stringify(S))}catch(e){try{toast('Sauvegarde impossible (stockage plein ou bloqué)')}catch(_){}}}
 function chk(k){return!!S.c[k]}
 function tog(k){S.c[k]=!S.c[k];if(!S.c[k])delete S.c[k];save()}
 function getNote(id){return S.n[id]||''}
@@ -7975,7 +7992,7 @@ function coursState(c){
 function stBadge(s){const l={'non-vue':'Non vue','en-cours':'En cours','maitrisee':'Maîtrisée'};return`<span class="state-badge state-${s}">${l[s]}</span>`}
 function tIcon(t){return{connaissance:'📖',mudras:'🤞',taijutsu:'🥋',chakra:'🔥',tactique:'🎯',ninjutsu:'⚡'}[t]||'📌'}
 function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;')}
-function safeAvatar(url){return url&&url.startsWith('data:image/')?url:''}
+function safeAvatar(url){return url&&/^data:image\/(png|jpeg|gif|webp);base64,[A-Za-z0-9+\/=]+$/.test(url)?url:''}
 
 // ================================================================
 // NAV
@@ -8099,7 +8116,7 @@ function renderDash(){
   const _greeting=_greetings[_s.type]||_greetings.sage;
   const _avatar=safeAvatar(getNote('sensei_avatar'));
   h+=`<div class="sensei-card" data-type="${_s.type}" onclick="nav('sensei')" style="cursor:pointer">
-    <div class="sensei-card-avatar">${_avatar?`<img src="${_avatar}" style="width:100%;height:100%;object-fit:cover;border-radius:50%">`:(_nat?_nat.icon:_type.icon)}</div>
+    <div class="sensei-card-avatar">${_avatar?`<img src="${_avatar}" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:50%">`:(_nat?_nat.icon:_type.icon)}</div>
     <div class="sensei-card-info">
       <div class="sensei-card-name">${esc(senseiFullName())}</div>
       <div class="sensei-card-meta">${_s.rang?esc(_s.rang)+' · ':''}${_type.icon} ${_type.nom}${_s.signe?' · '+esc(_s.signe):''}</div>
@@ -8206,14 +8223,14 @@ function renderCoursList(){
   const senNatInfo=D.natures.find(n=>n.id===senNat);
   let h=`<div class="page-header"><div class="page-title">Cours</div><div class="page-desc">Tous les enseignements de l'Académie${senNatInfo?' · Affinité '+senNatInfo.icon+' '+senNatInfo.nom:''}</div></div>`;
   h+=`<div class="filters">
-    <input class="filter-input" type="text" placeholder="Rechercher..." value="${esc(fText)}" oninput="fText=this.value;clearTimeout(window._searchTimeout);window._searchTimeout=setTimeout(()=>{const v=document.querySelector('.filter-input');const pos=v?.selectionStart;document.getElementById('content').innerHTML=renderCoursList();const v2=document.querySelector('.filter-input');if(v2){v2.focus();v2.selectionStart=v2.selectionEnd=pos}},200)">
-    <select class="filter-select" onchange="fCat=this.value;document.getElementById('content').innerHTML=renderCoursList()">
+    <input class="filter-input" type="text" aria-label="Rechercher un cours" placeholder="Rechercher..." value="${esc(fText)}" oninput="fText=this.value;clearTimeout(window._searchTimeout);window._searchTimeout=setTimeout(()=>{const v=document.querySelector('.filter-input');const pos=v?.selectionStart;document.getElementById('content').innerHTML=renderCoursList();const v2=document.querySelector('.filter-input');if(v2){v2.focus();v2.selectionStart=v2.selectionEnd=pos}},200)">
+    <select class="filter-select" aria-label="Catégorie" onchange="fCat=this.value;document.getElementById('content').innerHTML=renderCoursList()">
       <option value="">Catégorie</option><option value="theorique"${fCat==='theorique'?' selected':''}>Théorique</option><option value="pratique"${fCat==='pratique'?' selected':''}>Pratique</option></select>
-    <select class="filter-select" onchange="fMod=this.value;document.getElementById('content').innerHTML=renderCoursList()">
+    <select class="filter-select" aria-label="Module" onchange="fMod=this.value;document.getElementById('content').innerHTML=renderCoursList()">
       <option value="">Module</option>${allMods.map(m=>`<option value="${m}"${fMod===m?' selected':''}>${m}</option>`).join('')}</select>
-    <select class="filter-select" onchange="fRang=this.value;document.getElementById('content').innerHTML=renderCoursList()">
+    <select class="filter-select" aria-label="Rang" onchange="fRang=this.value;document.getElementById('content').innerHTML=renderCoursList()">
       <option value="">Rang</option>${D.rangs.slice(0,5).map(r=>`<option value="${r}"${fRang===r?' selected':''}>${r}</option>`).join('')}</select>
-    <select class="filter-select" onchange="fEtat=this.value;document.getElementById('content').innerHTML=renderCoursList()">
+    <select class="filter-select" aria-label="État" onchange="fEtat=this.value;document.getElementById('content').innerHTML=renderCoursList()">
       <option value="">État</option><option value="non-vue"${fEtat==='non-vue'?' selected':''}>Non vue</option><option value="en-cours"${fEtat==='en-cours'?' selected':''}>En cours</option><option value="maitrisee"${fEtat==='maitrisee'?' selected':''}>Maîtrisée</option><option value="non-valide"${fEtat==='non-valide'?' selected':''}>⚠ Non validé</option></select>
   </div>`;
 
@@ -8365,7 +8382,7 @@ function renderDetail(){
     <button class="btn btn-sm" onclick="addCoursGiven(curCours,true);render()" style="font-size:0.8rem;border-color:var(--accent-orange);color:var(--accent-orange)">
       📭 Proposé (0 élève)
     </button>
-    ${givenCount?`<button class="btn btn-sm" onclick="removeCoursGiven(curCours);render()" style="font-size:0.75rem">− 1</button>`:''}
+    ${givenCount?`<button class="btn btn-sm" onclick="removeCoursGiven(curCours);render()" aria-label="Retirer le dernier cours donné" style="font-size:0.75rem">− 1</button>`:''}
     ${givenCount?`<span style="font-size:0.85rem;font-weight:600;color:var(--skin-primary);margin:0 4px">${givenCount} fois</span>`:''}
     ${givenLast?'<span style=\"font-size:0.72rem;color:var(--text-dim)\">· Dernier : '+givenLast+'</span>':''}
   </div>`;
@@ -9045,7 +9062,7 @@ function addCoursGiven(coursId,noEleve){
   // Arrondi au quart d'heure
   const mins=now.getMinutes();const rounded=Math.round(mins/15)*15;
   const rnd=new Date(now);rnd.setMinutes(rounded%60);if(rounded===60)rnd.setHours(rnd.getHours()+1);rnd.setSeconds(0);
-  // Serveur ouvert 18h→3h : les cours après minuit (0h-4h) = même mois IG que la veille
+  // Serveur ouvert 18h→4h : les cours après minuit (0h-4h) = même mois IG que la veille
   const dateRef=new Date(now);
   if(dateRef.getHours()<5)dateRef.setDate(dateRef.getDate()-1);
   const entry={id:coursId,titre:c.titre,date:dateRef.toLocaleDateString('fr-FR'),heure:rnd.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'}),ts:now.getTime()};
@@ -9071,11 +9088,78 @@ function removeCoursGiven(coursId){
 
 // 1 session (18h→4h) = 1 mois IG. Bilan par session avec historique navigable.
 let bilanDate=null; // null = aujourd'hui
-let bilanMode='v1'; // 'v1' = simple, 'v2' = compte rendu détaillé
+let bilanMode='v1'; // 'v1' = simple, 'v2' = compte rendu détaillé, 'v3' = aide au formulaire de primes
 let bilanV2Data={}; // {ts: {organisateur, intervenant, nbEleves}} — champs V2 par cours
 function bilanSetDate(dateStr){bilanDate=dateStr||null;render();}
 function bilanSetMode(m){bilanMode=m;render();}
 function bilanV2Set(ts,field,val){if(!bilanV2Data[ts])bilanV2Data[ts]={};bilanV2Data[ts][field]=val;}
+
+// V3 — aide au remplissage du formulaire de primes (Pôle Professoral) : compte, ne rédige rien
+const V3_TYPE_LINES={
+  sage:'Chaque enseignement compte. Reporte-les avec la même justesse que tu les as donnés.',
+  dur:'Le compte exact. Ni plus, ni moins. Une erreur et la prime saute.',
+  guerrier:'Voilà ce que tu as donné ce mois-ci ! Coche tout, rien ne se perd !',
+  bienveillant:'Tout ce que tu as partagé avec tes élèves est là. Prends ton temps pour le reporter.',
+  mysterieux:'Les chiffres parlent pour toi. Il suffit de les recopier.',
+  stratege:'Données consolidées. Report direct, case par case.',
+  veteran:'Pas besoin de papier ni de mémoire. Tout est noté, recopie.',
+  fraternel:'T\'as bien bossé ! Voilà tes chiffres, t\'as plus qu\'à cocher.',
+  ironique:'Même toi, tu ne peux pas te tromper avec ça. Enfin... on verra.',
+  ermite:'J\'ai compté pour toi. Tu coches, et on retourne se poser.',
+  ombre:'Relevé du mois. À reporter tel quel.',
+  sensei_noble:'Le registre fidèle de tes enseignements. Qu\'il soit reporté avec soin.',
+  rebelle:'La paperasse, version rapide. Tu recopies et c\'est plié.',
+  mentor:'Ce que tu as transmis, en toute clarté. Reporte-le l\'esprit tranquille.',
+  chasseur:'Le tableau de chasse du mois. Tout y est.',
+  tacticien:'Tout est déjà compté. Il ne te reste qu\'à déplacer les pions dans les cases.'
+};
+const V3_NATURE_LINES={
+  katon:'Les flammes que tu as transmises',
+  futon:'Le vent que tu as fait souffler',
+  raiton:'La foudre que tu as enseignée',
+  doton:'La roche que tu as fait lever',
+  suiton:'Les eaux que tu as fait couler'
+};
+function renderBilanV3(selHist,selDate){
+  const s=getSensei();
+  const nat=s.nature?D.natures.find(n=>n.id===s.nature):null;
+  const typeInfo=senseiTypeInfo();
+  const fullName=(s.prenom+' '+s.nom).trim();
+  // Les séances « Proposé (0 élève) » ne comptent pas dans les cases
+  const given=selHist.filter(e=>!e.noEleve);
+  const proposes=selHist.length-given.length;
+  const groups={theorique:[],pratique:[],nature:[]};
+  given.forEach(e=>{
+    const c=cours(e.id);
+    if(COURS_NATURE[e.id])groups.nature.push(e);
+    else if(c&&c.cat==='theorique')groups.theorique.push(e);
+    else groups.pratique.push(e);
+  });
+  let h=`<div class="v3-remind">
+    <div style="font-size:0.82rem;font-weight:700;color:var(--accent-orange)">⚠️ Prénom &amp; Nom (RP) — à recopier de manière EXACTE dans le formulaire</div>
+    ${fullName?`<div class="v3-remind-name">${esc(fullName)}</div>`:`<div style="margin:6px 0;font-size:0.85rem;color:var(--text-muted);font-style:italic">Aucun nom dans ton profil. <a href="#" onclick="nav('sensei');return false">Renseigne-le ici</a>.</div>`}
+    <div style="font-size:0.75rem;color:var(--text-muted)">Vérifie l'orthographe <strong>deux fois</strong> : accents, tirets, majuscules. Un nom mal écrit peut faire refuser la prime.</div>
+  </div>
+  <div style="font-size:0.85rem;font-style:italic;color:var(--text);margin-bottom:12px">${typeInfo.icon} ${esc(V3_TYPE_LINES[typeInfo.id]||V3_TYPE_LINES.sage)}</div>
+  <div style="font-size:0.72rem;color:var(--text-muted);margin-bottom:10px">Pôle Professoral — session du ${esc(selDate)} · coche le chiffre de chaque carte dans la ligne correspondante.</div>`;
+  const card=(label,icon,list,sub)=>{
+    const n=list.length;
+    const titles=list.map(e=>'• '+esc(e.titre)).join('<br>');
+    return `<div class="v3-card">
+      <div class="v3-card-label">${icon} ${label}</div>
+      <div class="v3-card-num${n?'':' zero'}">${n}</div>
+      ${sub?`<div style="font-size:0.7rem;font-style:italic;color:var(--text-muted)">${sub}</div>`:''}
+      ${n?`<div class="v3-card-list">${titles}</div>`:''}
+    </div>`;
+  };
+  h+=`<div class="v3-grid">
+    ${card('Cours Théorique','📖',groups.theorique,'')}
+    ${card('Cours Pratique','🥋',groups.pratique,'')}
+    ${card('Cours de Nature',nat?nat.icon:'🌀',groups.nature,nat?esc(V3_NATURE_LINES[nat.id]||nat.nom):'Jutsu de nature uniquement')}
+  </div>`;
+  if(proposes)h+=`<div style="font-size:0.72rem;color:var(--accent-orange);margin-top:10px">📭 ${proposes} cours proposé${proposes>1?'s':''} sans élève — non compté${proposes>1?'s':''} ci-dessus.</div>`;
+  return h;
+}
 function getCoursCategoryLabel(coursId){
   const nat=COURS_NATURE[coursId];
   if(nat)return nat.charAt(0).toUpperCase()+nat.slice(1);
@@ -9092,9 +9176,9 @@ function buildDiscordV2(entries,allHist){
     const typeStr=c?(c.titre+(catLabel?' - '+catLabel:'')):e.titre;
     const d=bilanV2Data[e.ts]||{};
     const num=d.numCours||'';
-    const org=d.organisateur||'';
+    const org=d.organisateur!==undefined?d.organisateur:senseiFullName();
     const inter=d.intervenant||'';
-    const nb=d.nbEleves||'';
+    const nb=d.nbEleves!==undefined?d.nbEleves:(e.noEleve?'0':'');
     if(i>0)txt+='\n';
     txt+=`Cours ${num}\n`;
     txt+=`Organisateur du cours : ${org}\n`;
@@ -9174,7 +9258,7 @@ function renderBilan(){
   const dayModList=Object.entries(dayModules).sort((a,b)=>b[1]-a[1]);
 
   // Heures du jour
-  const dayHeures=selHist.map(e=>e.heure).sort();
+  const dayHeures=[...selHist].sort(sessionSort).map(e=>e.heure);
   const premiereHeure=dayHeures.length?dayHeures[0]:'—';
   const derniereHeure=dayHeures.length>1?dayHeures[dayHeures.length-1]:'';
 
@@ -9278,7 +9362,7 @@ function renderBilan(){
         <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap">
           <div style="display:flex;align-items:center;gap:8px">
             <span style="font-size:0.82rem;font-weight:700;color:var(--skin-primary);font-family:monospace;background:var(--skin-bg-tint);padding:2px 8px;border-radius:4px;letter-spacing:0.5px">${e.heure}</span>
-            <span style="font-weight:600;color:var(--text-bright);font-size:0.88rem">${catBadge} ${e.titre}</span>
+            <span style="font-weight:600;color:var(--text-bright);font-size:0.88rem">${catBadge} ${esc(String(e.titre||''))}</span>
           </div>
           ${isNoEleve?'<span style="font-size:0.68rem;color:var(--accent-orange);font-weight:600;background:rgba(217,122,30,0.1);padding:2px 8px;border-radius:8px">📭 aucun élève</span>':''}
         </div>
@@ -9298,9 +9382,12 @@ function renderBilan(){
     <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px;flex-wrap:wrap">
       <button class="btn btn-sm ${activeMode==='v1'?'btn-primary':''}" onclick="bilanSetMode('v1')" style="font-size:0.75rem">V1 — Résumé</button>
       <button class="btn btn-sm ${activeMode==='v2'?'btn-primary':''}" onclick="bilanSetMode('v2')" style="font-size:0.75rem">V2 — Compte rendu</button>
+      <button class="btn btn-sm ${activeMode==='v3'?'btn-primary':'btn-v3-pulse'}" onclick="bilanSetMode('v3')" style="font-size:0.75rem;font-weight:700">✨ V3 — Formulaire de primes</button>
     </div>`;
 
-  if(activeMode==='v1'){
+  if(activeMode==='v3'){
+    h+=renderBilanV3(selHist,selDate);
+  }else if(activeMode==='v1'){
     h+=`<div style="margin-bottom:10px">
       <button class="btn btn-sm btn-primary" onclick="clipCopy(document.getElementById('bilanText').getAttribute('data-raw'),'Bilan')">📋 Copier</button>
     </div>
@@ -9517,7 +9604,7 @@ function renderHistorique(){
   // ====== CARTE SENSEI ======
   const _hAvatar=safeAvatar(getNote('sensei_avatar'));
   h+=`<div class="sensei-card" data-type="${s.type}" style="margin-bottom:24px">
-    <div class="sensei-card-avatar">${_hAvatar?`<img src="${_hAvatar}" style="width:100%;height:100%;object-fit:cover;border-radius:50%">`:nat?nat.icon:typeInfo.icon}</div>
+    <div class="sensei-card-avatar">${_hAvatar?`<img src="${_hAvatar}" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:50%">`:nat?nat.icon:typeInfo.icon}</div>
     <div class="sensei-card-info">
       <div class="sensei-card-name">${esc(senseiFullName())}</div>
       <div class="sensei-card-meta">${s.rang?esc(s.rang)+' · ':''}${typeInfo.icon} ${typeInfo.nom}</div>
@@ -9757,7 +9844,7 @@ function renderHistorique(){
     h+=`<tr style="border-bottom:1px solid var(--border);transition:background 0.15s;cursor:pointer" onclick="openCours('${e.id}')" onmouseover="this.style.background='var(--bg-input)'" onmouseout="this.style.background='transparent'">
       ${isGlobal?`<td style="padding:6px;color:var(--text-dim);white-space:nowrap">${e.date}</td>`:''}
       <td style="padding:6px;color:var(--text);font-family:monospace;font-size:0.75rem">${e.heure}</td>
-      <td style="padding:6px;color:var(--text-bright);font-weight:500">${e.titre}</td>
+      <td style="padding:6px;color:var(--text-bright);font-weight:500">${esc(String(e.titre||''))}</td>
       <td style="padding:6px;color:var(--text-dim);white-space:nowrap">${icon} ${mod}</td>
       <td style="padding:6px;text-align:center">${e.noEleve?'<span style="color:var(--accent-orange);font-size:0.7rem">📭 0 élève</span>':'<span style="color:var(--accent-leaf);font-size:0.7rem">✅ Donné</span>'}</td>
     </tr>`;
@@ -10018,12 +10105,12 @@ function renderSensei(){
     <label>Avatar / Screenshot</label>
     <div style="display:flex;align-items:center;gap:16px;margin-top:4px">
       <div style="width:80px;height:80px;border-radius:50%;border:2px solid var(--skin-primary);overflow:hidden;display:flex;align-items:center;justify-content:center;background:var(--bg-input);flex-shrink:0">
-        ${avatarData?`<img src="${avatarData}" style="width:100%;height:100%;object-fit:cover">`:`<span style="font-size:2rem;color:var(--text-muted)">👤</span>`}
+        ${avatarData?`<img src="${avatarData}" alt="" style="width:100%;height:100%;object-fit:cover">`:`<span style="font-size:2rem;color:var(--text-muted)">👤</span>`}
       </div>
       <div>
         <input type="file" id="avatarInput" accept="image/*" style="display:none" onchange="loadAvatar(this)">
         <button class="btn btn-sm" onclick="document.getElementById('avatarInput').click()" style="font-size:0.8rem">📷 Choisir une image</button>
-        ${avatarData?`<button class="btn btn-sm" onclick="setNote('sensei_avatar','');render()" style="font-size:0.75rem;margin-left:4px">✕</button>`:''}
+        ${avatarData?`<button class="btn btn-sm" onclick="setNote('sensei_avatar','');render()" aria-label="Retirer l'avatar" style="font-size:0.75rem;margin-left:4px">✕</button>`:''}
         <div style="font-size:0.72rem;color:var(--text-muted);margin-top:4px">Affiché sur votre carte sensei (stocké dans votre navigateur)</div>
       </div>
     </div>
@@ -10199,6 +10286,16 @@ function validateSaveData(d){
     strFields.forEach(f=>{if(d.sensei[f]!==undefined){if(typeof d.sensei[f]!=='string'||d.sensei[f].length>200)d.sensei[f]='';}});
     // Strip any HTML tags from text fields
     ['prenom','nom','signe','signature'].forEach(f=>{if(d.sensei[f])d.sensei[f]=d.sensei[f].replace(/<[^>]*>/g,'');});
+    // Champs à valeurs fixes : toute valeur inconnue est ramenée au défaut
+    if(d.sensei.type&&!SENSEI_TYPES.some(t=>t.id===d.sensei.type))d.sensei.type='sage';
+    if(d.sensei.nature&&!D.natures.some(n=>n.id===d.sensei.nature))d.sensei.nature='';
+    if(d.sensei.specCombat&&!['taijutsu','kenjutsu'].includes(d.sensei.specCombat))d.sensei.specCombat='';
+    if(d.sensei.typeLame&&!['simple','double','lourde'].includes(d.sensei.typeLame))d.sensei.typeLame='';
+  }
+  // Historique importé : on ne garde que les entrées au format produit par addCoursGiven()
+  if(d.n&&typeof d.n==='object'&&typeof d.n.cours_history==='string'){
+    try{const h=JSON.parse(d.n.cours_history);d.n.cours_history=JSON.stringify(Array.isArray(h)?h.filter(e=>e&&/^[\w-]+$/.test(e.id)&&/^\d{2}\/\d{2}\/\d{4}$/.test(e.date)&&/^\d{2}:\d{2}$/.test(e.heure)):[]);}
+    catch(e){d.n.cours_history='[]';}
   }
   return true;
 }
@@ -10251,8 +10348,8 @@ function doReset(){if(confirm('Réinitialiser toute la progression ?')){const se
 // integrity : si le CDN est compromis, le navigateur refuse le script.
 // ================================================================
 const LIBS={
-  qrcode:{url:'https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js',
-    integrity:'sha384-lQXOAyZwHXE55JFyrOMB7nY2Wv+m5ZWNtJcHrd1rceRQXAYNLak8ukN5TjBTcIwz',
+  qrcode:{url:'https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js',
+    integrity:'sha384-mZT2gIty7ZDdOGkxfP6joZcYdMW1Jvj9dRlfpTmaJAKKXTqzygtB22k7FLe+KZC1',
     ready:()=>typeof qrcode!=='undefined'},
   html2canvas:{url:'https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js',
     integrity:'sha384-ZZ1pncU3bQe8y31yfZdMFdSpttDoPmOZg2wguVK9almUodir1PghgT0eY7Mrty8H',
@@ -10260,8 +10357,8 @@ const LIBS={
   jspdf:{url:'https://cdn.jsdelivr.net/npm/jspdf@2.5.2/dist/jspdf.umd.min.js',
     integrity:'sha384-en/ztfPSRkGfME4KIm05joYXynqzUgbsG5nMrj/xEFAHXkeZfO3yMK8QQ+mP7p1/',
     ready:()=>!!(window.jspdf&&window.jspdf.jsPDF)},
-  confetti:{url:'https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js',
-    integrity:'sha384-sPwMflxqfAN+Q5mvlkLmHiX3PORGbZSXHiSGPTXT9VHCD/AB+b+r+vJWsqprv+7k',
+  confetti:{url:'https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.4/dist/confetti.browser.js',
+    integrity:'sha384-bopE5cbMjKUprmGnIRk2UdvCnHImrRLCtNW2uR6oDYqO+o3XWJeuIrWWxDzeDgNW',
     ready:()=>typeof confetti!=='undefined'}
 };
 // Entrée / Espace activent les éléments cliquables rendus focusables (role link/tab).
@@ -10328,8 +10425,8 @@ async function generateQR(){
   }catch(e){toast('Données trop volumineuses pour un QR. Utilisez le code texte.')}
 }
 
-// Auto-restore from URL hash
-(function(){
+// Auto-restore from URL hash — après le chargement complet (load(), toast, SIDEBAR_LABELS prêts)
+window.addEventListener('load',function(){
   const hash=location.hash;
   if(hash.startsWith('#restore=')){
     const code=decodeURIComponent(hash.slice(9));
@@ -10338,7 +10435,7 @@ async function generateQR(){
       toast('Profil restauré depuis le lien !');
     }
   }
-})();
+});
 
 // ================================================================
 // EXPORT PDF — historique et cours
@@ -10634,12 +10731,15 @@ function updateHeaderSensei(){
   document.title=(nat?nat.icon+' ':'')+'Zenkai — '+senseiFullName();
   // Dynamic favicon
   try{
+    const ico=nat?nat.icon:'🍃';
+    if(updateHeaderSensei._ico===ico)return; // favicon inchangé : pas de redessin à chaque save()
     const fc=document.createElement('canvas');fc.width=32;fc.height=32;
     const fx=fc.getContext('2d');fx.font='28px serif';fx.textAlign='center';fx.textBaseline='middle';
-    fx.fillText(nat?nat.icon:'🍃',16,18);
-    let link=document.querySelector("link[rel*='icon']");
+    fx.fillText(ico,16,18);
+    let link=document.querySelector("link[rel='icon']");
     if(!link){link=document.createElement('link');link.rel='icon';document.head.appendChild(link);}
     link.href=fc.toDataURL();
+    updateHeaderSensei._ico=ico;
   }catch(e){}
 }
 updateHeaderSensei();
@@ -10671,6 +10771,7 @@ tog=function(k){_origTog(k);
 // ================================================================
 document.addEventListener('keydown',e=>{
   if(e.target.tagName==='INPUT'||e.target.tagName==='TEXTAREA'||e.target.tagName==='SELECT')return;
+  if(e.ctrlKey||e.metaKey||e.altKey)return;
   const viewKeys={1:'dashboard',2:'cours',3:'mudras',4:'natures',5:'hierarchie',6:'annonces',7:'bilan',8:'historique',9:'sensei'};
   if(viewKeys[e.key]){e.preventDefault();nav(viewKeys[e.key]);return;}
   if(e.key==='Escape'){

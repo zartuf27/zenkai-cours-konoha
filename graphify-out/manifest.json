@@ -12,10 +12,10 @@
     "semantic_hash": "763ed728bbb6a36b1550d73465dd61c1"
   },
   "CLAUDE.md": {
-    "mtime": 1790157451.9835832,
-    "seen": 1790157601.701864,
-    "ast_hash": "3a44b1f482975f227b4bcf934baf6bb6",
-    "semantic_hash": "3a44b1f482975f227b4bcf934baf6bb6"
+    "mtime": 1790608737.8383386,
+    "seen": 1790608938.5478432,
+    "ast_hash": "58011338dbca4236e9a913b0f11d5bc7",
+    "semantic_hash": "58011338dbca4236e9a913b0f11d5bc7"
   },
   "Cours du sensei renard/HTML/armes ninja renard.html": {
     "mtime": 1782616085.3212354,
@@ -108,10 +108,10 @@
     "semantic_hash": "b8b34c29ae8646899339cae49887222f"
   },
   "gestion_cours_zenkai.html": {
-    "mtime": 1790157102.3815973,
-    "seen": 1790157601.701869,
-    "ast_hash": "52fc12428b248bd675da59a4ba7b7d81",
-    "semantic_hash": "52fc12428b248bd675da59a4ba7b7d81"
+    "mtime": 1790608698.4715357,
+    "seen": 1790608938.5478623,
+    "ast_hash": "03c788304514b4cd692677749815302b",
+    "semantic_hash": "03c788304514b4cd692677749815302b"
   },
   "graphify-out/converted/Aide pour construire les cours_959fb678.md": {
     "mtime": 1789338145.1185358,
@@ -270,16 +270,16 @@
     "semantic_hash": "549336c69f51ea23696fd145ae60e748"
   },
   "manifest.json": {
-    "mtime": 1789354414.8299427,
-    "seen": 1789614494.0880795,
-    "ast_hash": "5109320043106ae19c8644b673c9e532",
-    "semantic_hash": "5109320043106ae19c8644b673c9e532"
+    "mtime": 1790608654.1455538,
+    "seen": 1790608938.5478382,
+    "ast_hash": "cb28f9fb76e112886206a96ece844764",
+    "semantic_hash": "cb28f9fb76e112886206a96ece844764"
   },
   "sw.js": {
-    "mtime": 1790157128.412635,
-    "seen": 1790157601.7018614,
-    "ast_hash": "53db5181b04f7851dc568a83bbc2d9a8",
-    "semantic_hash": "53db5181b04f7851dc568a83bbc2d9a8"
+    "mtime": 1790608654.1455538,
+    "seen": 1790608938.5478406,
+    "ast_hash": "d40767eaa10e331b1c05f0029fe5c7f7",
+    "semantic_hash": "d40767eaa10e331b1c05f0029fe5c7f7"
   },
   "icon-192.svg": {
     "mtime": 1789354410.9763727,
@@ -298,18 +298,6 @@
     "seen": 1789870976.011467,
     "ast_hash": "c72cbb8c93a6508696cfd1c031f5f82e",
     "semantic_hash": "c72cbb8c93a6508696cfd1c031f5f82e"
-  },
-  "exemple 1.png": {
-    "mtime": 1789869943.4660816,
-    "seen": 1789870976.0114677,
-    "ast_hash": "cddb01aead9dad1bf5c1c42dc2bba74e",
-    "semantic_hash": "cddb01aead9dad1bf5c1c42dc2bba74e"
-  },
-  "exemple2.png": {
-    "mtime": 1789869984.062692,
-    "seen": 1789870976.0114686,
-    "ast_hash": "37d08fa5e39c848110975dbc690c2813",
-    "semantic_hash": "37d08fa5e39c848110975dbc690c2813"
   },
   ".claude/skills/zenkai-cours/SKILL.md": {
     "mtime": 1790157122.030045,

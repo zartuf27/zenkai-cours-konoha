@@ -1,14 +1,16 @@
-const CACHE_NAME='zenkai-v30';
+const CACHE_NAME='zenkai-v32';
+// Pas de './' : GitHub Pages n'a pas d'index.html (404), et addAll() échoue en bloc au moindre fichier manquant
+// cache:'reload' : ignore le cache HTTP (max-age=600) pour ne pas figer une ancienne version sous le nouveau CACHE_NAME
 const CORE_ASSETS=[
   './gestion_cours_zenkai.html',
-  './',
   './img_cycle_natures.png',
   './img_kekkei_genkai.png',
-  './manifest.json'
+  './manifest.json',
+  './icon-192.svg'
 ];
 
 self.addEventListener('install',e=>{
-  e.waitUntil(caches.open(CACHE_NAME).then(c=>c.addAll(CORE_ASSETS)));
+  e.waitUntil(caches.open(CACHE_NAME).then(c=>c.addAll(CORE_ASSETS.map(u=>new Request(u,{cache:'reload'})))));
   self.skipWaiting();
 });
 
