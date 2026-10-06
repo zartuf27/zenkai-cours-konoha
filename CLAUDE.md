@@ -84,7 +84,7 @@ Regroupement d'affichage : dans `D.cours[]`, il n'y a que **8 modules** (voir Ic
 | 🔥 Natures | `natures` | 5 natures, cycle, kekkei genkai, bannière perso |
 | 👑 Hiérarchie | `hierarchie` | 10 rangs ninja |
 | 📋 Règlement | `admin` | Directive Yamamoto Jakka |
-| 📢 Annonces | `annonces` | Annonces avec sélecteur de lieu (popup) + copie par module |
+| 📢 Annonces | `annonces` | Annonces avec sélecteur de lieu puis heure (popup en 2 étapes) + copie par module |
 | 📊 Fin de mois | `bilan` | Sélecteur jour, liste des cours avec heure |
 | 📜 Historique | `historique` | Stats sensei, graphiques, classement, journal complet |
 | 👤 Sensei | `sensei` | Profil complet (10 champs), aperçu en direct, réglages (parchemin, QR, reset) |
@@ -342,6 +342,14 @@ Fonctions : `bilanSetMode()`, `bilanV2Set()`, `buildDiscordV2()`, `copyBilanV2()
 - Graphe heures d'enseignement (colonnes 7h→23h)
 - Classement des cours (médailles 🥇🥈🥉, cliquable)
 - Journal complet (tableau chronologique)
+
+### Page Annonces (📢) — Lieu + heure
+
+Clic sur un cours (ou « Copier le module ») → `showLieuPicker()` ouvre une popup en 2 étapes :
+1. **📍 Lieu du cours** — boutons issus de `LIEUX_ANNONCE`
+2. **🕒 Heure du cours** — case de texte libre (40 car. max, ex. « 21h30 »), validée par Entrée ou « 📋 Copier l'annonce » ; « ← Lieu » revient à l'étape 1
+
+Format copié : `Titre — Rang — Lieu — Heure — Prénom Nom`. Heure vide → segment omis. En copie unitaire, le cours s'ouvre ensuite (`openCours`, 1,2 s).
 
 ### Mode Présentation (🎤)
 
