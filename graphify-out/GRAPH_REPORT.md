@@ -4,7 +4,7 @@
 - cluster-only mode — file stats not available
 
 ## Summary
-- 566 nodes · 926 edges · 36 communities (34 shown, 1 thin omitted)
+- 568 nodes · 930 edges · 36 communities (34 shown, 1 thin omitted)
 - Extraction: 81% EXTRACTED · 19% INFERRED · 0% AMBIGUOUS · INFERRED: 174 edges (avg confidence: 0.86)
 - Token cost: 0 input · 0 output
 

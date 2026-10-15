@@ -30,3 +30,6 @@ desktop.ini
 # Dépendances des outils de vérification (npm i pour les installer)
 node_modules/
 package-lock.json
+
+# Sauvegardes de profs envoyées pour diagnostic (données personnelles)
+DEBUG/

@@ -4382,7 +4382,7 @@
       "file_type": "code",
       "norm_label": "addcoursgiven()",
       "source_file": "gestion_cours_zenkai.html",
-      "source_location": "line 7961",
+      "source_location": "line 9092",
       "source_url": null
     },
     {
@@ -4892,7 +4892,7 @@
       "file_type": "code",
       "norm_label": "load()",
       "source_file": "gestion_cours_zenkai.html",
-      "source_location": "line 5828",
+      "source_location": "line 6847",
       "source_url": null
     },
     {
@@ -6667,7 +6667,7 @@
       "file_type": "code",
       "norm_label": "renderbilan()",
       "source_file": "gestion_cours_zenkai.html",
-      "source_location": "line 8038",
+      "source_location": "line 9231",
       "source_url": null
     },
     {
@@ -8225,6 +8225,36 @@
       "norm_label": "#presentationoverlay (fermeture par echap)",
       "source_file": "gestion_cours_zenkai.html",
       "source_location": "line 9863"
+    },
+    {
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "contributor": null,
+      "source_url": null,
+      "file_type": "code",
+      "source_file": "gestion_cours_zenkai.html",
+      "id": "gestion_cours_zenkai_normalizehistory",
+      "label": "normalizeHistory()",
+      "norm_label": "normalizehistory()",
+      "community": 15,
+      "community_name": "\u00c9tat, profil et sauvegarde",
+      "source_location": "line 6826"
+    },
+    {
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "contributor": null,
+      "source_url": null,
+      "file_type": "code",
+      "source_file": "gestion_cours_zenkai.html",
+      "id": "gestion_cours_zenkai_fmtdate_fmtheure",
+      "label": "fmtDate() / fmtHeure() / parseHeure()",
+      "norm_label": "fmtdate() / fmtheure() / parseheure()",
+      "community": 11,
+      "community_name": "Page d\u00e9tail et historique des cours",
+      "source_location": "line 6817"
     }
   ],
   "links": [
@@ -18298,6 +18328,46 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "CLAUDE.md",
+      "weight": 1.0
+    },
+    {
+      "source": "gestion_cours_zenkai_load",
+      "target": "gestion_cours_zenkai_normalizehistory",
+      "relation": "calls",
+      "_origin": "semantic",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "gestion_cours_zenkai.html",
+      "weight": 1.0
+    },
+    {
+      "source": "gestion_cours_zenkai_normalizehistory",
+      "target": "gestion_cours_zenkai_fmtdate_fmtheure",
+      "relation": "calls",
+      "_origin": "semantic",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "gestion_cours_zenkai.html",
+      "weight": 1.0
+    },
+    {
+      "source": "gestion_cours_zenkai_addcoursgiven",
+      "target": "gestion_cours_zenkai_fmtdate_fmtheure",
+      "relation": "calls",
+      "_origin": "semantic",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "gestion_cours_zenkai.html",
+      "weight": 1.0
+    },
+    {
+      "source": "gestion_cours_zenkai_renderbilan",
+      "target": "gestion_cours_zenkai_fmtdate_fmtheure",
+      "relation": "calls",
+      "_origin": "semantic",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "gestion_cours_zenkai.html",
       "weight": 1.0
     }
   ],

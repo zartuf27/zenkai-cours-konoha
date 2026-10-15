@@ -41,7 +41,7 @@ img_cycle_natures.png      — Schéma cycle des 5 natures (utilisé dans les co
 img_kekkei_genkai.png      — Diagramme des Kekkei Genkai (utilisé dans les cours)
 CLAUDE.md                  — Ce fichier (instructions pour Claude)
 GUIDE-PARTAGE.md           — Guide multi-sensei (déploiement, profil, progression)
-.gitignore                 — Exclut images lourdes, .docx sources, .claude/, cache graphify
+.gitignore                 — Exclut images lourdes, .docx sources, .claude/, cache graphify, DEBUG/ (sauvegardes de profs pour diagnostic)
 théorique/                 — Cours théoriques (.docx, .md) + images + directive format + propositions
 FUTON/                     — Supports Futon (.md/.txt) intégrés dans les 4 techniques Futon
 Pratique/                  — 15 cours pratiques (.docx) dont nature pratique et kenjutsu
@@ -278,7 +278,7 @@ Le flag `zenkai_onboarded` dans localStorage empêche de relancer le tuto. Bouto
 ### Graphify — Mémoire structurelle
 
 Le projet utilise **Graphify** comme carte contextuelle et mémoire structurelle. Fichiers dans `graphify-out/` :
-- `graph.json` — graphe du projet (566 nœuds, 926 arêtes, 36 communautés nommées, 0 nœud orphelin)
+- `graph.json` — graphe du projet (568 nœuds, 930 arêtes, 36 communautés nommées, 0 nœud orphelin)
 - `graph.html` — visualisation interactive
 - `GRAPH_REPORT.md` — rapport d'analyse (hubs, communautés, gaps)
 - `converted/*.md` — sources .docx converties (contenu original des cours)
@@ -331,7 +331,7 @@ Le **Parchemin** = le canal Discord de l'Académie où les senseis postent leur 
 - Bouton 🗑️ Supprimer ce jour (supprime uniquement le jour sélectionné, pas l'historique global)
 - Lien vers la page Historique
 
-**Dates et heures de l'historique** — toujours écrites par `fmtDate()` (`jj/mm/aaaa`) et `fmtHeure()` (`hh:mm`), jamais par `toLocaleDateString` / `toLocaleTimeString` : un navigateur sans données de langue française renvoie « 09:00 PM » et « 10/15/2026 ». Avant le 15/10, deux cours dans la même heure au format « PM » faisaient tourner sans fin la boucle anti-collision de la V1 et figeaient la page Fin de mois. `normalizeHistory()` (appelée par `load()`) répare l'historique existant depuis l'horodatage `ts` ; la boucle est bornée à 96 tours.
+**Dates et heures de l'historique** — toujours écrites par `fmtDate()` (`jj/mm/aaaa`) et `fmtHeure()` (`hh:mm`), jamais par `toLocaleDateString` / `toLocaleTimeString` : un navigateur sans données de langue française renvoie « 09:00 PM » et « 10/15/2026 ». Avant le 15/10, deux cours dans la même heure au format « PM » faisaient tourner sans fin la boucle anti-collision de la V1 et figeaient la page Fin de mois. `normalizeHistory()` (appelée par `load()`) répare l'historique existant depuis l'horodatage `ts` ; la boucle est bornée à 96 tours. Ce plafond couvre aussi le second cas rencontré le 15/10 : plus de 96 cours le même jour (sauvegarde d'un sensei avec 134 clics « +1 » en 19 min) épuisaient les 96 créneaux de 15 min et la boucle cherchait sans fin. Au-delà de 96, les heures se répètent dans le résumé V1, sans blocage.
 
 Variables : `bilanDate` (jour sélectionné), `bilanMode` ('v1'/'v2'/'v3'), `bilanV2Data` (champs saisis par ts).
 Fonctions : `bilanSetMode()`, `bilanV2Set()`, `buildDiscordV2()`, `copyBilanV2()`, `getCoursCategoryLabel()`, `renderBilanV3()`.
