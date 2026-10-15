@@ -9859,7 +9859,10 @@ function openPresentation(coursId){
   const npHtml=np?applySenseiName(np.html,coursId):'';
   const natInfo=coursNature(coursId)?D.natures.find(n=>n.id===coursNature(coursId)):null;
   const overlay=document.createElement('div');
+  document.getElementById('presentationOverlay')?.remove();
+  overlay.id='presentationOverlay';
   overlay.className='pres-overlay';
+  overlay.tabIndex=-1;
   overlay.innerHTML=`
     <button class="pres-close" onclick="this.parentElement.remove()">✕ Fermer</button>
     <div class="pres-title">${natInfo?natInfo.icon+' ':''}${c.titre}</div>
