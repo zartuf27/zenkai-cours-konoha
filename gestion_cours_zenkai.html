@@ -6811,7 +6811,40 @@ function iCalcScore(cid){
 // ================================================================
 const SK='zenkai_v2';
 let S={c:{},n:{}};
-function load(){try{const r=localStorage.getItem(SK);if(r){S=JSON.parse(r)}}catch(e){}if(!S.c)S.c={};if(!S.n)S.n={};if(!S.sensei)S.sensei={prenom:'',nom:'',signe:'',nature:'',type:'sage',rang:'',signature:''};if(!S.sensei.type)S.sensei.type='sage';if(S.sensei.signature===undefined)S.sensei.signature='';if(S.noAnim)document.documentElement.setAttribute('data-no-anim','')}
+// Dates et heures écrites à la main : toLocale*('fr-FR') retombe sur le format anglais (« 09:00 PM », « 10/15/2026 »)
+// dans les navigateurs sans données de langue française, et la page Fin de mois figeait sur ces heures-là.
+const pad2=n=>String(n).padStart(2,'0');
+function fmtDate(d){return pad2(d.getDate())+'/'+pad2(d.getMonth()+1)+'/'+d.getFullYear()}
+function fmtHeure(d){return pad2(d.getHours())+':'+pad2(d.getMinutes())}
+function sessionDate(d){const r=new Date(d);if(r.getHours()<5)r.setDate(r.getDate()-1);return r} // 18h→4h = même mois IG
+function parseHeure(str){
+  const m=String(str||'').match(/(\d{1,2})\s*(?:[:hH.]\s*(\d{2}))?\s*([aApP])?/);if(!m)return null;
+  let h=+m[1];const mn=+(m[2]||0);
+  if(m[3]){const pm=/p/i.test(m[3]);if(h===12)h=pm?12:0;else if(pm)h+=12;}
+  return h<24&&mn<60?pad2(h)+':'+pad2(mn):null;
+}
+function normalizeHistory(){
+  let hist;try{hist=JSON.parse(S.n.cours_history||'[]')}catch(e){return}
+  if(!Array.isArray(hist))return;
+  let changed=false;
+  hist.forEach(e=>{
+    if(!e||typeof e!=='object')return;
+    const t=Number.isFinite(e.ts)?new Date(e.ts):null;
+    if(!/^\d{2}:\d{2}$/.test(e.heure||'')){
+      let h=parseHeure(e.heure);
+      if(!h&&t){const r=new Date(t);const q=Math.round(r.getMinutes()/15)*15;r.setMinutes(0);r.setMinutes(q);h=fmtHeure(r);}
+      e.heure=h||'00:00';changed=true;
+    }
+    if(t){
+      // Date absente, mal formée, ou au format anglais (mois/jour inversés) : recalculée depuis l'horodatage
+      const ok=fmtDate(sessionDate(t));const [a,b,y]=String(e.date||'').split('/');
+      const us=[b,a,y].map((x,i)=>i<2?pad2(+x||0):x).join('/');
+      if(!/^\d{2}\/\d{2}\/\d{4}$/.test(e.date||'')||(e.date!==ok&&us===ok)){e.date=ok;changed=true;}
+    }
+  });
+  if(changed)S.n.cours_history=JSON.stringify(hist);
+}
+function load(){try{const r=localStorage.getItem(SK);if(r){S=JSON.parse(r)}}catch(e){}if(!S.c)S.c={};if(!S.n)S.n={};if(!S.sensei)S.sensei={prenom:'',nom:'',signe:'',nature:'',type:'sage',rang:'',signature:''};if(!S.sensei.type)S.sensei.type='sage';if(S.sensei.signature===undefined)S.sensei.signature='';if(S.noAnim)document.documentElement.setAttribute('data-no-anim','');normalizeHistory()}
 function save(){try{localStorage.setItem(SK,JSON.stringify(S))}catch(e){try{toast('Sauvegarde impossible (stockage plein ou bloqué)')}catch(_){}}}
 function chk(k){return!!S.c[k]}
 function tog(k){S.c[k]=!S.c[k];if(!S.c[k])delete S.c[k];save()}
@@ -9063,9 +9096,7 @@ function addCoursGiven(coursId,noEleve){
   const mins=now.getMinutes();const rounded=Math.round(mins/15)*15;
   const rnd=new Date(now);rnd.setMinutes(rounded%60);if(rounded===60)rnd.setHours(rnd.getHours()+1);rnd.setSeconds(0);
   // Serveur ouvert 18h→4h : les cours après minuit (0h-4h) = même mois IG que la veille
-  const dateRef=new Date(now);
-  if(dateRef.getHours()<5)dateRef.setDate(dateRef.getDate()-1);
-  const entry={id:coursId,titre:c.titre,date:dateRef.toLocaleDateString('fr-FR'),heure:rnd.toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'}),ts:now.getTime()};
+  const entry={id:coursId,titre:c.titre,date:fmtDate(sessionDate(now)),heure:fmtHeure(rnd),ts:now.getTime()};
   if(noEleve)entry.noEleve=true;
   const hist=getCoursHistory();hist.push(entry);saveCoursHistory(hist);
   const k='given_count_'+coursId;setNote(k,String((parseInt(getNote(k))||0)+1));
@@ -9188,8 +9219,7 @@ function buildDiscordV2(entries,allHist){
 }
 function copyBilanV2(){
   const hist=getCoursHistory();
-  const sessionNow=new Date();if(sessionNow.getHours()<5)sessionNow.setDate(sessionNow.getDate()-1);
-  const todayStr=sessionNow.toLocaleDateString('fr-FR');
+  const todayStr=fmtDate(sessionDate(new Date()));
   const selDate=bilanDate||todayStr;
   const allDays={};hist.forEach(e=>{if(!allDays[e.date])allDays[e.date]=[];allDays[e.date].push(e)});
   const selHist=allDays[selDate]||[];
@@ -9214,9 +9244,7 @@ function renderBilan(){
   });
 
   // Date de session (18h→4h = même mois IG) : avant 5h → veille
-  const sessionNow=new Date(now);
-  if(sessionNow.getHours()<5)sessionNow.setDate(sessionNow.getDate()-1);
-  const todayStr=sessionNow.toLocaleDateString('fr-FR');
+  const todayStr=fmtDate(sessionDate(now));
   const selDate=bilanDate||todayStr;
   const selHist=allDays[selDate]||[];
 
@@ -9231,8 +9259,8 @@ function renderBilan(){
     const sorted=[...selHist].sort(sessionSort);
     const usedTimes=new Set();
     sorted.forEach(e=>{
-      let [hh,mm]=e.heure.split(':').map(Number);
-      while(usedTimes.has(`${String(hh).padStart(2,'0')}:${String(mm).padStart(2,'0')}`)){
+      let [hh,mm]=(parseHeure(e.heure)||'00:00').split(':').map(Number);
+      for(let guard=0;guard<96&&usedTimes.has(`${String(hh).padStart(2,'0')}:${String(mm).padStart(2,'0')}`);guard++){
         mm+=15;if(mm>=60){mm-=60;hh=(hh+1)%24;}
       }
       const finalTime=`${String(hh).padStart(2,'0')}:${String(mm).padStart(2,'0')}`;
@@ -9546,8 +9574,8 @@ function renderHistorique(){
   hist.forEach(e=>{const c=cours(e.id);if(c){if(c.cat==='theorique')nbTheo++;else nbPrat++}});
 
   const dates=hist.map(e=>e.ts).sort();
-  const premier=new Date(dates[0]).toLocaleDateString('fr-FR');
-  const dernier=new Date(dates[dates.length-1]).toLocaleDateString('fr-FR');
+  const premier=fmtDate(new Date(dates[0]));
+  const dernier=fmtDate(new Date(dates[dates.length-1]));
 
   // ====== CALCULS AVANCÉS (faits marquants) ======
   // Cours unique enseigné

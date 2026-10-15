@@ -331,6 +331,8 @@ Le **Parchemin** = le canal Discord de l'Académie où les senseis postent leur 
 - Bouton 🗑️ Supprimer ce jour (supprime uniquement le jour sélectionné, pas l'historique global)
 - Lien vers la page Historique
 
+**Dates et heures de l'historique** — toujours écrites par `fmtDate()` (`jj/mm/aaaa`) et `fmtHeure()` (`hh:mm`), jamais par `toLocaleDateString` / `toLocaleTimeString` : un navigateur sans données de langue française renvoie « 09:00 PM » et « 10/15/2026 ». Avant le 15/10, deux cours dans la même heure au format « PM » faisaient tourner sans fin la boucle anti-collision de la V1 et figeaient la page Fin de mois. `normalizeHistory()` (appelée par `load()`) répare l'historique existant depuis l'horodatage `ts` ; la boucle est bornée à 96 tours.
+
 Variables : `bilanDate` (jour sélectionné), `bilanMode` ('v1'/'v2'/'v3'), `bilanV2Data` (champs saisis par ts).
 Fonctions : `bilanSetMode()`, `bilanV2Set()`, `buildDiscordV2()`, `copyBilanV2()`, `getCoursCategoryLabel()`, `renderBilanV3()`.
 
