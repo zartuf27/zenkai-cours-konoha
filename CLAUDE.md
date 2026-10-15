@@ -278,7 +278,7 @@ Le flag `zenkai_onboarded` dans localStorage empêche de relancer le tuto. Bouto
 ### Graphify — Mémoire structurelle
 
 Le projet utilise **Graphify** comme carte contextuelle et mémoire structurelle. Fichiers dans `graphify-out/` :
-- `graph.json` — graphe du projet (564 nœuds, 922 arêtes, 36 communautés nommées, 0 nœud orphelin)
+- `graph.json` — graphe du projet (566 nœuds, 926 arêtes, 36 communautés nommées, 0 nœud orphelin)
 - `graph.html` — visualisation interactive
 - `GRAPH_REPORT.md` — rapport d'analyse (hubs, communautés, gaps)
 - `converted/*.md` — sources .docx converties (contenu original des cours)
@@ -355,6 +355,8 @@ Format copié : `Titre — Rang — Lieu — Heure — Prénom Nom`. Heure vide 
 ### Mode Présentation (🎤)
 
 Overlay plein écran déclenché depuis la page détail d'un cours. Affiche le contenu + notes pour les élèves en grand format pour enseigner en jeu.
+
+L'overlay porte l'id `presentationOverlay` : c'est par cet id que le raccourci Échap le retrouve et le ferme (avant le 15/10, l'id manquait et Échap changeait la page cachée derrière sans fermer l'écran — signalé par les profs comme « le site plante quand on clique »). `openPresentation()` retire un overlay existant avant d'en créer un, donc P pressé deux fois n'empile pas deux écrans. Fermeture aussi par le bouton « ✕ Fermer ».
 
 ### Structure des données (inline dans le HTML)
 
