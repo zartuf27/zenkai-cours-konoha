@@ -30,6 +30,7 @@ Déploiement auto en ~1 min. Chaque prof ouvre le même lien, son profil/progres
 
 ```
 gestion_cours_zenkai.html  — App principale (~10800 lignes, tout-en-un)
+index.html                 — Redirection de la racine du site vers l'app (évite le 404)
 tools/verifier.mjs         — Vérificateur (syntaxe, cohérence, HRP, sync, test navigateur)
 package.json               — Dépendances des outils uniquement (jsdom) — l'app n'en a aucune
 sw.js                      — Service Worker PWA (cache hors-ligne)
@@ -399,7 +400,7 @@ Overlay plein écran déclenché depuis la page détail d'un cours. Affiche le c
 
 Pour mettre à jour le cache PWA : incrémenter la version dans `sw.js` (ex: `zenkai-v32` → `zenkai-v33`).
 
-`CORE_ASSETS` ne doit lister **que des fichiers existants** : `cache.addAll()` échoue en bloc au moindre 404, et le service worker ne s'installe alors jamais. Jamais de `'./'` (GitHub Pages n'a pas d'`index.html`). Les fichiers sont précachés avec `cache:'reload'` pour contourner le cache HTTP de GitHub Pages (`max-age=600`). La navigation sert toujours le HTML en cache : les profs ne reçoivent une nouvelle version que si `CACHE_NAME` change.
+`CORE_ASSETS` ne doit lister **que des fichiers existants** : `cache.addAll()` échoue en bloc au moindre 404, et le service worker ne s'installe alors jamais. Jamais de `'./'` ni d'`index.html` (simple redirection vers l'app, inutile hors-ligne). Les fichiers sont précachés avec `cache:'reload'` pour contourner le cache HTTP de GitHub Pages (`max-age=600`). La navigation sert toujours le HTML en cache : les profs ne reçoivent une nouvelle version que si `CACHE_NAME` change.
 
 ### Fonctions clés
 
