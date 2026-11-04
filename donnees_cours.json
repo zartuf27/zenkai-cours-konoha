@@ -595,6 +595,83 @@
       ]
     },
     {
+      "id": "shizen_sosen",
+      "titre": "Shizen to Sosen no Michi — La voie de la nature et des ancêtres",
+      "cat": "theorique",
+      "mod": "Fondamentaux",
+      "rang": "Tous grades",
+      "cible": "Tous",
+      "auteur": "Eraku Morikawa",
+      "desc": "Avec la section Hana Do, ouvert à tous : les gestes anciens envers les lieux, les esprits et les morts. Respect, gratitude, mémoire, équilibre.",
+      "techs": [
+        {
+          "id": "shizen_respect",
+          "nom": "Ce que l'on respecte",
+          "desc": "Les esprits, les yorishiro, la shimenawa et les shide. Respecter un lieu, ce n'est pas l'adorer : c'est refuser de le traiter comme une simple ressource.",
+          "type": "connaissance",
+          "etapes": [
+            "Présenter les esprits et leur place dans l'histoire des clans",
+            "Reconnaître un lieu marqué",
+            "Distinguer respect et confiance"
+          ],
+          "mudras": [],
+          "rang": "Tous grades"
+        },
+        {
+          "id": "shizen_gestes",
+          "nom": "Les gestes",
+          "desc": "L'offrande, la purification, l'entrée dans un lieu et la conduite à tenir en mission.",
+          "type": "connaissance",
+          "etapes": [
+            "Expliquer les shinsen",
+            "Distinguer kegare et faute, harae, temizu et misogi",
+            "Trouver sa propre manière d'honorer un lieu",
+            "Replacer ces gestes sous les Règles d'Or"
+          ],
+          "mudras": [],
+          "rang": "Tous grades"
+        },
+        {
+          "id": "shizen_morts",
+          "nom": "Les morts",
+          "desc": "Ne pas laisser les noms se perdre. Honorer n'est pas approuver, et tout le monde a ses morts, avec ou sans clan.",
+          "type": "connaissance",
+          "etapes": [
+            "Présenter les usages du souvenir",
+            "Transmettre les noms de la Hana Do",
+            "Distinguer honorer et approuver"
+          ],
+          "mudras": [],
+          "rang": "Tous grades"
+        },
+        {
+          "id": "shizen_equilibre",
+          "nom": "Le chakra et l'équilibre",
+          "desc": "De l'équilibre du chakra à celui d'une forêt : ne pas prendre sans mesure.",
+          "type": "connaissance",
+          "etapes": [
+            "Relier énergie physique et énergie spirituelle",
+            "Se demander ce qui restera après soi"
+          ],
+          "mudras": [],
+          "rang": "Tous grades"
+        },
+        {
+          "id": "shizen_pratique",
+          "nom": "La pratique des noms",
+          "desc": "Chacun choisit un lieu ou un nom et dit, s'il le veut, ce qu'il lui doit. Silence entre chaque nom.",
+          "type": "connaissance",
+          "etapes": [
+            "Commencer soi-même",
+            "Laisser le silence entre chaque nom",
+            "Accepter qu'on se taise et incline la tête"
+          ],
+          "mudras": [],
+          "rang": "Tous grades"
+        }
+      ]
+    },
+    {
       "id": "decomposition_chakra",
       "titre": "Décomposition du Chakra",
       "cat": "theorique",

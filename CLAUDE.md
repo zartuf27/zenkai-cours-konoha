@@ -6,7 +6,7 @@ Ce dossier contient les cours RP Naruto du serveur **Zenkai**, village de **Kono
 
 - **Repo GitHub** : https://github.com/zartuf27/zenkai-cours-konoha (public)
 - **App en ligne (GitHub Pages)** : https://zartuf27.github.io/zenkai-cours-konoha/gestion_cours_zenkai.html
-- **Lore serveur** : dossier frère `C:\Users\ludov\Desktop\Zenkai-RP` (Vault Obsidian, candidatures, règles)
+- **Lore serveur** : dossier frère `C:\Users\ludov\Projets\Zenkai RP\Vault Zenkai-RP` (Vault Obsidian, candidatures, règles)
 - **Temporalité** : 1 semaine IRL = 1 an RP / 1 session (18h→4h) = 1 mois IG
 
 ## Déploiement & partage
@@ -51,13 +51,13 @@ graphify-out/              — Graphe contextuel Graphify (graph.json, rapport, 
 .claude/skills/            — Skills projet versionnées (zenkai-cours : procédure d'ajout d'un cours)
 ```
 
-## Les 55 cours (par module)
+## Les 56 cours (par module)
 
 Regroupement d'affichage : dans `D.cours[]`, il n'y a que **8 modules** (voir Icônes). Les 20 techniques de nature sont toutes dans `Ninjutsu`, le Genjutsu dans `Combat`, et les 4 autres cours en attente dans `Tactique`.
 
 | Module | Cours |
 |--------|-------|
-| Fondamentaux | Règles d'Or, Nindo, Volonté du Feu, Histoire de Konoha, Règlement Intérieur |
+| Fondamentaux | Règles d'Or, Nindo, Volonté du Feu, Histoire de Konoha, Règlement Intérieur, Shizen to Sosen no Michi |
 | Chakra | Décomposition du Chakra, Mudras, Nature de Chakra |
 | Combat | Théorie Taijutsu, Armes Ninja, Kenjutsu — Initiation, Kenjutsu — Lame Simple, Lame Pénétrante, Ruée Acérée, Kenjutsu — Lame Double (Nitōryū) |
 | Taijutsu | La Bourrasque Ardente, Pied de l'Aube |
@@ -101,7 +101,7 @@ Navigation : `VIEWS[]` → `buildSidebar()` → `nav(viewId)` → `render()` →
 | Signe distinctif | `S.sensei.signe` | Annonces ("cheveux brun") |
 | Rang | `S.sensei.rang` | Carte sensei, header, bilan Discord (de Genin Confirmé à Hokage) |
 | Phrase signature | `S.sensei.signature` | Override toutes les citations si rempli |
-| Type de Sensei | `S.sensei.type` | 704 citations, greeting, animation avatar |
+| Type de Sensei | `S.sensei.type` | 720 citations, greeting, animation avatar |
 | Nature de Chakra | `S.sensei.nature` | Skin couleurs, particules, filtrage cours, closing lines, favicon |
 | Spécialisation combat | `S.sensei.specCombat` | `taijutsu` ou `kenjutsu` |
 | Type de lame | `S.sensei.typeLame` | Si kenjutsu : `simple`, `double` ou `lourde` |
@@ -112,7 +112,7 @@ Navigation : `VIEWS[]` → `buildSidebar()` → `nav(viewId)` → `render()` →
 
 Sage 🍃, Implacable 🗡️, Guerrier 🔥, Bienveillant 🌸, Énigmatique 🌙, Stratège ♟️, Vétéran 🩸, Grand Frère 🤝, Provocateur 😏, Ermite 🐸, Ombre 🦇, Noble 👑, Rebelle 💢, Mentor spirituel 📿, Chasseur 🐺, Manipulateur 🎭
 
-Chaque type : 1 citation par entrée de `SENSEI_QUOTES` (44 entrées : 39 cours + 5 fallbacks `_<nature>`, soit 16 × 44 = 704) + greeting dashboard + animation avatar spécifique.
+Chaque type : 1 citation par entrée de `SENSEI_QUOTES` (45 entrées : 40 cours + 5 fallbacks `_<nature>`, soit 16 × 45 = 720) + greeting dashboard + animation avatar spécifique.
 
 Les **16 types** personnalisent les **11 onglets** de la sidebar (`SIDEBAR_LABELS`). Chaque type a un vocabulaire complet adapté à sa personnalité (HRP assumé) :
 - Sage : "Enseignements", "Méditation du mois", "Chroniques"
@@ -147,7 +147,7 @@ Affecte : header, SVG, sidebar, progress bars, boutons, badges, stat cards, fond
 ### Système de citations (encouragements de fin de cours)
 
 Chaque citation combine **type de personnalité + nature de chakra** :
-1. `SENSEI_QUOTES[coursId][type]` — phrase de personnalité (44 entrées × 16 types = 704)
+1. `SENSEI_QUOTES[coursId][type]` — phrase de personnalité (45 entrées × 16 types = 720)
 2. `NATURE_CLOSING[nature][module]` — closing line nature (5 × 8 = 40 entrées)
 3. Si `S.sensei.signature` est rempli → override tout par cette phrase unique
 
@@ -198,8 +198,8 @@ Le bouton **📋 Copier pour les élèves** est positionné en haut du cours (ap
 
 Le contenu des cours s'adapte dynamiquement sur 3 axes, injectés après le titre via `applySenseiName()` :
 
-1. **`COURS_FLAVOR[coursId].intro[type]`** — Intro personnalisée par type de sensei (16 variantes × 44 entrées = 704 textes). Ton, vocabulaire, métaphores adaptés à la personnalité.
-2. **`COURS_FLAVOR[coursId].nature[nature]`** — Anecdote/métaphore reliant le thème du cours à l'élément du sensei (5 variantes × 44 entrées = 220 textes).
+1. **`COURS_FLAVOR[coursId].intro[type]`** — Intro personnalisée par type de sensei (16 variantes × 45 entrées = 720 textes). Ton, vocabulaire, métaphores adaptés à la personnalité.
+2. **`COURS_FLAVOR[coursId].nature[nature]`** — Anecdote/métaphore reliant le thème du cours à l'élément du sensei (5 variantes × 45 entrées = 225 textes).
 3. **`SPEC_FLAVOR[coursId][spec/lame]`** — Touche combat adaptée à la spécialisation Taijutsu ou Kenjutsu + type de lame (5 variantes × 9 cours = 45 textes).
 
 Logique de sélection `SPEC_FLAVOR` :
@@ -209,7 +209,7 @@ Logique de sélection `SPEC_FLAVOR` :
 
 Affichage : blocs CSS `.flavor-intro` (bordure skin, italique) et `.flavor-nature` (fond teinté, icône nature/spec).
 
-**Couverture** : les 55 cours ont des marqueurs personnalisés — soit une entrée propre dans `COURS_FLAVOR` (39 entrées, dont les 4 techniques Futon, + 5 fallbacks `_<nature>`), soit le fallback `_<nature>` pour les 16 autres techniques de nature. Tout nouveau cours doit maintenir cette couverture : 16 intros + 5 natures, sans exception.
+**Couverture** : les 56 cours ont des marqueurs personnalisés — soit une entrée propre dans `COURS_FLAVOR` (40 entrées, dont les 4 techniques Futon, + 5 fallbacks `_<nature>`), soit le fallback `_<nature>` pour les 16 autres techniques de nature. Tout nouveau cours doit maintenir cette couverture : 16 intros + 5 natures, sans exception.
 
 ### Cours Kenjutsu (structure modulaire par type de lame)
 
@@ -234,7 +234,11 @@ Techniques de combat par voie (cours pratiques séparés, comme les techniques d
 
 ### Rangs hors échelle
 
-`nindo` porte le rang **« Tous grades »**, qui ne figure pas dans `D.rangs`. C'est volontaire : `_getCoursInverse()` l'accepte explicitement et le classe en difficulté « facile ». Le filtre Rang de la page Cours laisse passer ce rang quel que soit le filtre choisi (`c.rang!=='Tous grades'`), sinon le Nindo disparaîtrait de toutes les vues filtrées.
+`nindo` et `shizen_sosen` portent le rang **« Tous grades »**, qui ne figure pas dans `D.rangs`. C'est volontaire : `_getCoursInverse()` l'accepte explicitement et le classe en difficulté « facile ». Le filtre Rang de la page Cours laisse passer ce rang quel que soit le filtre choisi (`c.rang!=='Tous grades'`), sinon le Nindo disparaîtrait de toutes les vues filtrées.
+
+### Shizen to Sosen no Michi (`shizen_sosen`)
+
+Cours écrit par Eraku Morikawa avec la section Hana Do, mais rédigé pour **n'importe quel sensei** : le support s'écarte volontairement du .docx source, dont les témoignages personnels (chant, chaise vide, séjour au Pays de l'Eau) ont été retirés ou rendus neutres. Ne pas les réintroduire. La citation de personnalité et la phrase de nature s'y placent dans le dernier bloc parchemin (« Nous ne sommes que les gardiens… »), avant les remerciements, écrits hors parchemin pour que le cours se termine sur eux.
 
 ### Cours en attente de validation (`validated: false`)
 
@@ -278,7 +282,7 @@ Le flag `zenkai_onboarded` dans localStorage empêche de relancer le tuto. Bouto
 ### Graphify — Mémoire structurelle
 
 Le projet utilise **Graphify** comme carte contextuelle et mémoire structurelle. Fichiers dans `graphify-out/` :
-- `graph.json` — graphe du projet (568 nœuds, 930 arêtes, 36 communautés nommées, 0 nœud orphelin)
+- `graph.json` — graphe du projet (570 nœuds, 935 arêtes, 36 communautés nommées, 0 nœud orphelin)
 - `graph.html` — visualisation interactive
 - `GRAPH_REPORT.md` — rapport d'analyse (hubs, communautés, gaps)
 - `converted/*.md` — sources .docx converties (contenu original des cours)
@@ -365,13 +369,13 @@ L'overlay porte l'id `presentationOverlay` : c'est par cet id que le raccourci �
 | Constante | Contenu |
 |-----------|---------|
 | `const D` | Objet principal : meta, rangs, mudras, natures, kekkei, armes, cours[] |
-| `const COURS_FLAVOR` | Intros personnalité + anecdotes nature par cours (44 entrées × 21 variantes) |
+| `const COURS_FLAVOR` | Intros personnalité + anecdotes nature par cours (45 entrées × 21 variantes) |
 | `const SPEC_FLAVOR` | Anecdotes spécialisation combat par cours (9 cours × 5 variantes) |
-| `const RESUME` | Bullet points "À retenir" par cours théorique (16 entrées) |
+| `const RESUME` | Bullet points "À retenir" par cours théorique (17 entrées) |
 | `const CONTENU` | Guides oraux (HTML) par cours ID |
 | `const INTERACTIF` | Blocs interactifs (Nindo uniquement) |
 | `const NOTES_PROF` | Notes pour les élèves (copy + html) — bouton « Copier pour les élèves » |
-| `const SENSEI_QUOTES` | Citations par cours × 16 types (44 entrées × 16 = 704) |
+| `const SENSEI_QUOTES` | Citations par cours × 16 types (45 entrées × 16 = 720) |
 | `const SENSEI_TYPES` | 16 types (icône, nom, description, couleur) |
 | `const NATURE_CLOSING` | Phrases clôture par nature × module (5 × 8) |
 | `const COURS_NATURE` | Mapping cours → nature pour filtrage |

@@ -33,7 +33,7 @@ Quand tu modifies un cours, ajoutes un nouveau cours, ou changes quoi que ce soi
 ### Étape 1 — Modifie le fichier sur ton PC
 Le fichier principal est :
 ```
-C:\Users\ludov\Desktop\ZENKAI TEEEST\gestion_cours_zenkai.html
+C:\Users\ludov\Projets\Zenkai RP\Cours Zenkai - app\gestion_cours_zenkai.html
 ```
 
 ### Étape 2 — Envoie sur GitHub (3 commandes)
