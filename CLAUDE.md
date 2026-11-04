@@ -258,6 +258,8 @@ Un cours peut porter `validated: false` dans `D.cours[]`. Il reste **jouable** m
 | Information & Communication en mission | Tactique | Genin | Yaïko Okira |
 | Shizen to Sosen no Michi | Traditions | Tous grades | Eraku Morikawa |
 
+**`etudeSeule: true`** (aujourd'hui `shizen_sosen` seulement) va plus loin : le cours n'apparaît **que** dans cette page. `COURS_LISTES` (= `D.cours` sans ces cours) alimente la barre latérale, le dashboard, la page Cours, les annonces et l'historique ; le module Traditions, qui n'a pas d'autre cours, n'y figure donc pas pour l'instant. Pour valider ce cours, retirer `validated` **et** `etudeSeule`, dans le HTML et dans `donnees_cours.json`.
+
 Ces cours reçoivent **la personnalisation complète** au même titre que les cours validés : `COURS_FLAVOR` (16 intros + 5 natures), `SENSEI_QUOTES` (16 types), `CONTENU`, `NOTES_PROF`. Pour valider un cours, retirer la clé `validated` (ou la passer à `true`) dans le HTML **et** dans `donnees_cours.json`.
 
 ### Compteur "Cours donné"

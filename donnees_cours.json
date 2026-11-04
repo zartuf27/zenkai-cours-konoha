@@ -603,6 +603,7 @@
       "cible": "Tous",
       "auteur": "Eraku Morikawa",
       "validated": false,
+      "etudeSeule": true,
       "desc": "Ouvert à tous : les gestes anciens envers les lieux, les esprits et les morts, ceux que la Hana Do fait encore vivre. Respect, gratitude, mémoire, équilibre.",
       "techs": [
         {
