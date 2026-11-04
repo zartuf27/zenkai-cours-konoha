@@ -286,7 +286,7 @@ Le flag `zenkai_onboarded` dans localStorage empêche de relancer le tuto. Bouto
 ### Graphify — Mémoire structurelle
 
 Le projet utilise **Graphify** comme carte contextuelle et mémoire structurelle. Fichiers dans `graphify-out/` :
-- `graph.json` — graphe du projet (571 nœuds, 937 arêtes, 36 communautés nommées, 0 nœud orphelin)
+- `graph.json` — graphe du projet (573 nœuds, 941 arêtes, 36 communautés nommées, 0 nœud orphelin)
 - `graph.html` — visualisation interactive
 - `GRAPH_REPORT.md` — rapport d'analyse (hubs, communautés, gaps)
 - `converted/*.md` — sources .docx converties (contenu original des cours)
@@ -381,6 +381,7 @@ L'overlay porte l'id `presentationOverlay` : c'est par cet id que le raccourci �
 | `const NOTES_PROF` | Notes pour les élèves (copy + html) — bouton « Copier pour les élèves » |
 | `const SENSEI_QUOTES` | Citations par cours × 16 types (45 entrées × 16 = 720) |
 | `const SENSEI_TYPES` | 16 types (icône, nom, description, couleur) |
+| `const COPIE_PERSO` | Phrases du texte à copier propres à un cours, par type (16 variantes ; aujourd'hui `shizen_sosen` : offrande et purification) |
 | `const NATURE_CLOSING` | Phrases clôture par nature × module (5 × 9) |
 | `const COURS_NATURE` | Mapping cours → nature pour filtrage |
 | `const COURS_LAME` | Mapping cours → voie de la lame (simple/double) pour filtrage |

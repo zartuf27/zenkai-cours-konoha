@@ -8079,6 +8079,14 @@ function senseiTypeInfo(){const s=getSensei();return SENSEI_TYPES.find(t=>t.id==
 function senseiTypeIcon(){return senseiTypeInfo().icon;}
 
 // Nature-specific flavor lines per module — appended to personality quote
+// Phrases du texte à copier propres à un cours, par type de sensei. La variante sage est le texte écrit dans NOTES_PROF.
+const COPIE_PERSO={
+shizen_sosen:[
+  {sage:'on dépose une part de ce qu\'on a reçu, puis on partage le reste.',dur:'on dépose sa part, sans discuter, puis on partage le reste.',guerrier:'on donne une part de ce qu\'on a gagné, puis on partage le reste avec les siens.',bienveillant:'on dépose un peu de ce qu\'on a reçu, avec le cœur, puis on partage le reste.',mysterieux:'une part revient à ce qui donne, sans bruit ; le reste se partage.',stratege:'une part déposée pour se rappeler la dette, le reste partagé pour lier le groupe.',veteran:'on dépose une part, parce que tout aurait pu manquer, puis on partage le reste.',fraternel:'tu poses un peu de ce que t\'as reçu, et le reste, on le partage entre nous.',ironique:'trois grains de riz ne sauveront personne, mais on en dépose quand même, et on partage le reste.',ermite:'un peu pour la montagne, le reste pour ceux qui ont faim.',ombre:'on dépose une part sans témoin, puis on partage le reste.',sensei_noble:'on rend avec dignité une part de ce qu\'on a reçu, puis on partage le reste.',rebelle:'pas pour plaire à qui que ce soit : on pose une part par gratitude, et on partage le reste.',mentor:'on dépose une part en conscience de ce qu\'on a reçu, puis on partage le reste.',chasseur:'une part rendue à la forêt pour ce qu\'elle a donné, le reste pour la meute.',tacticien:'une part déposée, le reste partagé : on garde ainsi la mesure de ce qu\'on a pris.'},
+  {sage:'elle dit « je sais ce que j\'ai fait ».',dur:'elle dit « je réponds de mes actes ».',guerrier:'elle dit « je porte mes combats, je ne les cache pas ».',bienveillant:'elle dit doucement « je sais ce que j\'ai fait ».',mysterieux:'elle murmure « je n\'entre pas seul avec ce que j\'ai fait ».',stratege:'elle fixe un constat : « je sais ce que j\'ai fait ».',veteran:'elle dit « je n\'ai rien oublié de ce que j\'ai fait ».',fraternel:'elle dit juste « je sais ce que j\'ai fait, et je l\'assume ».',ironique:'elle ne fait pas de vous un saint, elle dit seulement « je sais ce que j\'ai fait ».',ermite:'elle dit à la rivière « je sais ce que j\'ai fait ».',ombre:'elle dit, sans témoin, « je sais ce que j\'ai fait ».',sensei_noble:'elle dit avec droiture « je sais ce que j\'ai fait ».',rebelle:'pas une excuse, juste « je sais ce que j\'ai fait ».',mentor:'elle ramène à soi : « je sais ce que j\'ai fait ».',chasseur:'elle dit « je sais le sang que j\'ai versé ».',tacticien:'elle dit « je sais ce que j\'ai fait, et ce que cela change ».'}
+]
+};
+
 const NATURE_CLOSING={
 katon:{
   Fondamentaux:'Le feu en vous ne demande qu\'à s\'embraser — ne le retenez pas.',
@@ -8195,6 +8203,10 @@ function applySenseiName(html,coursId){
     const origQuote=_qObj.sage;
     const newQuote=_qObj[type]||origQuote;
     if(origQuote!==newQuote) out=out.replace(new RegExp(origQuote.replace(/[.*+?^${}()|[\]\\]/g,'\\$&'),'g'),newQuote);
+  }
+  // Phrases du texte à copier adaptées au type du sensei
+  if(coursId&&type!=='sage'&&COPIE_PERSO[coursId]){
+    COPIE_PERSO[coursId].forEach(v=>{if(v[type])out=out.split(v.sage).join(v[type])});
   }
   // Append nature closing line to the quote in the rendered content
   if(coursId&&s.nature&&NATURE_CLOSING[s.nature]){

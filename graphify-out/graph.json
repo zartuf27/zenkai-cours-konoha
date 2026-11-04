@@ -8300,6 +8300,36 @@
       "source_file": "gestion_cours_zenkai.html",
       "source_location": "modIcons",
       "source_url": null
+    },
+    {
+      "id": "gestion_cours_zenkai_copie_perso",
+      "label": "COPIE_PERSO",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 0,
+      "community_name": "Contenu des cours et techniques Futon",
+      "contributor": null,
+      "file_type": "code",
+      "norm_label": "copie_perso",
+      "source_file": "gestion_cours_zenkai.html",
+      "source_location": "const COPIE_PERSO",
+      "source_url": null
+    },
+    {
+      "id": "gestion_cours_zenkai_cours_listes",
+      "label": "COURS_LISTES",
+      "_origin": "semantic",
+      "author": null,
+      "captured_at": null,
+      "community": 0,
+      "community_name": "Contenu des cours et techniques Futon",
+      "contributor": null,
+      "file_type": "code",
+      "norm_label": "cours_listes",
+      "source_file": "gestion_cours_zenkai.html",
+      "source_location": "const COURS_LISTES",
+      "source_url": null
     }
   ],
   "links": [
@@ -18490,6 +18520,50 @@
       "confidence_score": 1.0,
       "source_file": "gestion_cours_zenkai.html",
       "source_location": "D.cours[shizen_sosen].mod",
+      "weight": 1.0
+    },
+    {
+      "source": "gestion_cours_zenkai_applysenseiname",
+      "target": "gestion_cours_zenkai_copie_perso",
+      "relation": "references",
+      "_origin": "semantic",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "gestion_cours_zenkai.html",
+      "source_location": "applySenseiName()",
+      "weight": 1.0
+    },
+    {
+      "source": "gestion_cours_zenkai_shizen_sosen",
+      "target": "gestion_cours_zenkai_copie_perso",
+      "relation": "references",
+      "_origin": "semantic",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "gestion_cours_zenkai.html",
+      "source_location": "COPIE_PERSO.shizen_sosen",
+      "weight": 1.0
+    },
+    {
+      "source": "gestion_cours_zenkai_cours_listes",
+      "target": "gestion_cours_zenkai_d",
+      "relation": "references",
+      "_origin": "semantic",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "gestion_cours_zenkai.html",
+      "source_location": "const COURS_LISTES",
+      "weight": 1.0
+    },
+    {
+      "source": "gestion_cours_zenkai_shizen_sosen",
+      "target": "gestion_cours_zenkai_cours_listes",
+      "relation": "references",
+      "_origin": "semantic",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "gestion_cours_zenkai.html",
+      "source_location": "D.cours[shizen_sosen].etudeSeule",
       "weight": 1.0
     }
   ],
