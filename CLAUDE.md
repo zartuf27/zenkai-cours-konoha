@@ -239,7 +239,7 @@ Techniques de combat par voie (cours pratiques séparés, comme les techniques d
 
 ### Shizen to Sosen no Michi (`shizen_sosen`)
 
-Seul cours du module **Traditions** 🌿 (créé pour lui, avec ses 5 phrases dans `NATURE_CLOSING`), en attente de validation (`validated: false`). Écrit par Eraku Morikawa avec la section Hana Do, mais rédigé pour **n'importe quel sensei** : le support s'écarte volontairement du .docx source, dont les témoignages personnels (chant, chaise vide, séjour au Pays de l'Eau) ont été retirés ou rendus neutres. Ne pas les réintroduire. La citation de personnalité et la phrase de nature s'y placent dans le dernier bloc parchemin (« Nous ne sommes que les gardiens… »), avant les remerciements, écrits hors parchemin pour que le cours se termine sur eux.
+Seul cours du module **Traditions** 🌿 (créé pour lui, avec ses 5 phrases dans `NATURE_CLOSING`), en attente de validation (`validated: false`). Écrit par Eraku Morikawa et **donné à l'Académie**, pas à la Hana Do : le support parle de la Hana Do d'Ory Souta Morikawa, sans la présenter comme organisatrice ni hôte. Il est rédigé pour **n'importe quel sensei** : le support s'écarte volontairement du .docx source, dont les témoignages personnels (chant, chaise vide, séjour au Pays de l'Eau) ont été retirés ou rendus neutres. Ne pas les réintroduire. La citation de personnalité et la phrase de nature s'y placent dans le dernier bloc parchemin (« Nous ne sommes que les gardiens… »), avant le dernier mot (les esprits, puis la devise de la Hana Do), écrit hors parchemin pour que le cours se termine dessus. Aucun remerciement à Ory ni à la Hana Do.
 
 ### Cours en attente de validation (`validated: false`)
 
@@ -256,7 +256,7 @@ Un cours peut porter `validated: false` dans `D.cours[]`. Il reste **jouable** m
 | Le Cours Inversé | Tactique | Genin | interne |
 | La Chasse au Sensei | Tactique | Apprenti Genin | interne |
 | Information & Communication en mission | Tactique | Genin | Yaïko Okira |
-| Shizen to Sosen no Michi | Traditions | Tous grades | Eraku Morikawa, avec la Hana Do |
+| Shizen to Sosen no Michi | Traditions | Tous grades | Eraku Morikawa |
 
 Ces cours reçoivent **la personnalisation complète** au même titre que les cours validés : `COURS_FLAVOR` (16 intros + 5 natures), `SENSEI_QUOTES` (16 types), `CONTENU`, `NOTES_PROF`. Pour valider un cours, retirer la clé `validated` (ou la passer à `true`) dans le HTML **et** dans `donnees_cours.json`.
 
