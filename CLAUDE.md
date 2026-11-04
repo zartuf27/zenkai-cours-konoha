@@ -53,11 +53,12 @@ graphify-out/              — Graphe contextuel Graphify (graph.json, rapport, 
 
 ## Les 56 cours (par module)
 
-Regroupement d'affichage : dans `D.cours[]`, il n'y a que **8 modules** (voir Icônes). Les 20 techniques de nature sont toutes dans `Ninjutsu`, le Genjutsu dans `Combat`, et les 4 autres cours en attente dans `Tactique`.
+Regroupement d'affichage : dans `D.cours[]`, il n'y a que **9 modules** (voir Icônes). Les 20 techniques de nature sont toutes dans `Ninjutsu`, le Genjutsu dans `Combat`, et les 4 autres cours en attente dans `Tactique`, Shizen to Sosen no Michi (en attente lui aussi) dans son propre module `Traditions`.
 
 | Module | Cours |
 |--------|-------|
-| Fondamentaux | Règles d'Or, Nindo, Volonté du Feu, Histoire de Konoha, Règlement Intérieur, Shizen to Sosen no Michi |
+| Fondamentaux | Règles d'Or, Nindo, Volonté du Feu, Histoire de Konoha, Règlement Intérieur |
+| Traditions | Shizen to Sosen no Michi |
 | Chakra | Décomposition du Chakra, Mudras, Nature de Chakra |
 | Combat | Théorie Taijutsu, Armes Ninja, Kenjutsu — Initiation, Kenjutsu — Lame Simple, Lame Pénétrante, Ruée Acérée, Kenjutsu — Lame Double (Nitōryū) |
 | Taijutsu | La Bourrasque Ardente, Pied de l'Aube |
@@ -70,7 +71,7 @@ Regroupement d'affichage : dans `D.cours[]`, il n'y a que **8 modules** (voir Ic
 | Spécialisation | Infiltration (théorie), Infiltration (pratique), La Traque, L'Enquête |
 | Terrain | Course d'orientation, Pays du Feu — Visite |
 | Tactique | Jeu du Roi, Capture de Drapeau, Simulation de Mission, Simulation d'Escorte |
-| 🧪 En attente de validation | L'Éloquence Absurde, Le Cours Inversé, La Chasse au Sensei, Information & Communication en mission, Le Genjutsu — Théorie |
+| 🧪 En attente de validation | L'Éloquence Absurde, Le Cours Inversé, La Chasse au Sensei, Information & Communication en mission, Le Genjutsu — Théorie, Shizen to Sosen no Michi |
 
 ## Architecture du HTML
 
@@ -148,7 +149,7 @@ Affecte : header, SVG, sidebar, progress bars, boutons, badges, stat cards, fond
 
 Chaque citation combine **type de personnalité + nature de chakra** :
 1. `SENSEI_QUOTES[coursId][type]` — phrase de personnalité (45 entrées × 16 types = 720)
-2. `NATURE_CLOSING[nature][module]` — closing line nature (5 × 8 = 40 entrées)
+2. `NATURE_CLOSING[nature][module]` — closing line nature (5 × 9 = 45 entrées)
 3. Si `S.sensei.signature` est rempli → override tout par cette phrase unique
 
 **Comment elles s'affichent dans un cours** (`applySenseiName()`) :
@@ -238,7 +239,7 @@ Techniques de combat par voie (cours pratiques séparés, comme les techniques d
 
 ### Shizen to Sosen no Michi (`shizen_sosen`)
 
-Cours écrit par Eraku Morikawa avec la section Hana Do, mais rédigé pour **n'importe quel sensei** : le support s'écarte volontairement du .docx source, dont les témoignages personnels (chant, chaise vide, séjour au Pays de l'Eau) ont été retirés ou rendus neutres. Ne pas les réintroduire. La citation de personnalité et la phrase de nature s'y placent dans le dernier bloc parchemin (« Nous ne sommes que les gardiens… »), avant les remerciements, écrits hors parchemin pour que le cours se termine sur eux.
+Seul cours du module **Traditions** 🌿 (créé pour lui, avec ses 5 phrases dans `NATURE_CLOSING`), en attente de validation (`validated: false`). Écrit par Eraku Morikawa avec la section Hana Do, mais rédigé pour **n'importe quel sensei** : le support s'écarte volontairement du .docx source, dont les témoignages personnels (chant, chaise vide, séjour au Pays de l'Eau) ont été retirés ou rendus neutres. Ne pas les réintroduire. La citation de personnalité et la phrase de nature s'y placent dans le dernier bloc parchemin (« Nous ne sommes que les gardiens… »), avant les remerciements, écrits hors parchemin pour que le cours se termine sur eux.
 
 ### Cours en attente de validation (`validated: false`)
 
@@ -255,6 +256,7 @@ Un cours peut porter `validated: false` dans `D.cours[]`. Il reste **jouable** m
 | Le Cours Inversé | Tactique | Genin | interne |
 | La Chasse au Sensei | Tactique | Apprenti Genin | interne |
 | Information & Communication en mission | Tactique | Genin | Yaïko Okira |
+| Shizen to Sosen no Michi | Traditions | Tous grades | Eraku Morikawa, avec la Hana Do |
 
 Ces cours reçoivent **la personnalisation complète** au même titre que les cours validés : `COURS_FLAVOR` (16 intros + 5 natures), `SENSEI_QUOTES` (16 types), `CONTENU`, `NOTES_PROF`. Pour valider un cours, retirer la clé `validated` (ou la passer à `true`) dans le HTML **et** dans `donnees_cours.json`.
 
@@ -282,7 +284,7 @@ Le flag `zenkai_onboarded` dans localStorage empêche de relancer le tuto. Bouto
 ### Graphify — Mémoire structurelle
 
 Le projet utilise **Graphify** comme carte contextuelle et mémoire structurelle. Fichiers dans `graphify-out/` :
-- `graph.json` — graphe du projet (570 nœuds, 935 arêtes, 36 communautés nommées, 0 nœud orphelin)
+- `graph.json` — graphe du projet (571 nœuds, 937 arêtes, 36 communautés nommées, 0 nœud orphelin)
 - `graph.html` — visualisation interactive
 - `GRAPH_REPORT.md` — rapport d'analyse (hubs, communautés, gaps)
 - `converted/*.md` — sources .docx converties (contenu original des cours)
@@ -298,7 +300,7 @@ Le projet utilise **Graphify** comme carte contextuelle et mémoire structurelle
 - `applySenseiName()` (16) et `render()` (15) — cœur de la personnalisation et du rendu
 - `CONTENU`, `SENSEI_QUOTES` (15), `COURS_FLAVOR`, `NOTES_PROF` (14) — les données de chaque cours
 
-**Piège de la reconstruction code seule** — `graphify update .` élague les nœuds sémantiques des documents modifiés depuis leur dernière extraction (ex. le 28/09 : 7 nœuds de `.claude/skills/zenkai-cours/SKILL.md` perdus). Une réextraction `--update` complète remplacerait les ~130 nœuds du HTML et ~120 de CLAUDE.md par une extraction neuve d'un fichier de 790 Ko. Méthode sûre, utilisée le 28/09 : restaurer le graphe commité (`git checkout -- graphify-out/`), retirer les nœuds des fichiers supprimés, **ajouter à la main** les nœuds/arêtes des changements (même schéma que les nœuds existants, `_origin: semantic`), puis `graphify cluster-only .`, renommer les communautés et régénérer la signature, enfin tamponner le manifest (`save_manifest`).
+**Piège de la reconstruction code seule** — `graphify update .` élague les nœuds sémantiques des documents modifiés depuis leur dernière extraction (ex. le 28/09 : 7 nœuds de `.claude/skills/zenkai-cours/SKILL.md` perdus). Une réextraction `--update` complète remplacerait les ~130 nœuds du HTML et ~120 de CLAUDE.md par une extraction neuve d'un fichier de 790 Ko. Méthode sûre, utilisée le 28/09 : restaurer le graphe commité (`git checkout -- graphify-out/`), retirer les nœuds des fichiers supprimés, **ajouter à la main** les nœuds/arêtes des changements (même schéma que les nœuds existants, `_origin: semantic`), puis `graphify cluster-only .`, renommer les communautés et régénérer la signature, enfin tamponner le manifest (`save_manifest`). **Pour un petit ajout, ne pas recluster** : le 04/11, `cluster-only` a transformé 36 communautés en 44 pour 2 nœuds ajoutés. Donner aux nouveaux nœuds une communauté existante, régénérer la signature, corriger les chiffres de `GRAPH_REPORT.md`, puis tamponner le manifest.
 
 **Noms de communautés** — `.graphify_labels.json` porte les noms lisibles, `.graphify_labels.json.sig` un hash des membres de chaque communauté. Au rebuild, graphify **garde** le nom d'une communauté dont le hash n'a pas bougé et **renomme par son hub** celles dont le membership a changé. Après avoir renommé des communautés à la main, régénérer la signature, sinon les noms sont perdus au prochain `graphify update` :
 
@@ -377,7 +379,7 @@ L'overlay porte l'id `presentationOverlay` : c'est par cet id que le raccourci �
 | `const NOTES_PROF` | Notes pour les élèves (copy + html) — bouton « Copier pour les élèves » |
 | `const SENSEI_QUOTES` | Citations par cours × 16 types (45 entrées × 16 = 720) |
 | `const SENSEI_TYPES` | 16 types (icône, nom, description, couleur) |
-| `const NATURE_CLOSING` | Phrases clôture par nature × module (5 × 8) |
+| `const NATURE_CLOSING` | Phrases clôture par nature × module (5 × 9) |
 | `const COURS_NATURE` | Mapping cours → nature pour filtrage |
 | `const COURS_LAME` | Mapping cours → voie de la lame (simple/double) pour filtrage |
 | `const NATURE_PARTICLES` | Emojis par nature pour particules |
@@ -445,7 +447,7 @@ Pour mettre à jour le cache PWA : incrémenter la version dans `sw.js` (ex: `ze
 
 ### Icônes
 
-**Modules** : Fondamentaux 🏛️, Chakra 🔮, Combat ⚔️, Taijutsu 🥋, Ninjutsu ⚡, Tactique 🎯, Spécialisation 🕵️, Terrain 🗺️
+**Modules** : Fondamentaux 🏛️, Chakra 🔮, Combat ⚔️, Taijutsu 🥋, Ninjutsu ⚡, Tactique 🎯, Spécialisation 🕵️, Terrain 🗺️, Traditions 🌿
 
 **Techniques** : connaissance 📖, mudras 🤞, taijutsu 🥋, chakra 🔥, tactique 🎯, ninjutsu ⚡
 

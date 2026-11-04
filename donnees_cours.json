@@ -598,10 +598,11 @@
       "id": "shizen_sosen",
       "titre": "Shizen to Sosen no Michi — La voie de la nature et des ancêtres",
       "cat": "theorique",
-      "mod": "Fondamentaux",
+      "mod": "Traditions",
       "rang": "Tous grades",
       "cible": "Tous",
       "auteur": "Eraku Morikawa",
+      "validated": false,
       "desc": "Avec la section Hana Do, ouvert à tous : les gestes anciens envers les lieux, les esprits et les morts. Respect, gratitude, mémoire, équilibre.",
       "techs": [
         {

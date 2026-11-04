@@ -16,7 +16,7 @@ Avant d'écrire quoi que ce soit, déterminer :
 | Champ | Valeurs possibles |
 |-------|-------------------|
 | `cat` | `theorique` ou `pratique` |
-| `mod` | Fondamentaux, Chakra, Combat, Taijutsu, Ninjutsu, Tactique, Spécialisation, Terrain |
+| `mod` | Fondamentaux, Chakra, Combat, Taijutsu, Ninjutsu, Tactique, Spécialisation, Terrain, Traditions |
 | `rang` | Apprenti Genin, Genin, Genin Confirmé, Chūnin, Konin, Tokubetsu Jōnin, Jōnin, Commandant Jōnin, Sanin, Hokage |
 | `auteur` | le sensei qui a écrit le support, ou `null` |
 | `validated` | `false` si le cours n'est pas encore approuvé — sinon, ne pas mettre la clé |
